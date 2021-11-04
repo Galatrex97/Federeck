@@ -13,6 +13,7 @@ const discord_js_1 = require("discord.js");
 module.exports.run = (client, interaction) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     if (interaction.isCommand()) {
+        interaction.deferReply();
         const cmd = yield client.interactionz.get(interaction.commandName);
         if (!cmd)
             return;
