@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const { Collection, Client, Message } = require('discord.js');
-require("dotenv").config();
 class Klar extends Client {
     constructor() {
         super({ intents: 32767, partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'] });
