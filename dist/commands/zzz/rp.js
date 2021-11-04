@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = __importDefault(require("discord.js"));
-const NSFW = require("discord-nsfw");
-const nsfw = new NSFW();
+const discord_nsfw_1 = __importDefault(require("discord-nsfw"));
+const nsfw = new discord_nsfw_1.default();
 module.exports = {
     name: "real-pussy",
     aliases: ["rpussy"],

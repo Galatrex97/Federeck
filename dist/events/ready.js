@@ -16,9 +16,12 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const uri = process.env.mongoGOD;
 module.exports.run = (client) => __awaiter(void 0, void 0, void 0, function* () {
     //Defines mongoose
-    mongoose_1.default.connect(uri)
+    mongoose_1.default.connect(uri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
         .then(() => console.log('Conectado a MongoDB')) //Con esto, hacemos un console.log() para saber que si nos conectamos y todo está bien.
-        .catch((err) => console.error(err));
+        .catch((err) => console.log(err));
     const presencias = [
         {
             name: "actualizando code...",

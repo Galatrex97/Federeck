@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const { youtubeChannelInfo } = require("zjuqn");
+const zjuqn_1 = require("zjuqn");
 module.exports = {
     name: "ytchannel",
     aliases: ["ytchan"],
@@ -22,7 +22,7 @@ module.exports = {
         if (!canalName) {
             return message.reply("Por favor, escribe un canal.");
         }
-        let ñ = new youtubeChannelInfo({
+        let ñ = new zjuqn_1.youtubeChannelInfo({
             message: message,
             color: "WHITE",
             channelName: canalName

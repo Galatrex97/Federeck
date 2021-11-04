@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const { Collection, Client, Message } = require('discord.js');
+require("dotenv").config();
 class Klar extends Client {
     constructor() {
         super({ intents: 32767, partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'] });
@@ -17,7 +18,6 @@ class Klar extends Client {
         require('./handlers/events')(this);
         require("./routes/index")(this);
         require('./monitor')(this);
-        require("./handlerer")(this);
         require('./handlers/interactions')(this);
         require('./handlers/distube')(this);
         this.login(process.env.token);
