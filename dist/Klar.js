@@ -1,13 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Distube = require('distube');
-const Monitor = require('ping-monitor');
-const { Collection, Client, Intents } = require('discord.js');
+const { Collection, Client, Message } = require('discord.js');
 class Klar extends Client {
     constructor() {
         super({ intents: 32767, partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'] });
-        this.bruh = "null";
-        this.distube = new Client({ intents: 32767 });
+        // String sería el nombre del comando, en la parte que haces el set, y Command debería ser una interfaz o clase, pero mejor interfaz, de las cosas que tengan cada comando, por ejemplo name: 'hola', run: ...
         this.commands = new Collection();
         this.aliases = new Collection();
         this.interactionz = new Collection();
