@@ -39,7 +39,6 @@ module.exports = {
         }
         //en esta constante definimos nuestro client.snipes que es nuestro objeto Map, con el metodo .get() tratamos de ver si channel.id(id del canal) esta dentro del Map  
         if (!msg) {
-            interaction.deferReply({ ephemeral: true });
             yield interaction.followUp({ content: "No se ha borrado recientemente ningún mensaje", ephemeral: true });
             //Si no lo esta mandamos este mensaje ^    
         }
