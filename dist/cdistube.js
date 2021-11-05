@@ -24,8 +24,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Distube = __importStar(require("distube"));
 const Klar_1 = __importDefault(require("./Klar"));
+const discord_js_1 = require("discord.js");
 //Distube(m)
-exports.default = Klar_1.default.distube = new Distube.default(Klar_1.default, {
+exports.default = Klar_1.default.distube = new Distube.default(discord_js_1.Client, {
     emitNewSongOnly: true,
     searchSongs: 1,
     leaveOnStop: true,
