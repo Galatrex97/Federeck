@@ -22,6 +22,12 @@ module.exports = {
     description: '...',
     category: 'Anime',
     run: (client, message, args) => __awaiter(void 0, void 0, void 0, function* () {
+        var _a, _b, _c;
+        let user = (_a = message.member) === null || _a === void 0 ? void 0 : _a.id;
+        let mentionedUser = (_c = (_b = message.mentions.members) === null || _b === void 0 ? void 0 : _b.first()) === null || _c === void 0 ? void 0 : _c.id;
+        if (user === mentionedUser) {
+            return message.channel.send("No puedes usar este comando contigo mismo(a).");
+        }
         neko.sfw.baka().then(asd => {
             const embed = new discord_js_1.MessageEmbed()
                 .setDescription(`Idiota`)

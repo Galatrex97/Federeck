@@ -21,7 +21,7 @@ module.exports = {
     category: 'Mod',
     description: '...',
     run: (client, message, args) => {
-        var _a, _b, _c, _d, _e;
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         let possibleId = args[0];
         if (!((_a = message.member) === null || _a === void 0 ? void 0 : _a.permissions.has('ADMINISTRATOR')))
             return message.reply(`No tienes el permiso **Administrador**`);
@@ -30,9 +30,14 @@ module.exports = {
             return message.reply(`Debes mencionar a alguien`);
         if (user.id === client.user.id)
             return message.reply("No puedes warnearme a mi.");
+        let userX = (_d = message.member) === null || _d === void 0 ? void 0 : _d.id;
+        let mentionedUser = (_f = (_e = message.mentions.members) === null || _e === void 0 ? void 0 : _e.first()) === null || _f === void 0 ? void 0 : _f.id;
+        if (userX === mentionedUser) {
+            return message.channel.send("No puedes usar este comando contigo mismo(a).");
+        }
         const reason = args.slice(1).join(" ") ? args.slice(1).join(" ") : "No se dió un motivo";
-        warn_js_1.default.findOne({ guildid: (_d = message.guild) === null || _d === void 0 ? void 0 : _d.id, user: user.id }, (err, data) => __awaiter(void 0, void 0, void 0, function* () {
-            var _f;
+        warn_js_1.default.findOne({ guildid: (_g = message.guild) === null || _g === void 0 ? void 0 : _g.id, user: user.id }, (err, data) => __awaiter(void 0, void 0, void 0, function* () {
+            var _j;
             if (err) {
                 let errmsg = new (require('discord.js')).MessageEmbed()
                     .setTitle('Ha ocurrido un error')
@@ -47,7 +52,7 @@ module.exports = {
             ;
             if (!data) {
                 data = new warn_js_1.default({
-                    guildid: (_f = message.guild) === null || _f === void 0 ? void 0 : _f.id,
+                    guildid: (_j = message.guild) === null || _j === void 0 ? void 0 : _j.id,
                     user: user.user.id,
                     content: [
                         {
@@ -76,7 +81,7 @@ module.exports = {
             .setTimestamp();
         const xD = new discord_js_1.MessageEmbed()
             .setTitle("Warn")
-            .setDescription(`Te han warneado en ${(_e = message.guild) === null || _e === void 0 ? void 0 : _e.name} por ${reason}\nModerador: ${message.author}`)
+            .setDescription(`Te han warneado en ${(_h = message.guild) === null || _h === void 0 ? void 0 : _h.name} por ${reason}\nModerador: ${message.author}`)
             .setColor("WHITE")
             .setThumbnail(server.iconURL())
             .setFooter("...")

@@ -22,10 +22,15 @@ module.exports = {
     description: '',
     category: 'NSFW',
     run: (client, message, args) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a;
+        var _a, _b, _c, _d;
+        let userX = (_a = message.member) === null || _a === void 0 ? void 0 : _a.id;
+        let mentionedUser = (_c = (_b = message.mentions.members) === null || _b === void 0 ? void 0 : _b.first()) === null || _c === void 0 ? void 0 : _c.id;
+        if (userX === mentionedUser) {
+            return message.channel.send("No puedes usar este comando contigo mismo(a)(a).");
+        }
         if (!message.channel.nsfw)
             return message.channel.send("Este no es un canal **NSFW**");
-        const user = (_a = message.mentions.members) === null || _a === void 0 ? void 0 : _a.first();
+        const user = (_d = message.mentions.members) === null || _d === void 0 ? void 0 : _d.first();
         if (!user)
             return message.reply("Debes mencionar a alguien");
         neko.nsfw.kuni().then(ugu => {

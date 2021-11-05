@@ -22,8 +22,8 @@ module.exports = {
     description: '',
     run: (client, message, args, p) => {
         var _a, _b, _c;
-        if (!((_a = message.member) === null || _a === void 0 ? void 0 : _a.permissions.has("ADMINISTRATOR")))
-            return message.reply("No.").then(nya => {
+        if (!((_a = message.member) === null || _a === void 0 ? void 0 : _a.permissions.has("MANAGE_MESSAGES")))
+            return message.reply("Necesitas el permiso **Gestionar mensajes**.").then(nya => {
                 setTimeout(() => {
                     nya.delete();
                 }, 7000);

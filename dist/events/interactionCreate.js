@@ -14,7 +14,7 @@ module.exports.run = (client, interaction) => __awaiter(void 0, void 0, void 0, 
     var _a;
     if (interaction.isCommand()) {
         interaction.deferReply();
-        const cmd = yield client.interactionz.get(interaction.commandName);
+        const cmd = yield client.interactionz.get(interaction.commandName); //This obtains the name of the command from the collection interactionz of client.
         if (!cmd)
             return;
         const args = Array();

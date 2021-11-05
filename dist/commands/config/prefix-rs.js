@@ -22,8 +22,8 @@ module.exports = {
     description: 'Hace que el prefix vuelva a ser el prefix por defecto (k!).',
     run: (client, message, args) => __awaiter(void 0, void 0, void 0, function* () {
         var _a, _b;
-        if (!((_a = message.member) === null || _a === void 0 ? void 0 : _a.permissions.has("ADMINISTRATOR")))
-            return message.reply("No.").then(nya => {
+        if (!((_a = message.member) === null || _a === void 0 ? void 0 : _a.permissions.has("MANAGE_MESSAGES")))
+            return message.reply("Necesitas el permiso **Gestionar mensajes** para realizar esta acción.").then(nya => {
                 setTimeout(() => {
                     nya.delete();
                 }, 7000);

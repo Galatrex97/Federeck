@@ -22,8 +22,13 @@ module.exports = {
     description: '',
     category: 'NSFW',
     run: (client, message, args) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a;
-        const user = (_a = message.mentions.members) === null || _a === void 0 ? void 0 : _a.first();
+        var _a, _b, _c, _d;
+        let userX = (_a = message.member) === null || _a === void 0 ? void 0 : _a.id;
+        let mentionedUser = (_c = (_b = message.mentions.members) === null || _b === void 0 ? void 0 : _b.first()) === null || _c === void 0 ? void 0 : _c.id;
+        if (userX === mentionedUser) {
+            return message.channel.send("No puedes hacerte una mamada a ti mismo.");
+        }
+        const user = (_d = message.mentions.members) === null || _d === void 0 ? void 0 : _d.first();
         if (!user)
             return message.reply("Debes mencionar a alguien");
         if (!message.channel.nsfw)

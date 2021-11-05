@@ -22,10 +22,15 @@ module.exports = {
     description: 'Este comando abraza a un mencionado.',
     category: 'Anime',
     run: (client, message, args) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a;
+        var _a, _b, _c, _d;
         const person = (_a = message.mentions.members) === null || _a === void 0 ? void 0 : _a.first();
         if (!person)
             return message.reply("Debes mencionar a alguien.");
+        let user = (_b = message.member) === null || _b === void 0 ? void 0 : _b.id;
+        let mentionedUser = (_d = (_c = message.mentions.members) === null || _c === void 0 ? void 0 : _c.first()) === null || _d === void 0 ? void 0 : _d.id;
+        if (user === mentionedUser) {
+            return message.channel.send("No puedes usar este comando contigo mismo(a).");
+        }
         neko.sfw.hug().then(asd => {
             const embed = new discord_js_1.MessageEmbed()
                 .setDescription(`**${message.author.username}** Abraza a **${person.user.username}**`)

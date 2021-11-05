@@ -22,8 +22,13 @@ module.exports = {
     description: 'Este comando abraza a un mencionado.',
     category: 'Anime',
     run: (client, message, args) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a;
-        const person = (_a = message.mentions.members) === null || _a === void 0 ? void 0 : _a.first();
+        var _a, _b, _c, _d;
+        let user = (_a = message.member) === null || _a === void 0 ? void 0 : _a.id;
+        let mentionedUser = (_c = (_b = message.mentions.members) === null || _b === void 0 ? void 0 : _b.first()) === null || _c === void 0 ? void 0 : _c.id;
+        if (user === mentionedUser) {
+            return message.channel.send("No puedes usar este comando contigo mismo(a).");
+        }
+        const person = (_d = message.mentions.members) === null || _d === void 0 ? void 0 : _d.first();
         if (!person)
             return message.reply("Debes mencionar a alguien.");
         neko.sfw.slap().then(asd => {

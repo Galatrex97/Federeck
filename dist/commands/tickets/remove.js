@@ -19,9 +19,14 @@ module.exports = {
     userperms: ['ADMINISTRATOR'],
     botperms: [],
     run: (client, message, args, p) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a, _b, _c;
+        var _a, _b, _c, _d, _e, _f;
+        let userX = (_a = message.member) === null || _a === void 0 ? void 0 : _a.id;
+        let mentionedUser = (_c = (_b = message.mentions.members) === null || _b === void 0 ? void 0 : _b.first()) === null || _c === void 0 ? void 0 : _c.id;
+        if (userX === mentionedUser) {
+            return message.channel.send("No puedes usar este comando contigo mismo(a).");
+        }
         if (message.channel.name.includes('ticket-')) {
-            const member = ((_a = message.mentions.members) === null || _a === void 0 ? void 0 : _a.first()) || ((_b = message.guild) === null || _b === void 0 ? void 0 : _b.members.cache.get(`${args[0]}`)) || ((_c = message.guild) === null || _c === void 0 ? void 0 : _c.members.cache.find(x => x.user.username === args.slice(0).join(' ') || x.user.username === args[0]));
+            const member = ((_d = message.mentions.members) === null || _d === void 0 ? void 0 : _d.first()) || ((_e = message.guild) === null || _e === void 0 ? void 0 : _e.members.cache.get(`${args[0]}`)) || ((_f = message.guild) === null || _f === void 0 ? void 0 : _f.members.cache.find(x => x.user.username === args.slice(0).join(' ') || x.user.username === args[0]));
             if (!member) {
                 return message.channel.send(`Uso incorrecto! Uso correcto: \`${p}remove @usuario\` (tiene que ser con el arroba)`);
             }
