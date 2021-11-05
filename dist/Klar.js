@@ -27,7 +27,7 @@ class Klar extends Client {
         // String sería el nombre del comando, en la parte que haces el set, y Command debería ser una interfaz o clase, pero mejor interfaz, de las cosas que tengan cada comando, por ejemplo name: 'hola', run: ...
         this.commands = new Collection();
         this.aliases = new Collection();
-        this.distube = new Distube.default(Client, {
+        this.distube = new Distube.default(this, {
             emitNewSongOnly: true,
             searchSongs: 1,
             leaveOnStop: true,
