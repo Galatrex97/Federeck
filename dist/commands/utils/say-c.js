@@ -31,7 +31,7 @@ module.exports = {
                 }, 7000);
             });
         let roleMention = message.mentions.roles.first();
-        if (texto.includes(roleMention) && !((_b = message.member) === null || _b === void 0 ? void 0 : _b.permissions.has("ADMINISTRATOR"))) {
+        if (roleMention && !((_b = message.member) === null || _b === void 0 ? void 0 : _b.permissions.has("ADMINISTRATOR"))) {
             return message.reply("Para mencionar debes tener el permiso de Administrador.");
         }
         if (!message.member.permissions.has("ADMINISTRATOR") && (is_url(texto) === true))
