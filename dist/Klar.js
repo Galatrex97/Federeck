@@ -16,8 +16,6 @@ class Klar extends Client {
         require('./cdistube')(this);
         require('./handlers/command')(this);
         require('./handlers/events')(this);
-        require("./routes/index")(this);
-        require('./monitor')(this);
         require('./handlers/interactions')(this);
         require('./handlers/distube')(this);
         this.login(process.env.token);
