@@ -26,6 +26,7 @@ class Klar extends Client {
         super({ intents: 32767, partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'] });
         // String sería el nombre del comando, en la parte que haces el set, y Command debería ser una interfaz o clase, pero mejor interfaz, de las cosas que tengan cada comando, por ejemplo name: 'hola', run: ...
         this.commands = new Collection();
+        this.aliases = new Collection();
         this.distube = new Distube.default(Client, {
             emitNewSongOnly: true,
             searchSongs: 1,
@@ -37,13 +38,11 @@ class Klar extends Client {
                 "8d": "apulsator=hz=0.075"
             }
         });
-        this.aliases = new Collection();
         this.interactionz = new Collection();
         this.snipes = new Map();
     }
     ;
     setup() {
-        require('./cdistube')(this);
         require('./handlers/command')(this);
         require('./handlers/events')(this);
         require('./handlers/interactions')(this);
