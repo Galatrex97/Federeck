@@ -18,19 +18,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const Distube = __importStar(require("distube"));
-module.exports = (client) => {
-    //Distube(m)
-    client.distube = new Distube.default(client, {
-        emitNewSongOnly: true,
-        searchSongs: 1,
-        leaveOnStop: true,
-        leaveOnFinish: true,
-        leaveOnEmpty: true,
-        youtubeCookie: process.env.youtubeCookie,
-        customFilters: {
-            "8d": "apulsator=hz=0.075"
-        }
-    });
-};
+const Klar_1 = __importDefault(require("./Klar"));
+//Distube(m)
+exports.default = Klar_1.default.distube = new Distube.default(Klar_1.default, {
+    emitNewSongOnly: true,
+    searchSongs: 1,
+    leaveOnStop: true,
+    leaveOnFinish: true,
+    leaveOnEmpty: true,
+    youtubeCookie: process.env.youtubeCookie,
+    customFilters: {
+        "8d": "apulsator=hz=0.075"
+    }
+});
