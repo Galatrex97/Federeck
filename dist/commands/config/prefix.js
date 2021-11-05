@@ -41,7 +41,7 @@ module.exports = {
                 console.log(error);
                 message.channel.send("Ha ocurrido un error.");
             });
-        const res = yield args.join(" ");
+        const res = args.join(" ");
         let emoji = discord_js_1.default.Util.parseEmoji(res);
         const emojiRegex = require("emoji-regex");
         if (res.includes(`<:${emoji === null || emoji === void 0 ? void 0 : emoji.name}:${emoji === null || emoji === void 0 ? void 0 : emoji.id}>` || `<a:${emoji === null || emoji === void 0 ? void 0 : emoji.name}:${emoji === null || emoji === void 0 ? void 0 : emoji.id}>`) || res.length > 4 || res.match(emojiRegex)) {

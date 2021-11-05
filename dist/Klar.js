@@ -6,6 +6,7 @@ class Klar extends Client {
         super({ intents: 32767, partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'GUILD_MEMBER', 'USER'] });
         // String sería el nombre del comando, en la parte que haces el set, y Command debería ser una interfaz o clase, pero mejor interfaz, de las cosas que tengan cada comando, por ejemplo name: 'hola', run: ...
         this.commands = new Collection();
+        this.distube = new Client({ intents: 32767 });
         this.aliases = new Collection();
         this.interactionz = new Collection();
         this.snipes = new Map();
