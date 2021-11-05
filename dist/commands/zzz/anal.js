@@ -26,7 +26,7 @@ module.exports = {
         let userX = (_a = message.member) === null || _a === void 0 ? void 0 : _a.id;
         let mentionedUser = (_c = (_b = message.mentions.members) === null || _b === void 0 ? void 0 : _b.first()) === null || _c === void 0 ? void 0 : _c.id;
         if (userX === mentionedUser) {
-            return message.channel.send("No puedes hacerte una mamada a ti mismo.");
+            return message.channel.send("No puedes hacerte un anal a ti mismo.");
         }
         if (!message.channel.nsfw)
             return message.channel.send("Este no es un canal **NSFW**");
