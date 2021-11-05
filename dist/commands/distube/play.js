@@ -15,20 +15,6 @@ module.exports = {
             return message.channel.send("Debes estar en el mismo canal de voz que yo, de lo contrario no funcionará correctamente...");
         if (!song)
             return message.channel.send("Debes escribir algo...");
-        try {
-            client.distube.play(message, song);
-        }
-        catch (err) {
-            let errmsg = new (require('discord.js')).MessageEmbed()
-                .setTitle('Ha ocurrido un error')
-                .setDescription(`**Tengo el siguiente error:** ${err}`)
-                .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-                .setFooter('Tipico')
-                .setColor("WHITE")
-                .setTimestamp();
-            client.channels.cache.get('901550991923630130').send({ embeds: [errmsg] });
-            message.channel.send("Ha ocurrido un error.");
-            console.log(err);
-        }
+        client.distube.play(message, song);
     }
 };

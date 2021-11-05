@@ -10,7 +10,7 @@ module.exports = {
         var _a, _b, _c;
         const serverQueue = client.distube.getQueue(message);
         if (!((_a = message.member) === null || _a === void 0 ? void 0 : _a.voice.channel))
-            return message.channel.send("Debes estar en un canal de voz para usar el cmd");
+            return message.channel.send("Debes estar en un canal de voz para usar este cmd");
         if (((_c = (_b = message.guild) === null || _b === void 0 ? void 0 : _b.me) === null || _c === void 0 ? void 0 : _c.voice.channel) && message.member.voice.channel.id !== message.guild.me.voice.channel.id)
             return message.channel.send("debes estar en el mismo canal de voz que yo");
         if (!serverQueue)

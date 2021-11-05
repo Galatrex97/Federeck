@@ -24,7 +24,7 @@ module.exports = (client) => {
     //Distube(m)
     client.distube = new Distube.default(client, {
         emitNewSongOnly: true,
-        searchSongs: 0,
+        searchSongs: 1,
         leaveOnStop: true,
         leaveOnFinish: true,
         leaveOnEmpty: true,
