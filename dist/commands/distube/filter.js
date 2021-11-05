@@ -16,10 +16,15 @@ module.exports = {
     category: 'Música',
     description: 'Coloca un filtro',
     run: (client, message, args) => __awaiter(void 0, void 0, void 0, function* () {
+        var _a, _b, _c;
         let guildQueue = yield client.distube.getQueue(message);
         if (!guildQueue) {
             return message.channel.send("No hay canciones reproduciéndose");
         }
+        if (!((_a = message.member) === null || _a === void 0 ? void 0 : _a.voice.channel))
+            return message.channel.send("Debes estar en un canal de voz...");
+        if (((_c = (_b = message.guild) === null || _b === void 0 ? void 0 : _b.me) === null || _c === void 0 ? void 0 : _c.voice.channel) && message.member.voice.channel.id !== message.guild.me.voice.channel.id)
+            return message.channel.send("Debes estar en el mismo canal de voz que yo, de lo contrario no funcionará correctamente...");
         const filtrs = args[0];
         try {
             if ([`3d`, `bassboost`, `echo`, `karaoke`, `nightcore`, `vaporwave`, `flanger`, `gate`, `haas`, `reverse`, `surround`, `mcompand`, `phaser`, `tremolo`, `earwax`].includes(filtrs)) {
