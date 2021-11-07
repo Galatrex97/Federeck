@@ -1,0 +1,20 @@
+const Discord = require("discord.js");
+const client = new Discord.Client();
+const { Client, MessageEmbed } = require("discord.js");
+const Distube = require("distube");
+const distube = require("distube");
+
+module.exports = {
+  name: "",
+  aliases: [""],
+  usage: '',
+  category: 'Distube',
+  description: '',
+
+run: (client, message, args) => {
+
+
+ 
+ }
+
+}
