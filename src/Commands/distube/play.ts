@@ -20,7 +20,7 @@ run: (client, message, args) => {
 
     if(!song) return message.channel.send("Debes escribir algo...")
 
-    client.distube.play(message, song);
+    client.distube.play(message, song as string);
  
   }
 }
