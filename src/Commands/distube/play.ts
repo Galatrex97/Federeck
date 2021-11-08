@@ -1,6 +1,5 @@
 import Discord, { Channel, Client, MessageEmbed, Message, TextChannel } from "discord.js";
-import Klar from "../../Client";
-import distube from "distube";
+import Lyon from "../../Client";
 
  import { Command } from "../../Interfaces";
 
@@ -12,7 +11,7 @@ export const command: Command = {
   description: 'Reproduce una canción o la añade a la playlist',
 
 
-run: (client: Klar, message: Message, args: String[]) => {
+run: (client, message, args) => {
 
     const song = args.join(" ") as string;
 

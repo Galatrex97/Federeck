@@ -75,15 +75,5 @@ readdirSync("./src/Interaction-menus/").forEach((dir) => {
 });
 
   //Mongoose
-  connect(`${process.env.mongoGOD}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }) //Conectamos con Mongose, si les sale en rojo, intenten solo dejando "connect(process.env.MONGO)".
-    .then(() => console.log("✅ | Conectado a Mongoose")) //Si todo salió bien, envía el mensaje a la consola.
-    .catch(
-      //De lo contrario
-      (
-        e //Parámetro "e", de error.
-      ) => console.error("❌ | Ocurrió un error al conectarme a Mongoose:", e) //Si hay un error, envía el mensaje y error al mismo.
-    ); //Cerramos catch
+ //Cerramos catch
 } //Cerramos la función exportada, runALl.
