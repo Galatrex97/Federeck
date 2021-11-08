@@ -4,7 +4,7 @@ import { DistubeEvent } from "../Interfaces";
 
 export const distubeEvent: DistubeEvent = {
     name: "error",
-run: async (channel: TextChannel, error: Error) => {
-    channel.send(`Ha ocurrido un error: **${error}**`)
+run: async (error: Error) => {
+    console.log(error)
 }
 }
