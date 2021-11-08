@@ -40,16 +40,7 @@ readdirSync("./src/Distube/") //Entramos a la carpeta Events, creamos la carpeta
 });
 
   //unhandledRejection = Básicamente esto sirve para que tu bot no se apague al instante si hay un error, sólo enviará un error a la consola, más no lo apagará.
-  process.on("unhandledRejection", async (rejection: PromiseRejectedResult) => {
-    //Ejecutamos el evento con el parámetro rejection.
-    logReject(); //Ejecutamos la función logReject.
-    function logReject() {
-      //Abrimos la función
-      console.log("Unhandled Rejection:", rejection); //Y enviamos a la consola el error.
-      process.stdout.clearLine(1); //Eliminamos una línea de la consola.
-    } //Cerramos la función.
-  }); //Cerramos el evento.
-
+ 
 //Interactions (commands)
 readdirSync("./src/Interaction-commands/").forEach((dir) => {
   //Entramos a la carpeta Commands, creamos la carpeta Cmd, y hacemos un readdirSync, para obtener todas sus categorias, retornando el parámetro dir
