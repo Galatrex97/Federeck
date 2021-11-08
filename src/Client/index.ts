@@ -1,7 +1,7 @@
 import { Client, Collection, Message } from "discord.js"; 
 import { Command, interactionCommand, interactionMenu } from "../Interfaces"; 
 import { runAll } from "../Utils/runner"; 
-import * as Distube from "distube";
+import {  DisTube } from "distube";
 import * as dotenv from "dotenv"; 
 import prefixSchema from "../Models/prefix"
 let prefix = process.env.prefix;
@@ -32,7 +32,7 @@ class Lyon extends Client {
     }
     return custom;
   }
-  public distube = new Distube.default(this, {
+  public distube = new DisTube(this,{
     emitNewSongOnly: true,
     searchSongs: 1,
     leaveOnStop: true,
