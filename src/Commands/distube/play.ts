@@ -1,5 +1,4 @@
 import Discord, { Channel, Client, MessageEmbed, Message, TextChannel } from "discord.js";
-import Lyon from "../../Client";
 
  import { Command } from "../../Interfaces";
 

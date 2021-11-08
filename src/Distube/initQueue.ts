@@ -1,5 +1,4 @@
 import { Queue } from "distube";
-import Klar from "../Client";
 import { DistubeEvent } from "../Interfaces";
 
 export const distubeEvent: DistubeEvent = {
