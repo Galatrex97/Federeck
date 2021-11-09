@@ -2,17 +2,19 @@ import Discord, { Channel, Client, MessageEmbed, Message, TextChannel } from "di
 
  import { Command } from "../../Interfaces";
 
+
 export const command: Command = {
   name: "play",
   aliases: ["p"],
+  dev: true,
   category: 'Música',
   usage: 'play/p',
   description: 'Reproduce una canción o la añade a la playlist',
 
 
-run: (client, message, args) => {
+run: async(client, message, args) => {
 
-    const song = args.join(" ") as string;
+/*     const song = args.join(" ") as string;
 
     if(!message.member?.voice.channel) return message.channel.send("Debes estar en un canal de voz...")
 
@@ -20,7 +22,11 @@ run: (client, message, args) => {
 
     if(!song) return message.channel.send("Debes escribir algo...")
 
-    client.distube.play(message, song as string);
- 
+   await client.distube.play(message, song);
+  */
+
+
+
+
   }
 }

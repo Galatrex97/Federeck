@@ -15,7 +15,7 @@ export const command: Command = {
             }
             let embed = new Discord.MessageEmbed()
               .setTitle(`Estoy en ${client.guilds.cache.size} servers con ${client.users.cache.size} usuarios`)
-              .setDescription(`${client.guilds.cache.map(x => x).sort((a, b) => b.memberCount- a.memberCount).map((r,i) => `**${i+1}** | ${r.name}, con **${r.memberCount} usuarios**.`).join("\n")}`)
+              .setDescription(`${client.guilds.cache.map(x => x).sort((a, b) => b.memberCount- a.memberCount).map((r,i) => `**${i+1}** | ${r.name}, con **${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)} usuarios**.`).join("\n")}`)
               .setColor("WHITE")  
               .setThumbnail(`${client.user?.avatarURL()}`)
               .setFooter(`Servidores de ${client.user?.username}`)
