@@ -1,4 +1,4 @@
-import Discord from "discord.js"
+import Discord from "discord.js";
 const gg = process.env.botOwner
 const nya = process.env.nya
  import { Command } from "../../Interfaces";

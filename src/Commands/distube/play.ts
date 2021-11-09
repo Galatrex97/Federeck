@@ -6,7 +6,6 @@ import Discord, { Channel, Client, MessageEmbed, Message, TextChannel } from "di
 export const command: Command = {
   name: "play",
   aliases: ["p"],
-  dev: true,
   category: 'Música',
   usage: 'play/p',
   description: 'Reproduce una canción o la añade a la playlist',
