@@ -22,7 +22,7 @@ if(!args[0]) return message.channel.send("Tienes que especificar. (on/off)");
 
 	if(args[0] === 'on') {
 		await antilink.findOne({ Guild: message.guild?.id }, async(err: Error, data: any) => {
-			if(data.jaja === true) {
+			if(data && data.jaja === true) {
 				return message.reply({ content: `El antilink ya estaba activado. Usa \`${p}antilink off\` para desactivarlo`})
 			}
 	if (err) console.log(err);
@@ -46,7 +46,7 @@ if(!args[0]) return message.channel.send("Tienes que especificar. (on/off)");
 })
 	} else if(args[0] === 'off') {
 		await antilink.findOne({ Guild: message.guild?.id }, async(err: any, data: any) => {
-			if(data.jaja === false){
+			if(data && data.jaja === false){
 				return message.reply({ content: `El antilink ya estaba desactivado. Prueba \`${p}antilink on\` para activarlo.`})
 			}
 			if(err) {
