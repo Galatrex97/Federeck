@@ -11,7 +11,7 @@ export const command: Command = {
   category: 'Configuración',
   description: '',
 
-run: (client: Lyon, message: Message, args: String[], p: string) => {
+run: (client, message, args, p) => {
 
 	if(!message.member?.permissions.has("MANAGE_MESSAGES")) return message.reply("Necesitas el permiso **Gestionar mensajes**.").then(nya => {
   setTimeout(() => {
@@ -19,7 +19,7 @@ run: (client: Lyon, message: Message, args: String[], p: string) => {
   }, 7000)
 })
 
-if(!args[0]) return;
+if(!args[0]) return message.channel.send("Tienes que especificar. (on/off)");
 
 	if(args[0] === 'on') {
 		la_grasa.findOne({ guildId: message.guild?.id }, async(err: any, data: any) => {
@@ -78,7 +78,7 @@ let errmsg = new MessageEmbed()
 	}
 		})
 	} else {
-		return;
+		return message.channel.send("Ese argumento no es válido. Usa on/off.");
 	}
 
   
