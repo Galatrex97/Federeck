@@ -23,7 +23,7 @@ if(!args[0]) return message.channel.send("Tienes que especificar. (on/off)");
 
 	if(args[0] === 'on') {
 		await la_grasa.findOne({ guildId: message.guild?.id }, async(err: any, data: any) => {
-			if(data && data.sdlg === true) {
+			if(data?.sdlg === true) {
 				return message.reply({ content: `Las respuestas a los ":v" ya estaban activadas. Usa \`${p}pacman off\` para desactivarlas.`})
 			}
 	if (err) {
@@ -61,7 +61,7 @@ let errmsg = new MessageEmbed()
 })
 	} else if(args[0] === 'off') {
 		await la_grasa.findOne({ guildId: message.guild?.id }, async(err: any, data: any) => {
-			if(data && data.sdlg === false){
+			if(data?.sdlg === false){
 				return message.reply({ content: `Las respuestas a los pacmans ya estaban desactivadas. Prueba \`${p}pacman on\` para activarlas.`})
 			}
 			if(err) console.log(err);
