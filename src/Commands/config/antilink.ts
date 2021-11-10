@@ -22,11 +22,13 @@ if(!args[0]) return message.channel.send("Tienes que especificar. (on/off)");
 
 	if(args[0] === 'on') {
 		await antilink.findOne({ guild: message.guild?.id }, async(err: Error, data: any) => {
+
+			if(data?.jaja === true) {
+				return message.reply({ content: `El antilink ya estaba activado. Usa \`${p}antilink off\` para desactivarlo`})
+			}
+
 	if (err) console.log(err);
 	if(data) {
-		if(data?.jaja === true) {
-			return message.reply({ content: `El antilink ya estaba activado. Usa \`${p}antilink off\` para desactivarlo`})
-		}
 		await antilink.findOneAndDelete({ guild: message.guild?.id })
 		data = new antilink({
 			guild: message.guild?.id,
@@ -46,6 +48,10 @@ if(!args[0]) return message.channel.send("Tienes que especificar. (on/off)");
 })
 	} else if(args[0] === 'off') {
 		await antilink.findOne({ guild: message.guild?.id }, async(err: any, data: any) => {
+			if(data?.jaja === true) {
+				return message.reply({ content: `El antilink ya estaba activado. Usa \`${p}antilink off\` para desactivarlo`})
+			}
+
 			if(err) {
 		console.log(err)
 
@@ -62,9 +68,6 @@ let errmsg = new MessageEmbed()
 			if(!data) {
 			return message.reply({ content: `El antilink por defecto viene deshabilitado. Usa \`${p}antilink on\` para activarlo por primera vez.`})
 			}else if(data) {
-				if(data?.jaja === false){
-					return message.reply({ content: `El antilink ya estaba desactivado. Prueba \`${p}antilink on\` para activarlo.`})
-				}
 
 		await antilink.findOneAndDelete({ guild: message.guild?.id })
 		data = new antilink({
