@@ -11,7 +11,7 @@ export const command: Command = {
   category: 'Configuración',
   description: '',
 
-run: (client, message, args, p) => {
+run: async(client, message, args, p) => {
 
 	if(!message.member?.permissions.has("MANAGE_MESSAGES")) return message.reply("Necesitas el permiso **Gestionar mensajes**.").then(nya => {
   setTimeout(() => {
@@ -22,7 +22,7 @@ run: (client, message, args, p) => {
 if(!args[0]) return message.channel.send("Tienes que especificar. (on/off)");
 
 	if(args[0] === 'on') {
-		la_grasa.findOne({ guildId: message.guild?.id }, async(err: any, data: any) => {
+		await la_grasa.findOne({ guildId: message.guild?.id }, async(err: any, data: any) => {
 			if(data.sdlg === true) {
 				return message.reply({ content: `Las respuestas a los ":v" ya estaban activadas. Usa \`${p}pacman off\` para desactivarlas.`})
 			}
@@ -60,7 +60,7 @@ let errmsg = new MessageEmbed()
 	}
 })
 	} else if(args[0] === 'off') {
-		la_grasa.findOne({ guildId: message.guild?.id }, async(err: any, data: any) => {
+		await la_grasa.findOne({ guildId: message.guild?.id }, async(err: any, data: any) => {
 			if(data.sdlg === false){
 				return message.reply({ content: `Las respuestas a los pacmans ya estaban desactivadas. Prueba \`${p}pacman on\` para activarlas.`})
 			}

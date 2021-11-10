@@ -10,7 +10,7 @@ export const command: Command = {
   category: 'Configuración',
   description: '',
 
-run: (client, message, args, p) => {
+run: async(client, message, args, p) => {
 
 	if(!message.member?.permissions.has("MANAGE_MESSAGES")) return message.reply("Necesitas el permiso **Gestionar mensajes**.").then(nya => {
   setTimeout(() => {
@@ -21,7 +21,7 @@ run: (client, message, args, p) => {
 if(!args[0]) return message.channel.send("Tienes que especificar. (on/off)");
 
 	if(args[0] === 'on') {
-		antilink.findOne({ Guild: message.guild?.id }, async(err, data) => {
+		await antilink.findOne({ Guild: message.guild?.id }, async(err: Error, data: any) => {
 			if(data.jaja === true) {
 				return message.reply({ content: `El antilink ya estaba activado. Usa \`${p}antilink off\` para desactivarlo`})
 			}
@@ -45,7 +45,7 @@ if(!args[0]) return message.channel.send("Tienes que especificar. (on/off)");
 	}
 })
 	} else if(args[0] === 'off') {
-		antilink.findOne({ Guild: message.guild?.id }, async(err, data) => {
+		await antilink.findOne({ Guild: message.guild?.id }, async(err: any, data: any) => {
 			if(data.jaja === false){
 				return message.reply({ content: `El antilink ya estaba desactivado. Prueba \`${p}antilink on\` para activarlo.`})
 			}
