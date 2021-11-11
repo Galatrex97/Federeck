@@ -1,6 +1,6 @@
 import Client from "../Client"; //Importamos el ExtendedCLient.
 import { readdirSync } from "fs";
-import { Command, Event, interactionCommand, interactionMenu, DistubeEvent } from "../Interfaces";
+import { Command, Event, interactionCommand, interactionMenu, PlayerEvent } from "../Interfaces";
 import { connect } from "mongoose";
 
 export function runAll(client: Client) {
@@ -30,13 +30,13 @@ export function runAll(client: Client) {
       client.on((event as Event).name, (event as Event).run.bind(null, client)); //Y lo guardamos en caché, para que se emitan al cumplirse cada evento.
     }); //Cerramos forEach.
 
-//Distube Events
-readdirSync("./src/Distube/") //Entramos a la carpeta Events, creamos la carpeta Djs, y hacemos un readdirSync para obtener todos sus archivos.
+//Music Events
+readdirSync("./src/Player/") //Entramos a la carpeta Events, creamos la carpeta Djs, y hacemos un readdirSync para obtener todos sus archivos.
 .filter((f) => f.endsWith(".ts")) //Filtro de sólo archivos TypeScript.
 .forEach((file) => {
   //Y un forEach.
-  let { distubeEvent } = require("../Distube/" + file); //Requerimos el evento de los eventos.
-  client.distube.on((distubeEvent as DistubeEvent).name, (distubeEvent as DistubeEvent).run.bind(null, client)); //Y lo guardamos en caché, para que se emitan al cumplirse cada evento.
+  let { dmpEvent } = require("../Player/" + file); //Requerimos el evento de los eventos.
+  client.player.on((dmpEvent as PlayerEvent).name, (dmpEvent as PlayerEvent).run.bind(null, client)); //Y lo guardamos en caché, para que se emitan al cumplirse cada evento.
 });
 
   //unhandledRejection = Básicamente esto sirve para que tu bot no se apague al instante si hay un error, sólo enviará un error a la consola, más no lo apagará.

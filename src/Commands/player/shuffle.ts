@@ -10,8 +10,7 @@ export const command: Command = {
   description: 'Activa el modo aleatorio de la playlist.',
 
 run: async(client, message, args) => {
-
-let guildQueue = await client.distube.getQueue(message);
+  let guildQueue = await client.player.getQueue((message.guild?.id as string));
 
 if(!guildQueue) {
   return message.channel.send("No hay canciones reproduciéndose")
@@ -23,7 +22,7 @@ if(message.guild?.me?.voice.channel && message.member.voice.channel.id !== messa
 
 
 try {
-client.distube.shuffle(message);
+guildQueue.shuffle();
 message.reply("Se ha activado el modo aleatorio.")
 } catch (err) {
 

@@ -13,7 +13,7 @@ export const command: Command = {
 
 run: async(client, message, args) => {
 
-let queue = await client.distube.getQueue(message);
+let queue = await client.player.getQueue((message.guild?.id as string));
 
 if(!queue) {
   return message.channel.send("No hay nada reproduciéndose")
@@ -21,10 +21,12 @@ if(!queue) {
 
 let embed = new MessageEmbed()
 .setTitle("Lista de reproducción actual")
-.setDescription("En la siguiente lista está(n) la(s) canción(es) reproduciéndose y su posición actual: \n"+ queue.songs.map((song: Song, id: any) => 
+.setDescription("En la siguiente lista está(n) la(s) canción(es) reproduciéndose y su posición actual: \n"+ queue.songs.map((song: any, id: any) => 
 `**${id+1}**. ${song.name} - \`${song.formattedDuration}\``
         ).join("\n"))
         .setColor("WHITE")
+
+message.reply({ embeds: [embed] })
 
 }
  

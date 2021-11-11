@@ -12,7 +12,7 @@ export const command: Command = {
 
 run: async (client: Klar, message: Message, args: String[]) => {
 
-  const serverQueue = await client.distube.getQueue(message)
+  const serverQueue = await client.player.getQueue((message.guild?.id))
 
   if(!message.member?.voice.channel) return message.channel.send("Debes estar en un canal de voz para usar el cmd")
 
@@ -23,7 +23,7 @@ run: async (client: Klar, message: Message, args: String[]) => {
   if(serverQueue.paused) return message.channel.send("La canción ya había sido pausada...")
 
   try {
-    client.distube.pause(message)
+    serverQueue.pause()
 
   message.channel.send("La canción ha sido pausada.")
   } catch (err) {

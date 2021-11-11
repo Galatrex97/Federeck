@@ -1,6 +1,6 @@
 import Discord from "discord.js";
 const { Client, MessageEmbed } = require("discord.js");
-import YouTube from 'youtube-node';
+const YouTube = require('youtube-node');
  import { Command } from "../../Interfaces";
 
 export const command: Command = {

@@ -12,7 +12,7 @@ export const command: Command = {
 
 run: async(client, message, args) => {
 
-let guildQueue = await client.distube.getQueue(message);
+let guildQueue = await client.player.getQueue((message.guild?.id as string));
 
 if(!guildQueue) {
   return message.channel.send("No hay canciones reproduciéndose")
@@ -23,7 +23,7 @@ if(!guildQueue) {
     if(message.guild?.me?.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send("Debes estar en el mismo canal de voz que yo, de lo contrario no funcionará correctamente...")
 
     try {
-    client.distube.stop(message);
+    guildQueue.stop();
     message.channel.send("La musica se ha detenido correctamente.");
     } catch (err) {
       console.log(err)

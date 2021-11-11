@@ -11,7 +11,7 @@ export const command: Command = {
 
 run: async(client, message, args) => {
 
-let guildQueue = await client.distube.getQueue(message);
+let guildQueue = await client.player.getQueue((message.guild?.id as string));
 
 if(!guildQueue) {
   return message.channel.send("No hay canciones reproduciéndose")
@@ -28,7 +28,7 @@ if(message.guild?.me?.voice.channel && message.member.voice.channel.id !== messa
 const shitpost = '999999999';
 let parsedShitpost: number = parseInt(shitpost)
 try {
-client.distube.setVolume(message, parsedShitpost);
+guildQueue.setVolume(parsedShitpost);
 } catch (err) {
 
 let errmsg = new (require('discord.js')).MessageEmbed()

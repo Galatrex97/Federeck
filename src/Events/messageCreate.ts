@@ -265,9 +265,9 @@ const Embed = new Discord.MessageEmbed()
 // if(cmd && message.author.id !== (process.env.botOwner) && cmd.category === 'NSFW' && !vote) return message.reply({embeds: [Embed]}) 
 
 if(cmd && cmd.dev === true && message.author.id !== process.env.botOwner) return message.reply(`Ese comando está en "Reconstrucción" `)
-if(cmd && cmd.category === "Música") {
+/* if(cmd && cmd.category === "Música") {
   return message.reply("La categoría de Música está deshabilitada temporalmente.")
-}
+} */
 
 try {
 if(cmd){

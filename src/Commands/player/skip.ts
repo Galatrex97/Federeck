@@ -11,8 +11,7 @@ export const command: Command = {
   description: 'Salta una canción, pero puedes saltar más de una utilizando el comando jump.',
 
 run: async(client, message, args) => {
-
-let guildQueue = await client.distube.getQueue(message);
+  let guildQueue = await client.player.getQueue((message.guild?.id as string));
 
 if(!guildQueue) {
   return message.channel.send("No hay canciones reproduciéndose")
@@ -28,7 +27,7 @@ if(!message.member?.voice.channel) return message.channel.send("Debes estar en u
 
 try {
 
-client.distube.skip(message);
+guildQueue.skip();
 
 message.channel.send("La cancion fue omitida correctamente.")
  

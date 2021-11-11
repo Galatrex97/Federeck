@@ -12,7 +12,7 @@ export const command: Command = {
 run: async(client, message, args) => { 
 
 
-let guildQueue = await client.distube.getQueue(message);
+let guildQueue = await client.player.getQueue((message.guild?.id as string));
 
 if(!guildQueue) {
   return message.channel.send("No hay canciones reproduciéndose")
@@ -31,7 +31,7 @@ let parsedNya = parseInt(nya)
  
 
 try {
-  client.distube.setVolume(message, parsedNya)
+  guildQueue.setVolume(parsedNya)
   message.react("<a:vale:798231883024433163>")
 } catch(err) {
 

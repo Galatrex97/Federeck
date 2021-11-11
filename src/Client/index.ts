@@ -1,6 +1,7 @@
 import { Client, Collection, Message } from "discord.js"; 
 import { Command, interactionCommand, interactionMenu } from "../Interfaces"; 
-import { runAll } from "../Utils/runner"; 
+import { runAll } from "../Utils/runner";
+import { Player } from "discord-music-player";
 import {  DisTube } from "distube";
 import * as dotenv from "dotenv"; 
 import prefixSchema from "../Models/prefix"
@@ -32,7 +33,7 @@ class Lyon extends Client {
     }
     return custom;
   }
-  public distube = new DisTube(this,{
+/*   public distube = new DisTube(this,{
     emitNewSongOnly: true,
     searchSongs: 1,
     leaveOnStop: true,
@@ -42,7 +43,17 @@ class Lyon extends Client {
     customFilters: {
         "8d": "apulsator=hz=0.075"
     }
-})
+}) */
+
+public player = new Player(this, {
+  deafenOnJoin: true,
+  leaveOnEmpty: true,
+  leaveOnEnd: true,
+  leaveOnStop: true,
+  timeout: 7000,
+  volume: 100,
+  quality: "high"
+});
 public interactionz: Collection<string, interactionCommand> = new Collection();
 public interactiony: Collection<string, interactionMenu> = new Collection();
   public init() {
