@@ -11,7 +11,7 @@ export const command: Command = {
   description: 'Reproduce una canción o la añade a la playlist',
 
 
-run: async(client, message, args) => {
+run: async(client, message, args, guildList) => {
 
 let si = args.join(" ");
 if(!si) return message.channel.send("Debes escribir algo")
