@@ -16,9 +16,7 @@ run: async(client, message, args) => {
 
 const snipes = client.snipes.get(message.channel.id);
 
-    if (!snipes){
-	 message.reply("No se ha borrado recientemente ningun mensaje")
-    }
+    if (!snipes) message.reply("No se ha borrado recientemente ningun mensaje")
 
 const snipe = +args[0] - 1 || 0;
 const target = snipes[snipe]
