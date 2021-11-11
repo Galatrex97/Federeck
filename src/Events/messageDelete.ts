@@ -5,11 +5,19 @@ export const event: Event = {
 name: "messageDelete",
 run: async (client, message) => {
 
-client.snipes.set(message.channel.id, {
-      content: message.content,
-      delete: message.author,
-      canal: message.channel
-    });
+let snipes = client.snipes.get(message.channel.id) || [];
+if(snipes.length > 5) snipes = snipes.slice(0, 4)
+
+
+snipes.unshift({
+  msg: message,
+  image: message.attachments.first()?.proxyURL || null,
+  timeAgo: Date.now(),
+})
+
+
+
+client.snipes.set(message.channel.id, snipes);
   
 }
 }

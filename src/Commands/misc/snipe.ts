@@ -1,6 +1,6 @@
 import Discord, { Client, Message, MessageEmbed } from "discord.js";
 import Klar from "../../Client";
-
+const moment = require("moment");
  import { Command } from "../../Interfaces";
 
 export const command: Command = {
@@ -10,41 +10,34 @@ export const command: Command = {
   category: 'Misceláneo',
   description: 'Muestra un mensaje recientemente eliminado.',
 
-run: (client: Klar, message: Message, args: String[]) => {
-
-
- const channel = message.mentions.channels.first() || message.channel;
+run: async(client, message, args) => {
 
 //en esta constante definimos un canal mencionado y si no el canal donde se ejecuto el cmd
 
-const msg = client.snipes.get(channel.id);
-//en esta constante definimos nuestro client.snipes que es nuestro objeto Map, con el metodo .get() tratamos de ver si channel.id(id del canal) esta dentro del Map  
-    if (!msg){
+const snipes = client.snipes.get(message.channel.id);
+
+    if (!snipes){
 	 message.reply("No se ha borrado recientemente ningun mensaje")
-       .then(m => m.delete()).catch(error => {
-        console.log(error)
+    }
 
-let errmsg = new (require('discord.js')).MessageEmbed()
-.setTitle('Ha ocurrido un error')
-.setDescription(`**Tengo el siguiente error:** ${error}`)
-.setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-.setFooter('Tipico')
-.setTimestamp()
-.setColor("WHITE")
- 
+const snipe = +args[0] - 1 || 0;
+const target = snipes[snipe]
+if(!target) return message.reply("Solo hay "+snipes.length+" mensajes");
 
-        message.channel.send("Ha ocurrido un error.")
-      });
-//Si no lo esta mandamos este mensaje ^    
-	}else{
+const { msg, timeAgo, image  } = target;
+
+//en esta constante definimos nuestro client.snipes que es nuestro objeto Map, con el metodo .get() tratamos de ver si channel.id(id del canal) esta dentro del Map  
 
  const main = new MessageEmbed()
  .setColor("WHITE")
- .setAuthor(`Mensaje Escrito de ${msg.delete.tag}`, msg.delete.displayAvatarURL())
- .addField("Canal", `<#${msg.canal.id}>`)
- .setDescription(`${msg.content}`)
+ .setAuthor(`Mensaje de ${msg.author.tag}`, msg.author.displayAvatarURL())
+ .addField("Canal", `<#${msg.channel.id}>`)
+ .setImage(image)
+ .setFooter(`Borrado hace ${moment(timeAgo).locale("es").fromNow()} | ${snipe + 1} / ${snipes.length}`)
+ .setDescription(msg.content)
+
  message.reply({embeds: [main]});
-}
+
 /* 
 Cada Valor esta en el evento messageDelete del cual en el comando los vas a obtener.
 */
