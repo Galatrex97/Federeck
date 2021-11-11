@@ -25,7 +25,7 @@ const { msg, timeAgo, image } = target;
   .setAuthor(`Mensaje de ${msg.author.tag}`, msg.author.displayAvatarURL())
   .addField("Canal", `<#${msg.channel.id}>`)
   .setImage(image)
-  .setFooter(`Borrado hace ${moment(timeAgo).locale("es").fromNow()} | ${snipe + 1} / ${snipes.length}`)
+  .setFooter(`Borrado ${moment(timeAgo).locale("es").fromNow()} | ${snipe + 1} / ${snipes.length}`)
   .setDescription(msg.content)
 ]});
 
