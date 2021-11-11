@@ -15,7 +15,7 @@ export const command: Command = {
  */
 
 run: async(client, message, args) => {
-if(!message.member?.permissions.has("MANAGE_MESSAGES")) return message.reply("Necesitas el permiso **Gestionar mensajes para realizar este cambio.**").then(nya => {
+if(!message.member?.permissions.has("MANAGE_MESSAGES")) return message.reply("Necesitas el permiso **Gestionar mensajes** para realizar este cambio.**").then(nya => {
   setTimeout(() => {
     nya.delete()
   }, 7000)

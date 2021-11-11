@@ -1,6 +1,6 @@
 import Discord from "discord.js";
 const { Client, MessageEmbed } = require("discord.js");
-
+import YouTube from 'youtube-node';
  import { Command } from "../../Interfaces";
 
 export const command: Command = {
@@ -13,7 +13,7 @@ export const command: Command = {
 run: (client, message, args) => {
 
 
-const YouTube = require('youtube-node');
+
 let youTube = new YouTube();
 
 //Necesita tener una clave para usar la API de YouTube Data API v3
@@ -26,12 +26,12 @@ if(!nombreyt) return  message.reply('Que quieres buscar?'); //Si no tiene un nom
 
 message.reply('<a:xdd:841332542220927016> | Buscando..!') 
 .then(m => {
-    youTube.search(args.join(' '), 2, function(err, result){
+    youTube.search(args.join(' '), 2, function(err: Error, result: any){
         if(err){
             return console.log(err); 
 
         }
-        if(result.items[0]["id"].videoId == undefined){
+        if(result?.items[0]["id"].videoId == undefined){
             return message.reply('No he encontrado un video, relacionado con tu busqueda.'); //Si el vídeo no existe, retornar
 
         } else{
