@@ -11,9 +11,7 @@ export const command: Command = {
 	category: 'Info',
 	description: `Muestra la página <Ayuda> o Información sobre un comando especifíco`,
 	usage: 'help [comando/categoria]',
-	userperms: [],
-	botperms: [],
-	run: async (client: Klar, message: Message, args: String[], p: string) => {
+	run: async (client, message, args, p) => {
 		if (args.join(' ')) {
 			const command = client.commands.get(args.join(' ').toLowerCase()) || client.commands.get(client.aliases?.get(args.join(' ').toLowerCase() as string) as string);
       if(!command) return;
@@ -27,7 +25,7 @@ export const command: Command = {
 				.setLabel("Soporte")
 			)
 
-if(command?.category === "NSFW" && !message.channel.nsfw) {
+if(command?.category === "NSFW" && !(message.channel as TextChannel).nsfw) {
 	return message.reply("Para ver información sobre este comando debes usar el comando en un canal NSFW")
 } else if(command?.dev === true && message.author.id !== process.env.botOwner) {
 	return message.reply("No puedes ver información sobre este comando por que aún está en fase de desarrollo.")
@@ -69,7 +67,7 @@ if(command?.category === "NSFW" && !message.channel.nsfw) {
 
       let categories;
 			if(message.author.id !== process.env.botOwner) {
-				categories = [...new Set(client.commands.filter(command => command.category !== 'Test').map(command => command.category))];
+				categories = [...new Set(client.commands.filter(command => command.category !== 'Zzz').map(command => command.category))];
 			}
 			else{
 				categories = [...new Set(client.commands.map(command => command.category))];
@@ -79,7 +77,7 @@ if(command?.category === "NSFW" && !message.channel.nsfw) {
 				const category = client.commands.filter(command => command.category === id);
 
         if (id == "NSFW" && !(message.channel as TextChannel).nsfw) {
-         embed.addField(`NSFW`, '***\`Para ver los comandos de esta categoria ejecuta este comando en un canal NSFW\`***')
+         embed.addField(`NSFW (${category.size})`, '***\`Para ver los comandos de esta categoria ejecuta este comando en un canal NSFW\`***')
         } else {
            embed.addField(`${id} (${category.size})`, category.map(command => `\`${command.name}\``).join(' '));
         }

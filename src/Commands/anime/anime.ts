@@ -17,7 +17,7 @@ run: async(client, message, args) => {
 
   if(!Text) return message.reply(`<a:noputo:868687565304246283> |**Debes escribir el nombre del anime.**`); //Por si no hay nombre esto lanza.
 
-  if(Text.length > 200) return message.reply(`<a:noputo:868687565304246283> | **El limete de texto es de 200**`); //limite de texto
+  if(Text.length > 200) return message.reply(`<a:noputo:868687565304246283> | **El limite de texto es de 200**`); //limite de texto
 
   let Msg = await message.reply(`<a:see:868645120289943552> | **Buscando..**`); //tiempo de busqueda
 
