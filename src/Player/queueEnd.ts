@@ -6,7 +6,7 @@ export const dmpEvent: PlayerEvent = {
 run: async(client, queue) => {
 
 
-    let { msg } = await queue.data || queue.nowPlaying.data;
+    let { msg } = queue.nowPlaying.data;
     await msg.channel.send(`Se han acabado las canciones para reproducir, me saldré del canal de voz en unos segundos.`);
 
 }

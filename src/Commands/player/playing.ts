@@ -22,9 +22,10 @@ run: async(client, message, args) => {
 const ProgressBar = guildList?.createProgressBar();
 let embed = new MessageEmbed()
 .setTitle(`Reproduciendo ahora`)
-.setDescription(`[${guildList?.nowPlaying.name}](${guildList?.nowPlaying.url})`)
+.setDescription(`[${guildList?.nowPlaying.name}](${guildList?.nowPlaying.url})\n${ProgressBar}`)
 .setColor("WHITE")
 .setThumbnail(`${guildList?.nowPlaying.thumbnail}`)
+.setFooter(`Pedida por: ${guildList?.nowPlaying.requestedBy}`)
 await message.reply({embeds: [embed]});
 
   }
