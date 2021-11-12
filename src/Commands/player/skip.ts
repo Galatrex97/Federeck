@@ -13,11 +13,6 @@ export const command: Command = {
 run: async(client, message, args) => {
   let guildQueue = await client.player.getQueue((message.guild?.id as string));
 
-if(!guildQueue?.songs) {
-  return message.channel.send("No hay canciones reproduciéndose")
-}
-
-
 if(!guildQueue.songs[1]) {
   return message.channel.send("No hay otra canción para reproducir, si quieres saltarte la canción actual primero tienes que añadir una.")
 }

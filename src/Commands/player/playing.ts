@@ -25,7 +25,7 @@ let embed = new MessageEmbed()
 .setDescription(`[${guildList?.nowPlaying.name}](${guildList?.nowPlaying.url})`)
 .setColor("WHITE")
 .setThumbnail(`${guildList?.nowPlaying.thumbnail}`)
-await message.reply({content: `${ProgressBar}`, embeds: [embed]});
+await message.reply({embeds: [embed]});
 
   }
 }
