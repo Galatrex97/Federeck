@@ -269,11 +269,9 @@ if(cmd && cmd.dev === true && message.author.id !== process.env.botOwner) return
   return message.reply("La categoría de Música está deshabilitada temporalmente.")
 }  */
 
-let guildList = client.player.getQueue((message.guild?.id as string))
-
 try {
 if(cmd){
-  cmd.run(client, message, args, p, guildList)
+  cmd.run(client, message, args, p)
 }
 } catch (e) {
    console.log(e);
