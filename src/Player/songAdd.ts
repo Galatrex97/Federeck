@@ -11,7 +11,6 @@ run: async (client, queue, song) => {
     .setDescription(`[${song.name}](${song.url})`)
     .setColor("WHITE")
     .setThumbnail(`${song.thumbnail}`)
-    .setFooter(`Pedida por: ${song.requestedBy}`)
     await msg.channel.send({embeds: [embed]});
 }
 }

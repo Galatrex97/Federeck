@@ -10,7 +10,6 @@ run: async(client, queue, newSong, OldSong) => {
     .setDescription(`[${newSong.name}](${newSong.url})`)
     .setColor("WHITE")
     .setThumbnail(`${newSong.thumbnail}`)
-    .setFooter(`Solicitada por: ${newSong.requestedBy}`)
     await msg.channel.send({embeds: [embed]});
 
 }
