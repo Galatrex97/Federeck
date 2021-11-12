@@ -13,7 +13,7 @@ export const command: Command = {
 run: async(client, message, args) => {
   let guildQueue = await client.player.getQueue((message.guild?.id as string));
 
-if(!guildQueue) {
+if(!guildQueue?.songs) {
   return message.channel.send("No hay canciones reproduciéndose")
 }
 

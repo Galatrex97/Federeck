@@ -7,7 +7,7 @@ run: async(client, queue, newSong, OldSong) => {
     let { msg } = await queue.data || queue.nowPlaying.data;  
       let embed = new MessageEmbed()
     .setTitle(`Ahora reproduciendo`)
-    .setDescription(`[${newSong.name}](${newSong.url})`)
+    .setDescription(`[${newSong.name}](${newSong.url}) - ${newSong.duration}`)
     .setColor("WHITE")
     .setThumbnail(`${newSong.thumbnail}`)
     await msg.channel.send({embeds: [embed]});
