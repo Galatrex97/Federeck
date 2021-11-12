@@ -50,7 +50,7 @@ public player = new Player(this, {
   leaveOnEmpty: true,
   leaveOnEnd: true,
   leaveOnStop: true,
-  timeout: 7000,
+  timeout: 3000,
   volume: 100,
   quality: "high"
 });

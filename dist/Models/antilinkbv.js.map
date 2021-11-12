@@ -1,1 +1,0 @@
-{"version":3,"file":"antilinkbv.js","sourceRoot":"","sources":["../../src/Models/antilinkbv.ts"],"names":[],"mappings":";;AAAA,uCAAmD;AAEnD,MAAM,EAAE,GAAW,IAAI,iBAAM,CAAC;IAC7B,IAAI,EAAE;QACL,IAAI,EAAE,OAAO;QACb,QAAQ,EAAE,KAAK;QACf,OAAO,EAAE,KAAK;KACd;IACD,KAAK,EAAE;QACN,IAAI,EAAE,MAAM;KACZ;CAED,CAAC,CAAA;AAEF,kBAAe,IAAA,gBAAK,EAAC,aAAa,EAAE,EAAE,CAAC,CAAC"}

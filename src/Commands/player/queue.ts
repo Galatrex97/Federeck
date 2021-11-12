@@ -23,7 +23,7 @@ if(!queue) {
 let embed = new MessageEmbed()
 .setTitle("Lista de reproducción actual")
 .setDescription("En la siguiente lista está(n) la(s) canción(es) reproduciéndose y su posición actual: \n"+ queue.songs.map((song: any, id: any) => 
-`**${id+1}**. ${song.name}`
+`**${id+1}**. ${song.name} - \`${song.duration}\``
         ).join("\n"))
         .setColor("WHITE")
 

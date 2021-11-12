@@ -7,8 +7,8 @@ export const command: Command = {
   name: "seek",
   aliases: [],
   category: 'Música',
-  usage: 'seek <segundos>',
-  description: 'Adelanta segundos en la canción reproduciéndose',
+  usage: 'seek <segundo>',
+  description: 'Salta la canción a el segundo especificado',
 
 
 run: async(client, message, args) => {
@@ -24,7 +24,7 @@ let parsedSi = parseInt(si);
 
 if(isNaN(parsedSi)) return message.reply("Debes escribir un número válido.")
 guildList?.seek(parsedSi * 1000)
-message.reply("Se han adelantado "+parsedSi+" segundos");
+message.reply("Se ha saltado al segundo "+parsedSi);
 
   }
 }

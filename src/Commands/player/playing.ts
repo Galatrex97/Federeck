@@ -20,8 +20,13 @@ run: async(client, message, args) => {
     if(message.guild?.me?.voice.channel && message.member?.voice.channel?.id !== message.guild.me.voice.channel.id) return message.channel.send("Debes estar en el mismo canal de voz que yo, de lo contrario no funcionará correctamente...")
 
 const ProgressBar = guildList?.createProgressBar();
-
-message.reply(guildList?.nowPlaying+"\n"+ProgressBar)
+let embed = new MessageEmbed()
+.setTitle(`Reproduciendo ahora`)
+.setDescription(`[${guildList?.nowPlaying.name}](${guildList?.nowPlaying.url})\n${ProgressBar}`)
+.setColor("WHITE")
+.setThumbnail(`${guildList?.nowPlaying.thumbnail}`)
+.setFooter(`Pedida por: ${guildList?.nowPlaying.requestedBy}`)
+await message.reply({embeds: [embed]});
 
   }
 }

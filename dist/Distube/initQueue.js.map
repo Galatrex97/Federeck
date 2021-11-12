@@ -1,1 +1,0 @@
-{"version":3,"file":"initQueue.js","sourceRoot":"","sources":["../../src/Distube/initQueue.ts"],"names":[],"mappings":";;;AAIa,QAAA,YAAY,GAAiB;IACtC,IAAI,EAAE,WAAW;IACrB,GAAG,EAAE,KAAK,EAAE,MAAM,EAAE,KAAK,EAAE,EAAE;QAC3B,KAAK,CAAC,QAAQ,GAAG,KAAK,CAAC,CAAC,+CAA+C;IACzE,CAAC;CACA,CAAA"}
