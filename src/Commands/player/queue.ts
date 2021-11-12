@@ -7,6 +7,7 @@ import Klar from "../../Client";
 export const command: Command = {
   name: "queue",
   aliases: [],
+  dev: true,
   category: 'Música',
   usage: 'queue',
   description: 'Muestra la lista de reproducción',
@@ -22,7 +23,7 @@ if(!queue) {
 let embed = new MessageEmbed()
 .setTitle("Lista de reproducción actual")
 .setDescription("En la siguiente lista está(n) la(s) canción(es) reproduciéndose y su posición actual: \n"+ queue.songs.map((song: any, id: any) => 
-`**${id+1}**. ${song.name} - \`${song.formattedDuration}\``
+`**${id+1}**. ${song.name}`
         ).join("\n"))
         .setColor("WHITE")
 

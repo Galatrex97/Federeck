@@ -17,6 +17,7 @@ if(!guildQueue) {
   return message.channel.send("No hay canciones reproduciéndose")
 }
 
+
 if(!guildQueue.songs[1]) {
   return message.channel.send("No hay otra canción para reproducir, si quieres saltarte la canción actual primero tienes que añadir una.")
 }

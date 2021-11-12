@@ -6,7 +6,7 @@ export const dmpEvent: PlayerEvent = {
     name: "channelEmpty",
 run: async(client, queue) => {
 
-    let { msg } = queue.nowPlaying.data;
+    let { msg } = await queue.data || queue.nowPlaying.data;
     await msg.channel.send(`El canal de voz está vacío, me saldré en unos segundos.`);
  }
 }

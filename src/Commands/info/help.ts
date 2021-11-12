@@ -26,23 +26,27 @@ export const command: Command = {
 				.setURL("https://discord.gg/rk3FacaS2U")
 				.setLabel("Soporte")
 			)
+
+if(command?.category === "NSFW" && !message.channel.nsfw) {
+	return message.reply("Para ver información sobre este comando debes usar el comando en un canal NSFW")
+} else if(command?.dev === true && message.author.id !== process.env.botOwner) {
+	return message.reply("No puedes ver información sobre este comando por que aún está en fase de desarrollo.")
+}  else {
+
 			const h_embed = new MessageEmbed()
 				.setTitle(`Información del comando ${command.name.toString().toLowerCase()}`)
 				.setColor('WHITE')
 				.setTimestamp()
-				.setFooter('Sintaxis: <> = obligatorio, [] = opcional', `${client.user?.avatarURL()}`)
+				.setFooter('Sintaxis: <> = necesario, [] = opcional', `${client.user?.avatarURL()}`)
 				.setDescription([
 					`> **Nombre: \`${command.name}\`**`,
 					`> **Categoria: \`${command.category?.toString()}\`**`,
 					`> **Descripcion: \`${capitalizeFirstLetter(command.description || 'Este comando no tiene descripción.')}\`**`,
 					`> **Uso: \`${p}${command.usage || `No hay instrucciones de uso sobre este comando.`}\`**`,
 					`> **Alias: \`${command.aliases?.length ? command.aliases?.map((a) => `${a}`).join('`, `') : 'Ninguno'}\`**`,
-					`>  **Aclaraciones: \`No se deben usar los "<>" ni los "[]" puestos abajo o en las instrucciones de uso, son ejemplos.\`**`].join("\n"));
-					try {
-			return message.reply({ embeds: [h_embed], components: [row] });
-					} catch(err) {
-						console.log(err)
-					}
+					`>  **Aclaraciones: \`No se deben usar los "<>" ni los "[]" puestos abajo o en las instrucciones de uso, son indicaciones.\`**`].join("\n"));
+			 message.reply({ embeds: [h_embed], components: [row] });
+}
 		}
 		else {
 			
@@ -65,7 +69,7 @@ export const command: Command = {
 
       let categories;
 			if(message.author.id !== process.env.botOwner) {
-				categories = [...new Set(client.commands.filter(command => command.category !== 'Owner').map(command => command.category))];
+				categories = [...new Set(client.commands.filter(command => command.category !== 'Test').map(command => command.category))];
 			}
 			else{
 				categories = [...new Set(client.commands.map(command => command.category))];

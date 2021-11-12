@@ -265,9 +265,9 @@ const Embed = new Discord.MessageEmbed()
 // if(cmd && message.author.id !== (process.env.botOwner) && cmd.category === 'NSFW' && !vote) return message.reply({embeds: [Embed]}) 
 
 if(cmd && cmd.dev === true && message.author.id !== process.env.botOwner) return message.reply(`Ese comando está en "Reconstrucción" `)
- if(cmd && cmd.category === "Música" && message.author.id !== process.env.botOwner) {
+/*  if(cmd && cmd.category === "Música" && message.author.id !== process.env.botOwner) {
   return message.reply("La categoría de Música está deshabilitada temporalmente.")
-} 
+}  */
 
 let guildList = client.player.getQueue((message.guild?.id as string))
 

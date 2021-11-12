@@ -10,7 +10,9 @@ export const command: Command = {
   usage: 'continue/resume',
   description: 'Continua la canción si ha sido pausada.',
 
-run: (client: Klar, message: Message, args: String[], guildList: any) => {
+run: (client, message, args) => {
+
+let guildList = client.player.getQueue((message.guild?.id as string));
 
   if(!message.member?.voice.channel) return message.channel.send("Debes estar en un canal de voz para usar este cmd")
 
