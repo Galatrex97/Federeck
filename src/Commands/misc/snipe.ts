@@ -11,7 +11,11 @@ export const command: Command = {
   description: 'Muestra un mensaje recientemente eliminado.',
 
 run: async(client, message, args) => {
-const snipes = client.snipes.get(message.channel.id);
+let snipes = client.snipes.get(message.channel.id);
+if(message.mentions.channels.first()) {
+  snipes = client.snipes.get(message.mentions.channels.first()?.id)
+}
+
     if (!snipes) return message.reply("No se ha borrado recientemente ningun mensaje");
 
 const snipe = +args[0] - 1 || 0;
