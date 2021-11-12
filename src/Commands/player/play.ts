@@ -22,13 +22,16 @@ if(!si) return message.channel.send("Debes escribir algo")
     if(message.guild?.me?.voice.channel && message.member?.voice.channel?.id !== message.guild.me.voice.channel.id) return message.channel.send("Debes estar en el mismo canal de voz que yo, de lo contrario no funcionará correctamente...")
 
 
-   let queue = await client.player.createQueue((message.guild?.id as any), {
+   let queue = client.player.createQueue((message.guild?.id as any), {
      data: {
        msg: message
      }
    });
    await queue.join((message.member?.voice.channel as any));
-  let song = await queue.play(si)
+  let song: any = await queue.play(si).catch(_ => {
+    if(!guildList)
+        queue.stop();
+});
 
 song.setData({
   msg: message

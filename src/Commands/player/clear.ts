@@ -19,7 +19,7 @@ run: async(client, message, args) => {
 
     if(message.guild?.me?.voice.channel && message.member?.voice.channel?.id !== message.guild.me.voice.channel.id) return message.channel.send("Debes estar en el mismo canal de voz que yo, de lo contrario no funcionará correctamente...")
 
-guildList.clearQueue();
+guildList?.clearQueue();
 
 message.reply("La lista de reproducción se ha borrado correctamente.")
 

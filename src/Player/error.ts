@@ -6,6 +6,5 @@ export const dmpEvent: PlayerEvent = {
     name: "error",
 run: async (error: Error, queue) => {
     console.log(error)
-
 }
 }
