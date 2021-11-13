@@ -22,7 +22,7 @@ if(!guildQueue) {
 let parsedNya = parseInt(nya)
 
     if(isNaN(parsedNya)) {
-      return message.reply("Me pasó mañana.").then(() => message.react("<a:xdd:841332542220927016>"))
+      return message.reply("Me pasó mañana.")
      }
     
      if(!message.member?.voice.channel) return message.channel.send("Debes estar en un canal de voz...")
@@ -32,7 +32,7 @@ let parsedNya = parseInt(nya)
 
 try {
   guildQueue.setVolume(parsedNya)
-  message.react("<a:vale:798231883024433163>")
+  message.reply("El volumen se ha establecido a "+parsedNya)
 } catch(err) {
 
 let errmsg = new (require('discord.js')).MessageEmbed()
