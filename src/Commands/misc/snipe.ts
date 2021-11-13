@@ -18,11 +18,14 @@ if(message.mentions.channels.first()) {
 
     if (!snipes) return message.reply("No se ha borrado recientemente ningun mensaje");
 
-const snipe = +args[0] - 1 || 0;
+let snipe = +args[0] - 1 || 0;
+if(isNaN(parseInt(args[0]))) {
+  snipe = +args[1] - 1 || 0;
+}
 const target = snipes[snipe];
 if(!target) return message.reply(`Solo hay ${snipes.length} mensajes borrados recientemente en este canal`);
 
-const { msg, timeAgo, image } = target;
+let { msg, timeAgo, image } = target;
 
  message.reply({embeds: [new MessageEmbed()
   .setColor("WHITE")

@@ -6,7 +6,7 @@ name: "messageDelete",
 run: async (client, message) => {
 
 let snipes = client.snipes.get(message.channel.id) || [];
-if(snipes.length > 5) snipes = snipes.slice(0, 4)
+if(snipes.length > 9) snipes = snipes.slice(0, 8)
 
 
 snipes.unshift({
