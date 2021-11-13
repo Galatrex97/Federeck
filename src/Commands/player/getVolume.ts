@@ -4,10 +4,10 @@ import Discord, { Channel, Client, MessageEmbed, Message, TextChannel } from "di
 
 
 export const command: Command = {
-  name: "getVolume",
+  name: "get-volume",
   aliases: [],
   category: 'Música',
-  usage: 'getVolume',
+  usage: 'get-volume',
   description: 'Muestra el volumen actual de la canción reproduciéndose.',
 
 
