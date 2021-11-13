@@ -1,5 +1,6 @@
 import Discord, { Client, Message, MessageEmbed } from "discord.js";
 import Klar from "../../Client";
+import { inspect } from "util";
 const nya = process.env.botOwner;
  import { Command } from "../../Interfaces";
 
@@ -55,10 +56,12 @@ if(message.author.id !== nya) {
         .setFooter((client.user?.username as string), client.user?.displayAvatarURL())
         .setTitle(`:desktop: ${client.user?.username}`)
         .setDescription("Este comando sirve para ejecutar codes")
-        .addField("Codigo:", "```js\n"+beautify(args.join(" "), { format: "js" })+"```")
-        .addField("Evaluado:", "```js\n"+evaluated+"```") //Aca aparecera lo que se evalua
+        .addField("Tipo:", `\`\`\`prolog\n${typeof(evaluated)}\`\`\``, true)
+        .addField("Tiempo:", `\`\`\`yaml\n${Date.now() - message.createdTimestamp} ms\`\`\``, true)
+        .addField("Código:", "```js\n"+beautify(args.join(" "), { format: "js" })+"```")
+        .addField("Evaluado:", "```js\n"+inspect(evaluated, {depth:  0})+"```") //Aca aparecera lo que se evalua
         message.reply({embeds: [embed]})
-    } catch(err) { //Hacemos un catch y que defina err
+    } catch(err: any) { //Hacemos un catch y que defina err
 
         let beautify = require("beautify")
        let embed2 = new Discord.MessageEmbed()
