@@ -57,9 +57,9 @@ if(message.author.id !== nya) {
         .setTitle(`:desktop: ${client.user?.username}`)
         .setDescription("Este comando sirve para ejecutar codes")
         .addField("Tipo:", `\`\`\`prolog\n${typeof(evaluated)}\`\`\``, true)
-        .addField("Tiempo:", `\`\`\`yaml\n${Date.now() - message.createdTimestamp} ms\`\`\``, true)
-        .addField("Código:", "```js\n"+beautify(args.join(" "), { format: "js" })+"```")
-        .addField("Evaluado:", "```js\n"+inspect(evaluated, {depth:  0})+"```") //Aca aparecera lo que se evalua
+        .addField("Tiempo:", `\`\`\`yaml\n${Date.now() - message.createdTimestamp}ms\`\`\``, true)
+        .addField("Input:", "```js\n"+beautify(args.join(" "), { format: "js" })+"```")
+        .addField("Output:", "```js\n"+inspect(evaluated, {depth:  0})+"```") //Aca aparecera lo que se evalua
         message.reply({embeds: [embed]})
     } catch(err: any) { //Hacemos un catch y que defina err
 
