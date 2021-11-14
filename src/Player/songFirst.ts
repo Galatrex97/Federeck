@@ -5,6 +5,8 @@ export const dmpEvent: PlayerEvent = {
     name: "songFirst",
 run: async(client, queue, song) => {
 
+
+    try {
     let { msg } = await queue.data || queue.nowPlaying.data;
     let embed = new MessageEmbed()
     .setTitle(`Reproduciendo`)
@@ -12,5 +14,9 @@ run: async(client, queue, song) => {
     .setColor("WHITE")
     .setThumbnail(`${song.thumbnail}`)
     await msg.channel.send({embeds: [embed]});
+    } catch (err) {
+        console.log(err)
+    }
+
 }
 }
