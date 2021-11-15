@@ -27,6 +27,8 @@ if(!target) return message.reply(`Solo hay ${snipes.length} mensajes borrados re
 
 let { msg, timeAgo, image } = target;
 
+try {
+
  message.reply({embeds: [new MessageEmbed()
   .setColor("WHITE")
   .setAuthor(`Mensaje de ${msg.author.tag}`, msg.author.displayAvatarURL())
@@ -35,7 +37,9 @@ let { msg, timeAgo, image } = target;
   .setFooter(`Borrado ${moment(timeAgo).locale("es").fromNow()} | ${snipe + 1} / ${snipes.length}`)
   .setDescription(msg.content)
 ]});
-
+} catch (err) {
+  console.log(err)
+}
  
  }
 
