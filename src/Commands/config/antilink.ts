@@ -21,6 +21,12 @@ run: async(client, message, args, p) => {
 if(!args[0]) return message.channel.send("Tienes que especificar. (on/off)");
 
 	if(args[0] === 'on') {
+		if(!message.member?.permissions.has("MANAGE_MESSAGES")) return message.reply("Necesitas el permiso **Gestionar mensajes**.").then(x => {
+			setTimeout(() => {
+			  x.delete()
+			}, 7000)
+		  })
+
 		await antilink.findOne({ guild: message.guild?.id }, async(err: Error, data: any) => {
 
 			if(data?.jaja === true) {
@@ -47,6 +53,11 @@ if(!args[0]) return message.channel.send("Tienes que especificar. (on/off)");
 	}
 })
 	} else if(args[0] === 'off') {
+		if(!message.member?.permissions.has("MANAGE_MESSAGES")) return message.reply("Necesitas el permiso **Gestionar mensajes**.").then(y => {
+			setTimeout(() => {
+			  y.delete()
+			}, 7000)
+		  })
 		await antilink.findOne({ guild: message.guild?.id }, async(err: any, data: any) => {
 			if(data?.jaja === false) {
 				return message.reply({ content: `El antilink ya estaba desactivado. Usa \`${p}antilink off\` para activarlo`})
