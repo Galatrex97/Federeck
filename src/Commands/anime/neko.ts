@@ -19,7 +19,7 @@ run: async(client, message, args) => {
 
 if(!(message.channel as TextChannel).nsfw) {
 
-neko.sfw.neko().then(asd => {
+neko.sfw.neko().then((asd: any) => {
   const embed = new MessageEmbed()
   .setDescription(`Meow`)
   .setImage(asd.url)
@@ -41,9 +41,10 @@ let errmsg = new (require('discord.js')).MessageEmbed()
   message.channel.send("Ha ocurrido un error.")
 })
 
-} else if ((message.channel as TextChannel).nsfw) {
+}
+ if ((message.channel as TextChannel).nsfw) {
 
-  neko.nsfw.neko().then(aa => {
+  neko.nsfw.neko().then((aa: any) => {
   const embed = new MessageEmbed()
   .setDescription("Nekos")
   .setFooter("Nya~")
@@ -52,7 +53,7 @@ let errmsg = new (require('discord.js')).MessageEmbed()
   .setImage(aa.url)
 
   message.reply({embeds: [embed]})
-}).catch(error => {
+}).catch((error: Error) => {
   console.log(error)
 
   let errmsg = new (require('discord.js')).MessageEmbed()

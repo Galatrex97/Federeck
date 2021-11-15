@@ -50,12 +50,7 @@ run: async(client, message, args) => {
     .setTimestamp()
 
   } catch (error) { //abrimos y cerramos el evento
-
- 
-
-
-    console.log(error)
-    return message.reply(`Ha ocurrido un error.`)
+    return message.reply(`No se ha encontrado el anime.`)
   };
 
   return message.reply({embeds: [Embed]}); //enviamos el mensaje
