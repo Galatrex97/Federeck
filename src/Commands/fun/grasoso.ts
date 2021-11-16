@@ -35,8 +35,11 @@ export const command: Command = {
     const canvas = createCanvas(800, 800);
     const ctx = canvas.getContext("2d");
     const background = await loadImage(
-      " https://cdn.discordapp.com/attachments/851634368619085874/909228210888273920/grasapapu.png"
+      "https://i.imgur.com/PMMncdy.png"
     );
+
+//link antiguo por si acaso:  https://cdn.discordapp.com/attachments/851634368619085874/909228210888273920/grasapapu.png 
+
     ctx.drawImage(avatar, 0, 0, canvas.width, canvas.height);
 
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
