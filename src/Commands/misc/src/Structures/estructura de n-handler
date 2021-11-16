@@ -1,0 +1,25 @@
+const Discord = require('discord.js');
+const client = new Discord.Client();
+const { Client, MessageEmbed } = require('discord.js');
+const clientnt = require("nekos.life")
+const neko = new clientnt()
+
+module.exports = {
+  name: "",
+  aliases: [],
+  usage: '',
+  description: '',
+  category: 'NSFW',
+
+run: async(client, message, args) => {
+
+
+
+  if (!message.channel.nsfw) return message.channel.send("Este no es un canal **NSFW**")
+
+
+
+
+ }
+
+}

@@ -1,0 +1,17 @@
+const Discord = require("discord.js");
+const { Client, MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+
+module.exports = {
+  name: "",
+  aliases: [],
+  usage: '',
+  category: '',
+  description: '',
+
+run: (client, message, args) => {
+
+
+ 
+ }
+
+}
