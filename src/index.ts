@@ -1,1 +1,1 @@
-import Client from "./Client"; new Client().init();
+import Client from "./Client"; new Client().setup();

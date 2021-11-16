@@ -94,6 +94,7 @@ let random = Math.floor(Math.random()*sdlg.length)
         "Viva la grasa",
         "En la grasa habian buenos momos :pensive:",
         "El shitposting es un pasatiempo, la grasa es un sentimiento.",
+        "¿Quieres ser el : de mi v?"
       ];
       let random = Math.floor(Math.random() * sdlg.length);
 
@@ -146,7 +147,7 @@ let random = Math.floor(Math.random()*sdlg.length)
       !message.member?.permissions.has("ADMINISTRATOR")
     ) {
       try {
-        message.delete().then(m => m.channel.send({ embeds: [embed] }));
+        message.delete().then((m) => m.channel.send({ embeds: [embed] }));
       } catch (error) {
         console.log(error);
 
@@ -167,14 +168,14 @@ let random = Math.floor(Math.random()*sdlg.length)
       data2.AFK_Reason = null;
       data2.AFK = false;
       message.channel.send(
-        `Volviste ${message.author}, estuviste AFK **${a}** por **${reason}**`
+        `Volviste **${message.member?.nickname || message.author.username}**, estuviste AFK **${a}** por **${reason}**`
       );
       await data2.save();
     } else if (data2.AFK === true) {
       data2.AFK_Reason = null;
       data2.AFK = false;
       message.channel.send(
-        `Volviste ${message.author}, estuviste AFK **${a}**`
+        `Volviste **${message.member?.nickname || message.author.username}**, estuviste AFK **${a}**`
       );
       await data2.save();
     }
@@ -205,14 +206,14 @@ let random = Math.floor(Math.random()*sdlg.length)
       if (data3.AFK === true) {
         if (data3.AFK_Reason) {
           message.channel.send(
-            `${message.mentions.members.first()?.user} Está afk por: **${
+            `**${message.mentions.members.first()?.nickname}** está afk por: **${
               data3.AFK_Reason
             }** desde **${a}**`
           );
         }
         if (!data3.AFK_Reason) {
           message.channel.send(
-            `${message.mentions.members.first()?.user} está afk desde **${a}**`
+            `**${message.mentions.members.first()?.nickname}** está afk desde **${a}**`
           );
         }
 

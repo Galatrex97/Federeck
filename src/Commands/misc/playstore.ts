@@ -17,6 +17,7 @@ run: async(client, message, args) => {
 
     let busqueda = args.join(" ")
     if(!busqueda){
+      message.channel.sendTyping();
         return message.reply({ content: "Que quieres buscar?"})
     }
     play.search({
@@ -74,7 +75,8 @@ const row = new MessageActionRow().addComponents(
         .addField("Novedades",`${gg.recentChanges ? gg.recentChanges.replace(/<br>/g, "\n").replace(/&quot;/g, `"`) : "No hay datos" }`)
         .setFooter("Encontré la aplicación")
         .setTimestamp()
-let msg = await message.reply({embeds: [embed], components: [row]})
+        message.channel.sendTyping();
+let msg = await message.reply({embeds: [embed], components: [row]});
 
 const desc = new MessageEmbed()
 .setColor("WHITE")
@@ -95,17 +97,20 @@ interactionxd.deferUpdate();
 		const id = interactionxd.customId;
 		if(id === "playstore_text") {
 		interactionxd.user.send({embeds: [desc]})
+    msg.channel.sendTyping();
 			msg.channel.send(`${interactionxd.user} he enviado la descripción completa de la aplicación ${gg.title} a tu MD`)
 		} 
 	})
 
   collector.on("end", () => {
+    msg.channel.sendTyping();
     msg.channel.send("Se han acabado los 7 segundos para ver la descripción.")
   })
 
 
 
     }).catch(error => {
+      message.channel.sendTyping();
         message.reply({content: `Ha ocurrido un error con la búsqueda: ${busqueda}`})
 
 let errmsg = new (require('discord.js')).MessageEmbed()

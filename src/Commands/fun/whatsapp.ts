@@ -1,20 +1,25 @@
-import Discord, { Channel, Client, MessageEmbed, Message, TextChannel } from "discord.js";
+import Discord, {
+  Channel,
+  Client,
+  MessageEmbed,
+  Message,
+  TextChannel,
+} from "discord.js";
 import Klar from "../../Client";
-import { createCanvas, loadImage } from 'canvas';
+import { createCanvas, loadImage } from "canvas";
 
- import { Command } from "../../Interfaces";
+import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "whatsapp",
   aliases: ["wa"],
-  usage: '',
-  category: 'Fun',
-  description: 'wasaaaa',
+  usage: "",
+  category: "Fun",
+  description: "wasaaaa",
 
-  run: async (client: Klar, message: Message, args: String[], p: string) => {
-
+  run: async (client: Klar, message: Message, args, p) => {
     let users: any;
-    if(message.mentions.users.first()) {
+    if (message.mentions.users.first()) {
       users = message.mentions.users.first()?.id;
     } else if (args[0]) {
       users = args[0];
@@ -22,8 +27,7 @@ export const command: Command = {
       users = message.author.id;
     }
 
-let user = await client.users.fetch(users)
-
+    let user = await client.users.fetch(users);
 
     const avatar = await loadImage(
       user.displayAvatarURL({ format: "png", size: 4096 })
@@ -41,6 +45,6 @@ let user = await client.users.fetch(users)
       `${user.username}_whatsapp.png`
     );
 
-    message.channel.send({files: [attachment]});
-  }
-}
+    message.channel.send({ files: [attachment] });
+  },
+};
