@@ -21,8 +21,6 @@ export const command: Command = {
     let users: any;
     if (message.mentions.users.first()) {
       users = message.mentions.users.first()?.id;
-    } else if (args[0]) {
-      users = args[0];
     } else {
       users = message.author.id;
     }
