@@ -35,7 +35,7 @@ export const command: Command = {
     const canvas = createCanvas(800, 800);
     const ctx = canvas.getContext("2d");
     const background = await loadImage(
-      "https://i.imgur.com/D8FCEXq.png"
+      `${__dirname}/whatsapp.png`
     );
 
     //antiguo link por si acaso: https://cdn.discordapp.com/attachments/788657156428660757/836802519639392296/PicsArt_04-27-09.59.41.png

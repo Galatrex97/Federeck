@@ -35,7 +35,7 @@ export const command: Command = {
     const canvas = createCanvas(800, 800);
     const ctx = canvas.getContext("2d");
     const background = await loadImage(
-      "https://i.imgur.com/PMMncdy.png"
+      `${__dirname}/hailgrasa.png`
     );
 
 //link antiguo por si acaso:  https://cdn.discordapp.com/attachments/851634368619085874/909228210888273920/grasapapu.png 

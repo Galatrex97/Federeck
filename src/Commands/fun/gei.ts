@@ -33,7 +33,7 @@ export const command: Command = {
     );
     const canvas = createCanvas(800, 800);
     const ctx = canvas.getContext("2d");
-    const background = await loadImage(`https://i.imgur.com/0joqb7W.png`);
+    const background = await loadImage(`${__dirname}/el_pepe.png`);
     ctx.drawImage(avatar, 0, 0, canvas.width, canvas.height);
 
     const aa = await user.username;
