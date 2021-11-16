@@ -29,9 +29,13 @@ export const command: Command = {
       snipe = +args[1] - 1 || 0;
     }
     const target = snipes[snipe];
-    if (snipes.length <= 1 && !target) return message.reply(`Solo hay ${snipes.length} mensaje borrado recientemente en este canal`);
-    if(snipes.length >= 2  && !target) return message.reply(`Solo hay ${snipes.length} mensajes borrados recientemente en este canal`)
-
+    if (snipes.length <= 1 && !target) {
+      return message.reply(`Solo hay ${snipes.length} mensaje borrado recientemente en este canal`);
+    }
+    
+    if(snipes.length >= 2  && !target) {
+      return message.reply(`Solo hay ${snipes.length} mensajes borrados recientemente en este canal`)
+}
     let {
       msg,
       timeAgo,
