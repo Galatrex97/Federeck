@@ -65,6 +65,9 @@ let random = Math.floor(Math.random()*sdlg.length)
       console.log(error);
     }
 
+    const a = moment(data2.timeAgo).locale("es").fromNow();
+    const reason = data2.AFK_Reason;
+
     let ñ: any;
     try {
       ñ = await lagrasa.findOne({
@@ -161,9 +164,6 @@ let random = Math.floor(Math.random()*sdlg.length)
       }
     }
 
-    const a = moment(data2.timeAgo).locale("es").fromNow();
-    const reason = data2.AFK_Reason;
-
     if (data2.AFK === true && data2.AFK_Reason) {
       data2.AFK_Reason = null;
       data2.AFK = false;
@@ -206,14 +206,14 @@ let random = Math.floor(Math.random()*sdlg.length)
       if (data3.AFK === true) {
         if (data3.AFK_Reason) {
           message.channel.send(
-            `**${message.mentions.members.first()?.user.nickname}** está afk por: **${
+            `**${message.mentions.members.first()?.nickname || message.mentions.members.first()?.user.username}** está afk por: **${
               data3.AFK_Reason
             }** desde **${a}**`
           );
         }
         if (!data3.AFK_Reason) {
           message.channel.send(
-            `**${message.mentions.members.first()?.user.nickname}** está afk desde **${a}**`
+            `**${message.mentions.members.first()?.nickname || message.mentions.members.first()?.user.username}** está afk desde **${a}**`
           );
         }
 
