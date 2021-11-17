@@ -10,11 +10,11 @@ export const command: Command = {
   category: "Info",
   description: "...",
   run: async (client, message, args) => {
-    if (![gg, nya].includes(message.author.id)) {
+ /*    if (![gg, nya].includes(message.author.id)) {
       return message.reply(
         "No puedes usar este comando, no te diré porque pero no tiene nada que ver con permisos o roles."
       );
-    }
+    } */
     let embed = new Discord.MessageEmbed()
       .setTitle(
         `Estoy en ${
