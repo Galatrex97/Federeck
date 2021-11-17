@@ -24,7 +24,7 @@ export const command: Command = {
 
     let si = regg.test(when);
 
-    if (args[0] && !si) {
+    if (args[0] && !message.mentions.members?.first() && !si) {
       return message.channel.send(
         "Esa no es una id válida, da otra, menciona a alguien o usa el comando contigo mismo."
       );

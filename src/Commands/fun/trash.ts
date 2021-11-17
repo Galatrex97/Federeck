@@ -1,4 +1,9 @@
-import { Message, MessageEmbed, MessageAttachment, Snowflake } from "discord.js";
+import {
+  Message,
+  MessageEmbed,
+  MessageAttachment,
+  Snowflake,
+} from "discord.js";
 import Klar from "../../Client";
 import DIG from "discord-image-generation";
 import { Command } from "../../Interfaces";
@@ -17,14 +22,16 @@ export const command: Command = {
 
     let si = regg.test(when);
 
-    if(args[0] && !si) {
-      return message.channel.send("Esa no es una id válida, da otra, menciona a alguien o usa el comando contigo mismo.")
+    if (args[0] && !message.mentions.members?.first() && !si) {
+      return message.channel.send(
+        "Esa no es una id válida, da otra, menciona a alguien o usa el comando contigo mismo."
+      );
     }
 
     let users: any;
     if (message.mentions.users.first()) {
       users = message.mentions.users.first()?.id;
-    } else if(args[0] && !!si) {
+    } else if (args[0] && !!si) {
       users = args[0];
     } else {
       users = message.author.id;

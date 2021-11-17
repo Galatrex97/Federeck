@@ -12,15 +12,16 @@ export const command: Command = {
   usage: "avatar/pfp",
 
   run: async (client, message, args) => {
-
-let when = args[0];
+    let when = args[0];
 
     let regg = /^\d{17,18}$/;
 
     let si = regg.test(when);
 
-    if(args[0] && !si) {
-      return message.channel.send("Esa no es una id válida, da otra, menciona a alguien o usa el comando contigo mismo.")
+    if (args[0] && !message.mentions.members?.first() && !si) {
+      return message.channel.send(
+        "Esa no es una id válida, da otra, menciona a alguien o usa el comando contigo mismo."
+      );
     }
 
     let member: any;
@@ -48,7 +49,7 @@ let when = args[0];
       message.reply({ embeds: [embed] });
     } catch (err) {
       console.log(err);
-      message.channel.send("Ha ocurrido un error.")
+      message.channel.send("Ha ocurrido un error.");
     }
   },
 };
