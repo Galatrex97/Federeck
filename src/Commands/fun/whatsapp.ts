@@ -18,9 +18,23 @@ export const command: Command = {
   description: "wasaaaa",
 
   run: async (client: Klar, message: Message, args, p) => {
+    let when = args[0];
+
+    let regg = /^\d{17,18}$/;
+
+    let si = regg.test(when);
+
+    if (args[0] && !si) {
+      return message.channel.send(
+        "Esa no es una id válida, da otra, menciona a alguien o usa el comando contigo mismo."
+      );
+    }
+
     let users: any;
     if (message.mentions.users.first()) {
       users = message.mentions.users.first()?.id;
+    } else if (args[0] && !!si) {
+      users = args[0];
     } else {
       users = message.author.id;
     }
@@ -32,9 +46,7 @@ export const command: Command = {
     );
     const canvas = createCanvas(800, 800);
     const ctx = canvas.getContext("2d");
-    const background = await loadImage(
-      `${__dirname}/whatsapp.png`
-    );
+    const background = await loadImage(`${__dirname}/whatsapp.png`);
 
     //antiguo link por si acaso: https://cdn.discordapp.com/attachments/788657156428660757/836802519639392296/PicsArt_04-27-09.59.41.png
     ctx.drawImage(avatar, 0, 0, canvas.width, canvas.height);

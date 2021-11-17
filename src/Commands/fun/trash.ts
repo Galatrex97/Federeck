@@ -11,10 +11,24 @@ export const command: Command = {
   description: "XD",
 
   run: async (client, message, args) => {
-    let users: any =
-      message.mentions.users.first()?.id ||
-      message.author.id;
+    let when = args[0];
 
+    let regg = /^\d{17,18}$/;
+
+    let si = regg.test(when);
+
+    if(args[0] && !si) {
+      return message.channel.send("Esa no es una id válida, da otra, menciona a alguien o usa el comando contigo mismo.")
+    }
+
+    let users: any;
+    if (message.mentions.users.first()) {
+      users = message.mentions.users.first()?.id;
+    } else if(args[0] && !!si) {
+      users = args[0];
+    } else {
+      users = message.author.id;
+    }
     let user = await client.users.fetch(users);
 
     let pfp = user.displayAvatarURL({ format: "png", size: 4096 });

@@ -6,7 +6,7 @@ import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "pacman",
-  aliases: ["hailgrasa"],
+  aliases: [],
   usage: "pacman on/off",
   category: "Configuración",
   description: "",
