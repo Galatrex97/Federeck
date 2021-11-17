@@ -206,14 +206,14 @@ let random = Math.floor(Math.random()*sdlg.length)
       if (data3.AFK === true) {
         if (data3.AFK_Reason) {
           message.channel.send(
-            `**${message.mentions.members.first()?.nickname}** está afk por: **${
+            `**${message.mentions.members.first()?.user.nickname}** está afk por: **${
               data3.AFK_Reason
             }** desde **${a}**`
           );
         }
         if (!data3.AFK_Reason) {
           message.channel.send(
-            `**${message.mentions.members.first()?.nickname}** está afk desde **${a}**`
+            `**${message.mentions.members.first()?.user.nickname}** está afk desde **${a}**`
           );
         }
 
