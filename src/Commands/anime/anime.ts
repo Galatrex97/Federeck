@@ -67,6 +67,6 @@ export const command: Command = {
       return message.reply(`No se ha encontrado el anime.`);
     }
 
-    return message.reply({ embeds: [Embed] }); //enviamos el mensaje
+    return Msg.edit({ embeds: [Embed] }); //enviamos el mensaje
   },
 };
