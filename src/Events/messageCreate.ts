@@ -65,7 +65,7 @@ let random = Math.floor(Math.random()*sdlg.length)
       console.log(error);
     }
 
-    const a = moment(data2.timeAgo).locale("es").fromNow();
+    const a = data2.timeAgo;
     const reason = data2.AFK_Reason;
 
     let ñ: any;

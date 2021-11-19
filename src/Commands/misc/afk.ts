@@ -41,7 +41,7 @@ export const command: Command = {
       );
     }
     data.AFK = true;
-    data.timeAgo = Date.now();
+    data.timeAgo = `<t:${Date.now() / 1000}:R>`;
     await data.save();
   },
 };
