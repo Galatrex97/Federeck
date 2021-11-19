@@ -6,31 +6,18 @@ import Discord, {
   TextChannel,
 } from "discord.js";
 
-let cooldown = new Set();
 
 import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "clear",
+  cooldown: 7,
   aliases: ["del", "purge"],
   category: "Mod",
   usage: "clear/del <numero de mensajes a borrar>",
   description: "Elimina los mensajes que quieras",
 
   run: (client: Klar, message: Message, args: String[]) => {
-    if (cooldown.has(message.author.id)) {
-      message.reply(
-        `Hey ${message.author} espera 7seg antes de volver a usar el comando`
-      );
-
-      return;
-    }
-
-    cooldown.add(message.author.id);
-
-    setTimeout(() => {
-      cooldown.delete(message.author.id);
-    }, 7000);
 
     let su = message.channel as TextChannel;
     let cantidad: any = args.join(" ");

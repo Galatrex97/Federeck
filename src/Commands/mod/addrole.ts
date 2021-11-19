@@ -12,6 +12,7 @@ import { Command } from "../../Interfaces";
 export const command: Command = {
   name: "addrole",
   aliases: [],
+  cooldown: 5,
   usage: "addrole <@role> <@user>",
   category: "Mod",
   description: "Añade un rol al miembro mencionado",

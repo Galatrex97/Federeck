@@ -15,6 +15,7 @@ export const command: Command = {
   name: "translate",
   aliases: [],
   category: "Útil",
+  cooldown: 7,
   description: "Traduce",
   usage: "",
 

@@ -20,6 +20,7 @@ class Lyon extends Client {
   }
   public commands: Collection<string, Command> = new Collection();
   public aliases: Collection<string, string> = new Collection();
+  public cooldowns: Collection<any, any> = new Collection();
   public snipes = new Map();
   public prefix = async function (message: Message) {
     let custom: any;

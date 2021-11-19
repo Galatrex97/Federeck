@@ -7,7 +7,8 @@ import { Command } from "../../Interfaces";
 export const command: Command = {
   name: "math",
   aliases: ["Útil"],
-  usage: "math <args>",
+  usage: "math <expresión>",
+  cooldown: 3,
   category: "Útil",
   description:
     "Una calculadora para resolver operaciones matematicas de forma sencilla.",

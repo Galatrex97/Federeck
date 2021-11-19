@@ -12,6 +12,7 @@ import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "anime",
+  cooldown: 5,
   aliases: [],
   usage: "anime <Anime a buscar>",
   category: "Anime",

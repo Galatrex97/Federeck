@@ -7,6 +7,7 @@ import Klar from "../../Client";
 export const command: Command = {
   name: "play-store",
   aliases: ["playstore"],
+  cooldown: 10,
   usage: 'play-store <app>',
   category: 'Misceláneo',
   description: '',

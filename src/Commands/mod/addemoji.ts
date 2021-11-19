@@ -6,7 +6,7 @@ import { Command } from "../../Interfaces";
 export const command: Command = {
   name: "add-emoji",
   aliases: ["addemoji"],
-  dev: true,
+  cooldown: 15,
   usage: "add-emoji <:emoji:>",
   category: "Útil",
   description: `"Toma prestado" un emoji de otro servidor`,
@@ -22,9 +22,9 @@ export const command: Command = {
     let res = args.join(" ");
 
     if (res.match(emojiRegex)) {
-      return message.reply("No puedes poner emojis por defecto de Discord.");
+      return message.reply("No puedes poner emojis que ya trae Discord.");
     }
-
+    
     /* let parsedRes = parseInt(res);
 
 	if(isNaN(parsedRes) === false) {
@@ -35,6 +35,14 @@ export const command: Command = {
       message.reply("Por favor especifica el emoji");
       return;
     }
+
+    let reg = /^<a?:(\w{2,32}+):(\d{17,18}+)>$/;
+    let x = reg.test(args.join("  "));
+
+    if(args.join(" ") && !x) {
+      return message.reply("Ese no es un emoji válido, reintenta.")
+    }
+    
 
     for (let emojix of args) {
       let emojibv = Discord.Util.parseEmoji(emojix);

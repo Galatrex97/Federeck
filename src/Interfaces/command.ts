@@ -17,6 +17,7 @@ export interface Command {
   category: string;
   usage: string;
   dev?: boolean;
+  cooldown?: number;
   aliases: string[];
   run: Run;
 }

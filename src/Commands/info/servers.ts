@@ -8,6 +8,7 @@ export const command: Command = {
   aliases: ["sv"],
   usage: "servers/sv",
   category: "Info",
+  cooldown: 7,
   description: "...",
   run: async (client, message, args) => {
  /*    if (![gg, nya].includes(message.author.id)) {

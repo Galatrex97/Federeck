@@ -7,6 +7,7 @@ export const command: Command = {
     name: "left",
     description: "Muestra los servidores restantes para la verificación",
     category: "Misceláneo",
+    cooldown: 5,
     usage: "left",
     aliases: [],
 

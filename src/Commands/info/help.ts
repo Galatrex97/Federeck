@@ -14,6 +14,7 @@ import { Command } from "../../Interfaces";
 export const command: Command = {
   name: "help",
   aliases: ["commands"],
+  cooldown: 5,
   category: "Info",
   description: `Muestra la página <Ayuda> o Información sobre un comando especifíco`,
   usage: "help [comando/categoria]",

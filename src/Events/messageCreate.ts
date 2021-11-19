@@ -3,7 +3,7 @@ import afkSchema from "../Models/afk";
 import lagrasa from "../Models/lagrasa";
 import parentSchema from "../Models/parent";
 import antilink from "../Models/antilinkbv";
-import Discord, { MessageEmbed, TextChannel, Message } from "discord.js";
+import Discord, { MessageEmbed, TextChannel, Message, Collection } from "discord.js";
 let prefix = process.env.prefix as string;
 import moment from "moment";
 import Client from "../Client";
@@ -271,6 +271,39 @@ const Embed = new Discord.MessageEmbed()
 .setColor("WHITE")
  */
     // if(cmd && message.author.id !== (process.env.botOwner) && cmd.category === 'NSFW' && !vote) return message.reply({embeds: [Embed]})
+
+let cooldowns = client.cooldowns;
+
+if(!cooldowns.has(cmd?.name)) {
+  client.cooldowns.set(cmd?.name, new Collection())
+}
+
+const now = Date.now();
+const timestamps = cooldowns.get(cmd?.name);
+let cooldownAmount;
+ if (cmd && cmd?.cooldown) {
+   cooldownAmount = cmd?.cooldown * 1000
+ };
+
+if (timestamps?.has(message.author.id)) {
+	// ...
+  const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+	if (now < expirationTime) {
+		const timeLeft = (expirationTime - now) / 1000;
+		return message.reply(`Por favor espera **${timeLeft.toFixed(1)} segundos** antes de volver a usar el comando \`${cmd?.name}\`.`);
+	}
+}
+
+timestamps.set(message.author.id, now);
+setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+
+try {
+	// ...
+} catch (error) {
+	// ...
+}
+
 
     if (cmd && cmd.dev === true && message.author.id !== process.env.botOwner)
       return message.reply(`Ese comando está en "Reconstrucción" `);

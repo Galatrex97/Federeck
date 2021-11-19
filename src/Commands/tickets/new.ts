@@ -12,11 +12,12 @@ import { Command } from "../../Interfaces";
 export const command: Command = {
   name: "new-ticket",
   category: "Soporte",
+  cooldown: 25,
   aliases: [],
   description:
     "Esto abrirá un ticket para resolver inconvenientes, problemas y/o dudas.",
   usage: "new",
-  run: async (client: Klar, message: Message, args: String[0], p: string) => {
+  run: async (client, message, args, p) => {
     let logchannel = message.guild?.channels.cache.find(
       (channel) => channel.name === `ticket-logs`
     );
