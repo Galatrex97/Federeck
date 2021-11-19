@@ -36,7 +36,7 @@ export const command: Command = {
       await antilink.findOne(
         { guild: message.guild?.id },
         async (err, data) => {
-          if (data?.jaja === true) {
+          if (data?.switch === true) {
             return message.reply({
               content: `El antilink ya estaba activado. Usa \`${p}antilink off\` para desactivarlo`,
             });
@@ -47,7 +47,7 @@ export const command: Command = {
             await antilink.findOneAndDelete({ guild: message.guild?.id });
             data = new antilink({
               guild: message.guild?.id,
-              jaja: true,
+              switch: true,
             });
             data.save();
             message.reply({
@@ -58,7 +58,7 @@ export const command: Command = {
           if (!data) {
             data = new antilink({
               guild: message.guild?.id,
-              jaja: true,
+              switch: true,
             });
             data.save();
             message.reply({
@@ -79,7 +79,7 @@ export const command: Command = {
       await antilink.findOne(
         { guild: message.guild?.id },
         async (err, data) => {
-          if (data?.jaja === false) {
+          if (data?.switch === false) {
             return message.reply({
               content: `El antilink ya estaba desactivado. Usa \`${p}antilink off\` para activarlo`,
             });
@@ -87,16 +87,6 @@ export const command: Command = {
 
           if (err) {
             console.log(err);
-
-            let errmsg = new MessageEmbed()
-              .setTitle("Ha ocurrido un error")
-              .setDescription(`**Tengo el siguiente error:** ${err.stack}`)
-              .setThumbnail(
-                `https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`
-              )
-              .setFooter("Tipico")
-              .setColor("WHITE")
-              .setTimestamp();
           }
           if (!data) {
             return message.reply({
@@ -106,7 +96,7 @@ export const command: Command = {
             await antilink.findOneAndDelete({ guild: message.guild?.id });
             data = new antilink({
               guild: message.guild?.id,
-              jaja: false,
+              switch: false,
             });
             data.save();
             message.reply({

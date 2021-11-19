@@ -1,7 +1,7 @@
 import mongoose, { model, Schema } from "mongoose";
 
 const gg: Schema = new Schema({
-  jaja: {
+  switch: {
     type: Boolean,
     required: false,
     default: false,

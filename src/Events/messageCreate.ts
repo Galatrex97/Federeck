@@ -1,144 +1,101 @@
-import prefixSchema from "../Models/prefix";
-import afkSchema from "../Models/afk";
-import lagrasa from "../Models/lagrasa";
-import parentSchema from "../Models/parent";
-import antilink from "../Models/antilinkbv";
-import Discord, { MessageEmbed, TextChannel, Message, Collection } from "discord.js";
-let prefix = process.env.prefix as string;
-import moment from "moment";
-import Client from "../Client";
-import { Event } from "../Interfaces";
+import afkSchema from "../Models/afk"; //Importamos el model de AFK para el sistema de AFK
+import lagrasa from "../Models/lagrasa"; //Importamos un model de configuración para respuestas a pacmans.
+import antilink from "../Models/antilinkbv"; //Importamos el model de antilinks para el sistema de antilinks.
+import Discord, { Message, Collection } from "discord.js"; //Importamos esto desde el módulo de discord.js
+let prefix = process.env.prefix as string; //Definimos prefix como una string.
+import { Event } from "../Interfaces"; //Importamos la interfaz de eventos.
+import { is_url } from "../functions"; //Importamos una función para saber si una string es un link.
 
 export const event: Event = {
   name: "messageCreate",
   run: async (client, message) => {
-    /* let bv = await la_grasa.findOne({ guildId: message.guild.id }).catch(err => console.log(err))
-
-   if(!bv) {
-     bv = la_grasa.create({ guildId: message.guild.id })
-   }
-
-if(bv.sdlg === true && message.content === ":v" ) {
-
-let sdlg = [":v", "#HailGrasa", "La grasa no muere, evoluciona...", "Viva la grasa", "En la grasa habian buenos momos :pensive:", "El shitposting es un pasatiempo, la grasa es un sentimiento."] 
-let random = Math.floor(Math.random()*sdlg.length)
-
-  message.channel.send(sdlg[random]);
-} else {
- return;
-}  */
-
-    if (message.author.bot) return;
-    if (message.author.bot && message.channel.type === "DM") return;
+    if (message.author.bot) return; //Si el autor de el mensaje es un bot retornamos, por que no quiero responder a mensajes de bots.
+    if (message.author.bot && message.channel.type === "DM") return; //Retornamos si un bot nos envía un mensaje directo.
     if (message.channel.type === "DM" && message.content.startsWith(prefix)) {
+      //Si el mensaje empieza por el prefix por defecto (ya que no se puede personalizar en mensajes directos) retornamos, ya que no quiero ejecutar comandos en mensajes directos por ahora.
       try {
-        return message.reply("Los comandos en MD no están soportados aún.");
+        return message.reply("Los comandos en MD no están soportados aún."); //Respuesta.
       } catch (err) {
-        console.log(err);
+        console.log(err); //Si hay un error lo mostramos en la consola.
       }
     } else if (message.channel.type === "DM") {
+      //Pero si, por el contrario, es solo un mensaje, retornamos sin más.
       return;
     }
 
-    let ment = new RegExp(`^<@!?${client.user?.id}>( |)$`);
+    let myMention = new RegExp(`^<@!?${client.user?.id}>( |)$`); //Acá tenemos una expresión regular (o regex) de menciones hacia mi, esto nos sirve para responder cuando nos mencionan.
 
-    let data2: any;
+    let AFKData: any; //Obtenemos información del estado de los usuarios sobre su AFK, buscamos en nuestra base de datos con la id del autor del mensaje y el server.
     try {
-      data2 = await afkSchema.findOne({
+      AFKData = await afkSchema.findOne({
+        //Intentamos encontrar datos.
         userId: message.author.id,
         guildId: message.guild?.id,
       });
-      if (!data2)
-        data2 = await afkSchema.create({
+      if (!AFKData)
+        AFKData = await afkSchema.create({
+          //Pero si no hay los creamos.
           userId: message.author.id,
           guildId: message.guild?.id,
         });
     } catch (error) {
-      let errmsg = new (require("discord.js").MessageEmbed)()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${error}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setTimestamp()
-        .setColor("WHITE");
-
-      console.log(error);
+      console.log(error); //Si hay algún error encontrando los datos mostramos el error en la consola.
     }
 
-    const a = (data2.timeAgo / 1000).toFixed(0);
+    let fechaDeAusencia = (AFKData.timeAgo / 1000).toFixed(0); //Esto es la fecha del momento en el que un usuario usa el comando afk para decir que está ausente.
 
-console.log(data2.timeAgo)
+    let idleReason = AFKData.AFK_Reason; //La razón de su ausencia, si no da ninguna, no habrá.
 
-    const reason = data2.AFK_Reason;
-
-    let ñ: any;
+    let pacmansConfig: any; //La configuración sobre la respuesta a los pacmans, que por defecto está desactivada. Buscamos en nuestra base de datos con la id del server y según los datos que obtenemos hacemos o no algo.
     try {
-      ñ = await lagrasa.findOne({
+      pacmansConfig = await lagrasa.findOne({
+        //Intentamos encontrar un dato.
         guildId: message.guild?.id,
       });
-      if (!ñ)
-        ñ = await lagrasa.create({
+      if (!pacmansConfig)
+        pacmansConfig = await lagrasa.create({
+          //Pero si no hay creamos un dato con solamente la id del server.
           guildId: message.guild?.id,
         });
     } catch (err) {
-      console.log(err);
-
-      let errmsg = new (require("discord.js").MessageEmbed)()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setColor("WHITE")
-        .setTimestamp();
+      console.log(err); //Si ocurre un error obteniendo los datos lo mostramos en la consola.
     }
 
-    if (ñ.sdlg === true && message.content === ":v") {
-      let sdlg = [
+    if (pacmansConfig.sdlg === true && message.content === ":v") {
+      //Si se configuró en el server que se responda a los pacmans, entonces hará esto:
+      let pacmansReplies = [
+        //Un array que contiene las respuestas a los pacmans.
         ":v",
         "#HailGrasa",
         "La grasa no muere, evoluciona...",
         "Viva la grasa",
         "En la grasa habian buenos momos :pensive:",
         "El shitposting es un pasatiempo, la grasa es un sentimiento.",
-        "¿Quieres ser el : de mi v?"
+        "¿Quieres ser el : de mi v?",
       ];
-      let random = Math.floor(Math.random() * sdlg.length);
+      let randomizePacmanReplies = Math.floor(
+        Math.random() * pacmansReplies.length //Hacemos las respuestas randoms para más variedad.
+      );
 
-      message.channel.send(sdlg[random]);
+      message.channel.send(pacmansReplies[randomizePacmanReplies]); //Y aquí las envíamos.
     }
 
-    let silence: any;
+    let antilinksConfig: any; //La configuración sobre los antilinks, buscamos en nuestra base de datos con la id del server.
     try {
-      silence = await antilink.findOne({
+      antilinksConfig = await antilink.findOne({
+        //Intentamos encontrar un dato.
         guild: message.guild?.id,
       });
-      if (!silence)
-        silence = await antilink.create({
+      if (!antilinksConfig)
+        antilinksConfig = await antilink.create({
+          //Pero si no hay lo creamos.
           guild: message.guild?.id,
         });
     } catch (err) {
-      console.log(err);
-
-      let errmsg = new MessageEmbed()
-        .setTitle("Ha ocurrido un error")
-        .setColor("WHITE")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setTimestamp();
+      console.log(err); //Si hay un error, lo mostramos en la consola.
     }
 
-    function is_url(str) {
-      let regexp =
-        /((?:(http|https|Http|Https|rtsp|Rtsp):\/\/(?:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,64}(?:\:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,25})?\@)?)?((?:(?:[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}\.)+(?:(?:aero|arpa|asia|a[cdefgilmnoqrstuwxz])|(?:biz|b[abdefghijmnorstvwyz])|(?:cat|com|coop|c[acdfghiklmnoruvxyz])|d[ejkmoz]|(?:edu|e[cegrstu])|f[ijkmor]|(?:gov|g[abdefghilmnpqrstuwy])|h[kmnrtu]|(?:info|int|i[delmnoqrst])|(?:jobs|j[emop])|k[eghimnrwyz]|l[abcikrstuvy]|(?:mil|mobi|museum|m[acdghklmnopqrstuvwxyz])|(?:name|net|n[acefgilopruz])|(?:org|om)|(?:pro|p[aefghklmnrstwy])|qa|r[eouw]|s[abcdeghijklmnortuvyz]|(?:tel|travel|t[cdfghjklmnoprtvwz])|u[agkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]))|(?:(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9])))(?:\:\d{1,5})?)(\/(?:(?:[a-zA-Z0-9\;\/\?\:\@\&\=\#\~\-\.\+\!\*\'\(\)\,\_])|(?:\%[a-fA-F0-9]{2}))*)?(?:\b|$)/gi;
-      if (regexp.test(str)) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    const embed = new Discord.MessageEmbed()
+    const embed = new Discord.MessageEmbed() //El embed de respuesta si el antilink está activado en el server y un miembro envió un link.
       .setTitle("Antilink activado")
       .setDescription("No puedes enviar links, el antilink está activado.")
       .setFooter(
@@ -148,198 +105,169 @@ console.log(data2.timeAgo)
       .setColor("WHITE");
 
     if (
-      silence.jaja === true &&
-      is_url(message.content) &&
-      !message.member?.permissions.has("ADMINISTRATOR")
+      antilinksConfig.switch === true && //Si los antilinks están activados y
+      is_url(message.content) && //El mensaje tiene un link y
+      !message.member?.permissions.has("ADMINISTRATOR") //El usuario que envió el link no es un administrador entonces hacemos esto:
     ) {
       try {
-        message.delete().then((m) => m.channel.send({ embeds: [embed] }));
+        message
+          .delete() //Borramos el mensaje
+          .then((m: Message) => m.channel.send({ embeds: [embed] })); //Y enviamos el embed.
       } catch (error) {
-        console.log(error);
-
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${error}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setColor("WHITE")
-          .setTimestamp();
+        console.log(error); //Si hay un error, lo mostramos en la consola.
       }
     }
 
-    if (data2.AFK === true && data2.AFK_Reason) {
-      data2.AFK_Reason = null;
-      data2.AFK = false;
+    if (AFKData.AFK === true) {
+      //Si el usuario envió un mensaje y estaba ausente entonces hacemos esto:
+      if (AFKData.AFK_Reason) {
+        //Si dió una razón de su ausencia hacemos esto:
+        AFKData.AFK = false; //Hacemos que ya no esté más ausente.
+        AFKData.AFK_Reason = null; //Hacemos que su razón de ausencia sea null.
+
+        await AFKData.save(); //Guardamos los datos.
+
+        message.channel.send(
+          `Volviste **${
+            message.member?.nickname || message.author.username //Si el usuario tiene un nick o apodo en el server lo mostramos, si no, en su lugar mostramos el nombre de usuario.
+          }**, estuviste AFK **<t:${fechaDeAusencia}:R>** por **${idleReason}**`
+        ); //Le respondemos al usuario tras haber vuelto.
+      }
+
+      //Pero si no la dió hacemos esto:
+
+      AFKData.AFK = false; //Hacemos que ya no esté más ausente.
+      AFKData.AFK_Reason = null; //Hacemos que su razón de ausencia sea null.
+      await AFKData.save(); //Guardamos los datos.
+
       message.channel.send(
-        `Volviste **${message.member?.nickname || message.author.username}**, estuviste AFK **<t:${a}:R>** por **${reason}**`
-      );
-      await data2.save();
-    } else if (data2.AFK === true) {
-      data2.AFK_Reason = null;
-      data2.AFK = false;
-      message.channel.send(
-        `Volviste **${message.member?.nickname || message.author.username}**, estuviste AFK **<t:${a}:R>**`
-      );
-      await data2.save();
+        `Volviste **${
+          message.member?.nickname || message.author.username
+        }**, estuviste AFK **<t:${fechaDeAusencia}:R>**`
+      ); //Le respondemos al usuario tras haber vuelto.
     }
 
     if (message.mentions.members?.first()) {
-      let data3: any;
+      //Si hay una mención hacia un miembro entonces:
+      let AFKInfo: any; //Esto es como AFKData, solo que llamada AFKInfo. Buscamos en nuestra base de datos con el id del usuario mencionado y la id del servidor.
       try {
-        data3 = await afkSchema.findOne({
+        AFKInfo = await afkSchema.findOne({
+          //Intentamos encontrar datos.
           userId: message.mentions.members.first()?.id,
           guildId: message.guild?.id,
         });
-        if (!data3)
-          data3 = await afkSchema.create({
+        if (!AFKInfo)
+          AFKInfo = await afkSchema.create({
+            //Y si no hay los creamos.
             userId: message.mentions.members.first()?.id,
             guildId: message.guild?.id,
           });
       } catch (error) {
-        console.log(error);
+        console.log(error); //Si hay un error lo mostramos en la consola.
       }
-      if (message.author.bot) return;
-      if (message.channel.type === "DM" && message.content.startsWith(prefix)) {
-        return message.channel.send(
-          "Los comandos en MD no están soportados aún."
-        );
-      } else if (message.channel.type === "DM") {
-        return;
-      }
-      if (data3.AFK === true) {
-        if (data3.AFK_Reason) {
+      if (AFKInfo.AFK === true) {
+        //Si el usuario mencionado está ausente hacemos lo siguiente:
+        let tiempoAusente = (AFKInfo.timeAgo / 1000).toFixed(0); //Este es el tiempo que pasó desde su ausencia.
+
+        if (AFKInfo.AFK_Reason) {
+          //Si el usuario mencionado ausente dió una razón, hacemos esto:
           message.channel.send(
-            `**${message.mentions.members.first()?.nickname || message.mentions.members.first()?.user.username}** está afk por: **${
-              data3.AFK_Reason
-            }** desde **<t:${a}:R>**`
+            `**${
+              message.mentions.members.first()?.nickname ||
+              message.mentions.members.first()?.user.username
+            }** está afk por: **${
+              AFKInfo.AFK_Reason
+            }** desde **<t:${tiempoAusente}:R>**`
           );
         }
-        if (!data3.AFK_Reason) {
+        if (!AFKInfo.AFK_Reason) {
+          //Pero si no la dió hacemos esto:
           message.channel.send(
-            `**${message.mentions.members.first()?.nickname || message.mentions.members.first()?.user.username}** está afk desde **<t:${a}:R>**`
+            `**${
+              message.mentions.members.first()?.nickname ||
+              message.mentions.members.first()?.user.username
+            }** está afk desde **<t:${tiempoAusente}:R>**`
           );
         }
 
-        data3.save();
+        AFKInfo.save(); //Guardamos los datos.
       }
     }
 
-    const p = await client.prefix(message);
+    const p = await client.prefix(message); //Obtenemos un prefix (pro defecto o personalizado) para los comandos.
 
-    if (message.content.match(ment))
+    if (message.content.match(myMention))
+      // Si nos mencionan hacemos esto:
       try {
         return message.reply(
           `Mi prefix es \`${p}\` si necesitas más ayuda utiliza \`${p}help\``
-        );
+        ); //Le respondemos con esto.
       } catch (error) {
-        console.log(error);
-
-        let errmsg = new MessageEmbed()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${error}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setColor("WHITE")
-          .setTimestamp();
+        console.log(error); //Si hay un error lo mostramos en consola.
       }
 
-    let mentionprefix = [`<@!849395994973700117>`, `<@849395994973700117>`];
-
-    /* if(message.content === "gei")
-message.channel.send(`<:waaa:866829623391813663>`)
- */
-
-    if (message.content === p) return;
-    if (!message.content.startsWith(p)) return;
-    let usuario = message.mentions.members?.first() || message.member;
-    const args: any = message.content.slice(p.length).trim().split(/ +/g);
-
-    const command = args.shift().toLowerCase();
-
-    const cmd =
+    if (message.content === p) return; //Si el mensaje solo contiene el prefix retornamos.
+    if (!message.content.startsWith(p)) return; //Si el mensaje no empieza por el prefix retornamos.
+    const args: any = message.content.slice(p.length).trim().split(/ +/g); //Definimos los argumentos, los cuales son muy útiles en los comandos para determinar acciones, entre otra cosas.
+    const command = args.shift().toLowerCase(); //Definimos lo que puede ser un comando.
+    const cmd = //Y este es el comando real, lo obtenemos con el nombre o alias en nuestra colección commands.
       client.commands.get(command) ||
       client.commands.get(client.aliases.get(command) as string);
-    /* 
-const topgg = require("@top-gg/sdk");
 
-const Topgg = new topgg.Api(process.env.topgg);
+    let cooldowns = client.cooldowns; //Definimos cooldowns como nuestra colección cooldowns. Los cooldowns son útiles para evitar que determinados comandos que requieran recursos elevados se usen constantemente.
 
-const vote = await Topgg.hasVoted(message.author.id)
+    if (!cooldowns.has(cmd?.name)) {
+      client.cooldowns.set(cmd?.name, new Collection());
+    }
 
-const Embed = new Discord.MessageEmbed()
-.setTitle("Para desbloquear los comandos de esta categoria ayudame votando por mí.")
-.setDescription(`Vota Aqui: [Link](https://top.gg/bot/849395994973700117/vote)`)
-.setThumbnail(client.user?.displayAvatarURL())
-.setFooter("Gracias")
-.setColor("WHITE")
- */
-    // if(cmd && message.author.id !== (process.env.botOwner) && cmd.category === 'NSFW' && !vote) return message.reply({embeds: [Embed]})
+    let actualTime = Date.now(); //Definimos la fecha actual.
+    let cooldownTimestamps = cooldowns.get(cmd?.name); //NO SE PARA QUE SIRVE ESTO XD
+    let cooldownAmount: any; //Esto es el tiempo de cooldown.
+    if (cmd && cmd?.cooldown) {
+      cooldownAmount = cmd?.cooldown * 1000; //Convertimos los segundos que dimos en la opción cooldown de los comandos a milisegundos.
+    }
 
-let cooldowns = client.cooldowns;
+    if (cooldownTimestamps?.has(message.author.id)) {
+      //¯\_(ツ)_/¯
+      // ...
+      let cooldownExpiration = //La expiración del cooldown
+        cooldownTimestamps.get(message.author.id) + cooldownAmount;
 
-if(!cooldowns.has(cmd?.name)) {
-  client.cooldowns.set(cmd?.name, new Collection())
-}
+      if (actualTime < cooldownExpiration) {
+        //Si el tiempo actual es menor que el tiempo de expiración del cooldown, hacemos esto:
+        let timeLeft = (cooldownExpiration - actualTime) / 1000; //Esto es el tiempo restante antes de que se acabe el cooldown.
+        return message.reply(
+          `Por favor espera **${timeLeft.toFixed(
+            1
+          )} segundos** antes de volver a usar el comando \`${cmd?.name}\`.`
+        ); //Si todavía falta tiempo para que se acabe el cooldown le respondemos.
+      }
+    }
 
-const now = Date.now();
-const timestamps = cooldowns.get(cmd?.name);
-let cooldownAmount;
- if (cmd && cmd?.cooldown) {
-   cooldownAmount = cmd?.cooldown * 1000
- };
+    cooldownTimestamps.set(message.author.id, actualTime);
+    setTimeout(
+      //Con esto eliminamos el cooldown en los segundos de cooldown.
+      () => cooldownTimestamps.delete(message.author.id),
+      cooldownAmount
+    );
 
-if (timestamps?.has(message.author.id)) {
-	// ...
-  const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-
-	if (now < expirationTime) {
-		const timeLeft = (expirationTime - now) / 1000;
-		return message.reply(`Por favor espera **${timeLeft.toFixed(1)} segundos** antes de volver a usar el comando \`${cmd?.name}\`.`);
-	}
-}
-
-timestamps.set(message.author.id, now);
-setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-
-try {
-	// ...
-} catch (error) {
-	// ...
-}
-
-
-    if (cmd && cmd.dev === true && message.author.id !== process.env.botOwner)
-      return message.reply(`Ese comando está en "Reconstrucción" `);
-    /*  if(cmd && cmd.category === "Música" && message.author.id !== process.env.botOwner) {
-  return message.reply("La categoría de Música está deshabilitada temporalmente.")
-}  */
+    if (cmd?.dev === true && message.author.id !== process.env.botOwner)
+      //Si en un comando la opción dev es true y el id del autor del mensaje no es la id de mi owner, hacemos esto:
+      return message.reply(`Ese comando está en "Reconstrucción" `); //Le respondemos con esto.
 
     try {
       if (cmd) {
-        cmd.run(client, message, args, p);
+        cmd.run(client, message, args, p); //Ejecutamos el comando con estos parámetros.
       }
     } catch (e) {
-      console.log(e);
-
-      let errmsg = new (require("discord.js").MessageEmbed)()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${e}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setColor("WHITE")
-        .setTimestamp();
+      console.log(e); //Si hay un error ejecutando un comando, entonces mostramos en la consola el error.
     }
+
     if (!cmd) {
-      /*    const dsnte = new Discord.MessageEmbed()
-  .setTitle("Error 404")
-  .setDescription(`**${command}** no es un comando, verifica si lo escribiste bien.`)
-  .setColor("WHITE")
-  .setFooter("Puede que si haya existido, y ya no.")
-  .setTimestamp()
-  message.reply({ embeds: [dsnte] })  */
+      //Si no se encontró el comando:
       return message.reply(
         `No tengo un comando llamado \`${command}\` pero puedes usar \`${p}help\``
-      );
+      ); //Le respondemos con esto.
     }
   },
 };
