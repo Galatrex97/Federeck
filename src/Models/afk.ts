@@ -17,7 +17,7 @@ const AFKSchema: Schema = new mongoose.Schema({
     default: null,
   },
   timeAgo: {
-    type: Date,
+    type: Number,
     required: false,
   },
 });

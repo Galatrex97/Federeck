@@ -65,7 +65,7 @@ let random = Math.floor(Math.random()*sdlg.length)
       console.log(error);
     }
 
-    const a = data2.timeAgo;
+    const a = moment(data2.timeAgo).locale("es").fromNow();
     const reason = data2.AFK_Reason;
 
     let ñ: any;
@@ -168,14 +168,14 @@ let random = Math.floor(Math.random()*sdlg.length)
       data2.AFK_Reason = null;
       data2.AFK = false;
       message.channel.send(
-        `Volviste **${message.member?.nickname || message.author.username}**, estuviste AFK **<t:${a}:R>** por **${reason}**`
+        `Volviste **${message.member?.nickname || message.author.username}**, estuviste AFK **${a}** por **${reason}**`
       );
       await data2.save();
     } else if (data2.AFK === true) {
       data2.AFK_Reason = null;
       data2.AFK = false;
       message.channel.send(
-        `Volviste **${message.member?.nickname || message.author.username}**, estuviste AFK **<t:${a}:R>**`
+        `Volviste **${message.member?.nickname || message.author.username}**, estuviste AFK **${a}**`
       );
       await data2.save();
     }
@@ -208,12 +208,12 @@ let random = Math.floor(Math.random()*sdlg.length)
           message.channel.send(
             `**${message.mentions.members.first()?.nickname || message.mentions.members.first()?.user.username}** está afk por: **${
               data3.AFK_Reason
-            }** desde **<t:${a}:R>**`
+            }** desde **${a}**`
           );
         }
         if (!data3.AFK_Reason) {
           message.channel.send(
-            `**${message.mentions.members.first()?.nickname || message.mentions.members.first()?.user.username}** está afk desde **<t:${a}:R>**`
+            `**${message.mentions.members.first()?.nickname || message.mentions.members.first()?.user.username}** está afk desde **${a}**`
           );
         }
 
