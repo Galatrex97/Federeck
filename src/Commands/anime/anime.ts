@@ -12,7 +12,7 @@ import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "anime",
-  cooldown: 5,
+  cooldown: 10,
   aliases: [],
   usage: "anime <Anime a buscar>",
   category: "Anime",
@@ -31,9 +31,9 @@ export const command: Command = {
         `<a:noputo:868687565304246283> | **El limite de texto es de 200**`
       ); //limite de texto
 
-    let Msg = await message.reply(
+    let Msg = await message.reply({ content:
       `<a:see:868645120289943552> | **Buscando..**`
-    ); //tiempo de busqueda
+    }); //tiempo de busqueda
 
     let Replaced = Text.replace(/ /g, " ");
 
@@ -67,6 +67,6 @@ export const command: Command = {
       return message.reply(`No se ha encontrado el anime.`);
     }
 
-    return Msg.edit({ embeds: [Embed] }); //enviamos el mensaje
+    return await Msg.edit({ content: null, embeds: [Embed] }); //enviamos el mensaje
   },
 };
