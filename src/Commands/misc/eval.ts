@@ -33,10 +33,6 @@ if(message.author.id !== nya) {
             .setDescription("Y el code? <a:xdd:841332542220927016>")
             .setColor("WHITE")
            return message.reply({embeds: [embed]})
-            .then((m) => m.delete()).catch(error => {
-              console.log(error)
-              message.channel.send("Ha ocurrido un error.")
-            })
         }
         try {
 					if (no.includes(toEval)){
@@ -48,7 +44,6 @@ if(message.author.id !== nya) {
         } catch (err) {
           console.log(err)
         }
-       if(!args.join(" ")) return;
         let beautify = require("beautify") //Se usa beautify para que funcione
         let embed = new Discord.MessageEmbed() //Creamos otro embed
         .setColor("WHITE")

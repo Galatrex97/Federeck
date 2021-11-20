@@ -25,7 +25,7 @@ export const command: Command = {
         client.commands.get(
           client.aliases?.get(args.join(" ").toLowerCase() as string) as string
         );
-      if (!command) return;
+      if (!command) return message.reply(`**${args.join(" ")}** no es un comando`);
       if (!command.usage) {
         p = "";
       }

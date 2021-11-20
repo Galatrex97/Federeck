@@ -26,17 +26,12 @@ export const event: Event = {
   name: "guildMemberAdd",
   run: async (client, member) => {
     let nya = await ugu.findOne({ Guild: member.guild.id });
-    if (!nya) return;
 
     let Channel;
 
     if (nya.Channel) {
       Channel = member.guild.channels.cache.get(nya.Channel);
-    } else {
-      Channel = null;
     }
-    if (!Channel) return;
-    if (!nya.Channel) return;
     let canvas = welcomeCanvas;
 
     (canvas.context.font = "42px My Olivin"),
@@ -77,17 +72,11 @@ export const event: Event = {
         .setFooter(`Gracias por unirte a nuestro server`, a);
 
       try {
-        Channel.send({ embeds: [welcomembed], files: [attachment] });
+        if (Channel) {
+          Channel.send({ embeds: [welcomembed], files: [attachment] });
+        }
       } catch (err) {
         console.log(err);
-
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${err}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setColor("WHITE")
-          .setTimestamp();
       }
     });
   },

@@ -14,23 +14,11 @@ export const command: Command = {
   name: "buscaminas",
   aliases: [],
   usage: "",
+  cooldown: 60,
   category: "Fun",
   description: "",
 
   run: (client: Klar, message: Message, args: String[]) => {
-    if (cooldown.has(message.author.id)) {
-      message.reply(
-        `Hey ${message.author} espera 1 minuto antes de volver a usar el comando`
-      );
-
-      return;
-    }
-
-    cooldown.add(message.author.id);
-
-    setTimeout(() => {
-      cooldown.delete(message.author.id);
-    }, 60000);
 
     const choices = [
       "||:zero:||",

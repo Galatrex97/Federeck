@@ -27,7 +27,7 @@ export const command: Command = {
     if ((message.channel as TextChannel).name.includes("ticket-")) {
       message.channel.delete();
     } else if ((message.channel as TextChannel).name === "ticket-logs") {
-      return;
+      return message.reply("No puedes borrar el canal de logs con este comando.");
     } else {
       return message.reply(
         "No puedes usar este comando aqui, úsalo en un ticket."
