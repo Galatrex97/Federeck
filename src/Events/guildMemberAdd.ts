@@ -31,7 +31,7 @@ export const event: Event = {
 
     let welcomeChannel;
 
-    if (welcomeData.Channel) {
+    if (welcomeData && welcomeData?.Channel) {
       welcomeChannel = member.guild.channels.cache.get(welcomeData.Channel);
     }
     let canvas = welcomeCanvas;
