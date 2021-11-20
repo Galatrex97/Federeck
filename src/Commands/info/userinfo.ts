@@ -53,26 +53,32 @@ export const command: Command = {
       .addFields(
         // Hacemos nuevas Fields
         {
-          name: "Nombre",
+          name: "Username: ",
           value: user?.user.username,
-          inline: true,
+          inline: true
         },
         {
-          name: "Apodo: ", // Nombre - Titulo - Caso 1
-          value: user?.nickname ? user.nickname : "No tiene apodo", // Si el "user" tiene apodo se envia, si es false / no tiene Se envia diciendo que "No tiene Apodo"
-          inline: true, // En linea: SI
+          name: "Nickname: ", // Nombre - Titulo - Caso 1
+          value: user?.nickname ? user.nickname : "No tiene apodo", // En linea: SI
+          inline: true
         },
         {
           name: "#️⃣ Tag: ", // Nombre - Titulo - Caso 1
-          value: `#${user?.user.discriminator}`, // Del "user" sacamos su tag / discriminador
-          inline: true, // En linea: SI
+          value: `#${user?.user.discriminator}`, // En linea: SI
+          inline: true
         },
         {
           name: "🆔 ID: ", // Nombre - Titulo - Caso 1
           value: user?.user.id, // Del "user" sacamos su ID
+          inline: true
         },
         {
-          name: "Reciente Actividad: ", // Nombre - Titulo - Caso 1
+          name: "Avatar: ", // Nombre - Titulo - Caso 1
+          value: `[Click Aquí](${user?.user.displayAvatarURL({ dynamic: true, size: 4096 })})`, // Del "user" obtenemos su Avatar Link, Hacemos que dentro del Array se encuentre el Link y cuando se de Click te reenviara una pagina viendo el avatar del "user"
+          inline: true
+        },
+        {
+          name: "Status actual: ", // Nombre - Titulo - Caso 1
           value: user?.presence?.status ? status : "⚪ Desconectado", // Acá se obtiene el estado del "user" con los casos ya dichos y explicado anteriormente.
           inline: true, // En linea: SI
         },
@@ -81,11 +87,7 @@ export const command: Command = {
           value: user?.presence?.activities[0]
             ? user.presence.activities[0].state
             : "Sin estado", // Si el "user" tiene actividad se envia, si no la tiene se envia "Sin Estado"
-          inline: true, // En linea: SI
-        },
-        {
-          name: "Avatar link: ", // Nombre - Titulo - Caso 1
-          value: `[Click Aquí](${user?.user.displayAvatarURL({ dynamic: true, size: 4096 })})`, // Del "user" obtenemos su Avatar Link, Hacemos que dentro del Array se encuentre el Link y cuando se de Click te reenviara una pagina viendo el avatar del "user"
+            inline: true,
         },
         {
           name: "Fecha de creación de la cuenta: ", // Nombre - Titulo - Caso 1
@@ -93,14 +95,13 @@ export const command: Command = {
           inline: true, // En linea: SI
         },
         {
-          name: "Fecha de entrada al Servidor: ", // Nombre - Titulo - Caso 1
-          value: user?.joinedAt?.toLocaleDateString("es-co"), // Del "user" obtenemos su Fecha de entrada al servidor en donde se envio el mensaje y hacemos que el dato local sea a ES-PE, Esto va en codigo segun por lenguaje - EJEMPLOS: es = español , en = english
-          inline: true, // En linea: SI
+          name: "Fecha de entrada al server: ", // Nombre - Titulo - Caso 1
+          value: user?.joinedAt?.toLocaleDateString("es-co"), // En linea: SI
+          inline: true
         },
         {
           name: "Roles del usuario: ", // Nombre - Titulo - Caso 1
-          value: user?.roles.cache.map((role) => role.toString()).join(" "), // Del "user" obtenemos sus roles del server y lo mapeamos tambien lo separamos con una coma ","
-          inline: true, // En linea: SI
+          value: user?.roles.cache.map((role) => role.toString()).join(" ") // En linea: SI
         }
       );
 

@@ -5,7 +5,7 @@ import Discord, { Message, Collection } from "discord.js";
 import moment from "moment";
 let prefix = process.env.prefix as string;
 import { Event } from "../Interfaces";
-import { is_url } from "../functions"; 
+import { is_url } from "../functions";
 import { myMention, randomsPacmansReplies } from "../resources";
 
 export const event: Event = {
@@ -25,37 +25,32 @@ export const event: Event = {
     }
 
     //Params Objects
-    const afkSearchParams = {
+    const someConfigParams = {
       userId: message.author.id,
       guildId: message.guild?.id,
     };
 
-    let pacmansConfigParams = {
-      userId: message.author.id,
-      guildId: message.guild?.id,
-    };
-
-    let antilinkConfigParams = {
+    const antilinkConfigParams = {
       guild: message.guild?.id,
     };
 
-    let afkMentParams = {
+    const afkMentParams = {
       userId: message.mentions.members.first()?.id,
       guildId: message.guild?.id,
     };
 
     //Definitions
     let AFKData =
-      (await afkSchema.findOne(afkSearchParams)) ||
-      (await afkSchema.create(afkSearchParams));
+      (await afkSchema.findOne(someConfigParams)) ||
+      (await afkSchema.create(someConfigParams));
 
-    let fechaDeAusencia = moment(AFKData.timeAgo).locale("es").fromNow();
+    let tiempoAusente = moment(AFKData.timeAgo).locale("es").fromNow();
 
     let idleReason = AFKData.AFK_Reason;
 
     let pacmansConfig =
-      (await lagrasa.findOne(pacmansConfigParams)) ||
-      (await lagrasa.create(pacmansConfigParams));
+      (await lagrasa.findOne(someConfigParams)) ||
+      (await lagrasa.create(someConfigParams));
 
     let antilinkConfig =
       (await antilink.findOne(antilinkConfigParams)) ||
@@ -99,10 +94,9 @@ export const event: Event = {
         message.channel.send(
           `Volviste **${
             message.member?.nickname || message.author.username
-          }**, estuviste AFK **${fechaDeAusencia}** por **${idleReason}**`
+          }**, estuviste AFK **${tiempoAusente}** por **${idleReason}**`
         );
-      }
-      if (!AFKData.AFK_Reason) {
+      } else if (!AFKData.AFK_Reason) {
         AFKData.AFK = false;
         AFKData.AFK_Reason = null;
         await AFKData.save();
@@ -110,7 +104,7 @@ export const event: Event = {
         message.channel.send(
           `Volviste **${
             message.member?.nickname || message.author.username
-          }**, estuviste AFK **${fechaDeAusencia}**`
+          }**, estuviste AFK **${tiempoAusente}**`
         );
       }
     }
@@ -121,7 +115,7 @@ export const event: Event = {
         (await afkSchema.create(afkMentParams));
 
       if (AFKMentData.AFK === true) {
-        let tiempoAusente = moment(AFKMentData.timeAgo).locale("es").fromNow();
+        tiempoAusente = moment(AFKMentData.timeAgo).locale("es").fromNow();
 
         if (AFKMentData.AFK_Reason) {
           message.channel.send(
