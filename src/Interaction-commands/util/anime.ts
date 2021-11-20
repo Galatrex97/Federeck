@@ -28,18 +28,18 @@ export const Interaction: interactionCommand = {
    * @param {String[]} args
    */
   run: async (client: Klar, interaction: CommandInteraction) => {
-    let Text = interaction.options.getString("search");
+    let searchText = interaction.options.getString("search");
 
-    if (Text && Text.length > 200)
+    if (searchText && searchText.length > 200)
       return interaction.followUp({
         content: `<a:noputo:868687565304246283> | **El limite de texto es de 200**`,
         ephemeral: true,
       }); //limite de texto
 
-    let Replaced;
+    let replacedText: any;
 
     if (Text) {
-      Replaced = Text.replace(/ /g, " ");
+      replacedText = searchText?.replace(/ /g, " ");
     }
 
     let Anime: any; //definimos el anime
@@ -47,7 +47,7 @@ export const Interaction: interactionCommand = {
     let Embed: any; //Definimos el embed
 
     try {
-      Anime = await getInfoFromName(Replaced); //Información del anime cómo descripción.
+      Anime = await getInfoFromName(replacedText); //Información del anime cómo descripción.
 
       if (!Anime.genres[0] || Anime.genres[0] === null)
         Anime.genres[0] = "None";

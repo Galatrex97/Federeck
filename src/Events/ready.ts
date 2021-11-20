@@ -6,17 +6,15 @@ import { ClientPresence, Presence } from "discord.js";
 export const event: Event = {
   name: "ready",
   run: async (client) => {
-    //Defines mongoose
-
     mongoose
       .connect(uri, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       })
-      .then(() => console.log("Conectado a MongoDB")) //Con esto, hacemos un console.log() para saber que si nos conectamos y todo está bien.
+      .then(() => console.log("Conectado a MongoDB")) 
       .catch((err: any) => console.log(err));
 
-    const presencias: any = [
+    const presencesArray: any = [
       {
         name: "Spiderversen't",
         type: "WATCHING",
@@ -41,21 +39,16 @@ export const event: Event = {
         type: "WATCHING",
       },
     ];
-    //presencias
 
     setInterval(() => {
         client.user?.setPresence({
           status: "online",
           activities: [
-            presencias[Math.floor(Math.random() * presencias.length)],
+            presencesArray[Math.floor(Math.random() * presencesArray.length)],
           ],
         });
     }, 105000);
     console.log("Todo piola");
     console.log("Estoy listo");
-
-    //Con esto hacemos una función para la presencia, que es la actividad, o el estado.
-
-    const fecha = new Date("May 31, 2021");
   },
 };
