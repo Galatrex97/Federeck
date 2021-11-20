@@ -5,6 +5,7 @@ import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "setprefix",
+  cooldown: 60,
   aliases: ["sp", "set-prefix"],
   category: "Configuración",
   usage: "setprefix/sp/set-prefix",
@@ -39,9 +40,10 @@ export const command: Command = {
           message.channel.send("Ha ocurrido un error.");
         });
 
-    const res = args.join(" ");
+    const res = args.join(" ");    
     let emoji = Discord.Util.parseEmoji(res);
     const emojiRegex = require("emoji-regex");
+
 
     if (
       res.includes(
@@ -59,16 +61,13 @@ export const command: Command = {
     prefixSchema.findOne({ Guild: message.guild?.id }, async (err, data) => {
       if (err) {
         console.log(err);
-
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${err.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setColor("WHITE")
-          .setTimestamp();
       }
       if (data) {
+
+        if(res == "k!"  && data.Prefix == "k!") {
+          return message.reply("No puedes re-establecer k! como prefix, es el prefix por defecto, además de que el servidor ya estableció este prefix.")
+        }
+
         await prefixSchema.findOneAndDelete({ Guild: message.guild?.id });
         data = new prefixSchema({
           Guild: message.guild?.id,
@@ -77,12 +76,17 @@ export const command: Command = {
         data.save();
         message.reply(`Mi prefix ha sido cambiado a **${res}**`);
       } else {
+
+        if(res == "k!") {
+          return message.reply("No puedes establecer k! como prefix ya que es el prefix por defecto que estás utilizando.")
+        }
+
         data = new prefixSchema({
           Guild: message.guild?.id,
           Prefix: res,
         });
         data.save();
-        message.reply(`Mi prefix ha sido cambiado a **${res}**`);
+        message.reply(`Mi prefix ha sido establecido a **${res}**`);
       }
     });
   },

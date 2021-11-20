@@ -23,7 +23,7 @@ export const command: Command = {
         "Intenta no mencionar, esto puede provocar errores."
       );
     if (!txt) return message.reply("Olvidaste colocar el comentario."); //Si no hay argumentos...
-
+    if(txt.length > 30) return message.reply("El texto debe ser menor a 30 carácteres.")   
     let autor = message.author; //Definimos autor
 
     let attachment = new Discord.MessageAttachment(

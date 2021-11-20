@@ -132,7 +132,7 @@ export const event: Event = {
             message.member?.nickname || message.author.username //Si el usuario tiene un nick o apodo en el server lo mostramos, si no, en su lugar mostramos el nombre de usuario.
           }**, estuviste AFK **<t:${fechaDeAusencia}:R>** por **${idleReason}**`
         ); //Le respondemos al usuario tras haber vuelto.
-      }
+      } if(!AFKData.AFK_Reason) {
 
       //Pero si no la dió hacemos esto:
 
@@ -145,6 +145,7 @@ export const event: Event = {
           message.member?.nickname || message.author.username
         }**, estuviste AFK **<t:${fechaDeAusencia}:R>**`
       ); //Le respondemos al usuario tras haber vuelto.
+      }
     }
 
     if (message.mentions.members?.first()) {

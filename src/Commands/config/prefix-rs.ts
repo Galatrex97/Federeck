@@ -24,19 +24,37 @@ export const command: Command = {
         })
         .catch((error: Error) => {
           console.log(error);
-
-          let errmsg = new (require("discord.js").MessageEmbed)()
-            .setTitle("Ha ocurrido un error")
-            .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-            .setThumbnail(
-              `https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`
-            )
-            .setFooter("Tipico")
-            .setColor("WHITE")
-            .setTimestamp();
-
           message.channel.send("Ha ocurrido un error.");
         });
+
+    let prefixData: any;
+    try {
+      prefixData = await prefixSchema.findOne({
+        Guild: message.guild?.id,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+      if (!prefixData) {
+        prefixData = new prefixSchema({
+          Guild: message.guild?.id,
+        });
+      }
+
+      if (!prefixData.Prefix && prefixData.Guild)
+        return message.reply(
+          "El servidor re-estableció el prefix, así que están usando el prefix por defecto (k!)."
+        );
+
+        if(!prefixData.Prefix) return message.reply("El servidor nunca estableció un prefix. Están usando k! como prefix.")
+
+      if (prefixData.Prefix == "k!") {
+        return message.reply(
+          "No puedes reestablecer el prefix ya que k! ya es el prefix por defecto."
+        );
+      }
+
+
     await prefixSchema.findOneAndDelete({ Guild: message.guild?.id });
     message.reply(`El prefix ha sido reestablecido a **${prefix}**`);
   },
