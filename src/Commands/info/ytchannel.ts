@@ -6,7 +6,6 @@ import { Command } from "../../Interfaces";
 export const command: Command = {
   name: "ytchannel",
   aliases: ["ytchan"],
-  dev: true,
   category: "Info",
   description: "Busca un canal de YouTube y te muestra sus estadísticas",
   usage: "ytchannel <canal>",

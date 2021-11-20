@@ -13,7 +13,6 @@ import { Command } from "../../Interfaces";
 export const command: Command = {
   name: "queue",
   aliases: [],
-  dev: true,
   category: "Música",
   usage: "queue",
   description: "Muestra la lista de reproducción",

@@ -12,7 +12,6 @@ export const command: Command = {
   name: "userinfo",
   aliases: [],
   usage: "userinfo",
-  dev: true,
   category: "Info",
   description: "",
 
@@ -25,7 +24,7 @@ export const command: Command = {
     const row = new MessageActionRow().addComponents(
       new MessageButton()
         .setStyle("LINK")
-        .setURL(`${user?.user.displayAvatarURL()}`)
+        .setURL(`${user?.user.displayAvatarURL({ dynamic: true, size: 4096 })}`)
         .setLabel("Link del avatar")
     );
 
@@ -86,7 +85,7 @@ export const command: Command = {
         },
         {
           name: "Avatar link: ", // Nombre - Titulo - Caso 1
-          value: `En el botón.`, // Del "user" obtenemos su Avatar Link, Hacemos que dentro del Array se encuentre el Link y cuando se de Click te reenviara una pagina viendo el avatar del "user"
+          value: `[Click Aquí](${user?.user.displayAvatarURL({ dynamic: true, size: 4096 })})`, // Del "user" obtenemos su Avatar Link, Hacemos que dentro del Array se encuentre el Link y cuando se de Click te reenviara una pagina viendo el avatar del "user"
         },
         {
           name: "Fecha de creación de la cuenta: ", // Nombre - Titulo - Caso 1
@@ -108,14 +107,6 @@ export const command: Command = {
     try {
       message.reply({ embeds: [embed], components: [row] }); // Y enviamos el mensaje
     } catch (err) {
-      let errmsg = new (require("discord.js").MessageEmbed)()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setColor("WHITE")
-        .setTimestamp();
-
       console.log(err);
     }
   },
