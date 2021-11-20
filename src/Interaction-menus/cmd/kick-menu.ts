@@ -19,8 +19,8 @@ export const InteractionMenu: interactionMenu = {
   run: async (client: Klar, interaction: ContextMenuInteraction) => {
     const targetUser = interaction.options.getUser("user", true);
     const target = await interaction.guild?.members.fetch(targetUser.id);
-    let guild = interaction.guild as Guild;
-    const owner = (await guild.fetchOwner()).user.id;
+    let thisServer = interaction.guild as Guild;
+    const guildOwner = (await thisServer.fetchOwner()).user.id;
 
     if (!(interaction.member as GuildMember).permissions.has("KICK_MEMBERS")) {
       return interaction.followUp({
@@ -29,7 +29,7 @@ export const InteractionMenu: interactionMenu = {
       });
     }
 
-    if (target?.id === owner && target.id === interaction.user.id) {
+    if (target?.id === guildOwner && target.id === interaction.user.id) {
       return interaction.followUp({
         content:
           "No te puedes expulsar a ti mismo, además tu eres el dueño del servidor.",
@@ -42,7 +42,7 @@ export const InteractionMenu: interactionMenu = {
         ephemeral: true,
       });
     }
-    if (target?.id === owner) {
+    if (target?.id === guildOwner) {
       return interaction.followUp({
         content: "No puedes expulsar al dueño del servidor.",
         ephemeral: true,

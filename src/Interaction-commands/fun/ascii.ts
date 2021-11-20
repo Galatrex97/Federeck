@@ -1,5 +1,5 @@
 import Discord, { Client, CommandInteraction, MessageEmbed } from "discord.js";
-import figlet from "figlet";
+import parseToAscii from "figlet";
 import Klar from "../../Client";
 import { interactionCommand } from "../../Interfaces";
 export const Interaction: interactionCommand = {
@@ -28,7 +28,7 @@ export const Interaction: interactionCommand = {
       );
     }
 
-    figlet(str, (err: any, data: any) =>
+    parseToAscii(str, (err: any, data: any) =>
       interaction.followUp("```" + data + "```")
     );
   },

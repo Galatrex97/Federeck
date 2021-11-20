@@ -32,28 +32,28 @@ export const Interaction: interactionCommand = {
    * @param {String[]} args
    */
   run: async (client: Klar, interaction: CommandInteraction) => {
-    let a = interaction.member;
-    const guild = interaction.guild as Guild;
-    const owner: any = (await guild.fetchOwner()).user.id;
+    let thisUser = interaction.member;
+    const thisGuild = interaction.guild as Guild;
+    const guildOwner: any = (await thisGuild.fetchOwner()).user.id;
     const banReason = interaction.options.getString("reason") as string;
-    const user = interaction.options.getUser("user") as User;
-    const member: any =
-      interaction.guild?.members.cache.get(user.id) ||
-      (await interaction.guild?.members.fetch(user.id).catch((err) => {}));
-    if (user?.id === owner && user?.id === interaction.user.id) {
+    const userSelected = interaction.options.getUser("user") as User;
+    const memberSelected: any =
+      interaction.guild?.members.cache.get(userSelected.id) ||
+      (await interaction.guild?.members.fetch(userSelected.id).catch((err) => {}));
+    if (userSelected?.id === guildOwner && userSelected?.id === interaction.user.id) {
       return interaction.followUp({
         content:
           "No te puedes banear a ti mismo, además tu eres el dueño del servidor.",
         ephemeral: true,
       });
     }
-    if (member?.id === owner) {
+    if (memberSelected?.id === guildOwner) {
       return interaction.followUp({
         content: "No puedes banear al dueño del servidor.",
         ephemeral: true,
       });
     }
-    if (member?.id === interaction.user.id) {
+    if (memberSelected?.id === interaction.user.id) {
       return interaction.followUp({
         content: "No te puedes banear a ti mismo.",
         ephemeral: true,
@@ -72,7 +72,7 @@ export const Interaction: interactionCommand = {
         ephemeral: true,
       });
     }
-    if (client.user?.id === user?.id) {
+    if (client.user?.id === userSelected?.id) {
       return interaction.followUp({
         content: "No me puedes banear.",
         ephemeral: true,
@@ -80,8 +80,8 @@ export const Interaction: interactionCommand = {
     } /*  else if (interaction.member.roles.highest.position <= member.roles.highest.position) {
 		        return interaction.followUp({content: 'No puedes banear a una persona con un mayor o igual rango que tú.', ephemeral: true})
 	 } */
-    if (!user?.bot) {
-      const nya = new MessageEmbed()
+    if (!userSelected?.bot) {
+      const greetingsEmbed = new MessageEmbed()
         .setTitle("Adiós.")
         .setDescription(
           `Has sido baneado de **${interaction.guild?.name}** por el Moderador: **${interaction.user.username}**.\nLa razón de tu baneo fue: **${banReason}**.`
@@ -89,40 +89,24 @@ export const Interaction: interactionCommand = {
         .setTimestamp()
         .setFooter("Hasta pronto.");
       try {
-        member?.ban({ reason: banReason });
-        member?.send({ embeds: [nya] });
+        memberSelected?.ban({ reason: banReason });
+        memberSelected?.send({ embeds: [greetingsEmbed] });
         interaction.followUp({
-          content: `El usuario **${user}** ha sido Baneado.\nModerador: ${interaction.user.toString()}\nRazón: **${banReason}**`,
+          content: `El usuario **${userSelected}** ha sido Baneado.\nModerador: ${interaction.user.toString()}\nRazón: **${banReason}**`,
           ephemeral: false,
         });
       } catch (err: any) {
-        let errmsg = new MessageEmbed()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${err}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setTimestamp()
-          .setColor("WHITE");
-
         console.log(err);
       }
     }
-    if (user?.bot) {
+    if (userSelected?.bot) {
       try {
-        member?.ban({ reason: banReason });
+        memberSelected?.ban({ reason: banReason });
         interaction.followUp({
-          content: `El bot **${user}** ha sido Baneado.\nModerador: ${interaction.user.toString()}\nRazón: **${banReason}**`,
+          content: `El bot **${userSelected}** ha sido Baneado.\nModerador: ${interaction.user.toString()}\nRazón: **${banReason}**`,
           ephemeral: false,
         });
       } catch (err: any) {
-        let errmsg = new MessageEmbed()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${err}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setColor("WHITE")
-          .setTimestamp();
-
         console.log(err);
       }
     }

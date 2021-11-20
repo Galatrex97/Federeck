@@ -1,6 +1,6 @@
 import Discord, { GuildMember } from "discord.js";
 import { model } from "mongoose";
-import ugu from "../Models/add";
+import welcomeChannelSchema from "../Models/add";
 import Canvas from "canvas";
 import { registerFont } from "canvas";
 import Klar from "../Client";
@@ -25,12 +25,14 @@ Canvas.loadImage("./17010.jpg").then(async (img) => {
 export const event: Event = {
   name: "guildMemberAdd",
   run: async (client, member) => {
-    let nya = await ugu.findOne({ Guild: member.guild.id });
+    let welcomeData = await welcomeChannelSchema.findOne({
+      Guild: member.guild.id,
+    });
 
-    let Channel;
+    let welcomeChannel;
 
-    if (nya.Channel) {
-      Channel = member.guild.channels.cache.get(nya.Channel);
+    if (welcomeData.Channel) {
+      welcomeChannel = member.guild.channels.cache.get(welcomeData.Channel);
     }
     let canvas = welcomeCanvas;
 
@@ -58,22 +60,22 @@ export const event: Event = {
         `NuevoMiembro.png`
       );
 
-      const avatar = member.user.displayAvatarURL();
-      const a = member.guild.iconURL() as string;
+      const newMemberAvatar = member.user.displayAvatarURL();
+      const serverIconUrl = member.guild.iconURL() as string;
       const welcomembed = new Discord.MessageEmbed()
         .setTitle("¡Nuevo miembro!")
         .setDescription(
           `El usuario ** ${member}** se ha unido al server y ahora somos ${member.guild.memberCount} personas!`
         )
-        .setThumbnail(`${avatar}`)
+        .setThumbnail(`${newMemberAvatar}`)
         .setColor("WHITE")
         .setImage("attachment://NuevoMiembro.png")
         .setTimestamp()
-        .setFooter(`Gracias por unirte a nuestro server`, a);
+        .setFooter(`Gracias por unirte a nuestro server`, serverIconUrl);
 
       try {
-        if (Channel) {
-          Channel.send({ embeds: [welcomembed], files: [attachment] });
+        if (welcomeChannel) {
+          welcomeChannel.send({ embeds: [welcomembed], files: [attachment] });
         }
       } catch (err) {
         console.log(err);

@@ -6,7 +6,7 @@ import {
   MessageActionRow,
   MessageButton,
 } from "discord.js";
-import play from "google-play-scraper";
+import playStore from "google-play-scraper";
 import moment from "moment";
 import Klar from "../../Client";
 import { interactionMenu } from "../../Interfaces";
@@ -34,13 +34,13 @@ export const InteractionMenu: interactionMenu = {
       return interaction.followUp("Ocurrió un error con esa búsqueda");
     }
 
-    play
+    playStore
       .search({
         term: busqueda,
         num: 1,
       })
       .then((aa) => {
-        play
+        playStore
           .app({
             appId: aa[0].appId,
             lang: "es",

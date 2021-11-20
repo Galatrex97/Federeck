@@ -44,15 +44,12 @@ export const event: Event = {
     //presencias
 
     setInterval(() => {
-      function presence() {
         client.user?.setPresence({
           status: "online",
           activities: [
             presencias[Math.floor(Math.random() * presencias.length)],
           ],
         });
-      }
-      presence();
     }, 105000);
     console.log("Todo piola");
     console.log("Estoy listo");

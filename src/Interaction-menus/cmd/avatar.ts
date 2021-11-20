@@ -16,13 +16,13 @@ export const InteractionMenu: interactionMenu = {
    * @param {String[]} args
    */
   run: async (client: Klar, interaction: ContextMenuInteraction) => {
-    let member = await client.users.fetch(interaction.targetId);
+    let fetchedMember = await client.users.fetch(interaction.targetId);
 
     const embed = new MessageEmbed()
-      .setDescription(`Avatar de: __**${member.username}**__`)
+      .setDescription(`Avatar de: __**${fetchedMember.username}**__`)
       .addField("Pedido por:", `${interaction.member}`)
       .setImage(
-        member.displayAvatarURL({ format: "png", dynamic: true, size: 4096 })
+        fetchedMember.displayAvatarURL({ format: "png", dynamic: true, size: 4096 })
       )
       .setColor("WHITE")
       .setFooter(":)", client.user?.displayAvatarURL())
