@@ -12,8 +12,6 @@ export const event: Event = {
   name: "messageCreate",
   run: async (client, message) => {
     //Returns & Conditionals
-    if (message.author.bot) return;
-    if (message.author.bot && message.channel.type === "DM") return;
     if (message.channel.type === "DM" && message.content.startsWith(prefix)) {
       try {
         return message.reply("Los comandos en MD no están soportados aún.");
@@ -29,6 +27,10 @@ export const event: Event = {
       userId: message.author.id,
       guildId: message.guild?.id,
     };
+
+    const pacmansParams = {
+      guildId: message.guild?.id
+    }
 
     const antilinkConfigParams = {
       guild: message.guild?.id,
@@ -49,8 +51,8 @@ export const event: Event = {
     let idleReason = AFKData.AFK_Reason;
 
     let pacmansConfig =
-      (await lagrasa.findOne(someConfigParams)) ||
-      (await lagrasa.create(someConfigParams));
+      (await lagrasa.findOne(pacmansParams)) ||
+      (await lagrasa.create(pacmansParams));
 
     let antilinkConfig =
       (await antilink.findOne(antilinkConfigParams)) ||
@@ -153,7 +155,7 @@ export const event: Event = {
       }
 
     if (message.content === p) return;
-    if (!message.content.startsWith(p)) return;
+    if (!message.content.startsWith(p) || message.author.bot) return;
     const args: any = message.content.slice(p.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     const cmd =

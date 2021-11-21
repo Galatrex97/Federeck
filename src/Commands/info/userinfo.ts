@@ -54,50 +54,50 @@ export const command: Command = {
         // Hacemos nuevas Fields
         {
           name: "Username: ",
-          value: user?.user.username,
-          inline: true
+          value: `\`${user?.user.username}\``,
+          inline: false
         },
         {
           name: "Nickname: ", // Nombre - Titulo - Caso 1
-          value: user?.nickname ? user.nickname : "No tiene apodo", // En linea: SI
-          inline: true
+          value: user?.nickname ? `\`${user.nickname}\`` : "\`No tiene apodo\`", // En linea: SI
+          inline: false
         },
         {
           name: "#️⃣ Tag: ", // Nombre - Titulo - Caso 1
-          value: `#${user?.user.discriminator}`, // En linea: SI
-          inline: true
+          value: `\`#${user?.user.discriminator}\``, // En linea: SI
+          inline: false
         },
         {
           name: "🆔 ID: ", // Nombre - Titulo - Caso 1
-          value: user?.user.id, // Del "user" sacamos su ID
-          inline: true
+          value: `\`${user?.user.id}\``, // Del "user" sacamos su ID
+          inline: false
         },
         {
           name: "Avatar: ", // Nombre - Titulo - Caso 1
-          value: `[Click Aquí](${user?.user.displayAvatarURL({ dynamic: true, size: 4096 })})`, // Del "user" obtenemos su Avatar Link, Hacemos que dentro del Array se encuentre el Link y cuando se de Click te reenviara una pagina viendo el avatar del "user"
-          inline: true
+          value: `[\`Click Aquí\`](${user?.user.displayAvatarURL({ dynamic: true, size: 4096 })})`, // Del "user" obtenemos su Avatar Link, Hacemos que dentro del Array se encuentre el Link y cuando se de Click te reenviara una pagina viendo el avatar del "user"
+          inline: false
         },
         {
           name: "Status actual: ", // Nombre - Titulo - Caso 1
-          value: user?.presence?.status ? status : "⚪ Desconectado", // Acá se obtiene el estado del "user" con los casos ya dichos y explicado anteriormente.
-          inline: true, // En linea: SI
+          value: user?.presence?.status ? `\`${status}\`` : "\`⚪ Desconectado\`", // Acá se obtiene el estado del "user" con los casos ya dichos y explicado anteriormente.
+          inline: false, // En linea: SI
         },
         {
           name: "Estado: ", // Nombre - Titulo - Caso 1
           value: user?.presence?.activities[0]
-            ? user.presence.activities[0].state
-            : "Sin estado", // Si el "user" tiene actividad se envia, si no la tiene se envia "Sin Estado"
-            inline: true,
+            ? `\`${user.presence.activities[0].state}\``
+            : "\`Sin estado\`", // Si el "user" tiene actividad se envia, si no la tiene se envia "Sin Estado"
+            inline: false,
         },
         {
           name: "Fecha de creación de la cuenta: ", // Nombre - Titulo - Caso 1
-          value: user?.user.createdAt.toLocaleDateString("es-co"), // Del "user" obtenemos su Fecha de creacion y hacemos que el dato local sea a ES-PE, Esto va en codigo segun por lenguaje - EJEMPLOS: es = español , en = english
-          inline: true, // En linea: SI
+          value: `\`${user?.user.createdAt.toLocaleDateString("es-co")}\``, // Del "user" obtenemos su Fecha de creacion y hacemos que el dato local sea a ES-PE, Esto va en codigo segun por lenguaje - EJEMPLOS: es = español , en = english
+          inline: false, // En linea: SI
         },
         {
           name: "Fecha de entrada al server: ", // Nombre - Titulo - Caso 1
-          value: user?.joinedAt?.toLocaleDateString("es-co"), // En linea: SI
-          inline: true
+          value: `\`${user?.joinedAt?.toLocaleDateString("es-co")}\``, // En linea: SI
+          inline: false
         },
         {
           name: "Roles del usuario: ", // Nombre - Titulo - Caso 1
