@@ -1,6 +1,6 @@
 export const myMention = new RegExp(`^<@!?849395994973700117>( |)$`); //Acá tenemos una expresión regular (o regex) de menciones hacia mi, esto nos sirve para responder cuando nos mencionan.
 
-const pacmansReplies = [
+export const pacmansReplies = [
     //Un array que contiene las respuestas a los pacmans.
     ":v",
     "#HailGrasa",
@@ -10,7 +10,7 @@ const pacmansReplies = [
     "El shitposting es un pasatiempo, la grasa es un sentimiento.",
     "¿Quieres ser el : de mi v?",
   ];
-  const randomizePacmanReplies = Math.floor(
+  export const randomizePacmanReplies = Math.floor(
     Math.random() * pacmansReplies.length //Hacemos las respuestas randoms para más variedad.
   );
 

@@ -12,6 +12,11 @@ import { connect } from "mongoose";
 export function runAll(client: Client) {
   //Exportamos la función runAll.
 
+//Avoid crashes
+process.on("unhandledRejection", async(promise) => {
+  console.log("There was an unhandled rejection: "+promise)
+})
+
   //Commands
   readdirSync("./src/Commands/").forEach((dir) => {
     //Entramos a la carpeta Commands, creamos la carpeta Cmd, y hacemos un readdirSync, para obtener todas sus categorias, retornando el parámetro dir

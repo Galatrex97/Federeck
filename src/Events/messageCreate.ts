@@ -6,7 +6,7 @@ import moment from "moment";
 let prefix = process.env.prefix as string;
 import { Event } from "../Interfaces";
 import { is_url } from "../functions";
-import { myMention, randomsPacmansReplies } from "../resources";
+import { myMention, randomsPacmansReplies, randomizePacmanReplies, pacmansReplies } from "../resources";
 
 export const event: Event = {
   name: "messageCreate",
@@ -59,7 +59,7 @@ export const event: Event = {
       (await antilink.create(antilinkConfigParams));
 
     if (pacmansConfig.sdlg === true && message.content === ":v") {
-      message.channel.send(randomsPacmansReplies);
+      message.channel.send(pacmansReplies[randomizePacmanReplies]);
     }
 
     //Antilink System
