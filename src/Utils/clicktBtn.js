@@ -347,7 +347,7 @@ async function clickBtn(button, options = []) {
 						new Discord.MessageEmbed()
 							.setColor('#075FFF')
 							.setAuthor(
-								'Transcribiendo...',
+								'Creando un log...',
 								'https://cdn.discordapp.com/emojis/757632044632375386.gif?v=1'
 							)
 					]
@@ -387,7 +387,7 @@ async function clickBtn(button, options = []) {
 				let tr_btn = new MessageButton()
 					.setStyle(options.trColor || 'PRIMARY')
 					.setEmoji(options.trEmoji || '📜')
-					.setLabel('Transcribir')
+					.setLabel('Log')
 					.setCustomId('tr_ticket')
 
 				let row = new MessageActionRow().addComponents([
@@ -517,7 +517,7 @@ async function clickBtn(button, options = []) {
 							})
 							.then((c) => {
 								c.channel.send({
-									content: `***Transcripción:*** \`#${ek}\``,
+									content: `***Archivo:*** \`#${ek}\``,
 									files: [attach]
 								})
 							})

@@ -17,7 +17,7 @@ let parentData = await parentSchema.findOne(parentParams) || await parentSchema.
       credit: false,
       cooldownMsg: "Ya tienes un ticket abierto, cierralo primero para abrir otro.",
       timeout: false,
-      embedColor: "#fffff",
+      embedColor: "#ffffff",
     });
 
     if (interaction.isCommand()) {
