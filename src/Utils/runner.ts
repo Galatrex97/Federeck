@@ -13,14 +13,18 @@ export function runAll(client: Client) {
   //Exportamos la función runAll.
 
 //Avoid crashes
-process.on("unhandledRejection", async(promise) => {
-  console.log("There was an unhandled rejection at: ")
+process.on("unhandledRejection", async(reason, promise) => {
+  console.log("------- There was an unhandled rejection at -------")
   console.log(promise)
+  console.log("------- Reason -------")
+  console.log(reason)
 })
 
-process.on("uncaughtException", async(error) => {
-  console.log("Error: ")
-  console.log(error)
+process.on("uncaughtException", async(error, origin) => {
+  console.log("------- Error -------")
+  console.log(error.stack)
+  console.log("------- Exception origin -------")
+  console.log(origin)
 })
 
   //Commands
