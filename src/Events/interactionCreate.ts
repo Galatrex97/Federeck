@@ -1,9 +1,24 @@
 import { MessageEmbed } from "discord.js";
 import { Event } from "../Interfaces";
-
+import { ticketBtn } from "../Utils";
+import parentSchema from "../Models/parent";
 export const event: Event = {
   name: "interactionCreate",
-  run: async (client, interaction) => {
+  run: async(client, interaction) => {
+
+const parentParams = {
+  guildId: interaction.guild?.id
+}
+
+let parentData = await parentSchema.findOne(parentParams) || await parentSchema.create(parentParams);
+
+    ticketBtn(interaction, {
+      categoryID: parentData.parentId,
+      credit: false,
+      cooldownMsg: "Ya tienes un ticket abierto, cierralo primero para abrir otro.",
+      timeout: false,
+      embedColor: "#fffff",
+    });
 
     if (interaction.isCommand()) {
       interaction.deferReply();

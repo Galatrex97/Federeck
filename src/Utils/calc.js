@@ -44,11 +44,11 @@ async function calculator(interaction, options = []) {
 			'0',
 			'00',
 			'=',
-			'Delete'
+			'Del'
 		]
 		let current = 0
 		if (options.credit === false) {
-			foot = options.embedFoot || 'Lyon calculator. npm i simply-djs'
+			foot = options.embedFoot || 'Lyon calculator. based on simply-djs npm'
 		} else {
 			foot = '©️ Simply Develop. npm i simply-djs'
 		}
@@ -122,7 +122,7 @@ async function calculator(interaction, options = []) {
 									embeds: [emb1],
 									components: row
 								})
-							} else if (value.includes('Delete'))
+							} else if (value.includes('Del'))
 								return interaction.deleteReply().catch(() => {})
 							else if (value.includes('Clear')) return (value = '0')
 							emb1.setDescription('```' + value + '```')
@@ -204,7 +204,7 @@ async function calculator(interaction, options = []) {
 									embeds: [emb1],
 									components: row
 								})
-							} else if (value.includes('Delete')) {
+							} else if (value.includes('Del')) {
 								msg.delete()
 								return interaction.delete().catch(() => {})
 							} else if (value.includes('Clear')) return (value = '0')
@@ -246,7 +246,7 @@ async function calculator(interaction, options = []) {
 
 		function createButton(label, style = 'SECONDARY') {
 			if (label === 'Clear') style = 'DANGER'
-			else if (label === 'Delete') style = 'DANGER'
+			else if (label === 'Del') style = 'DANGER'
 			else if (label === '⌫') style = 'DANGER'
 			else if (label === 'π') style = 'SECONDARY'
 			else if (label === '%') style = 'SECONDARY'

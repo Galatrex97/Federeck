@@ -1,4 +1,4 @@
-import { calculator } from "../../Utils/exporter";
+import { calculator } from "../../Utils";
 import { Command } from "../../Interfaces";
 
 export const command: Command = {
