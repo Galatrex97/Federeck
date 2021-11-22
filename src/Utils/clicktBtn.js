@@ -252,7 +252,7 @@ async function clickBtn(button, options = []) {
 							}
 
 							let emb = new Discord.MessageEmbed()
-								.setTitle('Ticket Created')
+								.setTitle('Ticket Creado')
 								.setDescription(
 									options.embedDesc ||
 										`Este ticket ha sido creado por ${button.user}. \n**User ID**: \`${button.user.id}\` | **User Tag**: \`${button.user.tag}\`\n${lele}`
