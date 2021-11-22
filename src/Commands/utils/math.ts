@@ -1,7 +1,4 @@
-import math from "math-expression-evaluator"; // Este NPM es con el que se podrá hacer los calculos
-import Discord, { Client, Message, MessageEmbed } from "discord.js";
-import Klar from "../../Client";
-import simplydjs from "simply-djs";
+import { calculator } from "../../Utils/exporter";
 import { Command } from "../../Interfaces";
 
 export const command: Command = {
@@ -14,12 +11,14 @@ export const command: Command = {
     "Una calculadora para resolver operaciones matematicas de forma sencilla.",
 
   run: async (client, message, args) => {
-    simplydjs.calculator(message as any, {
+
+    try {
+    calculator(message as any, {
       embedColor: "#ffffff",
       credit: false
     });
+  } catch (err) {
+    console.log(err)
+  }
   },
 };
-
-// Finaliza el código
-// Cualquier duda, lean la doc de la NPM
