@@ -14,7 +14,13 @@ export function runAll(client: Client) {
 
 //Avoid crashes
 process.on("unhandledRejection", async(promise) => {
-  console.log("There was an unhandled rejection: "+promise)
+  console.log("There was an unhandled rejection at: ")
+  console.log(promise)
+})
+
+process.on("uncaughtException", async(error) => {
+  console.log("Error: ")
+  console.log(error)
 })
 
   //Commands
