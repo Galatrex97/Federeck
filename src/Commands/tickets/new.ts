@@ -10,13 +10,13 @@ import { ticketSystem } from "../../Utils";
 import { Command } from "../../Interfaces";
 
 export const command: Command = {
-  name: "setup-ticket",
+  name: "set-tickets",
   category: "Soporte",
   cooldown: 900,
   aliases: [],
   description:
     "Esto configurará los tickets.",
-  usage: "setup-ticket",
+  usage: "set-tickets",
   run: async (client, message, args, p) => {
 
     const parentParams = {
