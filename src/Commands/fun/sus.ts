@@ -9,7 +9,7 @@ export const command: Command = {
   description: "Kinda sus",
 
   run: async (client, message, args) => {
-    const member = message.member;
+    const member = message.mentions.members?.first() || message.member;
     const pfp: any = member?.user.displayAvatarURL({ format: "jpg" })
     const avatar = await Canvas.loadImage(pfp);
     let bg = await Canvas.loadImage("https://github.com/katie07/Imagayes/blob/main/AMOGUS.png?raw=true%22%22")
