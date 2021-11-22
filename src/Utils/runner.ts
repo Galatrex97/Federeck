@@ -18,6 +18,7 @@ process.on("unhandledRejection", async(reason, promise) => {
   console.log(promise)
   console.log("------- Reason -------")
   console.log(reason)
+  console.log("------- End -------")
 })
 
 process.on("uncaughtException", async(error, origin) => {
@@ -25,6 +26,7 @@ process.on("uncaughtException", async(error, origin) => {
   console.log(error.stack)
   console.log("------- Exception origin -------")
   console.log(origin)
+  console.log("------- End -------")
 })
 
   //Commands

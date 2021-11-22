@@ -15,7 +15,8 @@ export const command: Command = {
 
   run: async (client, message, args) => {
     simplydjs.calculator(message as any, {
-      embedColor: "#ffffff"
+      embedColor: "#ffffff",
+      credit: false
     });
   },
 };
