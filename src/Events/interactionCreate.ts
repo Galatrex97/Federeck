@@ -1,6 +1,6 @@
 import { MessageEmbed } from "discord.js";
 import { Event } from "../Interfaces";
-import { ticketBtn } from "../Utils";
+import { clickBtn } from "../Utils";
 import parentSchema from "../Models/parent";
 export const event: Event = {
   name: "interactionCreate",
@@ -12,7 +12,7 @@ const parentParams = {
 
 let parentData = await parentSchema.findOne(parentParams) || await parentSchema.create(parentParams);
 
-    ticketBtn(interaction, {
+    clickBtn(interaction, {
       categoryID: parentData.parentId,
       credit: false,
       cooldownMsg: "Ya tienes un ticket abierto, cierralo primero para abrir otro.",
