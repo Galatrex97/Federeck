@@ -79,7 +79,10 @@ export const command: Command = {
     message.delete().catch(() => null);
 
     try {
-      (canal as TextChannel).send(texto);
+      (canal as TextChannel).send({content: texto, allowedMentions: {
+        parse: [],
+        },
+       });
     } catch (err) {
       let errmsg = new (require("discord.js").MessageEmbed)()
         .setTitle("Ha ocurrido un error")

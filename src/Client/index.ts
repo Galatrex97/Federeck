@@ -12,9 +12,6 @@ class Lyon extends Client {
     super({
       intents: 32767,
       partials: ["MESSAGE", "CHANNEL", "REACTION", "GUILD_MEMBER", "USER"],
-      allowedMentions: {
-        parse: [],
-      },
     });
   }
   public commands: Collection<string, Command> = new Collection();

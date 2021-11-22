@@ -46,17 +46,12 @@ export const command: Command = {
     }
 
     try {
-      message.channel.send(texto);
+      message.channel.send({content: texto, allowedMentions: {
+         parse: [],
+         },
+        });
     } catch (e) {
       console.log(e);
-
-      let errmsg = new (require("discord.js").MessageEmbed)()
-        .setTitle("Ha ocurrido un error")
-        .setColor("WHITE")
-        .setDescription(`**Tengo el siguiente error:** ${e}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setTimestamp();
     }
   },
 };
