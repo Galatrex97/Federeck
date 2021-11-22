@@ -5,10 +5,6 @@ export const event: Event = {
   name: "interactionCreate",
   run: async (client, interaction) => {
 
-    if(interaction.isButton()) {
-      interaction.deferReply();
-    }
-
     if (interaction.isCommand()) {
       interaction.deferReply();
 
