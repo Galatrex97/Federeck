@@ -140,7 +140,7 @@ async function calculator(interaction, options = []) {
 						else if (txt === '=') result = true
 						else result = false
 						createCollector(txt, result)
-					} if(!value.includes("Delete")) {
+					} if(!value.includes("Del")) {
 					setTimeout(async () => {
 				
 						emb1.setDescription(
@@ -224,7 +224,7 @@ async function calculator(interaction, options = []) {
 						else result = false
 						createCollector(txt, result)
 					}
-					if(!value.includes("Delete")) {
+					if(!value.includes("Del")) {
 					setTimeout(async () => {
 						emb1.setDescription(
 							'Se te ha acabado el tiempo límite para usar este comando. (10 minutos)'
