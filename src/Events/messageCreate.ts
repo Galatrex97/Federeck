@@ -12,6 +12,7 @@ export const event: Event = {
   name: "messageCreate",
   run: async (client, message) => {
     //Returns & Conditionals
+    if(message.author.bot) return;
     if (message.channel.type === "DM" && message.content.startsWith(prefix)) {
       try {
         return message.reply("Los comandos en MD no están soportados aún.");

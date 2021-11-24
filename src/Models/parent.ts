@@ -2,7 +2,7 @@ import mongoose, { Schema, model } from "mongoose";
 let parentSchema: Schema = new Schema({
   parentId: {
     type: String,
-    required: true,
+    required: false,
   },
   guildId: {
     type: String,
