@@ -15,17 +15,15 @@ export const InteractionMenu: interactionMenu = {
    * @param {ContextMenuInteraction} interaction
    * @param {String[]} args
    */
-  run: async (client: Klar, interaction: ContextMenuInteraction) => {
+  run: async (client, interaction) => {
     let fetchedMember = await client.users.fetch(interaction.targetId);
 
-let pfp = fetchedMember.displayAvatarURL({ dynamic: true, size: 4096 })
+const pfp = fetchedMember.displayAvatarURL({ dynamic: true, size: 4096 })
 
     const embed = new MessageEmbed()
       .setDescription(`Avatar de: __**${fetchedMember.username}**__`)
       .addField("Pedido por:", `${interaction.member}`)
-      .setImage(
-        pfp
-      )
+      .setImage(`${pfp}`)
       .setColor("WHITE")
       .setFooter(":)", client.user?.displayAvatarURL())
       .setTimestamp();
