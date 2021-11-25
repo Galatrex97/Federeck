@@ -38,7 +38,7 @@ export const Interaction: interactionCommand = {
 
     let replacedText: any;
 
-    if (Text) {
+    if (searchText) {
       replacedText = searchText?.replace(/ /g, " ");
     }
 
