@@ -39,7 +39,7 @@ export const command: Command = {
 
           if (data) {
             await la_grasa.findOneAndDelete({ guildId: message.guild?.id });
-            data = new la_grasa({
+            data = await la_grasa.create({
               guildId: message.guild?.id,
               sdlg: true,
             });
@@ -47,7 +47,7 @@ export const command: Command = {
             message.reply({ content: "#HailGrasa" });
           }
           if (!data) {
-            data = new la_grasa({
+            data = await la_grasa.create({
               guildId: message.guild?.id,
               sdlg: true,
             });
@@ -72,7 +72,7 @@ export const command: Command = {
             });
           } else if (data) {
             await la_grasa.findOneAndDelete({ guildId: message.guild?.id });
-            data = new la_grasa({
+            data = await la_grasa.create({
               guildId: message.guild?.id,
               sdlg: false,
             });

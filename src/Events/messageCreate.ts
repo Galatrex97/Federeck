@@ -60,7 +60,9 @@ export const event: Event = {
       (await antilink.create(antilinkConfigParams));
 
     if (pacmansConfig.sdlg == true && message.content === ":v") {
-      message.channel.send(pacmansReplies[randomizePacmanReplies]);
+      message.channel.send(pacmansReplies[Math.floor(
+        Math.random() * pacmansReplies.length
+      )]);
     }
 
     //Antilink System
