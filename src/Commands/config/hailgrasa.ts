@@ -31,7 +31,7 @@ const params = {
 
     if (args[0] === "on") {
       let data = await la_grasa.findOne(params); 
-          if (data?.sdlg == true) {
+          if (data && data?.sdlg == true) {
             return message.reply({
               content: `Las respuestas a los ":v" ya estaban activadas. Usa \`${p}pacman off\` para desactivarlas.`,
             });
@@ -53,7 +53,7 @@ const params = {
           }
     } else if (args[0] === "off") {
      let data = await la_grasa.findOne(params);
-          if (data?.sdlg == false) {
+          if (data && data.sdlg == false) {
             return message.reply({
               content: `Las respuestas a los pacmans ya estaban desactivadas. Prueba \`${p}pacman on\` para activarlas.`,
             });
