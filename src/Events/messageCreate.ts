@@ -51,9 +51,7 @@ export const event: Event = {
 
     let idleReason = AFKData.AFK_Reason;
 
-    let pacmansConfig =
-      (await la_grasa.findOne(pacmansParams)) ||
-      (await la_grasa.create(pacmansParams));
+    let pacmansConfig = await la_grasa.findOne(pacmansParams) || await new la_grasa(pacmansParams);
 
     let antilinkConfig =
       (await antilink.findOne(antilinkConfigParams)) ||
