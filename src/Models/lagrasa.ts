@@ -4,7 +4,6 @@ let la_grasa: Schema = new Schema({
   sdlg: {
     type: Boolean,
     required: false,
-    default: false,
   },
   guildId: {
     type: String,
