@@ -32,7 +32,7 @@ export const command: Command = {
     if (args[0] === "on") {
       await la_grasa.findOne(params,
         async (err, data) => {
-          if (data.sdlg === true) {
+          if (data?.sdlg === true) {
             return message.reply({
               content: `Las respuestas a los ":v" ya estaban activadas. Usa \`${p}pacman off\` para desactivarlas.`,
             });
@@ -64,7 +64,7 @@ export const command: Command = {
       await la_grasa.findOne(
         params,
         async (err, data) => {
-          if (data.sdlg === false) {
+          if (data?.sdlg === false) {
             return message.reply({
               content: `Las respuestas a los pacmans ya estaban desactivadas. Prueba \`${p}pacman on\` para activarlas.`,
             });
