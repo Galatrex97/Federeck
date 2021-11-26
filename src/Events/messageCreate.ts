@@ -1,5 +1,5 @@
 import afkSchema from "../Models/afk";
-import lagrasa from "../Models/lagrasa";
+import la_grasa from "../Models/lagrasa";
 import antilink from "../Models/antilinkbv";
 import Discord, { Message, Collection } from "discord.js";
 import moment from "moment";
@@ -52,14 +52,14 @@ export const event: Event = {
     let idleReason = AFKData.AFK_Reason;
 
     let pacmansConfig =
-      (await lagrasa.findOne(pacmansParams)) ||
-      (await lagrasa.create(pacmansParams));
+      (await la_grasa.findOne(pacmansParams)) ||
+      (await la_grasa.create(pacmansParams));
 
     let antilinkConfig =
       (await antilink.findOne(antilinkConfigParams)) ||
       (await antilink.create(antilinkConfigParams));
 
-    if (pacmansConfig.sdlg === true && message.content === ":v") {
+    if (pacmansConfig.sdlg == true && message.content === ":v") {
       message.channel.send(pacmansReplies[randomizePacmanReplies]);
     }
 

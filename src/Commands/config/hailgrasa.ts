@@ -28,23 +28,13 @@ export const command: Command = {
       await la_grasa.findOne(
         { guildId: message.guild?.id },
         async (err: any, data: any) => {
-          if (data?.sdlg === true) {
+          if (data?.sdlg == true) {
             return message.reply({
               content: `Las respuestas a los ":v" ya estaban activadas. Usa \`${p}pacman off\` para desactivarlas.`,
             });
           }
           if (err) {
             console.log(err);
-
-            let errmsg = new MessageEmbed()
-              .setTitle("Ha ocurrido un error")
-              .setDescription(`**Tengo el siguiente error:** ${err.stack}`)
-              .setThumbnail(
-                `https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`
-              )
-              .setFooter("Tipico")
-              .setTimestamp()
-              .setColor("WHITE");
           }
 
           if (data) {
@@ -70,7 +60,7 @@ export const command: Command = {
       await la_grasa.findOne(
         { guildId: message.guild?.id },
         async (err: any, data: any) => {
-          if (data?.sdlg === false) {
+          if (data?.sdlg == false) {
             return message.reply({
               content: `Las respuestas a los pacmans ya estaban desactivadas. Prueba \`${p}pacman on\` para activarlas.`,
             });
