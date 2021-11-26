@@ -39,19 +39,17 @@ export const command: Command = {
 
           if (data) {
             await la_grasa.findOneAndDelete({ guildId: message.guild?.id });
-            data = await la_grasa.create({
+            data = await new la_grasa({
               guildId: message.guild?.id,
               sdlg: true,
-            });
-            data.save();
+            }).save();
             message.reply({ content: "#HailGrasa" });
           }
           if (!data) {
-            data = await la_grasa.create({
+            data = await new la_grasa({
               guildId: message.guild?.id,
               sdlg: true,
-            });
-            data.save();
+            }).save();
             message.reply({ content: "#HailGrasa" });
           }
         }
@@ -72,11 +70,10 @@ export const command: Command = {
             });
           } else if (data) {
             await la_grasa.findOneAndDelete({ guildId: message.guild?.id });
-            data = await la_grasa.create({
+            data = await new la_grasa({
               guildId: message.guild?.id,
               sdlg: false,
-            });
-            data.save();
+            }).save();
             message.reply({
               content:
                 "Las respuestas a los pacmans han sido desactivadas. :'v",
