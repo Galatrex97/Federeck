@@ -308,7 +308,7 @@ async function clickBtn(button, options = []) {
 							}
 
 							ch.send({
-								content: `${button.user} -${pingrole}-`,
+								content: `${button.user} -${options.pingRole}-`,
 								embeds: [options.embed || emb],
 								components: [closerow]
 							}).then(async (msg) => {
