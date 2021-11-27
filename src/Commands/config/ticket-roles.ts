@@ -29,22 +29,14 @@ export const command: Command = {
 
 if(data) {
 
-    let obj = {
-        daRoles: mentArray
-    }
-
-    data.mentions.push(obj)
+    data.mentions.push(mentArray)
     data.save();
     message.channel.send("Se han actualizado los roles a mencionar.");
 }
 if(!data) {
     data = await roleSchema.create({
         guildId: message.guild?.id,
-        mentions: [
-            {
-                daRoles: mentArray
-            }
-        ]
+        mentions: mentArray
     })
     data.save();
     message.channel.send("Se han establecido los roles a mencionar.");
