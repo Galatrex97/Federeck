@@ -18,29 +18,35 @@ export const command: Command = {
       return message.reply("Necesitas el permiso **Gestionar mensajes**");
   }
 
-    let datos = await roleSchema.findOne(Params) || await roleSchema.create(Params);
+    let data = await roleSchema.findOne(Params) || await roleSchema.create(Params);
 
     let mentionedRoles = message.mentions.roles;
     if(!mentionedRoles) {
         return message.channel.send("Menciona al menos un rol para continuar.")
     }
     let mentArray: any = [];
-   let forPush = mentionedRoles.forEach(x => mentArray.push(x.id));
+   let forPushing = mentionedRoles.forEach(x => mentArray.push(x.id));
 
-if(datos) {
-    datos.mentions.push({ daRoles: forPush })
-    datos.save();
+if(data) {
+
+    let obj = {
+        daRoles: forPushing
+    }
+
+    data.mentions.push(obj)
+    data.save();
     message.channel.send("Se han actualizado los roles a mencionar.");
-} else if(!datos) {
-    datos = await roleSchema.create({
+}
+if(!data) {
+    data = await roleSchema.create({
         guildId: message.guild?.id,
         mentions: [
             {
-                daRoles: forPush
+                daRoles: forPushing
             }
         ]
     })
-    datos.save();
+    data.save();
     message.channel.send("Se han establecido los roles a mencionar.");
 }
 
