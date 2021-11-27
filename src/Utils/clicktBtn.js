@@ -214,7 +214,7 @@ async function clickBtn(button, options = []) {
 							}
 
 							if (options.pingRole && Array.isArray(options.pingRole)) {
-								options.pingRole.forEach((e) => {
+								options.pingRole.forEach(e => {
 									let rw = button.guild.roles.cache.find((r) => r.id === e)
 
 									if (rw) {
@@ -223,7 +223,7 @@ async function clickBtn(button, options = []) {
 								})
 							} else if (options.pingRole && !Array.isArray(options.pingRole)) {
 								let rww = button.guild.roles.cache.find(
-									(r) => r.id === options.pingRole
+									(r) => r.id === `${options.pingRole}`
 								)
 
 								if (rww) {
@@ -282,8 +282,8 @@ async function clickBtn(button, options = []) {
 
 							if (options.pingRole) {
 								if (options.pingRole && Array.isArray(options.pingRole)) {
-									options.pingRole.forEach((e) => {
-										let rollw = button.guild.roles.cache.find((r) => r.id === e)
+									options.pingRole.forEach(e => {
+										let rollw = button.guild.roles.cache.find((r) => r.id === `${e}`)
 
 										if (rollw) {
 											pingrole.push(`${rollw}`)
@@ -294,7 +294,7 @@ async function clickBtn(button, options = []) {
 									!Array.isArray(options.pingRole)
 								) {
 									let rol = button.guild.roles.cache.find(
-										(r) => r.id === options.pingRole
+										(r) => r.id === `${options.pingRole}`
 									)
 
 									if (rol) {
@@ -308,7 +308,7 @@ async function clickBtn(button, options = []) {
 							}
 
 							ch.send({
-								content: `${button.user} -${options.pingRole}-`,
+								content: `${button.user} -${pingrole}-`,
 								embeds: [options.embed || emb],
 								components: [closerow]
 							}).then(async (msg) => {
