@@ -25,12 +25,12 @@ export const command: Command = {
         return message.channel.send("Menciona al menos un rol para continuar.")
     }
     let mentArray: any = [];
-   let forPushing = mentionedRoles.forEach(x => mentArray.push(x.id));
+    mentionedRoles.forEach(x => mentArray.push(x.id));
 
 if(data) {
 
     let obj = {
-        daRoles: forPushing
+        daRoles: mentArray
     }
 
     data.mentions.push(obj)
@@ -42,7 +42,7 @@ if(!data) {
         guildId: message.guild?.id,
         mentions: [
             {
-                daRoles: forPushing
+                daRoles: mentArray
             }
         ]
     })
