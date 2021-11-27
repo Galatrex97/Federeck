@@ -15,11 +15,11 @@ const parentParams = {
 let parentData = await parentSchema.findOne(parentParams) || await parentSchema.create(parentParams);
 let mentionData = await mentionSchema.findOne(parentParams) || await mentionSchema.create(parentParams);
 
-if(!mentionData.mentions[0]) {
+/* if(!mentionData.mentions[0]) {
   return message.channel.send("Establece al menos un rol para mencionar para proseguir.")
 } else if(!parentData.parentId) {
   return Message.channel.send("Establece una categoría para los tickets.")
-}
+} */
 
 
     clickBtn(interaction, {
