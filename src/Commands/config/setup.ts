@@ -36,8 +36,7 @@ export const command: Command = {
 
 
       message.channel.send("Se ha configurado la categoría para los tickets.");
-    }
-    if (data) {
+    }else if (data) {
       await nyaSchema.findOneAndDelete({ guildId: message.guild?.id });
 
       if (!idParent)

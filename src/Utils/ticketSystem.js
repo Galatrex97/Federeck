@@ -77,7 +77,7 @@ async function ticketSystem(message, channel, options = []) {
 				message.followUp('Se configuraron los tickets en ese canal')
 				channel.send({ embeds: [options.embed || embed], components: [a] })
 			} else if (options.slash === false || !message.commandId) {
-				channel.send({ content: `${options.rolesToMention}` || null, embeds: [options.embed || embed], components: [a] })
+				channel.send({ embeds: [options.embed || embed], components: [a] })
 			}
 		} catch (err) {
 			channel.send({ content: 'Ha ocurrido un error' })
