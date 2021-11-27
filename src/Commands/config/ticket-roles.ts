@@ -29,7 +29,7 @@ export const command: Command = {
 
 if(data) {
 
-    data.mentions.push(mentArray)
+     mentionedRoles.forEach(x => data.mentions[0].push(x.id));
     data.save();
     message.channel.send("Se han actualizado los roles a mencionar.");
 }
