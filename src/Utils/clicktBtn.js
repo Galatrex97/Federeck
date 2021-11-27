@@ -307,8 +307,10 @@ async function clickBtn(button, options = []) {
 								pingrole = ''
 							}
 
+console.log(options.pingRole)
+
 							ch.send({
-								content: `${button.user} -${pingrole}-`,
+								content: `${button.user} ${pingrole.join(" ")}`,
 								embeds: [options.embed || emb],
 								components: [closerow]
 							}).then(async (msg) => {

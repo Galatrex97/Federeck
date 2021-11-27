@@ -2,7 +2,7 @@ import { MessageEmbed } from "discord.js";
 import { Event } from "../Interfaces";
 import { clickBtn } from "../Utils";
 import parentSchema from "../Models/parent";
-import mentionSchema from "../Models/parent";
+import mentionSchema from "../Models/ticketsMentionable";
 export const event: Event = {
   name: "interactionCreate",
   run: async(client, interaction) => {
@@ -10,17 +10,8 @@ export const event: Event = {
 const parentParams = {
   guildId: interaction.guild?.id
 }
-
-
 let parentData = await parentSchema.findOne(parentParams) || await parentSchema.create(parentParams);
 let mentionData = await mentionSchema.findOne(parentParams) || await mentionSchema.create(parentParams);
-
-/* if(!mentionData.mentions[0]) {
-  return message.channel.send("Establece al menos un rol para mencionar para proseguir.")
-} else if(!parentData.parentId) {
-  return Message.channel.send("Establece una categoría para los tickets.")
-} */
-
 
     clickBtn(interaction, {
       categoryID: parentData.parentId,
@@ -28,7 +19,7 @@ let mentionData = await mentionSchema.findOne(parentParams) || await mentionSche
       cooldownMsg: "Ya tienes un ticket abierto, cierralo primero para abrir otro.",
       timeout: false,
       embedColor: "#ffffff",
-      pingRole: mentionData?.mentions
+      pingRole: mentionData.mentions
     });
 
     if (interaction.isCommand()) {
