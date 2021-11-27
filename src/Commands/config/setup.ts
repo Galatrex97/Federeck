@@ -39,9 +39,10 @@ export const command: Command = {
     }else if (data) {
       await nyaSchema.findOneAndDelete({ guildId: message.guild?.id });
 
-      if (!idParent)
+      if (!idParent) {
       return message.channel.send(`Necesitas dar el id de una categoría.`);
-
+      } 
+      
     let category: any = message.guild?.channels.resolve(idParent);
 
     if (category.type !== "GUILD_CATEGORY") {
