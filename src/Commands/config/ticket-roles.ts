@@ -29,6 +29,7 @@ export const command: Command = {
 
 if(datos) {
     datos.mentions.push({ daRoles: forPush })
+    datos.save();
     message.channel.send("Se han actualizado los roles a mencionar.");
 } else if(!datos) {
     datos = await roleSchema.create({
@@ -39,6 +40,7 @@ if(datos) {
             }
         ]
     })
+    datos.save();
     message.channel.send("Se han establecido los roles a mencionar.");
 }
 
