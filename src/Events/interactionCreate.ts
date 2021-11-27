@@ -21,7 +21,7 @@ let mentionData = await mentionSchema.findOne(parentParams) || await mentionSche
       cooldownMsg: "Ya tienes un ticket abierto, cierralo primero para abrir otro.",
       timeout: false,
       embedColor: "#ffffff",
-      pingRole: mentionData.mentions.daRoles
+      pingRole: mentionData.mentions["daRoles"]
     });
 
     if (interaction.isCommand()) {
