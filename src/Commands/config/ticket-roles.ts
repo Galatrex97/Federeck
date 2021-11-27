@@ -36,8 +36,8 @@ if(data) {
 if(!data) {
     data = await roleSchema.create({
         guildId: message.guild?.id,
-        mentions: mentArray
     })
+    mentionedRoles.forEach(x => data.mentions.push(x.id));
     data.save();
     message.channel.send("Se han establecido los roles a mencionar.");
 }
