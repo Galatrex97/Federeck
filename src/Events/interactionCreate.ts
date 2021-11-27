@@ -2,6 +2,7 @@ import { MessageEmbed } from "discord.js";
 import { Event } from "../Interfaces";
 import { clickBtn } from "../Utils";
 import parentSchema from "../Models/parent";
+import mentionSchema from "../Models/parent";
 export const event: Event = {
   name: "interactionCreate",
   run: async(client, interaction) => {
@@ -11,6 +12,8 @@ const parentParams = {
 }
 
 let parentData = await parentSchema.findOne(parentParams) || await parentSchema.create(parentParams);
+let mentionData = await mentionSchema.findOne(parentParams) || await mentionSchema.create(parentParams);
+
 
     clickBtn(interaction, {
       categoryID: parentData.parentId,
@@ -18,6 +21,7 @@ let parentData = await parentSchema.findOne(parentParams) || await parentSchema.
       cooldownMsg: "Ya tienes un ticket abierto, cierralo primero para abrir otro.",
       timeout: false,
       embedColor: "#ffffff",
+      pingRole: mentionData.mentions
     });
 
     if (interaction.isCommand()) {

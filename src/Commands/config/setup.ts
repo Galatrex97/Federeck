@@ -1,14 +1,15 @@
 import nyaSchema from "../../Models/parent";
 import { Command } from "../../Interfaces";
-
+import xSchema from "../../Models/ticketsMentionable";
 export const command: Command = {
   name: "ticket-setup",
   category: "Configuración",
   aliases: [],
   description:
-    "Esto abrirá un ticket para resolver inconvenientes y/o problemas o dudas.",
+    "Esto configurará un ticket para resolver inconvenientes, problemas y/o dudas.",
   usage: "setup",
   run: async (client, message, args, p) => {
+
     let idParent = args[0] as string;
     let data;
     try {

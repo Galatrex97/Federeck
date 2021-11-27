@@ -7,6 +7,7 @@ import {
   MessageEmbed,
 } from "discord.js";
 import { ticketSystem } from "../../Utils";
+import mentionSchema from "../../Models/ticketsMentionable";
 import { Command } from "../../Interfaces";
 
 export const command: Command = {
@@ -23,6 +24,7 @@ export const command: Command = {
       guildId: message.guild?.id
     }
     
+    let mentionData = await mentionSchema.findOne(parentParams) || await mentionSchema.create(parentParams);
     let parentData = await parentSchema.findOne(parentParams) || await parentSchema.create(parentParams);
     
 
@@ -32,11 +34,11 @@ if(!parentData.parentId) {
 
     ticketSystem(message, message.channel, {
       embedTitle: "Soporte",
-      embedDesc: "Haz click en el botón de abajo para crear un ticket de soporte",
+      embedDesc: "Haz click en el botón de abajo para crear un ticket de soporte. \nNo mal usar.",
       embedColor: "#ffffff", // default: #075FFFF
       embedFoot: "Lyon tickets",
       emoji: "🎫", // default:, 🎫
-      credit: false
+      credit: false,
     });
   },
 };
