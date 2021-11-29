@@ -37,8 +37,8 @@ export const command: Command = {
       },
     });
     await queue.join(message.member?.voice.channel as any);
-    let song: any = await queue.play(si).catch((_) => {
-      if (!guildList) queue.stop();
+    let song: any = await queue.play(si).catch((err) => {
+      console.log(err)
     });
 
     song.setData({
