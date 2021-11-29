@@ -19,13 +19,36 @@ export const command: Command = {
   description: `Muestra la página <Ayuda> o Información sobre un comando especifíco`,
   usage: "help [comando/categoria]",
   run: async (client, message, args, p) => {
-    if (args.join(" ")) {
+    
+let catArray = [];
+
+    let categorias;
+    if (message.author.id !== process.env.botOwner) {
+      categorias = [
+        ...new Set(
+          client.commands
+            .filter((command) => command.category !== "Zzz")
+            .map((command) => command.category)
+        ),
+      ];
+    } else {
+      categorias = [
+        ...new Set(client.commands.map((command) => command.category)),
+      ];
+    }
+
+    for(var ids of categorias) {
+      var catego = client.commands.filter(
+        (command) => command.category === ids
+      );
+    }
+
+    if (args.join(" ") && args.join(" ") !== ids) {
       const command =
         client.commands.get(args.join(" ").toLowerCase()) ||
         client.commands.get(
           client.aliases?.get(args.join(" ").toLowerCase() as string) as string
         );
-      if (!command) return message.reply(`**${args.join(" ")}** no es un comando`);
       if (!command.usage) {
         p = "";
       }
@@ -82,6 +105,34 @@ export const command: Command = {
           );
         message.reply({ embeds: [h_embed], components: [row] });
       }
+    } else if(args.join(" ") == ids) {
+
+      let categoriar;
+      if (message.author.id !== process.env.botOwner) {
+        categoriar = [
+          ...new Set(
+            client.commands
+              .filter((command) => command.category !== "Zzz")
+              .map((command) => command.category)
+          ),
+        ];
+      } else {
+        categoriar = [
+          ...new Set(client.commands.map((command) => command.category)),
+        ];
+      }
+  
+      for(var ide of categoriar) {
+
+      }
+        const categoriaz = client.commands.filter(
+          (command) => command.category === ide
+        );
+const someEmbed = new MessageEmbed()
+.setTitle("Comandos de la categoría "+ids)
+.setDescription(`Con un total de **${categoriaz.size}** comandos la categoría **${ide}** tiene los siguientes comandos: \n**${categoriaz.map((command) => `\`${command.name}\``).join("\n")}**`)
+
+
     } else {
       const general_row = new MessageActionRow().addComponents(
         new MessageButton()
@@ -130,7 +181,7 @@ export const command: Command = {
 
         if (id == "NSFW" && !(message.channel as TextChannel).nsfw) {
           embed.addField(
-            `NSFW (${category.size})`,
+            `NSFW`,
             "***`Para ver los comandos de esta categoria ejecuta este comando en un canal NSFW`***"
           );
         } else {
