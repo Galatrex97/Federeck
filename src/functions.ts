@@ -1,6 +1,6 @@
 import prefixSchema from "./Models/prefix";
 import { Message } from "discord.js";
-let prefix = process.env.prefix;
+let prefix = process.env.prefix || "k!";
 // help.js
 export function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
