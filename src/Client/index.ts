@@ -41,6 +41,11 @@ class Lyon extends Client {
     timeout: 3000,
     volume: 100,
     quality: "high",
+    ytdlRequestOptions: {
+      headers: {
+        'Cookie': process.env.youtubeCookie
+      }
+    }
   });
   public interactionz: Collection<string, interactionCommand> =
     new Collection();
