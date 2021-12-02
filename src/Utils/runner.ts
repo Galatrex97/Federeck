@@ -77,15 +77,15 @@ process.on("uncaughtException", async(error, origin) => {
       .forEach((file) => {
         //Y un forEach.
 
-        let slashArray: any = [];
+        // let slashArray: any = [];
 
         let { Interaction } = require(`../Interaction-commands/${dir}/${file}`); //Requerimos el comando de los comandos.
 
-        slashArray.push(Interaction as interactionCommand);
+/*         slashArray.push(Interaction as interactionCommand);
 
         client.on("ready", async() => {
           await client.application?.commands.set(slashArray)
-        })
+        }) */
         client.interactionz.set(
           (Interaction as interactionCommand).name,
           Interaction as interactionCommand
@@ -101,17 +101,17 @@ process.on("uncaughtException", async(error, origin) => {
       .forEach((file) => {
         //Y un forEach.
 
-        let menuArray: any = [];
+        // let menuArray: any = [];
 
         let {
           InteractionMenu,
         } = require(`../Interaction-menus/${dir}/${file}`); //Requerimos el comando de los comandos.
-
+/* 
         menuArray.push(InteractionMenu as interactionMenu);
 
         client.on("ready", async() => {
           await client.application?.commands.set(menuArray)
-        })
+        }) */
 
         client.interactiony.set(
           (InteractionMenu as interactionMenu).name,
