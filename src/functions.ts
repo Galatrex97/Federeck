@@ -10,6 +10,20 @@ export const escapeRegex = async (str: any) => {
   return await str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 };
 
+export const parseToGigabyte = async(str: string) => {
+let parsedStr = parseInt(str);
+
+return parsedStr / 1e+9;
+
+}
+
+export const parseToMegabyte = async(str: string) => {
+  let parsedStr = parseInt(str);
+  
+  return parsedStr / 1e+6;
+  
+  }
+
 export async function prx(message: Message) {
   let custom: any;
   const data = await prefixSchema
