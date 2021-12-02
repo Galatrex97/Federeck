@@ -4,7 +4,7 @@ import Klar from "../../Client";
 import beautify from "beautify";
 import { interactionCommand } from "../../Interfaces";
 export const Interaction: interactionCommand = {
-  name: "eval",
+  name: "eval-e",
   description: "Evalúa un code",
   options: [
     {
