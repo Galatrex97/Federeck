@@ -76,16 +76,7 @@ process.on("uncaughtException", async(error, origin) => {
       .filter((f) => f.endsWith(".ts")) //Filtro de sólo archivos TypeScript.
       .forEach((file) => {
         //Y un forEach.
-
-        let slashArray: any = [];
-
         let { Interaction } = require(`../Interaction-commands/${dir}/${file}`); //Requerimos el comando de los comandos.
-
-        slashArray.push(Interaction as interactionCommand);
-
-        client.on("ready", async() => {
-          await (client.guilds.cache.get("868962467450085377") as any).commands.set(slashArray)
-        })
         client.interactionz.set(
           (Interaction as interactionCommand).name,
           Interaction as interactionCommand
@@ -100,19 +91,9 @@ process.on("uncaughtException", async(error, origin) => {
       .filter((f) => f.endsWith(".ts")) //Filtro de sólo archivos TypeScript.
       .forEach((file) => {
         //Y un forEach.
-
-        let menuArray: any = [];
-
         let {
           InteractionMenu,
         } = require(`../Interaction-menus/${dir}/${file}`); //Requerimos el comando de los comandos.
-
-        menuArray.push(InteractionMenu as interactionMenu);
-
-        client.on("ready", async() => {
-          await (client.guilds.cache.get("868962467450085377") as any).commands.set(menuArray)
-        })
-
         client.interactiony.set(
           (InteractionMenu as interactionMenu).name,
           InteractionMenu as interactionMenu
