@@ -100,9 +100,19 @@ process.on("uncaughtException", async(error, origin) => {
       .filter((f) => f.endsWith(".ts")) //Filtro de sólo archivos TypeScript.
       .forEach((file) => {
         //Y un forEach.
+
+        let menuArray: any = [];
+
         let {
           InteractionMenu,
         } = require(`../Interaction-menus/${dir}/${file}`); //Requerimos el comando de los comandos.
+
+        menuArray.push(InteractionMenu as interactionMenu);
+
+        client.on("ready", async() => {
+          await client.application?.commands.set(menuArray)
+        })
+
         client.interactiony.set(
           (InteractionMenu as interactionMenu).name,
           InteractionMenu as interactionMenu
