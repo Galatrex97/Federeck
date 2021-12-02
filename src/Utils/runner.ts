@@ -76,7 +76,16 @@ process.on("uncaughtException", async(error, origin) => {
       .filter((f) => f.endsWith(".ts")) //Filtro de sólo archivos TypeScript.
       .forEach((file) => {
         //Y un forEach.
+
+        let slashArray: any = [];
+
         let { Interaction } = require(`../Interaction-commands/${dir}/${file}`); //Requerimos el comando de los comandos.
+
+        slashArray.push(Interaction as interactionCommand);
+
+        client.on("ready", async() => {
+          await client.application?.commands.set(slashArray)
+        })
         client.interactionz.set(
           (Interaction as interactionCommand).name,
           Interaction as interactionCommand
