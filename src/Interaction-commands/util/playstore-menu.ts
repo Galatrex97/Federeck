@@ -26,7 +26,7 @@ export const Interaction: interactionCommand = {
    * @param {CommandInteraction} interaction
    * @param {String[]} args
    */
-  run: async (client: Klar, interaction: CommandInteraction) => {
+  run: async (client, interaction) => {
     let busqueda = interaction.options.getString("app");
 
     if (!busqueda) {

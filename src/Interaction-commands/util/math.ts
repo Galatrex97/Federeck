@@ -19,7 +19,7 @@ export const Interaction: interactionCommand = {
    * @param {CommandInteraction} interaction
    * @param {String[]} args
    */
-  run: async (client: Klar, interaction: CommandInteraction) => {
+  run: async (client, interaction) => {
     const embed = new Discord.MessageEmbed().setColor(`WHITE`);
 
     let calc = interaction.options.getString("expression") as string;
