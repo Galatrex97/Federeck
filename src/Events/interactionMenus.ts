@@ -4,7 +4,7 @@ export const event: Event = {
   name: "interactionCreate",
   run: async (client, interaction) => {
     if (interaction.isContextMenu()) {
-       interaction.deferReply();
+       await interaction.deferReply();
       const command = client.interactiony.get(interaction.commandName);
       try {
         if (command) {

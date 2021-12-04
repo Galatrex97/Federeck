@@ -69,37 +69,44 @@ process.on("uncaughtException", async(error, origin) => {
 
   //unhandledRejection = Básicamente esto sirve para que tu bot no se apague al instante si hay un error, sólo enviará un error a la consola, más no lo apagará.
 
+let interactionxD: any = [];
+let interactionyxD: any = [];
+
   //Interactions (commands)
-  readdirSync("./src/Interaction-commands/").forEach((dir) => {
-    //Entramos a la carpeta Commands, creamos la carpeta Cmd, y hacemos un readdirSync, para obtener todas sus categorias, retornando el parámetro dir
-    readdirSync("./src/Interaction-commands/" + dir) //Luego de eso entramos al mismo directorio, pero con el parámetro dir añadido.
-      .filter((f) => f.endsWith(".ts")) //Filtro de sólo archivos TypeScript.
-      .forEach((file) => {
-        //Y un forEach.
-        let { Interaction } = require(`../Interaction-commands/${dir}/${file}`); //Requerimos el comando de los comandos.
-        client.interactionz.set(
-          (Interaction as interactionCommand).name,
-          Interaction as interactionCommand
-        ); //Y lo establecemos en el Collection.
-      }); //Cerramos forEach de archivos.
-  }); //Cerramos
+
+readdirSync(__dirname.replace("\Utils", "\Interaction-commands")).forEach(dir => {
+  const commands = readdirSync(`${__dirname.replace("\Utils", "\Interaction-commands")}/${dir}/`).filter(file => file.endsWith(".ts"));
+
+for(let file of commands) {
+  let { Interaction } = require(`${__dirname.replace("\Utils", "\Interaction-commands")}/${dir}/${file}`);
+
+  client.interactionz.set((Interaction as interactionCommand).name, Interaction as interactionCommand)
+interactionxD.push(Interaction as interactionCommand);
+
+
+}
+
+})
 
   //Interactions (Menus)
-  readdirSync("./src/Interaction-menus/").forEach((dir) => {
-    //Entramos a la carpeta Commands, creamos la carpeta Cmd, y hacemos un readdirSync, para obtener todas sus categorias, retornando el parámetro dir
-    readdirSync("./src/Interaction-menus/" + dir) //Luego de eso entramos al mismo directorio, pero con el parámetro dir añadido.
-      .filter((f) => f.endsWith(".ts")) //Filtro de sólo archivos TypeScript.
-      .forEach((file) => {
-        //Y un forEach.
-        let {
-          InteractionMenu,
-        } = require(`../Interaction-menus/${dir}/${file}`); //Requerimos el comando de los comandos.
-        client.interactiony.set(
-          (InteractionMenu as interactionMenu).name,
-          InteractionMenu as interactionMenu
-        ); //Y lo establecemos en el Collection.
-      }); //Cerramos forEach de archivos.
-  });
+  readdirSync(__dirname.replace("\Utils", "\Interaction-menus")).forEach(dir => {
+    const commands = readdirSync(`${__dirname.replace("\Utils", "\Interaction-menus")}/${dir}/`).filter(file => file.endsWith(".ts"));
+  
+  for(let file of commands) {
+    let { InteractionMenu } = require(`${__dirname.replace("\Utils", "\Interaction-menus")}/${dir}/${file}`);
+  
+    client.interactiony.set((InteractionMenu as interactionMenu).name, InteractionMenu as interactionMenu)
+  interactionxD.push(InteractionMenu as interactionMenu);
+
+
+  }
+  
+  })
+
+      client.on("ready", async() => {
+    await client.application?.commands.set(interactionxD)
+  })
+
 
   //Mongoose
   //Cerramos catch

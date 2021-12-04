@@ -16,7 +16,7 @@ export const InteractionMenu: interactionMenu = {
    * @param {ContextMenuInteraction} interaction
    * @param {String[]} args
    */
-  run: async (client: Klar, interaction: ContextMenuInteraction) => {
+  run: async (client, interaction) => {
     const targetUser = interaction.options.getUser("user", true);
     const target = await interaction.guild?.members.fetch(targetUser.id);
     let thisServer = interaction.guild as Guild;
