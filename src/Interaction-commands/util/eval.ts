@@ -3,6 +3,7 @@ import * as Discord from "discord.js";
 import Klar from "../../Client";
 import beautify from "beautify";
 import { interactionCommand } from "../../Interfaces";
+import { inspect } from "util";
 export const Interaction: interactionCommand = {
   name: "eval-e",
   description: "Evalúa un code",
@@ -45,41 +46,31 @@ export const Interaction: interactionCommand = {
       }
 
       let evaluated: any;
-      try {
-        evaluated = eval(toEval); //"evaluated" va a evaluar el comando
-      } catch (err) {
-        console.log(err);
-      } //Se usa beautify para que funcione
-      let embed = new Discord.MessageEmbed() //Creamos otro embed
+        try {
+          evaluated = eval(toEval) //"evaluated" va a evaluar el comando
+        } catch (err) {
+          console.log(err)
+        }
+        let embed = new Discord.MessageEmbed() //Creamos otro embed
         .setColor("WHITE")
         .setTimestamp() //Usamos un Timestamp
-        .setFooter(
-          client.user?.username as string,
-          client.user?.displayAvatarURL()
-        )
+        .setFooter((client.user?.username as string), client.user?.displayAvatarURL())
         .setTitle(`:desktop: ${client.user?.username}`)
-        .setDescription("Esto fue el resultado de lo que ingresaste")
-        .addField(
-          "Codigo:",
-          "```js\n" + beautify(toEval, { format: "js" }) + "```"
-        )
-        .addField("Evaluado:", "```js\n" + evaluated + "```"); //Aca aparecera lo que se evalua
-      interaction.followUp({ embeds: [embed] });
-    } catch (err) {
-      //Hacemos un catch y que defina err
+        .setDescription("Este comando sirve para ejecutar codes")
+        .addField("Tipo:", `\`\`\`prolog\n${typeof(evaluated)}\`\`\``, true)
+        .addField("Tiempo:", `\`\`\`yaml\n${Date.now() - interaction.createdTimestamp}ms\`\`\``, true)
+        .addField("Input:", "```js\n"+beautify(toEval, { format: "js" })+"```")
+        .addField("Output:", "```js\n"+inspect(evaluated, {depth:  0})+"```") //Aca aparecera lo que se evalua
+        interaction.followUp({embeds: [embed]})
+    } catch(err: any) { //Hacemos un catch y que defina err
 
-      let embed2 = new Discord.MessageEmbed()
-        .setTimestamp()
-        .setFooter(
-          client.user?.username as string,
-          client.user?.displayAvatarURL()
-        )
-        .addField(
-          "Hubo un error con el codigo que evaluaste",
-          "```js\n" + err + "```"
-        ) //Va a aparecer el error
-        .setColor("WHITE");
-      return interaction.followUp({ embeds: [embed2] });
+        let beautify = require("beautify")
+       let embed2 = new Discord.MessageEmbed()
+       .setTimestamp()
+       .setFooter((client.user?.username as string), client.user?.displayAvatarURL())
+       .addField("Hubo un error con el codigo que evaluaste", "```js\n"+err+"```") //Va a aparecer el error
+       .setColor("WHITE")
+       return interaction.followUp({embeds: [embed2]}) 
     }
   },
 };
