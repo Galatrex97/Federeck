@@ -43,6 +43,10 @@ export const Interaction: interactionCommand = {
         ephemeral: true,
       });
     }
+
+    if(!str) {
+      str = 1;
+    }
       //Si no lo esta mandamos este mensaje ^
       let snipe = +str - 1 || 0;
 
