@@ -102,6 +102,10 @@ export const command: Command = {
         {
           name: "Roles del usuario: ", // Nombre - Titulo - Caso 1
           value: user?.roles.cache.map((role) => role.toString()).join(" ") // En linea: SI
+        },
+        {
+          name: "Permisos del usuario: ",
+          value: user?.permissions.toArray().map(perm => perm.toString()).join(", ")
         }
       );
 
