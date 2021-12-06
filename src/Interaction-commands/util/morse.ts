@@ -46,9 +46,8 @@ let text = interaction.options.getString("text");
 if(opt === "decode") {
 let decoded = await morse.decode(text);
 let embed = new MessageEmbed()
-.setTitle("Morse")
+.setTitle("Morse a Texto")
 .setColor("WHITE")
-.addField("Acción", `Decodificación`, false)
 .addField("Entrada", `\`\`\`${text}\`\`\``, false)
 .addField("Resultado", `\`\`\`${decoded}\`\`\``, false)
 
@@ -59,11 +58,10 @@ await interaction.followUp({ embeds: [embed] });
 } else if(opt === "encode") {
     let encoded = await morse.encode(text);
     let embed = new MessageEmbed()
-    .setTitle("Morse")
+    .setTitle("Texto a Morse")
     .setColor("WHITE")
-    .addField("Acción", `Codificación`, false)
     .addField("Entrada", `\`\`\`${text}\`\`\``, false)
-    .addField("Resultado", `\`\`\`${encoded}\`\`\``, false)
+    .addField("Salido", `\`\`\`${encoded}\`\`\``, false)
     
     
     
