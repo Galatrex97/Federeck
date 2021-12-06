@@ -48,9 +48,9 @@ let decoded = await morse.decode(text);
 let embed = new MessageEmbed()
 .setTitle("Morse")
 .setColor("WHITE")
-.addField("Acción", `Decodificación`, true)
-.addField("Entrada", `${text}`, true)
-.addField("Resultado", `${decoded}`, true)
+.addField("Acción", `Decodificación`, false)
+.addField("Entrada", `${text}`, false)
+.addField("Resultado", `${decoded}`, false)
 
 
 
@@ -61,9 +61,9 @@ await interaction.followUp({ embeds: [embed] });
     let embed = new MessageEmbed()
     .setTitle("Morse")
     .setColor("WHITE")
-    .addField("Acción", `Codificación`, true)
-    .addField("Entrada", `${text}`, true)
-    .addField("Resultado", `${encoded}`, true)
+    .addField("Acción", `Codificación`, false)
+    .addField("Entrada", `${text}`, false)
+    .addField("Resultado", `${encoded}`, false)
     
     
     
