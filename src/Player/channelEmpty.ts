@@ -1,4 +1,3 @@
-import { Queue } from "distube";
 import { MessageEmbed } from "discord.js";
 import { PlayerEvent } from "../Interfaces";
 
