@@ -49,8 +49,8 @@ let embed = new MessageEmbed()
 .setTitle("Morse")
 .setColor("WHITE")
 .addField("Acción", `Decodificación`, false)
-.addField("Entrada", `${text}`, false)
-.addField("Resultado", `${decoded}`, false)
+.addField("Entrada", `\`\`\`${text}\`\`\``, false)
+.addField("Resultado", `\`\`\`${decoded}\`\`\``, false)
 
 
 
@@ -62,8 +62,8 @@ await interaction.followUp({ embeds: [embed] });
     .setTitle("Morse")
     .setColor("WHITE")
     .addField("Acción", `Codificación`, false)
-    .addField("Entrada", `${text}`, false)
-    .addField("Resultado", `${encoded}`, false)
+    .addField("Entrada", `\`\`\`${text}\`\`\``, false)
+    .addField("Resultado", `\`\`\`${encoded}\`\`\``, false)
     
     
     
