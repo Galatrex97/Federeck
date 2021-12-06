@@ -49,7 +49,7 @@ let embed = new MessageEmbed()
 .setTitle("Morse a Texto")
 .setColor("WHITE")
 .addField("Entrada", `\`\`\`${text}\`\`\``, false)
-.addField("Resultado", `\`\`\`${decoded}\`\`\``, false)
+.addField("Salida", `\`\`\`${decoded}\`\`\``, false)
 
 
 
@@ -61,7 +61,7 @@ await interaction.followUp({ embeds: [embed] });
     .setTitle("Texto a Morse")
     .setColor("WHITE")
     .addField("Entrada", `\`\`\`${text}\`\`\``, false)
-    .addField("Salido", `\`\`\`${encoded}\`\`\``, false)
+    .addField("Salida", `\`\`\`${encoded}\`\`\``, false)
     
     
     
