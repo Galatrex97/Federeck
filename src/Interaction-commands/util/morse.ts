@@ -11,7 +11,7 @@ export const Interaction: interactionCommand = {
   description: "Codifica o decodifica texto morse",
   options: [
     {
-      name: "acción",
+      name: "option",
       description: "Codificar o Decodificar morse",
       type: "STRING",
       choices: [
@@ -40,18 +40,32 @@ export const Interaction: interactionCommand = {
    * @param {String[]} args
    */
   run: async (client, interaction) => {
-let opt = interaction.options.getString("acción");
+let opt = interaction.options.getString("option");
 let text = interaction.options.getString("text");
 
 if(opt === "decode") {
 let decoded = await morse.decode(text);
+let embed = new MessageEmbed()
+.setTitle("Morse")
+.addField("Acción", `Decodificación`, true)
+.addField("Entrada", `${text}`, true)
+.addField("Resultado", `${decoded}`, true)
 
-await interaction.followUp({ content: `${decoded}` });
+
+
+await interaction.followUp({ embeds: [embed] });
 
 } else if(opt === "encode") {
     let encoded = await morse.encode(text);
-
-   await interaction.followUp({ content: `${encoded}` });
+    let embed = new MessageEmbed()
+    .setTitle("Morse")
+    .addField("Acción", `Codificación`, true)
+    .addField("Entrada", `${text}`, true)
+    .addField("Resultado", `${encoded}`, true)
+    
+    
+    
+    await interaction.followUp({ embeds: [embed] });
 }
 
   },
