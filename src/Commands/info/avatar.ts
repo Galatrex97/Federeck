@@ -34,10 +34,10 @@ export const command: Command = {
     }
 
     try {
-      let a = await client.users.fetch(member) as unknown as GuildMember;
+      let a = await client.users.fetch(member)
       let pfp = await a.displayAvatarURL({ format: "png", dynamic: true, size: 4096 })
       const embed = new Discord.MessageEmbed()
-        .setTitle(`Avatar De: **${a.nickname || a.user.username}**`)
+        .setTitle(`Avatar De: **${a.username}**`)
         .addField("Pedido por:", `${message.member}`)
         .setImage(`${pfp}`)
         .setColor("WHITE")
