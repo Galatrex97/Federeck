@@ -1,4 +1,4 @@
-import Discord, { Message, MessageEmbed } from "discord.js";
+import Discord, { GuildMember, Message, MessageEmbed } from "discord.js";
 import Klar from "../../Client";
 
 import { Command } from "../../Interfaces";
@@ -25,20 +25,20 @@ export const command: Command = {
     }
 
     let member: any;
-    if (message.mentions.users.first()) {
-      member = message.mentions.users.first()?.id;
+    if (message.mentions.members?.first()) {
+      member = message.mentions.members.first()?.id;
     } else if (args[0] && !!si) {
       member = args[0];
     } else {
-      member = message.author.id;
+      member = message.member?.id;
     }
 
     try {
-      let a = await client.users.fetch(member);
+      let a = await client.users.fetch(member) as unknown as GuildMember;
       let pfp = await a.displayAvatarURL({ format: "png", dynamic: true, size: 4096 })
       const embed = new Discord.MessageEmbed()
-        .setTitle(`Avatar De: **${a.username}**`)
-        .addField("Pedido por:", `${message.author}`)
+        .setTitle(`Avatar De: **${a.nickname || a.user.username}**`)
+        .addField("Pedido por:", `${message.member}`)
         .setImage(`${pfp}`)
         .setColor("WHITE")
         .setFooter(":)", client.user?.avatarURL() as string)

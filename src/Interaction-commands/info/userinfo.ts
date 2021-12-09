@@ -3,7 +3,9 @@ import {
   CommandInteraction,
   MessageEmbed,
   TextChannel,
-  MessageActionRow
+  MessageActionRow,
+  MessageButton,
+  GuildMember
 } from "discord.js";
 import { interactionCommand } from "../../Interfaces";
 export const Interaction: interactionCommand = {
@@ -25,7 +27,10 @@ export const Interaction: interactionCommand = {
    */
   run: async (client, interaction) => {
 
-const user = interaction.options.getMember("user") || interaction.member;
+let user = interaction.options.getMember("user") as GuildMember;
+if(!user) {
+  user = interaction.member as GuildMember;
+}
 
     const row = new MessageActionRow().addComponents(
       new MessageButton()

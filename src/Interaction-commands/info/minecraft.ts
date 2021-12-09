@@ -26,7 +26,6 @@ export const Interaction: interactionCommand = {
   run: async (client, interaction) => {
 
       const ip = interaction.options.getString("ip");
-
     const options = {
       hostname: "api.mcsrvstat.us",
       port: 443,

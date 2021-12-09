@@ -2,6 +2,7 @@ import {
   Client,
   CommandInteraction,
   MessageEmbed,
+  Guild,
   TextChannel,
 } from "discord.js";
 import { interactionCommand } from "../../Interfaces";

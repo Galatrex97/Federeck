@@ -24,7 +24,7 @@ export const Interaction: interactionCommand = {
         .ping((err: any, result: any) => r(Date.now() - date));
     });
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new MessageEmbed()
       .setTitle("Latencia")
       .setDescription(
         `**Latencia de la API de Discord:** ${
