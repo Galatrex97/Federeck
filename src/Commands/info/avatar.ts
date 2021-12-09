@@ -35,13 +35,11 @@ export const command: Command = {
 
     try {
       let a = await client.users.fetch(member);
-
+      let pfp = await a.displayAvatarURL({ format: "png", dynamic: true, size: 4096 })
       const embed = new Discord.MessageEmbed()
         .setTitle(`Avatar De: **${a.username}**`)
         .addField("Pedido por:", `${message.author}`)
-        .setImage(
-          a.displayAvatarURL({ format: "png", dynamic: true, size: 4096 })
-        )
+        .setImage(`${pfp}`)
         .setColor("WHITE")
         .setFooter(":)", client.user?.avatarURL() as string)
         .setTimestamp();
