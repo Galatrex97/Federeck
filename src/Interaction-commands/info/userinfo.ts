@@ -15,7 +15,7 @@ export const Interaction: interactionCommand = {
     {
       name: "user",
       description: "Para ver la información de un usuario especifico.",
-      type: "",
+      type: "USER",
       required: false,
     },
   ],

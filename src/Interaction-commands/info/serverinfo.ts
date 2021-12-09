@@ -9,7 +9,6 @@ import { interactionCommand } from "../../Interfaces";
 export const Interaction: interactionCommand = {
   name: "serverinfo",
   description: "Muestra información sobre este server",
-  options: [],
   /**
    *
    * @param {Client} client
