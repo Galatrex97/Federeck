@@ -22,7 +22,7 @@ export const Interaction: interactionCommand = {
    * @param {String[]} args
    */
   run: async (client: Klar, interaction: CommandInteraction) => {
-    let toEval = interaction.options.getString("beval") as string;
+    let toEval = interaction.options.getString("code") as string;
 
     if (interaction.user.id !== process.env.botOwner) {
       let embed = new Discord.MessageEmbed() //Creamos el embed
