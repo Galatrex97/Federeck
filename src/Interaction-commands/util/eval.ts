@@ -5,12 +5,12 @@ import beautify from "beautify";
 import { interactionCommand } from "../../Interfaces";
 import { inspect } from "util";
 export const Interaction: interactionCommand = {
-  name: "eval-e",
+  name: "eval",
   description: "Evalúa un code",
   options: [
     {
-      name: "beval",
-      description: "Lo que se evaluará",
+      name: "code",
+      description: "Este es el código que será evaluado",
       type: "STRING",
       required: true,
     },

@@ -70,7 +70,6 @@ process.on("uncaughtException", async(error, origin) => {
   //unhandledRejection = Básicamente esto sirve para que tu bot no se apague al instante si hay un error, sólo enviará un error a la consola, más no lo apagará.
 
 let interactionxD: any = [];
-let interactionyxD: any = [];
 
   //Interactions (commands)
 
@@ -80,7 +79,7 @@ readdirSync(__dirname.replace("\Utils", "\Interaction-commands")).forEach(dir =>
 for(let file of commands) {
   let { Interaction } = require(`${__dirname.replace("\Utils", "\Interaction-commands")}/${dir}/${file}`);
 
-  client.interactionz.set((Interaction as interactionCommand).name, Interaction as interactionCommand)
+  client.slashCommands.set((Interaction as interactionCommand).name, Interaction as interactionCommand)
 interactionxD.push(Interaction as interactionCommand);
 
 
@@ -95,7 +94,7 @@ interactionxD.push(Interaction as interactionCommand);
   for(let file of commands) {
     let { InteractionMenu } = require(`${__dirname.replace("\Utils", "\Interaction-menus")}/${dir}/${file}`);
   
-    client.interactiony.set((InteractionMenu as interactionMenu).name, InteractionMenu as interactionMenu)
+    client.contextMenus.set((InteractionMenu as interactionMenu).name, InteractionMenu as interactionMenu)
   interactionxD.push(InteractionMenu as interactionMenu);
 
 

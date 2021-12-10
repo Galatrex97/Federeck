@@ -8,7 +8,7 @@ import https from "https";
 import { interactionCommand } from "../../Interfaces";
 export const Interaction: interactionCommand = {
   name: "mc-server",
-  description: "Muestra la información sobre ",
+  description: "Muestra la información sobre un server de minecraft",
   options: [
     {
       name: "ip",
@@ -52,7 +52,7 @@ let embed = new MessageEmbed()
 .setThumbnail(`https://api.mcsrvstat.us/icon/${ip}`)
 .setImage(`https://api.mcsrvstat.us/icon/${ip}`)
 .setTimestamp()
-.setFooter("La información e actualiza cada 5 minutos")
+.setFooter("La información se actualiza cada 5 minutos")
 .addFields(
     {
         name: "Estado",

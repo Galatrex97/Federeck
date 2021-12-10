@@ -5,7 +5,6 @@ import Discord, {
   Message,
   TextChannel,
 } from "discord.js";
-import { Song } from "distube";
 import Klar from "../../Client";
 
 import { Command } from "../../Interfaces";

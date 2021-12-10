@@ -47,9 +47,9 @@ class Lyon extends Client {
       }
     }
   });
-  public interactionz: Collection<string, interactionCommand> =
+  public slashCommands: Collection<string, interactionCommand> =
     new Collection();
-  public interactiony: Collection<string, interactionMenu> = new Collection();
+  public contextMenus: Collection<string, interactionMenu> = new Collection();
   public setup() {
     this.login(process.env.token);
     runAll(this);
