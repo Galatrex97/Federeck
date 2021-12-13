@@ -29,7 +29,6 @@ let mentionData = await mentionSchema.findOne(parentParams) || await mentionSche
       if (!cmd) return;
 
       const args = Array<string>();
-
       for (let option of interaction.options.data) {
         if (option.type === "SUB_COMMAND") {
           if (option.name) args.push(option.name);

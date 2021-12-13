@@ -17,8 +17,8 @@ export const command: Command = {
 
   run: (client: Klar, message: Message, args: String[]) => {
     const row = new MessageActionRow().addComponents(
-      new MessageButton().setCustomId("asd").setLabel("Si").setStyle("SUCCESS"),
-      new MessageButton().setCustomId("XD").setLabel("No").setStyle("DANGER")
+      new MessageButton().setCustomId("yBan").setLabel("Si").setStyle("SUCCESS"),
+      new MessageButton().setCustomId("nBan").setLabel("No").setStyle("DANGER")
     );
 
     const user = message.mentions.members?.first();
@@ -42,7 +42,7 @@ export const command: Command = {
 
     if (!message.guild?.me?.permissions.has("ADMINISTRATOR" || "BAN_MEMBERS"))
       return message.reply(
-        "No puedo hacer esto por falta de permiso de Banear Miembros o Administrador"
+        "No puedo banear, ya que no tengo el permiso de **Banear miembros**. Para continuar, dame un rol con los permisos adecuados o modifica mis permisos actuales."
       );
 
     const razon = args.join(" ").slice(22);
@@ -70,14 +70,14 @@ export const command: Command = {
       ButtonInteraction.first().deferUpdate();
 
       const id = ButtonInteraction.first().customId;
-      if (id === "asd") {
+      if (id === "yBan") {
         try {
           user.ban({ reason: razon });
           message.reply(`Se ha baneado con éxito a ${user} por **${razon}**`);
         } catch (err) {
           console.log(err);
         }
-      } else if (id === "XD") {
+      } else if (id === "nBan") {
         return message.reply("El baneo ha sido cancelado");
       }
     });
