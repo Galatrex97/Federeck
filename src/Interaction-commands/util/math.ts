@@ -28,15 +28,8 @@ export const Interaction: interactionCommand = {
     try {
       resultado = math.eval(calc); // El Args toma el calculo
     } catch (e) {
-      let errmsg = new MessageEmbed()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${e}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setColor("WHITE")
-        .setTimestamp();
-
       resultado = "Error: Entrada Invalida"; // Cuando es incorrecta
+      embed.setColor("RED")
     }
     embed
       .addField("Entrada:", `\`\`\`js\n${calc}\`\`\``, false) // Te da el calculo

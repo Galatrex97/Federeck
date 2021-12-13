@@ -1,4 +1,3 @@
-import { Playlist, Queue } from "distube";
 import { PlayerEvent } from "../Interfaces";
 
 export const dmpEvent: PlayerEvent = {

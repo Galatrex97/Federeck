@@ -15,10 +15,10 @@ export const Interaction: interactionCommand = {
    * @param {String[]} args
    */
   run: async (client, interaction) => {
-    let days = Math.floor(client.uptime / 86400000);
-    let hours = Math.floor(client.uptime / 3600000) % 24;
-    let minutes = Math.floor(client.uptime / 60000) % 60;
-    let seconds = Math.floor(client.uptime / 1000) % 60;
+    let days = Math.floor((client.uptime as any) / 86400000);
+    let hours = Math.floor((client.uptime as any) / 3600000) % 24;
+    let minutes = Math.floor((client.uptime as any) / 60000) % 60;
+    let seconds = Math.floor((client.uptime as any) / 1000) % 60;
 
     const ugu = new MessageEmbed()
       .setTitle("**Tiempo online**")
@@ -26,7 +26,6 @@ export const Interaction: interactionCommand = {
         `:clock1: \`${days} Días\` \`${hours} Horas\` \`${minutes} Minutos\` \`${seconds} Segundos\``
       )
       .setColor("WHITE")
-      .setFooter("Mmm...")
       .setTimestamp();
 
     

@@ -5,10 +5,10 @@ export const event: Event = {
   run: async (client, interaction) => {
     if (interaction.isContextMenu()) {
        await interaction.deferReply();
-      const command = client.contextMenus.get(interaction.commandName);
+      const contextMenu = client.contextMenus.get(interaction.commandName);
       try {
-        if (command) {
-          command.run(client, interaction);
+        if (contextMenu) {
+          contextMenu.run(client, interaction);
         }
       } catch (err) {
         console.log(err);

@@ -33,10 +33,10 @@ export const command: Command = {
     let embed = new MessageEmbed()
       .setTitle(`Reproduciendo ahora`)
       .setDescription(
-        `[${guildList?.nowPlaying.name}](${guildList?.nowPlaying.url})\n${ProgressBar}`
+        `[${guildList?.nowPlaying?.name}](${guildList?.nowPlaying?.url})\n${ProgressBar}`
       )
       .setColor("WHITE")
-      .setThumbnail(`${guildList?.nowPlaying.thumbnail}`);
+      .setThumbnail(`${guildList?.nowPlaying?.thumbnail}`);
     await message.reply({ embeds: [embed] });
   },
 };

@@ -70,25 +70,8 @@ export const Interaction: interactionCommand = {
     } catch (error: any) {
       //abrimos y cerramos el evento
       console.log(error);
-      let errmsg = new MessageEmbed()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setTimestamp()
-        .setColor("WHITE");
-
-      let channel = client.channels.cache.get(
-        "901550991923630130"
-      ) as TextChannel;
-
-      if (channel) {
-        channel.send({ embeds: [errmsg] });
-      } else {
-        return false;
-      }
       return interaction.followUp({
-        content: `Ha ocurrido un error.`,
+        content: `Ha ocurrido un __error__ intentando buscar **"${searchText}"**.`,
         ephemeral: true,
       });
     }

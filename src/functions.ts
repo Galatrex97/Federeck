@@ -47,3 +47,9 @@ export async function is_url(str: string) {
     return false;
   }
 }
+
+export async function separator(numb: number) {
+              let str = numb.toString().split(".");
+              str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+              return str.join(".");
+            }

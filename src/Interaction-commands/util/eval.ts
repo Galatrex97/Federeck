@@ -10,7 +10,7 @@ export const Interaction: interactionCommand = {
   options: [
     {
       name: "code",
-      description: "Este es el código que será evaluado",
+      description: "Pon aqui el código que quieres probar.",
       type: "STRING",
       required: true,
     },
@@ -26,8 +26,8 @@ export const Interaction: interactionCommand = {
 
     if (interaction.user.id !== process.env.botOwner) {
       let embed = new Discord.MessageEmbed() //Creamos el embed
-        .setDescription("Mmm, no puedes hacer esto")
-        .setColor("WHITE");
+        .setDescription("**No** puedes realizar la acción solicitada ya que no eres parte del equipo de **Desarrolladores**.")
+        .setColor("RED");
       return interaction.followUp({ embeds: [embed] });
     }
 
@@ -40,7 +40,7 @@ export const Interaction: interactionCommand = {
     try {
       if (noArray.includes(toEval)) {
         return interaction.followUp({
-          content: "Ni lo intentes",
+          content: "No puedes solicitar está información confidencial en un chat de Discord.",
           ephemeral: true,
         });
       }
@@ -56,20 +56,19 @@ export const Interaction: interactionCommand = {
         .setTimestamp() //Usamos un Timestamp
         .setFooter((client.user?.username as string), client.user?.displayAvatarURL())
         .setTitle(`:desktop: ${client.user?.username}`)
-        .setDescription("Este comando sirve para ejecutar codes")
+        .setDescription("**Información acerca de tu code:**")
         .addField("Tipo:", `\`\`\`prolog\n${typeof(evaluated)}\`\`\``, true)
         .addField("Tiempo:", `\`\`\`yaml\n${Date.now() - interaction.createdTimestamp}ms\`\`\``, true)
         .addField("Input:", "```js\n"+beautify(toEval, { format: "js" })+"```")
         .addField("Output:", "```js\n"+inspect(evaluated, {depth:  0})+"```") //Aca aparecera lo que se evalua
         interaction.followUp({embeds: [embed]})
     } catch(err: any) { //Hacemos un catch y que defina err
-
         let beautify = require("beautify")
        let embed2 = new Discord.MessageEmbed()
        .setTimestamp()
        .setFooter((client.user?.username as string), client.user?.displayAvatarURL())
-       .addField("Hubo un error con el codigo que evaluaste", "```js\n"+err+"```") //Va a aparecer el error
-       .setColor("WHITE")
+       .addField("Hubo un error con el código que evaluaste", "```js\n"+err+"```") //Va a aparecer el error
+       .setColor("RED")
        return interaction.followUp({embeds: [embed2]}) 
     }
   },

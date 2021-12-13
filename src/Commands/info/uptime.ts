@@ -11,10 +11,10 @@ export const command: Command = {
   description: "Muestra el tiempoque ha estado el bot online",
 
   run: (client, message, args) => {
-    let days = Math.floor(client.uptime / 86400000);
-    let hours = Math.floor(client.uptime / 3600000) % 24;
-    let minutes = Math.floor(client.uptime / 60000) % 60;
-    let seconds = Math.floor(client.uptime / 1000) % 60;
+    let days = Math.floor((client.uptime as any) / 86400000);
+    let hours = Math.floor((client.uptime as any) / 3600000) % 24;
+    let minutes = Math.floor((client.uptime as any) / 60000) % 60;
+    let seconds = Math.floor((client.uptime as any) / 1000) % 60;
 
     const ugu = new MessageEmbed()
       .setTitle("**Tiempo online**")
