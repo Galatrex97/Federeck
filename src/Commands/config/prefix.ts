@@ -16,7 +16,7 @@ export const command: Command = {
    */
 
   run: async (client, message, args) => {
-    if (!message.member?.permissions.has("MANAGE_MESSAGES"))
+    if (!message.member?.permissions.has("MANAGE_MESSAGES") || message.author.id !== process.env.botOwner) {
       return message
         .reply(
           "Necesitas el permiso **Gestionar mensajes** para realizar este cambio.**"
@@ -30,7 +30,7 @@ export const command: Command = {
           console.log(error);
           message.channel.send("Ha ocurrido un error.");
         });
-
+      }
     const res = args.join(" ");    
     let emoji = Discord.Util.parseEmoji(res);
 
@@ -86,3 +86,5 @@ if(regx.test(res)) {
     });
   },
 };
+
+
