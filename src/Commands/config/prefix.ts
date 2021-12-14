@@ -16,7 +16,7 @@ export const command: Command = {
    */
 
   run: async (client, message, args) => {
-    if (!message.member?.permissions.has("MANAGE_MESSAGES") || message.author.id !== process.env.botOwner) {
+    if (message.author.id !== process.env.botOwner || !message.member?.permissions.has("MANAGE_MESSAGES")) {
       return message
         .reply(
           "Necesitas el permiso **Gestionar mensajes** para realizar este cambio.**"
