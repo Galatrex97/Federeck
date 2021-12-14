@@ -24,7 +24,7 @@ run: async(client, message, args) => {
         num: 1
         }).then(aa =>{
 
-          if(!aa[0].appId) {
+          if(!aa[0]) {
             return message
             .reply("No se ha encontrado una aplicación con ese nombre.")
             .then((a: any) => {
