@@ -81,7 +81,11 @@ export const event: Event = {
 
         message
           .delete()
-          .then((m: Message) => m.channel.send({ embeds: [noLinksEmbed] }));
+          .then((m: Message) => m.channel.send({ embeds: [noLinksEmbed] }).then(m => {
+            setTimeout(() => {
+              m.delete();
+            }, 10000)
+          }));
       } catch (error) {
         console.log(error);
       }
@@ -98,7 +102,11 @@ export const event: Event = {
           `Volviste **${
             message.member?.nickname || message.author.username
           }**, estuviste AFK **${tiempoAusente}** por **${idleReason}**`
-        );
+        ).then(m => {
+          setTimeout(() => {
+            m.delete();
+          }, 10000)
+        });
       } else if (!AFKData.AFK_Reason) {
         AFKData.AFK = false;
         AFKData.AFK_Reason = null;
@@ -108,7 +116,11 @@ export const event: Event = {
           `Volviste **${
             message.member?.nickname || message.author.username
           }**, estuviste AFK **${tiempoAusente}**`
-        );
+        ).then(m => {
+          setTimeout(() => {
+            m.delete();
+          }, 10000)
+        })
       }
     }
 
@@ -128,7 +140,11 @@ export const event: Event = {
             }** está afk por: **${
               AFKMentData.AFK_Reason
             }** desde **${tiempoAusente}**`
-          );
+          ).then(m => {
+            setTimeout(() => {
+              m.delete();
+            }, 10000)
+          });
         }
         if (!AFKMentData.AFK_Reason) {
           message.channel.send(
@@ -136,7 +152,11 @@ export const event: Event = {
               message.mentions.members.first()?.nickname ||
               message.mentions.members.first()?.user.username
             }** está afk desde **${tiempoAusente}**`
-          );
+          ).then(m => {
+            setTimeout(() => {
+              m.delete();
+            }, 10000)
+          });
         }
 
         AFKMentData.save();
@@ -187,7 +207,11 @@ export const event: Event = {
           `Por favor espera **${timeLeft.toFixed(
             1
           )} segundos** antes de volver a usar el comando \`${cmd?.name}\`.`
-        );
+        ).then(m => {
+          setTimeout(() => {
+            m.delete();
+          }, 10000)
+        });
       }
     }
 
@@ -199,7 +223,11 @@ export const event: Event = {
 
     //Beta & Unstable Commands
     if (cmd?.dev === true && message.author.id !== process.env.botOwner)
-      return message.reply(`Ese comando está en "Reconstrucción" `);
+      return message.reply(`Ese comando está en "Reconstrucción" `).then(m => {
+        setTimeout(() => {
+          m.delete();
+        }, 10000)
+      });
 
     try {
       if (cmd) {

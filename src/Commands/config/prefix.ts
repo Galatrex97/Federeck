@@ -2,7 +2,7 @@ import Discord, { Client, MessageEmbed, Message } from "discord.js";
 import prefixSchema from "../../Models/prefix";
 import Klar from "../../Client";
 import { Command } from "../../Interfaces";
-
+import emojiRegex from "emoji-regex";
 export const command: Command = {
   name: "setprefix",
   cooldown: 60,
@@ -27,30 +27,25 @@ export const command: Command = {
           }, 7000);
         })
         .catch((error) => {
-          let errmsg = new (require("discord.js").MessageEmbed)()
-            .setTitle("Ha ocurrido un error")
-            .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-            .setThumbnail(
-              `https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`
-            )
-            .setFooter("Tipico")
-            .setTimestamp();
-
           console.log(error);
           message.channel.send("Ha ocurrido un error.");
         });
 
     const res = args.join(" ");    
     let emoji = Discord.Util.parseEmoji(res);
-    const emojiRegex = require("emoji-regex");
+
+let regx = emojiRegex();
+
+if(regx.test(res)) {
+  return message.reply("No puedes poner emojis como prefix.")
+}
 
 
     if (
       res.includes(
         `<:${emoji?.name}:${emoji?.id}>` || `<a:${emoji?.name}:${emoji?.id}>`
       ) ||
-      res.length > 4 ||
-      res.match(emojiRegex)
+      res.length > 4
     ) {
       return message.reply(
         "No puedes poner un prefix de más de 4 caracteres ni emojis."
@@ -69,11 +64,11 @@ export const command: Command = {
         }
 
         await prefixSchema.findOneAndDelete({ Guild: message.guild?.id });
-        data = new prefixSchema({
+        data = await new prefixSchema({
           Guild: message.guild?.id,
           Prefix: res,
         });
-        data.save();
+        await data.save();
         message.reply(`Mi prefix ha sido cambiado a **${res}**`);
       } else {
 
@@ -81,11 +76,11 @@ export const command: Command = {
           return message.reply("No puedes establecer k! como prefix ya que es el prefix por defecto que estás utilizando.")
         }
 
-        data = new prefixSchema({
+        data = await new prefixSchema({
           Guild: message.guild?.id,
           Prefix: res,
         });
-        data.save();
+        await data.save();
         message.reply(`Mi prefix ha sido establecido a **${res}**`);
       }
     });
