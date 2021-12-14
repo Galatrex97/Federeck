@@ -16,9 +16,6 @@ run: async(client, message, args) => {
 
   message
   .reply("Para mencionar debes tener el permiso de Administrador.")
-  .then((e) => {
-
-  });
 
     let busqueda = args.join(" ")
     if(!busqueda){
@@ -53,7 +50,7 @@ function separator(numb) {
     return str.join(".");
 }
 
-let jaj = moment(gg.updated).locale("es").fromNow();
+let relDate = moment(gg.updated).locale("es").fromNow();
 
 
 const row = new MessageActionRow().addComponents(
@@ -83,7 +80,7 @@ const row = new MessageActionRow().addComponents(
 				.addField("Descargas",gg.installs, true)
         .addField("Precio",`${gg.priceText.replace("Free", "Gratis")}`, true)
         .addField("ID (Nombre del paquete)",gg.appId, true)
-				.addField("Actualizado", gg.updated ? jaj : "No hay datos", true )
+				.addField("Actualizado", gg.updated ? relDate : "No hay datos", true )
         .addField("Género", `${gg.genre}`, true)
 				.addField("Creado el", gg.released ? `${gg.released} (${moment(new Date(gg.released.replace("abr", "apr").replace("ago", "aug").replace("ene", "jan").replace("dic", "dec"))).locale("es").fromNow()})`: "No hay datos", true)
 				.addField("Descripción (recortada)", `${gg.description.split(".")[0].slice(0, 256)}.`)
