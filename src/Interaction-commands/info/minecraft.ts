@@ -67,7 +67,7 @@ let embed = new MessageEmbed()
     },
     {
         name: "Versión",
-        value: `${Array.isArray(resp.version) ? resp.version[0] : resp.version}`,
+        value: `${Array.isArray(resp.version) ? resp.version[0] : resp.version || "No hay información"}`,
     },
     {
         name: "Plugins",
