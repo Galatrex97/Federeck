@@ -16,7 +16,7 @@ export const command: Command = {
    */
 
   run: async (client, message, args) => {
-    if (message.author.id !== "754717879265525792") {
+    if (!message.member?.permissions.has("MANAGE_MESSAGES")) {
       return message
         .reply(
           "Necesitas el permiso **Gestionar mensajes** para realizar este cambio.**"
