@@ -63,7 +63,7 @@ let embed = new MessageEmbed()
     },
     {
         name: "Jugadores online",
-        value: `${resp.players.online + "/" + resp.players.max}`
+        value: `${resp.players ? resp.players.online + "/" + resp.players.max : "No hay información"}`
     },
     {
         name: "Versión",
