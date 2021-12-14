@@ -65,7 +65,7 @@ export const Interaction: interactionCommand = {
       .setThumbnail(serverIcon)
       .setAuthor(serverName, serverIcon)
       .addField("**ID**", server?.id, true)
-      .addField("**Fecha de creación**", `${server?.joinedAt}`)
+      .addField("**Fecha de creación**", `${server?.createdAt}`)
       .addField("**Región:**", regions[server.preferredLocale])
       .addField("**Dueño del server:**", `${owner}`)
       .addField("** ID del dueño :**", `${owner.id}`)
