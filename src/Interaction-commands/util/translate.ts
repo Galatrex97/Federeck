@@ -197,7 +197,7 @@ export const Interaction: interactionCommand = {
       //Hacemos la función de la API que es la traducirá el texto al idioma que se especifico
       let embed = new MessageEmbed() //Me gusta usar embeds xd
         .setTitle("Traductor")
-        .addField("Texto original:", text)
+        .addField("Texto original:", text.split(".")[0].slice(0, 1023))
         .addField("Traducción:", res.text)
         .setFooter("Traducción gracias a Google Translate")
         .setColor("WHITE"); //Un console log por si las dudas

@@ -41,8 +41,7 @@ const request = https.request(options, (response) => {
       response.on("end", () => {
         let resp: any = JSON.parse(str);
         if (!resp.hostname) {
-          interaction.followUp("No encontré un server con la ip " + ip);
-          return;
+         return interaction.followUp("No encontré un server con la ip " + ip);
         }
         //create answer message with default offline data
 
