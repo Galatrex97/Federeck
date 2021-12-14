@@ -14,9 +14,6 @@ export const command: Command = {
 
 run: async(client, message, args) => {
 
-  message
-  .reply("Para mencionar debes tener el permiso de Administrador.")
-
     let busqueda = args.join(" ")
     if(!busqueda){
       message.channel.sendTyping();
