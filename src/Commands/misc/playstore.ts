@@ -14,7 +14,11 @@ export const command: Command = {
 
 run: async(client, message, args) => {
 
+  message
+  .reply("Para mencionar debes tener el permiso de Administrador.")
+  .then((e) => {
 
+  });
 
     let busqueda = args.join(" ")
     if(!busqueda){
@@ -25,6 +29,17 @@ run: async(client, message, args) => {
         term: busqueda,
         num: 1
         }).then(aa =>{
+
+          if(!aa[0].appId) {
+            return message
+            .reply("No se ha encontrado una aplicación con ese nombre.")
+            .then((a: any) => {
+              setTimeout(() => {
+                a.delete();
+              }, 10000);
+            })
+          }
+
     play.app({
 			appId: aa[0].appId,
 			lang: "es"
@@ -105,24 +120,22 @@ interactionxd.deferUpdate();
 
   collector.on("end", () => {
     msg.channel.sendTyping();
-    msg.channel.send("Se han acabado los 7 segundos para ver la descripción.")
+    msg.channel.send("Se han acabado los 7 segundos para ver la descripción.").then((a: any) => {
+      setTimeout(() => {
+        a.delete();
+      }, 10000);
+    })
   })
 
 
 
     }).catch(error => {
       message.channel.sendTyping();
-        message.reply({content: `Ha ocurrido un error con la búsqueda: ${busqueda}`})
-
-let errmsg = new (require('discord.js')).MessageEmbed()
-.setTitle('Ha ocurrido un error')
-.setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-.setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-.setFooter('Tipico')
-.setColor("WHITE")
-.setTimestamp()
- 
-
+        message.reply({content: `Ha ocurrido un error con la búsqueda: ${busqueda}`}).then((a: any) => {
+          setTimeout(() => {
+            a.delete();
+          }, 10000);
+        })
 				console.log(error)
     })
 }) 
