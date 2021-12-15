@@ -12,7 +12,7 @@ dotenv.config();
 class Lyon extends Client {
   constructor() {
     super({
-      intents: 515,
+      intents: 5635,
       partials: ["MESSAGE", "CHANNEL", "REACTION", "GUILD_MEMBER", "USER"],
     });
   }
