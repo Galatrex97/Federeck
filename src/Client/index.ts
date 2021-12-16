@@ -2,10 +2,9 @@ import { Client, Collection, Message } from "discord.js";
 import { Command, interactionCommand, interactionMenu } from "../Interfaces";
 import { runAll } from "../Utils/runner";
 import { Player } from "discord-music-player";
-import { prx } from "../functions";
 import * as dotenv from "dotenv";
 import prefixSchema from "../Models/prefix";
-let prefix = process.env.prefix || "k!";
+let defaultPrefix = process.env.prefix || "k!";
 
 dotenv.config();
 
@@ -29,7 +28,7 @@ class Lyon extends Client {
     if (data) {
       custom = data.Prefix;
     } else {
-      custom = prefix;
+      custom = defaultPrefix;
     }
     return custom;
   }

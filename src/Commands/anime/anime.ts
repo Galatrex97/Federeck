@@ -7,6 +7,7 @@ import Discord, {
 } from "discord.js";
 import Klar from "../../Client";
 const Scraper = require("mal-scraper");
+import translate from "@iamtraction/google-translate"
 
 import { Command } from "../../Interfaces";
 
@@ -26,13 +27,13 @@ export const command: Command = {
         `<a:noputo:868687565304246283> |**Debes escribir el nombre del anime.**`
       ); //Por si no hay nombre esto lanza.
 
-    if (Text.length > 200)
+    if (Text.length > 50)
       return message.reply(
-        `<a:noputo:868687565304246283> | **El limite de texto es de 200**`
+        `<a:noputo:868687565304246283> | **El limite de texto es de 50 caracteres.**`
       ); //limite de texto
 
     let Msg = await message.reply({ content:
-      `<a:see:868645120289943552> | **Buscando..**`
+      `<a:see:868645120289943552> | **Buscando...**`
     }); //tiempo de busqueda
 
     let Replaced = Text.replace(/ /g, " ");
@@ -47,23 +48,33 @@ export const command: Command = {
       if (!Anime.genres[0] || Anime.genres[0] === null)
         Anime.genres[0] = "None";
 
-      Embed = new MessageEmbed() //ponemos el embed anterior.
 
-        .setColor("WHITE") //color del embed
-        .setURL(Anime.url) //URL Del anime.
-        .setTitle(Anime.title) //un contexto en el anime
-        .setDescription(Anime.synopsis) //Escrito por
-        .addField(`Tipo`, Anime.type, true) //tipo de plataforma que se mira el anime
-        .addField(`Estreno`, Anime.status, true) //dice si esta transmitiendo capitulos o no
-        .addField(`Episodios`, Anime.episodes, true) //cuentos episodios tiene el anime.
-        .addField(`Duración`, Anime.duration, true) //duración del anime
-        .addField(`Popularidad`, Anime.popularity, true) //popularidad del anime o entre lugar que esta
-        .addField(`Generos`, Anime.genres.join(", ")) //tipo de anime del anime ejemplo comedia o romantico
-        .setThumbnail(Anime.picture) //foto de portada del anime
-        .setFooter(`Puntaje - ${Anime.score}`) //puntaje del anime
+let translatedStatus = {
+  "Finished Airing": "Transmisión finalizada",
+  "Currently Airing": "En transmisión"
+}
+
+let translatedSynopsis = translate(Anime.synopsis, { to: "es" })
+let translatedGenres = translate(Anime.genres.join(", "), { to: "es" })
+if(Anime.episodes == "Unknown") {
+  Anime.episodes = "No hay información"
+}
+      Embed = new MessageEmbed() 
+
+        .setColor("WHITE") 
+        .setURL(Anime.url) 
+        .setTitle(Anime.title) 
+        .setDescription((await translatedSynopsis).text) 
+        .addField(`Tipo`, Anime.type, true) 
+        .addField(`Estado`, translatedStatus[Anime.status], true) 
+        .addField(`Episodios`, Anime.episodes, true) 
+        .addField(`Duración por ep.`, Anime.duration, true) 
+        .addField(`Popularidad`, Anime.popularity, true) 
+        .addField(`Generos`, (await translatedGenres).text) 
+        .setThumbnail(Anime.picture) 
+        .setFooter(`Puntaje - ${Anime.score}`) 
         .setTimestamp();
     } catch (error) {
-      //abrimos y cerramos el evento
       return message.reply(`No se ha encontrado el anime.`);
     }
 
