@@ -8,8 +8,8 @@ import {
   GuildChannel,
 } from "discord.js";
 import { getInfoFromName } from "mal-scraper";
-import Klar from "../../client";
-import { interactionCommand } from "../../interfaces";
+import Klar from "../../Client";
+import { interactionCommand } from "../../Interfaces";
 export const Interaction: interactionCommand = {
   name: "anime",
   description: "Busca un anime",

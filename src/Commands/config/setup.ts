@@ -1,6 +1,6 @@
-import nyaSchema from "../../models/parent";
-import { Command } from "../../interfaces";
-import xSchema from "../../models/ticketsMentionable";
+import nyaSchema from "../../Models/parent";
+import { Command } from "../../Interfaces";
+import xSchema from "../../Models/ticketsMentionable";
 export const command: Command = {
   name: "ticket-setup",
   category: "Configuración",

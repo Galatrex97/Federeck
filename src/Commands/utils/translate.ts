@@ -5,11 +5,11 @@ import Discord, {
   Message,
   TextChannel,
 } from "discord.js";
-import Klar from "../../client";
+import Klar from "../../Client";
 import { is_url } from "../../functions";
 import translate from "@iamtraction/google-translate"; //requerimos la API que necesitaremos...
 
-import { Command } from "../../interfaces";
+import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "translate",

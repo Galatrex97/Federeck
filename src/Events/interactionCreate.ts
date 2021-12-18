@@ -1,8 +1,8 @@
 import { MessageEmbed } from "discord.js";
-import { Event } from "../interfaces";
-import { clickBtn } from "../resourcesz";
-import parentSchema from "../models/parent";
-import mentionSchema from "../models/ticketsMentionable";
+import { Event } from "../Interfaces";
+import { clickBtn } from "../Utils";
+import parentSchema from "../Models/parent";
+import mentionSchema from "../Models/ticketsMentionable";
 export const event: Event = {
   name: "interactionCreate",
   run: async(client, interaction) => {

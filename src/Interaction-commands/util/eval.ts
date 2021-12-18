@@ -1,8 +1,8 @@
 import { Client, CommandInteraction, MessageEmbed } from "discord.js";
 import * as Discord from "discord.js";
-import Klar from "../../client";
+import Klar from "../../Client";
 import beautify from "beautify";
-import { interactionCommand } from "../../interfaces";
+import { interactionCommand } from "../../Interfaces";
 import { inspect } from "util";
 export const Interaction: interactionCommand = {
   name: "eval",

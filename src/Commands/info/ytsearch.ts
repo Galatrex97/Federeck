@@ -1,7 +1,7 @@
 import Discord from "discord.js";
 const { Client, MessageEmbed } = require("discord.js");
 const YouTube = require("youtube-node");
-import { Command } from "../../interfaces";
+import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "ytsearch",

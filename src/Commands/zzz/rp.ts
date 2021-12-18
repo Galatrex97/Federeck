@@ -5,12 +5,12 @@ import Discord, {
   Message,
   TextChannel,
 } from "discord.js";
-import Klar from "../../client";
+import Klar from "../../Client";
 import clientnt from "nekos.life";
 import NSFW from "discord-nsfw";
 const nsfw = new NSFW();
 
-import { Command } from "../../interfaces";
+import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "real-pussy",

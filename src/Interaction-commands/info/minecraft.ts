@@ -5,7 +5,7 @@ import {
   TextChannel,
 } from "discord.js";
 import https from "https";
-import { interactionCommand } from "../../interfaces";
+import { interactionCommand } from "../../Interfaces";
 export const Interaction: interactionCommand = {
   name: "mc-server",
   description: "Muestra la información sobre un server de minecraft",

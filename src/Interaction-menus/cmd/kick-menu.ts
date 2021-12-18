@@ -5,8 +5,8 @@ import {
   MessageEmbed,
   GuildMember,
 } from "discord.js";
-import Klar from "../../client";
-import { interactionMenu } from "../../interfaces";
+import Klar from "../../Client";
+import { interactionMenu } from "../../Interfaces";
 export const InteractionMenu: interactionMenu = {
   name: "Expulsar este usuario",
   type: "USER",

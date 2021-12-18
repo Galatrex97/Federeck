@@ -1,9 +1,9 @@
 import { Client, Collection, Message } from "discord.js";
-import { Command, interactionCommand, interactionMenu } from "../interfaces";
-import { runAll } from "../resourcesz/runner";
+import { Command, interactionCommand, interactionMenu } from "../Interfaces";
+import { runAll } from "../Utils/runner";
 import { Player } from "discord-music-player";
 import * as dotenv from "dotenv";
-import prefixSchema from "../models/prefix";
+import prefixSchema from "../Models/prefix";
 let defaultPrefix = process.env.prefix || "k!";
 
 dotenv.config();

@@ -1,8 +1,8 @@
 
 import Discord, { Client, Message, MessageEmbed } from "discord.js";
 import figlet from "figlet";
-import Klar from "../../client";
- import { Command } from "../../interfaces";
+import Klar from "../../Client";
+ import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "ascii",

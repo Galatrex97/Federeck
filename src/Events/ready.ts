@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const uri: any = process.env.mongoGOD;
-import { Event } from "../interfaces";
+import { Event } from "../Interfaces";
 import { ClientPresence, Presence } from "discord.js";
 
 export const event: Event = {

@@ -1,6 +1,6 @@
 import { Message, MessageEmbed } from "discord.js";
-import { Command } from "../../interfaces";
-import roleSchema from "../../models/ticketsMentionable";
+import { Command } from "../../Interfaces";
+import roleSchema from "../../Models/ticketsMentionable";
 export const command: Command = {
   name: "ticket-roles",
   aliases: [],

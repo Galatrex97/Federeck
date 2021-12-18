@@ -1,9 +1,9 @@
 import Discord, { Client, Message, Guild, MessageEmbed } from "discord.js";
 import * as backup from "discord-backup";
-import Klar from "../../client";
+import Klar from "../../Client";
 backup.setStorageFolder(__dirname + "/backups/");
 
-import { Command } from "../../interfaces";
+import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "backupload",

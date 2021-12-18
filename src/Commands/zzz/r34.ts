@@ -5,10 +5,10 @@ import Discord, {
   Message,
   TextChannel,
 } from "discord.js";
-import Klar from "../../client";
+import Klar from "../../Client";
 import clientnt from "nekos.life";
 import * as booru from "booru";
-import { Command } from "../../interfaces";
+import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "rule34",

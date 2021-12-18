@@ -7,7 +7,7 @@ import {
   MessageButton,
   GuildMember
 } from "discord.js";
-import { interactionCommand } from "../../interfaces";
+import { interactionCommand } from "../../Interfaces";
 export const Interaction: interactionCommand = {
   name: "userinfo",
   description: "Muestra información detallada sobre ti o un usuario, si lo elegiste.",

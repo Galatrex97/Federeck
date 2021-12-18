@@ -1,5 +1,5 @@
 import { TextChannel } from "discord.js";
-import { PlayerEvent } from "../interfaces";
+import { PlayerEvent } from "../Interfaces";
 
 export const dmpEvent: PlayerEvent = {
   name: "error",

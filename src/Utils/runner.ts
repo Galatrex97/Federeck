@@ -1,4 +1,4 @@
-import Client from "../client"; //Importamos el ExtendedCLient.
+import Client from "../Client"; //Importamos el ExtendedCLient.
 import { readdirSync } from "fs";
 import {
   Command,
@@ -6,7 +6,7 @@ import {
   interactionCommand,
   interactionMenu,
   PlayerEvent,
-} from "../interfaces";
+} from "../Interfaces";
 import { connect } from "mongoose";
 
 export function runAll(client: Client) {

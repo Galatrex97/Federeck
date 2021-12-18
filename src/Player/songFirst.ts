@@ -1,4 +1,4 @@
-import { PlayerEvent } from "../interfaces";
+import { PlayerEvent } from "../Interfaces";
 import { MessageEmbed } from "discord.js";
 export const dmpEvent: PlayerEvent = {
   name: "songFirst",

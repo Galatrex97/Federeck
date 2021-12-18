@@ -1,4 +1,4 @@
-import Klar from "../../client";
+import Klar from "../../Client";
 import Discord, {
   Client,
   Message,
@@ -7,7 +7,7 @@ import Discord, {
 } from "discord.js";
 
 
-import { Command } from "../../interfaces";
+import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "clear",

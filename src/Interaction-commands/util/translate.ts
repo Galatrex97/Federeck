@@ -1,8 +1,8 @@
 import translate from "@iamtraction/google-translate";
 import { MessageEmbed } from "discord.js";
 import { Client, CommandInteraction } from "discord.js";
-import Klar from "../../client";
-import { interactionCommand } from "../../interfaces";
+import Klar from "../../Client";
+import { interactionCommand } from "../../Interfaces";
 import { is_url } from "../../functions";
 export const Interaction: interactionCommand = {
   name: "translate",

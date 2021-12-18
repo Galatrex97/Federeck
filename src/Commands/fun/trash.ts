@@ -4,9 +4,9 @@ import {
   MessageAttachment,
   Snowflake,
 } from "discord.js";
-import Klar from "../../client";
+import Klar from "../../Client";
 import DIG from "discord-image-generation";
-import { Command } from "../../interfaces";
+import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "trash",

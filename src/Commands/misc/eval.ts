@@ -1,8 +1,8 @@
 import Discord, { Client, Message, MessageEmbed } from "discord.js";
-import Klar from "../../client";
+import Klar from "../../Client";
 import { inspect } from "util";
 const nya = process.env.botOwner;
- import { Command } from "../../interfaces";
+ import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "eval",

@@ -6,8 +6,8 @@ import {
   MessageEmbed,
   User,
 } from "discord.js";
-import Klar from "../../client";
-import { interactionCommand } from "../../interfaces";
+import Klar from "../../Client";
+import { interactionCommand } from "../../Interfaces";
 export const Interaction: interactionCommand = {
   name: "ban",
   description: "Banea un usuario",

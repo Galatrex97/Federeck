@@ -1,5 +1,5 @@
-import Klar from "../client";
-import { Event } from "../interfaces";
+import Klar from "../Client";
+import { Event } from "../Interfaces";
 
 export const event: Event = {
   name: "messageDelete",

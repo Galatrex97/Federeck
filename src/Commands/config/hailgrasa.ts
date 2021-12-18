@@ -1,8 +1,8 @@
 import Discord from "discord.js";
 import { Client, MessageEmbed, Message } from "discord.js";
-import la_grasa from "../../models/lagrasa";
-import Lyon from "../../client";
-import { Command } from "../../interfaces";
+import la_grasa from "../../Models/lagrasa";
+import Lyon from "../../Client";
+import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "pacman",

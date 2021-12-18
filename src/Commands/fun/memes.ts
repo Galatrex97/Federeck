@@ -5,10 +5,10 @@ import Discord, {
   Message,
   TextChannel,
 } from "discord.js";
-import Klar from "../../client";
+import Klar from "../../Client";
 import memes from "discord-memes";
 
-import { Command } from "../../interfaces";
+import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "meme",

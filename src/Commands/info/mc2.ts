@@ -1,8 +1,8 @@
 import https from "https";
 import Discord, { Client, MessageEmbed, Message } from "discord.js";
-import Klar from "../../client";
+import Klar from "../../Client";
 
-import { Command } from "../../interfaces";
+import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "mc",

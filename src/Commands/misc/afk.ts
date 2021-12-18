@@ -1,6 +1,6 @@
 import Discord, { Message, TextChannel, MessageEmbed } from "discord.js";
-import afk from "../../models/afk";
-import { Command } from "../../interfaces";
+import afk from "../../Models/afk";
+import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "afk",

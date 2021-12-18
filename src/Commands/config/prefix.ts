@@ -1,7 +1,7 @@
 import Discord, { Client, MessageEmbed, Message } from "discord.js";
-import prefixSchema from "../../models/prefix";
-import Klar from "../../client";
-import { Command } from "../../interfaces";
+import prefixSchema from "../../Models/prefix";
+import Klar from "../../Client";
+import { Command } from "../../Interfaces";
 import emojiRegex from "emoji-regex";
 export const command: Command = {
   name: "setprefix",

@@ -1,8 +1,8 @@
 import Discord, { Client, MessageEmbed, Guild, Message } from "discord.js";
-import db from "../../models/warn";
+import db from "../../Models/warn";
 import mongoose from "mongoose";
-import Klar from "../../client";
-import { Command } from "../../interfaces";
+import Klar from "../../Client";
+import { Command } from "../../Interfaces";
 
 export const command: Command = {
   name: "warn",
