@@ -6,7 +6,7 @@ import {
   Message,
   MessageEmbed,
 } from "discord.js";
-import { ticketSystem } from "../../resources";
+import { ticketSystem } from "../../Utils";
 import mentionSchema from "../../Models/ticketsMentionable";
 import { Command } from "../../Interfaces";
 
