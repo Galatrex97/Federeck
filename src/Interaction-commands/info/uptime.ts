@@ -4,7 +4,7 @@ import {
   MessageEmbed,
   TextChannel,
 } from "discord.js";
-import { interactionCommand } from "../../Interfaces";
+import { interactionCommand } from "../../interfaces";
 export const Interaction: interactionCommand = {
   name: "uptime",
   description: "Muestra información sobre cuánto tiempo estuve en línea desde la última conexión",

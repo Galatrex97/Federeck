@@ -1,4 +1,4 @@
-import prefixSchema from "./Models/prefix";
+import prefixSchema from "./models/prefix";
 import { Message } from "discord.js";
 let prefix = process.env.prefix || "k!";
 // help.js

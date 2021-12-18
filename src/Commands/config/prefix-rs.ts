@@ -1,8 +1,8 @@
 import Discord, { Client, Message, MessageEmbed } from "discord.js";
-import prefixSchema from "../../Models/prefix";
+import prefixSchema from "../../models/prefix";
 let prefix = process.env.prefix as string;
-import Klar from "../../Client";
-import { Command } from "../../Interfaces";
+import Klar from "../../client";
+import { Command } from "../../interfaces";
 
 export const command: Command = {
   name: "prefix-reset",

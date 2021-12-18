@@ -5,7 +5,7 @@ import {
   TextChannel,
 } from "discord.js";
 import mongoose from "mongoose";
-import { interactionCommand } from "../../Interfaces";
+import { interactionCommand } from "../../interfaces";
 export const Interaction: interactionCommand = {
   name: "ping",
   description: "Muestra información detallada sobre mi latencia.",

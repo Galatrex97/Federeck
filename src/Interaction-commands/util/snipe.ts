@@ -1,6 +1,6 @@
 import { Client, CommandInteraction, MessageEmbed } from "discord.js";
-import Klar from "../../Client";
-import { interactionCommand } from "../../Interfaces";
+import Klar from "../../client";
+import { interactionCommand } from "../../interfaces";
 import moment from "moment";
 export const Interaction: interactionCommand = {
   name: "snipe",

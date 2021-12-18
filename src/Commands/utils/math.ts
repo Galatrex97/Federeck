@@ -1,5 +1,5 @@
-import { calculator } from "../../Utils";
-import { Command } from "../../Interfaces";
+import { calculator } from "../../resources";
+import { Command } from "../../interfaces";
 
 export const command: Command = {
   name: "math",

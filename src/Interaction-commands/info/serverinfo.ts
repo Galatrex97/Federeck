@@ -5,7 +5,7 @@ import {
   Guild,
   TextChannel,
 } from "discord.js";
-import { interactionCommand } from "../../Interfaces";
+import { interactionCommand } from "../../interfaces";
 export const Interaction: interactionCommand = {
   name: "serverinfo",
   description: "Muestra información sobre este server",

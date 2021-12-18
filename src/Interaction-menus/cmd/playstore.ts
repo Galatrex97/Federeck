@@ -8,8 +8,8 @@ import {
 } from "discord.js";
 import playStore from "google-play-scraper";
 import moment from "moment";
-import Klar from "../../Client";
-import { interactionMenu } from "../../Interfaces";
+import Klar from "../../client";
+import { interactionMenu } from "../../interfaces";
 export const InteractionMenu: interactionMenu = {
   name: "Buscar en playstore",
   type: "MESSAGE",

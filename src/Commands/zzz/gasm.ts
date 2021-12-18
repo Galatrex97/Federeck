@@ -5,11 +5,11 @@ import Discord, {
   Message,
   TextChannel,
 } from "discord.js";
-import Klar from "../../Client";
+import Klar from "../../client";
 import clientnt from "nekos.life";
 const neko = new clientnt();
 
-import { Command } from "../../Interfaces";
+import { Command } from "../../interfaces";
 
 export const command: Command = {
   name: "gasm",

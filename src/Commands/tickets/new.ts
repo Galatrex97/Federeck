@@ -1,14 +1,14 @@
-import parentSchema from "../../Models/parent";
-import Klar from "../../Client";
+import parentSchema from "../../models/parent";
+import Klar from "../../client";
 import {
   CategoryChannel,
   TextChannel,
   Message,
   MessageEmbed,
 } from "discord.js";
-import { ticketSystem } from "../../Utils";
-import mentionSchema from "../../Models/ticketsMentionable";
-import { Command } from "../../Interfaces";
+import { ticketSystem } from "../../resources";
+import mentionSchema from "../../models/ticketsMentionable";
+import { Command } from "../../interfaces";
 
 export const command: Command = {
   name: "set-tickets",

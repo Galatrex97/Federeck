@@ -1,5 +1,5 @@
 import { MessageEmbed } from "discord.js";
-import { PlayerEvent } from "../Interfaces";
+import { PlayerEvent } from "../interfaces";
 
 export const dmpEvent: PlayerEvent = {
   name: "channelEmpty",

@@ -5,11 +5,11 @@ import Discord, {
   Message,
   TextChannel,
 } from "discord.js";
-import Klar from "../../Client";
+import Klar from "../../client";
 const Scraper = require("mal-scraper");
 import translate from "@iamtraction/google-translate"
 
-import { Command } from "../../Interfaces";
+import { Command } from "../../interfaces";
 
 export const command: Command = {
   name: "anime",
@@ -17,7 +17,7 @@ export const command: Command = {
   aliases: [],
   usage: "anime <Anime a buscar>",
   category: "Anime",
-  description: "Busca un anime a partir de lo que escribe el user.",
+  description: "Busca un anime en MyAnimeList.",
 
   run: async (client, message, args) => {
     let Text = args.join(" ");
@@ -46,7 +46,7 @@ export const command: Command = {
       Anime = await Scraper.getInfoFromName(Replaced); //Información del anime cómo descripción.
 
       if (!Anime.genres[0] || Anime.genres[0] === null)
-        Anime.genres[0] = "None";
+        Anime.genres[0] = "No hay información";
 
 
 let translatedStatus = {

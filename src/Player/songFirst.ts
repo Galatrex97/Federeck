@@ -1,4 +1,4 @@
-import { PlayerEvent } from "../Interfaces";
+import { PlayerEvent } from "../interfaces";
 import { MessageEmbed } from "discord.js";
 export const dmpEvent: PlayerEvent = {
   name: "songFirst",
@@ -9,7 +9,8 @@ export const dmpEvent: PlayerEvent = {
         .setTitle(`Reproduciendo`)
         .setDescription(`[${song.name}](${song.url}) - ${song.duration}`)
         .setColor("WHITE")
-        .setThumbnail(`${song.thumbnail}`);
+        .setThumbnail(`${song.thumbnail}`)
+        .setFooter(`Pedida por: ${msg.member.nickname || msg.author.username}`)
       await msg.channel.send({ embeds: [embed] });
     } catch (err) {
       console.log(err);

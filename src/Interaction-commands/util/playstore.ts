@@ -7,8 +7,8 @@ import {
 } from "discord.js";
 import play from "google-play-scraper";
 import moment from "moment";
-import Klar from "../../Client";
-import { interactionCommand } from "../../Interfaces";
+import Klar from "../../client";
+import { interactionCommand } from "../../interfaces";
 import { separator } from "../../functions";
 export const Interaction: interactionCommand = {
   name: "playstore",

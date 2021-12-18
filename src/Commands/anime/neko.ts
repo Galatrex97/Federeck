@@ -1,12 +1,12 @@
 import { Message, TextChannel } from "discord.js";
-import Klar from "../../Client";
+import Klar from "../../client";
 
 const Discord = require("discord.js");
 const { Client, MessageEmbed } = require("discord.js");
 const clientnt = require("nekos.life");
 const neko = new clientnt();
 
-import { Command } from "../../Interfaces";
+import { Command } from "../../interfaces";
 
 export const command: Command = {
   name: "neko",

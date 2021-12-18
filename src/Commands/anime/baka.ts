@@ -5,11 +5,11 @@ import Discord, {
   Message,
   TextChannel,
 } from "discord.js";
-import Klar from "../../Client";
+import Klar from "../../client";
 import clientnt from "nekos.life";
 const neko = new clientnt();
 
-import { Command } from "../../Interfaces";
+import { Command } from "../../interfaces";
 
 export const command: Command = {
   name: "baka",
@@ -31,25 +31,16 @@ export const command: Command = {
 
     neko.sfw
       .baka()
-      .then((asd) => {
+      .then((img) => {
         const embed = new MessageEmbed()
           .setDescription(`Idiota`)
-          .setImage(asd.url)
+          .setImage(img.url)
           .setColor("WHITE");
 
         message.reply({ embeds: [embed] });
       })
       .catch((error) => {
         console.log(error);
-
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setColor("WHITE")
-          .setTimestamp();
-
         message.channel.send("Ha ocurrido un error.");
       });
   },

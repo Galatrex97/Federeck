@@ -1,10 +1,10 @@
-import afkSchema from "../Models/afk";
-import la_grasa from "../Models/lagrasa";
-import antilink from "../Models/antilinkbv";
+import afkSchema from "../models/afk";
+import la_grasa from "../models/lagrasa";
+import antilink from "../models/antilinkbv";
 import Discord, { Message, Collection } from "discord.js";
 import moment from "moment";
 let prefix = process.env.prefix as string;
-import { Event } from "../Interfaces";
+import { Event } from "../interfaces";
 import { is_url } from "../functions";
 import { myMention, randomsPacmansReplies, randomizePacmanReplies, pacmansReplies } from "../resources";
 

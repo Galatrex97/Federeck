@@ -1,8 +1,8 @@
 import Discord, { Client, MessageEmbed, Message } from "discord.js";
 import mongoose from "mongoose";
-import ugu from "../../Models/add";
-import Klar from "../../Client";
-import { Command } from "../../Interfaces";
+import ugu from "../../models/add";
+import Klar from "../../client";
+import { Command } from "../../interfaces";
 
 export const command: Command = {
   name: "set-welcome",

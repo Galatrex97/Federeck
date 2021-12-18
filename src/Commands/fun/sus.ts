@@ -1,5 +1,5 @@
 import Discord, { Message, MessageEmbed } from "discord.js";
-import { Command } from "../../Interfaces";
+import { Command } from "../../interfaces";
 import Canvas from "canvas";
 export const command: Command = {
   name: "sus",

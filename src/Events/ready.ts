@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const uri: any = process.env.mongoGOD;
-import { Event } from "../Interfaces";
+import { Event } from "../interfaces";
 import { ClientPresence, Presence } from "discord.js";
 
 export const event: Event = {
@@ -15,10 +15,6 @@ export const event: Event = {
       .catch((err: any) => console.log(err));
 
     const presencesArray: any = [
-      {
-        name: "Spiderversen't",
-        type: "WATCHING",
-      },
       {
         name: "Lyon | v0.4",
         type: "PLAYING",

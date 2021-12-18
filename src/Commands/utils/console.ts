@@ -1,6 +1,6 @@
 import Discord, { Client, Message, MessageEmbed } from "discord.js";
-import Klar from "../../Client";
-import { Command } from "../../Interfaces";
+import Klar from "../../client";
+import { Command } from "../../interfaces";
 
 export const command: Command = {
   name: "bugreport",

@@ -5,8 +5,8 @@ import {
   MessageEmbed,
   GuildMember,
 } from "discord.js";
-import Klar from "../../Client";
-import { interactionMenu } from "../../Interfaces";
+import Klar from "../../client";
+import { interactionMenu } from "../../interfaces";
 export const InteractionMenu: interactionMenu = {
   name: "Expulsar este usuario",
   type: "USER",
@@ -21,6 +21,10 @@ export const InteractionMenu: interactionMenu = {
     const target = await interaction.guild?.members.fetch(targetUser.id);
     let thisServer = interaction.guild as Guild;
     const guildOwner = (await thisServer.fetchOwner()).user.id;
+
+    if(!interaction.guild?.me?.permissions.has("KICK_MEMBERS")) {
+      return interaction.followUp("No puedo expulsar miembros por falta de permisos.")
+    }
 
     if (!(interaction.member as GuildMember).permissions.has("KICK_MEMBERS")) {
       return interaction.followUp({
@@ -79,13 +83,6 @@ export const InteractionMenu: interactionMenu = {
         target?.kick();
       } catch (err: any) {
         console.log(err);
-        let errmsg = new MessageEmbed()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${err.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setTimestamp()
-          .setColor("WHITE");
       }
 
       interaction.followUp({

@@ -4,8 +4,8 @@ import {
   ContextMenuInteraction,
   MessageEmbed,
 } from "discord.js";
-import Klar from "../../Client";
-import { interactionMenu } from "../../Interfaces";
+import Klar from "../../client";
+import { interactionMenu } from "../../interfaces";
 export const InteractionMenu: interactionMenu = {
   name: "Avatar",
   type: "USER",

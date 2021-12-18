@@ -1,4 +1,4 @@
-import { PlayerEvent } from "../Interfaces";
+import { PlayerEvent } from "../interfaces";
 
 export const dmpEvent: PlayerEvent = {
   name: "queueEnd",

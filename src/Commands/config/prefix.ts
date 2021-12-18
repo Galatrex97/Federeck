@@ -1,7 +1,7 @@
 import Discord, { Client, MessageEmbed, Message } from "discord.js";
-import prefixSchema from "../../Models/prefix";
-import Klar from "../../Client";
-import { Command } from "../../Interfaces";
+import prefixSchema from "../../models/prefix";
+import Klar from "../../client";
+import { Command } from "../../interfaces";
 import emojiRegex from "emoji-regex";
 export const command: Command = {
   name: "setprefix",
@@ -16,6 +16,7 @@ export const command: Command = {
    */
 
   run: async (client, message, args) => {
+
     if (!message.member?.permissions.has("MANAGE_MESSAGES")) {
       return message
         .reply(

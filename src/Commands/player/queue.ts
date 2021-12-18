@@ -5,9 +5,9 @@ import Discord, {
   Message,
   TextChannel,
 } from "discord.js";
-import Klar from "../../Client";
+import Klar from "../../client";
 
-import { Command } from "../../Interfaces";
+import { Command } from "../../interfaces";
 
 export const command: Command = {
   name: "queue",

@@ -1,10 +1,10 @@
 import Discord, { GuildMember } from "discord.js";
 import { model } from "mongoose";
-import welcomeChannelSchema from "../Models/add";
+import welcomeChannelSchema from "../models/add";
 import Canvas from "canvas";
 import { registerFont } from "canvas";
-import Klar from "../Client";
-import { Event } from "../Interfaces";
+import Klar from "../client";
+import { Event } from "../interfaces";
 registerFont("./font/KGHAPPY.ttf", { family: "My Olivin" });
 
 let welcomeCanvas: any = {};

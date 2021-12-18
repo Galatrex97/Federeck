@@ -1,7 +1,7 @@
 import Discord, { Client, CommandInteraction, MessageEmbed } from "discord.js";
 import parseToAscii from "figlet";
-import Klar from "../../Client";
-import { interactionCommand } from "../../Interfaces";
+import Klar from "../../client";
+import { interactionCommand } from "../../interfaces";
 export const Interaction: interactionCommand = {
   name: "ascii",
   description: "Muestra un texto en formato ASCII",

@@ -1,7 +1,7 @@
 import math from "math-expression-evaluator";
 import Discord, { Client, MessageEmbed, CommandInteraction } from "discord.js";
-import Klar from "../../Client";
-import { interactionCommand } from "../../Interfaces";
+import Klar from "../../client";
+import { interactionCommand } from "../../interfaces";
 export const Interaction: interactionCommand = {
   name: "math",
   description: "Calcula una expresión.",

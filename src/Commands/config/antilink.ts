@@ -1,7 +1,7 @@
 import Discord, { Client, MessageEmbed, Message } from "discord.js";
-import antilink from "../../Models/antilinkbv";
-import Klar from "../../Client";
-import { Command } from "../../Interfaces";
+import antilink from "../../models/antilinkbv";
+import Klar from "../../client";
+import { Command } from "../../interfaces";
 
 export const command: Command = {
   name: "antilink",

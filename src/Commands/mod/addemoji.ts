@@ -1,7 +1,7 @@
 import Discord, { Message } from "discord.js";
-import Klar from "../../Client";
+import Klar from "../../client";
 const emojiRegex = require("emoji-regex");
-import { Command } from "../../Interfaces";
+import { Command } from "../../interfaces";
 
 export const command: Command = {
   name: "add-emoji",

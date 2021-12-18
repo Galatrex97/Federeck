@@ -5,11 +5,11 @@ import Discord, {
   Message,
   TextChannel,
 } from "discord.js";
-import Klar from "../../Client";
+import Klar from "../../client";
 import clientnt from "nekos.life";
 const neko = new clientnt();
 
-import { Command } from "../../Interfaces";
+import { Command } from "../../interfaces";
 
 export const command: Command = {
   name: "cuddle",
@@ -19,14 +19,14 @@ export const command: Command = {
   category: "Anime",
 
   run: async (client, message, args) => {
-    const person = message.mentions.members?.first();
-    if (!person) return message.reply("Debes mencionar a alguien.");
+    const mentionedMember = message.mentions.members?.first();
+    if (!mentionedMember) return message.reply("Debes mencionar a alguien.");
 
     let user = message.member?.id;
 
-    let mentionedUser = message.mentions.members?.first()?.id;
+    let mentionedId = message.mentions.members?.first()?.id;
 
-    if (user === mentionedUser) {
+    if (user === mentionedId) {
       return message.channel.send(
         "No puedes usar este comando contigo mismo(a)."
       );
@@ -34,25 +34,17 @@ export const command: Command = {
 
     neko.sfw
       .cuddle()
-      .then((asd) => {
+      .then((img) => {
         const embed = new MessageEmbed()
           .setDescription(
-            `**${message.author.username}** Abraza a **${person.user.username}**`
+            `**${message.author.username}** Abraza a **${mentionedMember.user.username}**`
           )
-          .setImage(asd.url)
+          .setImage(img.url)
           .setColor("WHITE");
 
         message.reply({ embeds: [embed] });
       })
       .catch((error) => {
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setColor("WHITE")
-          .setTimestamp();
-
         console.log(error);
         message.channel.send("Ha ocurrido un error.");
       });

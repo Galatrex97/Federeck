@@ -1,8 +1,9 @@
 import translate from "@iamtraction/google-translate";
 import { MessageEmbed } from "discord.js";
 import { Client, CommandInteraction } from "discord.js";
-import Klar from "../../Client";
-import { interactionCommand } from "../../Interfaces";
+import Klar from "../../client";
+import { interactionCommand } from "../../interfaces";
+import { is_url } from "../../functions";
 export const Interaction: interactionCommand = {
   name: "translate",
   description: "Traduce un texto a el idioma destino.",
@@ -89,7 +90,7 @@ export const Interaction: interactionCommand = {
           value: "vi",
         },
       ],
-      required: true
+      required: false
     },
     {
       name: "to",
@@ -193,6 +194,12 @@ export const Interaction: interactionCommand = {
     let text = interaction.options.getString("texto") as string;
     let lang = interaction.options.getString("to") as string;
     let originLang = interaction.options.getString("from") as string;
+
+  let bool = is_url(text)
+  if(bool) {
+    return interaction.followUp("No puedes traducir links.")
+  }
+
     translate(text, { from: originLang || "auto", to: lang }).then((res) => {
       //Hacemos la función de la API que es la traducirá el texto al idioma que se especifico
       let embed = new MessageEmbed() //Me gusta usar embeds xd
@@ -201,6 +208,7 @@ export const Interaction: interactionCommand = {
         .addField("Traducción:", res.text)
         .setFooter("Traducción gracias a Google Translate")
         .setColor("WHITE"); //Un console log por si las dudas
+
       interaction.followUp({ embeds: [embed] }); //Se envia el embed
     });
   },

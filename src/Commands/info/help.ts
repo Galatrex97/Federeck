@@ -6,10 +6,10 @@ import {
   TextChannel,
 } from "discord.js";
 import { capitalizeFirstLetter } from "../../functions";
-import Klar from "../../Client";
+import Klar from "../../client";
 const BOT_OWNER = "";
 
-import { Command } from "../../Interfaces";
+import { Command } from "../../interfaces";
 
 export const command: Command = {
   name: "help",

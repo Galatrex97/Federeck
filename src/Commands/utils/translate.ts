@@ -5,11 +5,11 @@ import Discord, {
   Message,
   TextChannel,
 } from "discord.js";
-import Klar from "../../Client";
-
+import Klar from "../../client";
+import { is_url } from "../../functions";
 import translate from "@iamtraction/google-translate"; //requerimos la API que necesitaremos...
 
-import { Command } from "../../Interfaces";
+import { Command } from "../../interfaces";
 
 export const command: Command = {
   name: "translate",
@@ -22,6 +22,12 @@ export const command: Command = {
   run: async (client, message, args) => {
     const idioma = args[0] as string; //Establecemos el argumento 0 como el idioma al que se traducira
     const texto = args.slice(1).join(" "); //A partir del argumento 1 tomara el texto a traducir
+
+let def = is_url(texto)
+
+if(def) {
+  return message.reply("No traduzcas links.")
+}
 
     if (!idioma) {
       //Si no escribio el idioma de la manera correcta

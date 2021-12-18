@@ -4,7 +4,7 @@ import {
   MessageEmbed,
   TextChannel,
 } from "discord.js";
-import { interactionCommand } from "../../Interfaces";
+import { interactionCommand } from "../../interfaces";
 import morse from "morse";
 export const Interaction: interactionCommand = {
   name: "morse",
