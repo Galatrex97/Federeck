@@ -13,6 +13,10 @@ export const Interaction: interactionCommand = {
       description: "El idioma actual del texto. (Su idioma de origen)",
       type: "STRING",
       choices: [
+        { 
+          name: "Auto-detect",
+          value: "auto"
+        }, 
         {
           name: "Arabic/Árabe",
           value: "ar",
@@ -90,7 +94,7 @@ export const Interaction: interactionCommand = {
           value: "vi",
         },
       ],
-      required: false
+      required: true
     },
     {
       name: "to",
