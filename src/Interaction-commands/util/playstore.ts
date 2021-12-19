@@ -46,7 +46,7 @@ export const Interaction: interactionCommand = {
             lang: "es",
           })
           .then(async (app) => {
-            const numb = app.reviews;
+            const numb = app.reviews as number;
 
             let relDate = moment(app.updated).locale("es").fromNow();
 
@@ -65,6 +65,8 @@ export const Interaction: interactionCommand = {
                 .setLabel("Sitio web de " + app.title)
             );
 
+let separatedText = separator(numb);
+
             const embed = new MessageEmbed()
               .setColor("WHITE")
               .setTitle("Aplicación")
@@ -72,7 +74,7 @@ export const Interaction: interactionCommand = {
               .addField("Nombre", app.title, true)
               .addField("Puntuación", `${app.scoreText} ⭐`, true)
               .addField("Resumen", app.summary, true)
-              .addField("Reseñas", `${separator(numb)}`, true)
+              .addField("Reseñas", `${separatedText}`, true)
               .addField("Descargas", app.installs, true)
               .addField(
                 "Precio",
