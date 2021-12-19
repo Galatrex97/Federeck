@@ -39,7 +39,7 @@ process.on("uncaughtException", async(error, origin) => {
         let { command } = require(`../Commands/${dir}/${file}`); //Requerimos el comando de los comandos.
         client.commands.set((command as Command).name, command as Command);
         if (command.aliases && Array.isArray(command.aliases)) {
-          command.aliasCs.forEach((alias: string) =>
+          command.aliases.forEach((alias: string) =>
             client.aliases.set(alias, command.name)
           );
         } //Y lo establecemos en el Collection.
