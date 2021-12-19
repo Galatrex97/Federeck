@@ -149,7 +149,7 @@ export const Interaction: interactionCommand = {
               if (id === "reqAppDesc") {
                 mainInteraction.user.send({ embeds: [appDesc] });
                 mainMsg.channel.send(
-                  `${interaction.user} he enviado la descripción completa de la aplicación **${app.title}** a tu **MD**`
+                  `${mainInteraction.user} he enviado la descripción completa de la aplicación **${app.title}** a tu **MD**`
                 );
               }
             });

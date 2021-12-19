@@ -14,7 +14,7 @@ export const Interaction: interactionCommand = {
       type: "STRING",
       choices: [
         { 
-          name: "Auto-detect",
+          name: "Auto-detect/Detectar idioma",
           value: "auto"
         }, 
         {
