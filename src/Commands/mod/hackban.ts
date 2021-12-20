@@ -33,7 +33,7 @@ export const command: Command = {
       message.mentions.members?.first() ||
       message.guild?.members.resolve(idz) ||
       message.guild?.members.cache.find(
-        (m) => m.user.username.toLowerCase() == args[0]
+        (m) => m.user.id == args[0]
       );
 
     if (!member) {
