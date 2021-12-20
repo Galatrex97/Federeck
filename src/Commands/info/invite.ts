@@ -18,7 +18,7 @@ export const command: Command = {
       .setColor("WHITE")
       .setTimestamp()
       .setDescription(
-        `Haz click \`(aquí)[${link}]\` para invitarme a tu servidor.\nSi tienes alguna duda, puedes usar \`${p}help\``
+        `Haz click [\`aquí\`](${link}) para invitarme a tu servidor.\nSi tienes alguna duda, puedes usar \`${p}help\``
       )
       .setThumbnail(`${client.user?.avatarURL()}`);
 
