@@ -19,31 +19,8 @@ export const command: Command = {
   description: `Muestra la página <Ayuda> o Información sobre un comando especifíco`,
   usage: "help [comando/categoria]",
   run: async (client, message, args, p) => {
-    
-let catArray = [];
-
-    let categorias;
-    if (message.author.id !== process.env.botOwner) {
-      categorias = [
-        ...new Set(
-          client.commands
-            .filter((command) => command?.category !== "Zzz")
-            .map((command) => command?.category)
-        ),
-      ];
-    } else {
-      categorias = [
-        ...new Set(client.commands.map((command) => command?.category)),
-      ];
-    }
-
-    for(var ids of categorias) {
-      var catego = client.commands.filter(
-        (command) => command?.category === ids
-      );
-    }
-
-    if (args.join(" ") && args.join(" ") !== ids) {
+  
+    if (args.join(" ")) {
       const command =
         client.commands.get(args.join(" ").toLowerCase()) ||
         client.commands.get(
@@ -74,7 +51,7 @@ let catArray = [];
           "No puedes ver información sobre este comando por que aún está en fase de desarrollo."
         );
       } else {
-        const h_embed = new MessageEmbed()
+        const cmdEmbed = new MessageEmbed()
           .setTitle(
             `Información del comando ${command?.name.toString().toLowerCase()}`
           )
@@ -103,45 +80,17 @@ let catArray = [];
               `>  **Aclaraciones: \`No se deben usar los "<>" ni los "[]" puestos abajo o en las instrucciones de uso, son indicaciones.\`**`,
             ].join("\n")
           );
-        message.reply({ embeds: [h_embed], components: [row] });
+        message.reply({ embeds: [cmdEmbed], components: [row] });
       }
-    } else if(args.join(" ") == ids) {
-
-      let categoriar;
-      if (message.author.id !== process.env.botOwner) {
-        categoriar = [
-          ...new Set(
-            client.commands
-              .filter((command) => command?.category !== "Zzz")
-              .map((command) => command?.category)
-          ),
-        ];
-      } else {
-        categoriar = [
-          ...new Set(client.commands.map((command) => command?.category)),
-        ];
-      }
-  
-      for(var ide of categoriar) {
-
-      }
-        const categoriaz = client.commands.filter(
-          (command) => command?.category === ide
-        );
-const someEmbed = new MessageEmbed()
-.setTitle("Comandos de la categoría "+ids)
-.setDescription(`Con un total de **${categoriaz.size}** comandos la categoría **${ide}** tiene los siguientes comandos: \n**${categoriaz.map((command) => `\`${command?.name}\``).join("\n")}**`)
-
-
     } else {
-      const general_row = new MessageActionRow().addComponents(
+      const mainRow = new MessageActionRow().addComponents(
         new MessageButton()
           .setStyle("LINK")
           .setURL("https://discord.gg/rk3FacaS2U")
           .setLabel("Soporte")
       );
 
-      const embed = new MessageEmbed()
+      const mainEmbed = new MessageEmbed()
         .setTitle(`Comandos de ${client.user?.username}`)
         .setColor("WHITE")
         .addField(
@@ -180,28 +129,20 @@ const someEmbed = new MessageEmbed()
         );
 
         if (id == "NSFW" && !(message.channel as TextChannel).nsfw) {
-          embed.addField(
+          mainEmbed.addField(
             `NSFW`,
             "***`Para ver los comandos de esta categoria ejecuta este comando en un canal NSFW`***"
           );
         } else {
-          embed.addField(
+          mainEmbed.addField(
             `${id} (${category.size})`,
             category.map((command) => `\`${command?.name}\``).join(" ")
           );
         }
       }
       try {
-        return message.reply({ embeds: [embed], components: [general_row] });
+        return message.reply({ embeds: [mainEmbed], components: [mainRow] });
       } catch (err) {
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${err}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setColor("WHITE")
-          .setTimestamp();
-
         console.log(err);
       }
     }

@@ -5,7 +5,6 @@ import { Player } from "discord-music-player";
 import * as dotenv from "dotenv";
 import prefixSchema from "../Models/prefix";
 let defaultPrefix = process.env.prefix || "k!";
-
 dotenv.config();
 
 class Lyon extends Client {
@@ -47,14 +46,8 @@ class Lyon extends Client {
     }
   });
 
-  public nevermind = async function (client: Client, str: string) {
-await (client.channels.cache.get("921234267365867561") as any).send({
-      content: str
-  })
 
-  return "El mensaje se envió correctamente."
 
-  }
   
   public slashCommands: Collection<string, interactionCommand> =
     new Collection();

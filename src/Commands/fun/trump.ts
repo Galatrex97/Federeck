@@ -36,13 +36,6 @@ export const command: Command = {
     ); //Creamos la imagen con la API de NekoBot
 
     message.channel.send({ files: [attachment] }).catch((err) => {
-      let errmsg = new (require("discord.js").MessageEmbed)()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setColor("WHITE")
-        .setTimestamp();
 
       // En caso de algun error
       if (

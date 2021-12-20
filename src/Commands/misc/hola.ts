@@ -17,13 +17,6 @@ export const command: Command = {
     } catch (err) {
       console.log(err);
 
-      let errmsg = new MessageEmbed()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setColor("WHITE")
-        .setTimestamp();
     }
   },
 };

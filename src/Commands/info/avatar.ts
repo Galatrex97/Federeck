@@ -8,7 +8,7 @@ export const command: Command = {
   aliases: ["pfp"],
   category: "Útil",
   description:
-    "Muestra el avatar de un usuario (mencionado) o de ti si no mencionas a nadie.",
+    "Muestra el avatar de un usuario (mencionado) o de ti, si no mencionas a nadie.",
   usage: "avatar/pfp",
 
   run: async (client, message, args) => {
@@ -37,7 +37,7 @@ export const command: Command = {
       let a = await client.users.fetch(member)
       let pfp = await a.displayAvatarURL({ format: "png", dynamic: true, size: 4096 })
       const embed = new Discord.MessageEmbed()
-        .setTitle(`Avatar De: **${a.username}**`)
+        .setTitle(`Avatar de: **${a.username}**`)
         .addField("Pedido por:", `${message.member}`)
         .setImage(`${pfp}`)
         .setColor("WHITE")

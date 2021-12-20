@@ -44,13 +44,6 @@ export const command: Command = {
       guildQueue.setVolume(parsedNya);
       message.reply("El volumen se ha establecido a " + parsedNya);
     } catch (err) {
-      let errmsg = new (require("discord.js").MessageEmbed)()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setColor("WHITE")
-        .setTimestamp();
 
       message.reply("No hay nada reproduciendose.");
     }

@@ -36,13 +36,6 @@ export const command: Command = {
     try {
       message.reply({ files: [attachment] }); //La enviamos
     } catch (err) {
-      let errmsg = new MessageEmbed()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setColor("WHITE")
-        .setTimestamp();
 
       console.log(err);
     }

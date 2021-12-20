@@ -16,6 +16,12 @@ export const Interaction: interactionCommand = {
       type: "STRING",
       required: true,
     },
+    {
+      name: "port",
+      description: "El puerto del server",
+      type: "STRING",
+      required: false,
+    }
   ],
   /**
    *
@@ -26,9 +32,10 @@ export const Interaction: interactionCommand = {
   run: async (client, interaction) => {
 
       const ip = interaction.options.getString("ip");
+      const optPort = interaction.options.getString("port");
     const options = {
       hostname: "api.mcsrvstat.us",
-      port: 443,
+      port: optPort || 443,
       path: "/2/" + ip,
       method: "GET",
     };
@@ -40,7 +47,7 @@ const request = https.request(options, (response) => {
       });
       response.on("end", () => {
         let resp: any = JSON.parse(str);
-        if (!resp.hostname) {
+        if (!resp || !resp.hostname) {
          return interaction.followUp("No encontré un server con la ip " + ip);
         }
         //create answer message with default offline data

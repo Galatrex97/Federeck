@@ -13,7 +13,7 @@ export const command: Command = {
     const owner = (await (message.guild as Guild).fetchOwner()).user;
     let server = message.guild as Guild; //definimos server
     let serverSi: any = server?.premiumSubscriptionCount?.toString();
-    const nya = {
+    const securityLvl = {
       NONE: "Ninguno, ez",
       LOW: "Bajo",
       MEDIUM: "Mediano",
@@ -21,33 +21,33 @@ export const command: Command = {
       VERY_HIGH: "Tryhard",
     };
     const regions = {
-      "en-US": "English (United States)",
-      "en-GB": "English (Great Britain)",
-      "zh-CN": "Chinese (China)",
-      "zh-TW": "Chinese (Taiwan)",
-      "pt-BR": "Portuguese (Brazil)",
-      "es-ES": "Spanish (Spain)",
-      "sv-SE": "Swedish",
-      cs: "Czech",
-      da: "Danish",
-      nl: "Dutch",
-      fr: "French",
-      de: "German",
-      el: "Greek",
-      hu: "Hungarian",
-      it: "Italian",
-      ja: "Japanese",
-      ko: "Korean",
-      no: "Norwegian",
-      pl: "Polish",
-      ru: "Russian",
-      tr: "Turkish",
-      bg: "Bulgarian",
-      uk: "Ukrainian",
-      fi: "Finnish",
-      hr: "Croatian",
-      ro: "Romanian",
-      lt: "Lithuanian",
+      "en-US": "Inglésa (Estados Unidos)",
+      "en-GB": "Inglésa (Inglaterra)",
+      "zh-CN": "China (China)",
+      "zh-TW": "China (Taiwan)",
+      "pt-BR": "Portugues (Brazil)",
+      "es-ES": "Spanish (España)",
+      "sv-SE": "Sueca (Suecia)",
+      cs: "Checa",
+      da: "Danesa",
+      nl: "Holandesa",
+      fr: "Francesa",
+      de: "Alemana",
+      el: "Griega",
+      hu: "Húngara",
+      it: "Italiana",
+      ja: "Japonesa",
+      ko: "Coreana",
+      no: "Noruega",
+      pl: "Polaca",
+      ru: "Rusa",
+      tr: "Turca",
+      bg: "Búlgara",
+      uk: "Ucraniana",
+      fi: "Finlandesa",
+      hr: "Croata",
+      ro: "Romana",
+      lt: "Lituana",
     };
 
     let serverIcon: any = server?.iconURL() as string;
@@ -57,7 +57,7 @@ export const command: Command = {
       .setDescription("**Información actual del server**")
       .setThumbnail(serverIcon)
       .setAuthor(serverName, serverIcon)
-      .addField("**ID**", server?.id, true)
+      .addField("**ID del server**", server?.id, true)
       .addField("**Fecha de creación**", `${server?.createdAt}`)
       .addField("**Región:**", regions[server.preferredLocale])
       .addField("**Dueño del server:**", `${owner}`)
@@ -82,20 +82,13 @@ export const command: Command = {
       .addField("**Boosts**", serverSi)
       .addField(
         "**Nivel de verificación**",
-        `${nya[server?.verificationLevel]}`
+        `${securityLvl[server?.verificationLevel]}`
       )
       .addField("**Roles**", `${server.roles.cache.size}`, true)
       .setColor("WHITE");
     try {
       message.reply({ embeds: [embed] });
     } catch (err) {
-      let errmsg = new (require("discord.js").MessageEmbed)()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setColor("WHITE")
-        .setTimestamp();
 
       console.log(err);
     }

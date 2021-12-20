@@ -21,9 +21,9 @@ export const command: Command = {
     let embed = new Discord.MessageEmbed()
       .setTitle("Latencia")
       .setDescription(
-        `**Latencia de la API de Discord:** ${
+        `**Latencia del websocket:** ${
           client.ws.ping
-        } ms\n**Latencia general:** ${
+        } ms\n**Latencia de mensajes:** ${
           Date.now() - message.createdTimestamp
         } ms\n**Latencia de la base de datos:** ${pingDataBase} ms`
       )
@@ -35,13 +35,6 @@ export const command: Command = {
         allowedMentions: { repliedUser: false },
       });
     } catch (err) {
-      let errmsg = new MessageEmbed()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setColor("WHITE")
-        .setTimestamp();
 
       console.log(err);
     }

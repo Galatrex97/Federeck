@@ -21,14 +21,6 @@ export const command: Command = {
     try {
       return message.channel.send(memes.deTodoEspañol());
     } catch (err) {
-      let errmsg = new (require("discord.js").MessageEmbed)()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setTimestamp()
-        .setColor("WHITE");
-
       console.log(err);
     }
   },

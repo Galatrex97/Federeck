@@ -80,15 +80,7 @@ export const command: Command = {
         try {
           message.channel.send({ embeds: [embed] });
         } catch (err) {
-          let errmsg = new MessageEmbed()
-            .setTitle("Ha ocurrido un error")
-            .setDescription(`**Tengo el siguiente error:** ${err}`)
-            .setThumbnail(
-              `https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`
-            )
-            .setFooter("Tipico")
-            .setColor("WHITE")
-            .setTimestamp();
+
 
           console.log(err);
         }
@@ -97,14 +89,6 @@ export const command: Command = {
     //error handling
     request.on("error", (err) => {
       console.log(err);
-
-      let errmsg = new (require("discord.js").MessageEmbed)()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setTimestamp()
-        .setColor("WHITE");
 
       message.channel.send(
         "Ha ocurrido un error intentando obtener la información del server."

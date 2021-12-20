@@ -46,14 +46,6 @@ export const command: Command = {
       message.reply({ embeds: [embed] });
     } catch (err) {
       console.log(err);
-
-      let errmsg = new (require("discord.js").MessageEmbed)()
-        .setTitle("Ha ocurrido un error")
-        .setColor("WHITE")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setTimestamp();
     }
   },
 };

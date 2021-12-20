@@ -42,13 +42,6 @@ export const command: Command = {
 
       message.channel.send("La canción ha sido pausada.");
     } catch (err) {
-      let errmsg = new MessageEmbed()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setColor("WHITE")
-        .setTimestamp();
 
       message.channel.send("Ha ocurrido un error.");
       console.log(err);

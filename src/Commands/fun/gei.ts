@@ -64,13 +64,6 @@ export const command: Command = {
     try {
       message.channel.send({ embeds: [embed], files: [attachment] });
     } catch (err) {
-      let errmsg = new (require("discord.js").MessageEmbed)()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setColor("WHITE")
-        .setTimestamp();
 
       console.log(err);
     }

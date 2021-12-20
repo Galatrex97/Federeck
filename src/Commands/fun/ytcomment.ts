@@ -30,13 +30,6 @@ export const command: Command = {
     } catch (err) {
       // si hay un error lo loguea en la consola
 
-      let errmsg = new MessageEmbed()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setColor("WHITE")
-        .setTimestamp();
 
       console.log("Ha ocurrido un error."); // logeamos en caso de error
     }

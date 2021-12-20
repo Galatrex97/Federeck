@@ -42,14 +42,6 @@ export const command: Command = {
       guildList.setPaused(false);
       message.channel.send("La canción fue reanudada correctamente.");
     } catch (err) {
-      let errmsg = new (require("discord.js").MessageEmbed)()
-        .setTitle("Ha ocurrido un error")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setTimestamp()
-        .setColor("WHITE");
-
       message.channel.send("Ha ocurrido un error.");
 
       console.log(err);
