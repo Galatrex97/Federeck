@@ -46,14 +46,6 @@ export const command: Command = {
       .catch((err) => {
         // if the backup wasn't found
 
-        let errmsg = new MessageEmbed()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${err.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setColor("WHITE")
-          .setTimestamp();
-
         return message.channel.send(
           "No se ha encontrado una backup con la ID `" + backupID + "`!"
         );

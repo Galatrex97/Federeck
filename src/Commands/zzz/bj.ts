@@ -36,28 +36,20 @@ export const command: Command = {
 
     neko.nsfw
       .bJ()
-      .then((awwia) => {
-        const sag = new MessageEmbed()
+      .then((img) => {
+        const embed = new MessageEmbed()
           .setDescription(
             `**${message.author.username}** le hace una mamada a **${user.user.username}**`
           )
-          .setImage(awwia.url)
+          .setImage(img.url)
           .setColor("WHITE")
           .setFooter("Inviten")
           .setTimestamp();
 
-        message.reply({ embeds: [sag] });
+        message.reply({ embeds: [embed] });
       })
       .catch((error) => {
         console.log(error);
-
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setTimestamp()
-          .setColor("WHITE");
 
         message.channel.send("Ha ocurrido un error.");
       });

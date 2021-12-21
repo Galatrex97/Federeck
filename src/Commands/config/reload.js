@@ -1,10 +1,6 @@
-const Discord = require("discord.js");
-const { Client, MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 const glob = require("glob");
-const fs = require("fs");
- import { Command } from "../../Interfaces";
 
-export const command: Command = {
+module.exports = {
   name: "reload",
   aliases: [],
   usage: 'reload',
@@ -19,13 +15,6 @@ glob(`${__dirname}/../**/*.js`, async(err, filePaths) => {
     if(err) { 
         console.log(err)
         
-        let errmsg = new (require('discord.js')).MessageEmbed()
-        .setTitle('Ha ocurrido un error')
-        .setDescription(`**Tengo el siguiente error:** ${err.stack}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter('Tipico')
-        .setColor("WHITE")
-        .setTimestamp()
          
 
     }

@@ -64,18 +64,6 @@ export const command: Command = {
                     })
                     .catch((err) => {
                       console.log(err);
-
-                      let errmsg = new (require("discord.js").MessageEmbed)()
-                        .setTitle("Ha ocurrido un error")
-                        .setDescription(
-                          `**Tengo el siguiente error:** ${err.stack}`
-                        )
-                        .setThumbnail(
-                          `https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`
-                        )
-                        .setFooter("Tipico")
-                        .setColor("WHITE")
-                        .setTimestamp();
                     });
                 } else if (reaction.emoji.name === "❌") {
                   return message.reply(
@@ -85,44 +73,17 @@ export const command: Command = {
               })
               .catch((error) => {
                 console.log(error);
-
-                let errmsg = new (require("discord.js").MessageEmbed)()
-                  .setTitle("Ha ocurrido un error")
-                  .setDescription(`**Tengo el siguiente error:** ${error}`)
-                  .setThumbnail(
-                    `https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`
-                  )
-                  .setFooter("Tipico")
-                  .setTimestamp()
-                  .setColor("WHITE");
-
                 message.channel.send("Ha ocurrido un error.");
               });
           })
           .catch((error) => {
             console.log(error);
 
-            let errmsg = new (require("discord.js").MessageEmbed)()
-              .setTitle("Ha ocurrido un error")
-              .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-              .setThumbnail(
-                `https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`
-              )
-              .setFooter("Tipico")
-              .setTimestamp()
-              .setColor("WHITE");
 
             message.channel.send("Ha ocurrido un error.");
           });
       })
       .catch((error) => {
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setTimestamp()
-          .setColor("WHITE");
 
         console.log(error);
         message.channel.send("Ha ocurrido un error.");

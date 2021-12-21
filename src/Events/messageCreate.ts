@@ -133,29 +133,36 @@ export const event: Event = {
         tiempoAusente = moment(AFKMentData.timeAgo).locale("es").fromNow();
 
         if (AFKMentData.AFK_Reason) {
-          message.channel.send(
+          message.channel.send({ content:
             `**${
               message.mentions.members.first()?.nickname ||
               message.mentions.members.first()?.user.username
             }** está afk por: **${
               AFKMentData.AFK_Reason
-            }** desde **${tiempoAusente}**`
-          ).then(m => {
+            }** desde **${tiempoAusente}**`,
+            allowedMentions: {
+              parse: ["users"]
+            }
+          }).then(m => {
             setTimeout(() => {
               m.delete();
-            }, 10000)
+            }, 60000)
           });
         }
         if (!AFKMentData.AFK_Reason) {
-          message.channel.send(
+          message.channel.send({
+            content:
             `**${
               message.mentions.members.first()?.nickname ||
               message.mentions.members.first()?.user.username
-            }** está afk desde **${tiempoAusente}**`
-          ).then(m => {
+            }** está afk desde **${tiempoAusente}**`,
+            allowedMentions: {
+              parse: ["users"]
+            }
+          }).then(m => {
             setTimeout(() => {
               m.delete();
-            }, 10000)
+            }, 60000)
           });
         }
 

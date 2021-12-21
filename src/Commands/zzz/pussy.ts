@@ -23,21 +23,12 @@ export const command: Command = {
 
     neko.nsfw
       .pussyArt()
-      .then((aaaaa) => {
-        const nya = new MessageEmbed().setImage(aaaaa.url).setTimestamp();
-        message.channel.send({ embeds: [nya] });
+      .then((img) => {
+        const embed = new MessageEmbed().setImage(img.url).setColor("WHITE").setTimestamp();
+        message.channel.send({ embeds: [embed] });
       })
       .catch((error) => {
         console.log(error);
-
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setColor("WHITE")
-          .setTimestamp();
-
         message.channel.send("Ha ocurrido un error.");
       });
   },

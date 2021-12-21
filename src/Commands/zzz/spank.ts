@@ -36,28 +36,18 @@ export const command: Command = {
 
     neko.nsfw
       .spank()
-      .then((a) => {
+      .then((img) => {
         const embed = new MessageEmbed()
           .setDescription(
-            `${message.author.username} le da una nalgada a ${user.user.username}`
+            `${message.member?.nickname || message.author.username} le da una nalgada a ${user.nickname || user.user.username}`
           )
-          .setImage(a.url)
-          .setFooter("Uff")
+          .setImage(img.url)
           .setColor("WHITE")
           .setTimestamp();
         message.channel.send({ embeds: [embed] });
       })
       .catch((error) => {
         console.log(error);
-
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setColor("WHITE")
-          .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setTimestamp();
-
         message.channel.send("Ha ocurrido un error.");
       });
   },

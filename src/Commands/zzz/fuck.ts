@@ -22,42 +22,33 @@ export const command: Command = {
     if (!(message.channel as TextChannel).nsfw)
       return message.channel.send("Este no es un canal **NSFW**");
 
-    let userX = message.member?.id;
+    let userId = message.member?.id;
 
-    let mentionedUser = message.mentions.members?.first()?.id;
+    let mentionedUserId = message.mentions.members?.first()?.id;
 
-    if (userX === mentionedUser) {
+    if (userId === mentionedUserId) {
       return message.channel.send("No puedes follarte a ti mismo.");
     }
 
-    let user = message.mentions.users.first();
+    let user = message.mentions.members?.first();
     if (!user) return message.channel.send("Debes mencionar a un usuario");
 
     neko.nsfw
       .classic()
-      .then((aaa) => {
+      .then((img) => {
         const embed = new Discord.MessageEmbed()
 
-          .setImage(aaa.url)
+          .setImage(img.url)
           .setDescription(
-            `**${message.author.username}** se folló a **${user?.username}**`
+            `**${message.member?.nickname || message.author.username}** se folló a **${user?.nickname || user?.user.username}**`
           )
-          .setColor("GREEN")
+          .setColor("WHITE")
           .setTimestamp();
 
         message.reply({ embeds: [embed] });
       })
       .catch((error) => {
         console.log(error);
-
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setTimestamp()
-          .setColor("WHITE");
-
         message.channel.send("Ha ocurrido un error.");
       });
   },

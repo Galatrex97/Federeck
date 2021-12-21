@@ -49,13 +49,6 @@ if(def) {
         message.channel.send({ embeds: [embed] }); //Se envia el embed
       })
       .catch((err) => {
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${err.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setColor("WHITE")
-          .setFooter("Tipico")
-          .setTimestamp();
 
         console.error(err); //En caso de haber un error en este caso seria introducir mal el lenguaje al que se traducirá
       });

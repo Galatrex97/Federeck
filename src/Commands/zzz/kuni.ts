@@ -38,28 +38,19 @@ export const command: Command = {
 
     neko.nsfw
       .kuni()
-      .then((ugu) => {
+      .then((img) => {
         const embed = new MessageEmbed()
           .setDescription(
-            `**${message.author.username}** le está practicando pussy licking a **${user.user.username}**`
+            `**${message.member?.nickname || message.author.username}** le está practicando pussy licking a **${user.nickname || user.user.username}**`
           )
           .setColor("WHITE")
-          .setImage(ugu.url)
-          .setFooter("Que ricoo")
+          .setImage(img.url)
           .setTimestamp();
 
         message.reply({ embeds: [embed] });
       })
       .catch((error) => {
         console.log(error);
-
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setTimestamp()
-          .setColor("WHITE");
 
         message.channel.send("Ha ocurrido un error.");
       });

@@ -24,11 +24,11 @@ export const command: Command = {
 
     neko.nsfw
       .pussy()
-      .then((aa) => {
+      .then((img) => {
         const embed = new Discord.MessageEmbed()
 
-          .setImage(aa.url)
-          .setDescription(`Aqui hay algo que te puede servir`)
+          .setImage(img.url)
+          .setDescription(`Aqui tienes`)
           .setColor("WHITE")
           .setTimestamp();
 
@@ -36,15 +36,6 @@ export const command: Command = {
       })
       .catch((error) => {
         console.log(error);
-
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setTimestamp()
-          .setColor("WHITE");
-
         message.channel.send("Ha ocurrido un error.");
       });
   },

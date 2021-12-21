@@ -40,15 +40,6 @@ export const command: Command = {
       { guildid: message.guild?.id, user: user.id },
       async (err, data) => {
         if (err) {
-          let errmsg = new (require("discord.js").MessageEmbed)()
-            .setTitle("Ha ocurrido un error")
-            .setDescription(`**Tengo el siguiente error:** ${err.stack}`)
-            .setThumbnail(
-              `https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`
-            )
-            .setFooter("Tipico")
-            .setTimestamp()
-            .setColor("WHITE");
 
           console.log(err);
         }

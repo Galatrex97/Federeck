@@ -24,10 +24,10 @@ export const command: Command = {
 
     neko.nsfw
       .girlSoloGif()
-      .then((awa) => {
+      .then((img) => {
         const embed = new MessageEmbed()
-          .setImage(awa.url)
-          .setFooter("Pasen name")
+          .setImage(img.url)
+          .setFooter("When no tienes el name")
           .setTimestamp()
           .setColor("WHITE");
 
@@ -35,14 +35,6 @@ export const command: Command = {
       })
       .catch((error) => {
         console.log(error);
-
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setTimestamp()
-          .setColor("WHITE");
 
         message.channel.send("Ha ocurrido un error.");
       });

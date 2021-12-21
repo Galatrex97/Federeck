@@ -37,13 +37,6 @@ export const command: Command = {
       guildQueue.shuffle();
       message.reply("Se ha activado el modo aleatorio.");
     } catch (err) {
-      let errmsg = new (require("discord.js").MessageEmbed)()
-        .setTitle("Ha ocurrido un error")
-        .setColor("WHITE")
-        .setDescription(`**Tengo el siguiente error:** ${err}`)
-        .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-        .setFooter("Tipico")
-        .setTimestamp();
 
       message.channel.send("Ha ocurrido un error.");
       console.log(err);

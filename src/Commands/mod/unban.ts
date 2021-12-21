@@ -40,15 +40,7 @@ export const command: Command = {
         await message.guild?.members
           .unban(bannedUser.user)
           .catch((err) => {
-            let errmsg = new MessageEmbed()
-              .setTitle("Ha ocurrido un error")
-              .setDescription(`**Tengo el siguiente error:** ${err.stack}`)
-              .setThumbnail(
-                `https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`
-              )
-              .setFooter("Tipico")
-              .setTimestamp()
-              .setColor("WHITE");
+
 
             return message.channel.send("Algo salió mal.");
           })
@@ -57,31 +49,11 @@ export const command: Command = {
           })
           .catch((error) => {
             console.log(error);
-
-            let errmsg = new MessageEmbed()
-              .setTitle("Ha ocurrido un error")
-              .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-              .setThumbnail(
-                `https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`
-              )
-              .setFooter("Tipico")
-              .setTimestamp()
-              .setColor("WHITE");
-
             message.channel.send("Ha ocurrido un error.");
           });
       })
       .catch((error) => {
         console.log(error);
-
-        let errmsg = new MessageEmbed()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setColor("WHITE")
-          .setTimestamp();
-
         message.channel.send("Ha ocurrido un error.");
       });
   },

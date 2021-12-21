@@ -35,27 +35,18 @@ export const command: Command = {
 
     neko.nsfw
       .cumsluts()
-      .then((ugu) => {
-        const ah = new Discord.MessageEmbed()
+      .then((img) => {
+        const embed = new Discord.MessageEmbed()
           .setDescription(
             `**${message.author.username}** se corre en **${user.user.username}**`
           )
-          .setImage(ugu.url)
-          .setFooter("Que ricoo")
+          .setImage(img.url)
           .setTimestamp();
 
-        message.channel.send({ embeds: [ah] });
+        message.channel.send({ embeds: [embed] });
       })
       .catch((error) => {
         console.log(error);
-
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setColor("WHITE")
-          .setTimestamp();
 
         message.channel.send("Ha ocurrido un error.");
       });

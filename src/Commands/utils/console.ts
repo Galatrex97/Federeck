@@ -10,15 +10,15 @@ export const command: Command = {
   description: "...",
 
   run: (client: Klar, message: Message, args: String[]) => {
-    const a = args.join(" ");
-    if (!a) return message.reply("Que bug quieres reportar?");
+    const reportedBug = args.join(" ");
+    if (!reportedBug) return message.reply("Que bug quieres reportar?");
     const embed = new MessageEmbed()
       .setTitle("Nuevo reporte de bug")
       .setColor("WHITE")
       .setFooter("Mmm")
       .setTimestamp()
       .setDescription(
-        `El usuario **${message.author.tag}** ha reportado un bug desde el server **${message.guild?.name}**.\nEl bug reportado es el siguiente: **${a}**`
+        `El usuario **${message.author.tag}** ha reportado un bug desde el server **${message.guild?.name}**.\nEl bug reportado es el siguiente: **${reportedBug}**`
       );
 
     try {

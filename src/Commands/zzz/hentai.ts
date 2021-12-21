@@ -26,25 +26,17 @@ export const command: Command = {
 
     neko.nsfw
       .randomHentaiGif()
-      .then((nya) => {
-        const a = new Discord.MessageEmbed()
+      .then((img) => {
+        const embed = new Discord.MessageEmbed()
           .setTitle("Hentai GIF")
-          .setImage(nya.url)
+          .setImage(img.url)
           .setColor("WHITE")
           .setTimestamp();
 
-        message.reply({ embeds: [a] });
+        message.reply({ embeds: [embed] });
       })
       .catch((error) => {
         console.log(error);
-
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setColor("WHITE")
-          .setTimestamp();
 
         message.channel.send("Ha ocurrido un error.");
       });

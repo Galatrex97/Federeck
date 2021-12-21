@@ -45,14 +45,6 @@ export const command: Command = {
         message.reply({ embeds: [embed] });
       })
       .catch((error) => {
-        let errmsg = new (require("discord.js").MessageEmbed)()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${error.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setColor("WHITE")
-          .setTimestamp();
-
         console.log(error);
         message.channel.send("Ha ocurrido un error.");
       });

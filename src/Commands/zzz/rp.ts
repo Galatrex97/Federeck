@@ -25,7 +25,6 @@ export const command: Command = {
 
     const image = await nsfw.pussy();
     const embed = new Discord.MessageEmbed()
-      .setDescription(`Koya afk`)
       .setColor("WHITE")
       .setImage(image);
     message.channel.send({ embeds: [embed] });
