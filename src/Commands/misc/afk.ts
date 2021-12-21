@@ -27,11 +27,15 @@ export const command: Command = {
     }
     data.AFK_Reason = args.join(" ");
     if (data.AFK_Reason) {
-      message.channel.send(
+      message.channel.send({
+        content:
         `**${
           message.member?.nickname || message.author.username
-        }** tu AFK se ha establecido a: **${data.AFK_Reason}**`
-      );
+        }** tu AFK se ha establecido a: **${data.AFK_Reason}**`,
+        allowedMentions: {
+          parse: ["users"]
+        }
+      });
     }
     if (!data.AFK_Reason) {
       message.channel.send(

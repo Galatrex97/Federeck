@@ -98,11 +98,15 @@ export const event: Event = {
         AFKData.AFK_Reason = null;
         await AFKData.save();
 
-        message.channel.send(
+        message.channel.send({
+          content:
           `Volviste **${
             message.member?.nickname || message.author.username
-          }**, estuviste AFK **${tiempoAusente}** por **${idleReason}**`
-        ).then(m => {
+          }**, estuviste AFK **${tiempoAusente}** por **${idleReason}**`,
+          allowedMentions: {
+            parse: ["users"]
+          }
+        }).then(m => {
           setTimeout(() => {
             m.delete();
           }, 10000)
@@ -112,11 +116,15 @@ export const event: Event = {
         AFKData.AFK_Reason = null;
         await AFKData.save();
 
-        message.channel.send(
+        message.channel.send({
+          content:
           `Volviste **${
             message.member?.nickname || message.author.username
-          }**, estuviste AFK **${tiempoAusente}**`
-        ).then(m => {
+          }**, estuviste AFK **${tiempoAusente}**`,
+          allowedMentions: {
+            parse: ["users"]
+          }
+        }).then(m => {
           setTimeout(() => {
             m.delete();
           }, 10000)
