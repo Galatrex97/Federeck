@@ -41,44 +41,44 @@ export const Interaction: interactionCommand = {
       interaction.guild?.members.cache.get(userSelected.id) ||
       (await interaction.guild?.members.fetch(userSelected.id).catch((err) => {}));
     if (userSelected?.id === guildOwner && userSelected?.id === interaction.user.id) {
-      return interaction.followUp({
+      return interaction.reply({
         content:
           "No te puedes banear a ti mismo, además tu eres el dueño del servidor.",
         ephemeral: true,
       });
     }
     if (memberSelected?.id === guildOwner) {
-      return interaction.followUp({
+      return interaction.reply({
         content: "No puedes banear al dueño del servidor.",
         ephemeral: true,
       });
     }
     if (memberSelected?.id === interaction.user.id) {
-      return interaction.followUp({
+      return interaction.reply({
         content: "No te puedes banear a ti mismo.",
         ephemeral: true,
       });
     }
     if (!interaction.guild?.me?.permissions.has("BAN_MEMBERS")) {
-      return interaction.followUp({
+      return interaction.reply({
         content:
           "No tengo el permiso para banear miembros, así que no se puede usar ese comando.",
         ephemeral: true,
       });
     }
     if (!(interaction.member as GuildMember).permissions.has("BAN_MEMBERS")) {
-      return interaction.followUp({
+      return interaction.reply({
         content: "No tienes el permiso para **Banear miembros**.",
         ephemeral: true,
       });
     }
     if (client.user?.id === userSelected?.id) {
-      return interaction.followUp({
+      return interaction.reply({
         content: "No me puedes banear.",
         ephemeral: true,
       });
     } /*  else if (interaction.member.roles.highest.position <= member.roles.highest.position) {
-		        return interaction.followUp({content: 'No puedes banear a una persona con un mayor o igual rango que tú.', ephemeral: true})
+		        return interaction.reply({content: 'No puedes banear a una persona con un mayor o igual rango que tú.', ephemeral: true})
 	 } */
     if (!userSelected?.bot) {
       const greetingsEmbed = new MessageEmbed()
@@ -91,7 +91,7 @@ export const Interaction: interactionCommand = {
       try {
         memberSelected?.ban({ reason: banReason });
         memberSelected?.send({ embeds: [greetingsEmbed] });
-        interaction.followUp({
+        interaction.reply({
           content: `El usuario **${userSelected}** ha sido Baneado.\nModerador: ${interaction.user.toString()}\nRazón: **${banReason}**`,
           ephemeral: false,
         });
@@ -102,7 +102,7 @@ export const Interaction: interactionCommand = {
     if (userSelected?.bot) {
       try {
         memberSelected?.ban({ reason: banReason });
-        interaction.followUp({
+        interaction.reply({
           content: `El bot **${userSelected}** ha sido Baneado.\nModerador: ${interaction.user.toString()}\nRazón: **${banReason}**`,
           ephemeral: false,
         });

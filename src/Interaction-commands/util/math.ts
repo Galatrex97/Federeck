@@ -35,6 +35,6 @@ export const Interaction: interactionCommand = {
       .addField("Entrada:", `\`\`\`js\n${calc}\`\`\``, false) // Te da el calculo
       .setTitle("Calculadora de Lyon")
       .addField("Resultado", `\`\`\`js\n${resultado}\`\`\``, false);
-    await interaction.followUp({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
   },
 };

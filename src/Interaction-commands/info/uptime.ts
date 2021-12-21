@@ -29,6 +29,6 @@ export const Interaction: interactionCommand = {
       .setTimestamp();
 
     
-      interaction.followUp({ embeds: [ugu] });
+      interaction.reply({ embeds: [ugu] });
   },
 };

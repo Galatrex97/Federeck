@@ -23,9 +23,7 @@ export const Interaction: interactionCommand = {
     let str = interaction.options.getString("text") as string;
 
     if (str.length > 15) {
-       interaction.reply({ content: "El texto no puede sobrepasar los 15 carácteres para evitar errores.", ephemeral: true });
-      interaction.followUp({ content: "a", ephemeral: true })
-      return;
+       return interaction.reply({ content: "El texto no puede sobrepasar los 15 carácteres para evitar errores.", ephemeral: true });
     }
 
     parseToAscii(str, (err: any, data: any) =>

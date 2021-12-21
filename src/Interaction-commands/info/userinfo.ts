@@ -121,7 +121,7 @@ if(!user) {
       );
 
     try {
-      interaction.followUp({ embeds: [embed], components: [row] }); // Y enviamos el mensaje
+      interaction.reply({ embeds: [embed], components: [row] }); // Y enviamos el mensaje
     } catch (err) {
       console.log(err);
     }

@@ -49,14 +49,14 @@ export const Interaction: interactionCommand = {
     const owner = (await guild.fetchOwner()).user.id;
 
     if (!si.permissions.has("KICK_MEMBERS")) {
-      return interaction.followUp({
+      return interaction.reply({
         content: "No puedes realizar esta acción por falta de permisos",
         ephemeral: true,
       });
     }
 
     if (!interaction.guild?.me?.permissions.has("KICK_MEMBERS")) {
-      return interaction.followUp({
+      return interaction.reply({
         content:
           "No tengo el permiso para expulsar miembros, así que no se puede usar ese comando.",
         ephemeral: true,
@@ -64,7 +64,7 @@ export const Interaction: interactionCommand = {
     }
 
     if (user.id === owner && user.id === interaction.user.id) {
-      return interaction.followUp({
+      return interaction.reply({
         content:
           "No te puedes expulsar a ti mismo, además tu eres el dueño del servidor.",
         ephemeral: true,
@@ -72,29 +72,29 @@ export const Interaction: interactionCommand = {
     }
 
     if (user.id === interaction.user.id) {
-      return interaction.followUp({
+      return interaction.reply({
         content:
           "No puedes expulsarte a ti mismo ||A no ser que abandones el servidor||",
         ephemeral: true,
       });
     }
     if (user.id === owner) {
-      return interaction.followUp({
+      return interaction.reply({
         content: "No puedes expulsar al dueño del servidor.",
         ephemeral: true,
       });
     }
 
     if (client.user?.id === member?.id) {
-      return interaction.followUp({ content: "XDn't", ephemeral: true });
+      return interaction.reply({ content: "XDn't", ephemeral: true });
     }
     /*    if (interaction.member.roles.highest.position <= member.roles.highest.position) {
-                   return interaction.followUp({content: 'No puedes expulsar a una persona con un mayor o igual rango que tú.', ephemeral: true})
+                   return interaction.reply({content: 'No puedes expulsar a una persona con un mayor o igual rango que tú.', ephemeral: true})
         } */
     if (!user.bot) {
       try {
         member.kick(xd);
-        interaction.followUp({
+        interaction.reply({
           content: `El usuario **${user}** ha sido Expulsado.\nModerador: ${interaction.user.toString()}\nRazón: **${
             xd ? xd : "No se dió una razón"
           }**`,
@@ -102,29 +102,14 @@ export const Interaction: interactionCommand = {
         });
       } catch (err: any) {
         console.log(err);
-        let errmsg = new MessageEmbed()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${err.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setColor("WHITE")
-          .setTimestamp();
       }
     } else if (user.bot) {
       try {
         member.kick(xd);
       } catch (err: any) {
-        console.log(err);
-        let errmsg = new MessageEmbed()
-          .setTitle("Ha ocurrido un error")
-          .setDescription(`**Tengo el siguiente error:** ${err.stack}`)
-          .setThumbnail(`https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif`)
-          .setFooter("Tipico")
-          .setTimestamp()
-          .setColor("WHITE");
       }
 
-      interaction.followUp({
+      interaction.reply({
         content: `El bot **${user}** ha sido Expulsado.\nModerador: ${interaction.user.toString()}\nRazón: **${
           xd ? xd : "No se dió una razón"
         }**`,

@@ -31,7 +31,7 @@ export const Interaction: interactionCommand = {
     let searchText = interaction.options.getString("search");
 
     if (searchText && searchText.length > 200)
-      return interaction.followUp({
+      return interaction.reply({
         content: `<a:noputo:868687565304246283> | **El limite de texto es de 200**`,
         ephemeral: true,
       }); //limite de texto
@@ -70,12 +70,12 @@ export const Interaction: interactionCommand = {
     } catch (error: any) {
       //abrimos y cerramos el evento
       console.log(error);
-      return interaction.followUp({
+      return interaction.reply({
         content: `Ha ocurrido un __error__ intentando buscar **"${searchText}"**.`,
         ephemeral: true,
       });
     }
 
-    return interaction.followUp({ embeds: [Embed] }); //enviamos el mensaje
+    return interaction.reply({ embeds: [Embed] }); //enviamos el mensaje
   },
 };

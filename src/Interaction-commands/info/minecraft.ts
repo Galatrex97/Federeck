@@ -48,7 +48,7 @@ const request = https.request(options, (response) => {
       response.on("end", () => {
         let resp: any = JSON.parse(str);
         if (!resp || !resp.hostname) {
-         return interaction.followUp("No encontré un server con la ip " + ip);
+         return interaction.reply({ content:"No encontré un server con la ip " + ip, ephemeral: true});
         }
         //create answer message with default offline data
 
@@ -127,7 +127,7 @@ let embed = new MessageEmbed()
         }
         //send answer
         try {
-          interaction.followUp({ embeds: [embed] });
+          interaction.reply({ embeds: [embed] });
         } catch (err) {
           console.log(err);
         }
@@ -136,9 +136,7 @@ let embed = new MessageEmbed()
     //error handling
     request.on("error", (err) => {
       console.log(err);
-      interaction.followUp(
-        "Ha ocurrido un error intentando obtener la información del server."
-      );
+      interaction.reply({ content: "Ha ocurrido un error intentando obtener la información del server.", ephemeral: true });
     });
     //close request
     request.end();

@@ -53,7 +53,7 @@ let embed = new MessageEmbed()
 
 
 
-await interaction.followUp({ embeds: [embed] });
+await interaction.reply({ embeds: [embed] });
 
 } else if(opt === "encode") {
     let encoded = await morse.encode(text);
@@ -65,7 +65,7 @@ await interaction.followUp({ embeds: [embed] });
     
     
     
-    await interaction.followUp({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
 }
 
   },

@@ -94,7 +94,7 @@ export const Interaction: interactionCommand = {
       .addField("**Roles**", `${server.roles.cache.size}`, true)
       .setColor("WHITE");
     try {
-      interaction.followUp({ embeds: [embed] });
+      interaction.reply({ embeds: [embed] });
     } catch (err) {
 
       console.log(err);

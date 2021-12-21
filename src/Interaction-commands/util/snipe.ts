@@ -38,7 +38,7 @@ export const Interaction: interactionCommand = {
     }
     //en esta constante definimos nuestro client.snipes que es nuestro objeto Map, con el metodo .get() tratamos de ver si channel.id(id del canal) esta dentro del Map
     if (!snipes) {
-      return await interaction.followUp({
+      return await interaction.reply({
         content: "No se ha borrado recientemente ningún mensaje",
         ephemeral: true,
       });
@@ -52,20 +52,19 @@ export const Interaction: interactionCommand = {
 
       const target = snipes[snipe];
       if (snipes.length === 1 && !target) {
-        return interaction.followUp(
-          `Solo hay ${snipes.length} mensaje borrado recientemente en este canal`
-        );
+        return interaction.reply({ content:
+          `Solo hay ${snipes.length} mensaje borrado recientemente en este canal`,
+          ephemeral: true
+        });
       }
   
       if (snipes.length >= 2 && !target) {
-        return interaction.followUp(
-          `Solo hay ${snipes.length} mensajes borrados recientemente en este canal`
-        );
+        return interaction.reply({ content: `Solo hay ${snipes.length} mensajes borrados recientemente en este canal`, ephemeral: true });
       }
       let { msg, timeAgo, image } = target;
   
       try {
-        interaction.followUp({
+        interaction.reply({
           embeds: [
             new MessageEmbed()
               .setColor("WHITE")

@@ -201,7 +201,7 @@ export const Interaction: interactionCommand = {
 
   let bool = is_url(text)
   if(bool) {
-    return interaction.followUp("No puedes traducir links.")
+    return interaction.reply({ content: "No puedes traducir links.", ephemeral: true })
   }
 
     translate(text, { from: originLang || "auto", to: lang }).then((res) => {
@@ -213,7 +213,7 @@ export const Interaction: interactionCommand = {
         .setFooter("Traducción gracias a Google Translate")
         .setColor("WHITE"); //Un console log por si las dudas
 
-      interaction.followUp({ embeds: [embed] }); //Se envia el embed
+      interaction.reply({ embeds: [embed] }); //Se envia el embed
     });
   },
 };

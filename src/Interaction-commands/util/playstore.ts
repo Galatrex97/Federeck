@@ -31,7 +31,7 @@ export const Interaction: interactionCommand = {
     let input = interaction.options.getString("app");
 
     if (!input) {
-      return interaction.followUp("Ha ocurrido un error.");
+      return interaction.reply("Ha ocurrido un error.");
     }
 
     play
@@ -131,7 +131,7 @@ let separatedText = separator(numb);
               )
               .setFooter("Encontré esto")
               .setTimestamp();
-            let mainMsg: any = await interaction.followUp({
+            let mainMsg: any = await interaction.reply({
               embeds: [embed],
               components: [row],
             });
@@ -157,9 +157,7 @@ let separatedText = separator(numb);
             });
           })
           .catch((error) => {
-            interaction.followUp(
-              "Ha ocurrido un error con la búsqueda: " + input
-            );
+            interaction.reply({content: "Ha ocurrido un error con la búsqueda: " + input, ephemeral: true });
             console.log(error);
           });
       });
