@@ -23,7 +23,6 @@ let mentionData = await mentionSchema.findOne(parentParams) || await mentionSche
     });
 
     if (interaction.isCommand()) {
-      await interaction.deferReply();
 
       const cmd = client.slashCommands.get(interaction.commandName); //This obtains the name of the command from the collection interactionz of client.
       if (!cmd) return;
