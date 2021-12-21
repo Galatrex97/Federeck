@@ -141,7 +141,7 @@ export const event: Event = {
               AFKMentData.AFK_Reason
             }** desde **${tiempoAusente}**`,
             allowedMentions: {
-              parse: ["users"]
+              parse: []
             }
           }).then(m => {
             setTimeout(() => {
@@ -157,7 +157,7 @@ export const event: Event = {
               message.mentions.members.first()?.user.username
             }** está afk desde **${tiempoAusente}**`,
             allowedMentions: {
-              parse: ["users"]
+              parse: []
             }
           }).then(m => {
             setTimeout(() => {
