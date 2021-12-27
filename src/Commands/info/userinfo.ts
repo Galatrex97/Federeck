@@ -28,7 +28,13 @@ export const command: Command = {
         .setLabel("Link del avatar")
     );
 
-    let activitiesArray: any = [];
+    let roles: any = `${user?.roles.cache.map((role) => role.toString()).slice(0, 10).join(" ")}`;
+    if((user?.roles.cache.size as any) > 10) {
+      if(user?.roles.cache.size == 11) {
+        roles = roles + ` y un rol más`;
+      }
+      roles = roles + ` y otros ${(user?.roles.cache.size as any) - 10} roles más...`
+    }
     let activityType;
     if(!user?.user.bot && user?.presence?.activities[0] && user?.presence?.activities[0].id == "custom" && user?.presence?.activities[1]) {
     switch(user?.presence?.activities[1].type) {
@@ -208,7 +214,7 @@ export const command: Command = {
         },
         {
           name: "Roles del usuario: ", // Nombre - Titulo - Caso 1
-          value: `${user?.roles.cache.map((role) => role.toString()).slice(0, 10).join(" ")} y otros ${(user?.roles.cache.size as any) - 10} más...` // En linea: SI
+          value: `${roles}` // En linea: SI
         },
         // {
         //   name: "Permisos del usuario: ",
