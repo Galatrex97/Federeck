@@ -109,7 +109,7 @@ export const command: Command = {
     } else if(activityType == "Compitiendo en") {
       final = `Compitiendo en ${user.presence.activities[0].name}`;
     }
-    } else if(user?.presence.activities[0])
+    } 
     let status; // Hacemos un let vacio
     switch (
       user?.presence?.status // Hacemos un switch de la funcion Presencia
