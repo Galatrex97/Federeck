@@ -28,6 +28,88 @@ export const command: Command = {
         .setLabel("Link del avatar")
     );
 
+    let activitiesArray: any = [];
+    let activityType;
+    if(!user.user.bot && user?.presence?.activities[0].id == "custom") {
+    switch(user?.presence?.activities[1].type) {
+      case "PLAYING":
+        activityType = "Jugando a";
+        break;
+      case "STREAMING":
+        activityType = "Transmitiendo";
+        break;
+      case "LISTENING":
+        activityType = "Escuchando";
+        break;
+      case "WATCHING":
+        activityType = "Viendo";
+        break;
+      case "COMPETING":
+        activityType = "Compitiendo en";
+        break;
+    }
+    } else if(user?.user.bot || user?.presence.activities[0].id !== "custom") {
+          switch(user?.presence?.activities[0].type) {
+      case "PLAYING":
+        activityType = "Jugando a";
+        break;
+      case "STREAMING":
+        activityType = "Transmitiendo";
+        break;
+      case "LISTENING":
+        activityType = "Escuchando";
+        break;
+      case "WATCHING":
+        activityType = "Viendo";
+        break;
+      case "COMPETING":
+        activityType = "Compitiendo en";
+        break;
+    }
+    }
+
+    let final;
+    if(!user.user.bot && user?.presence.activities[0].id == "custom") {
+    if(activityType == "Jugando a") {
+      final = `${activityType} ${user.presence.activities[1].name}`;
+    } else if(activityType == "Transmitiendo") {
+      if(!user.user.bot && user.presence.activities[1].url) {
+      final = `${activityType} en Twitch\nLink: [\`Stream\`](${user.presence.activities[1].url})`
+      } else {
+        final = `${activityType} en Twitch`
+      }
+    } else if(activityType == "Escuchando") {
+      if(user.presence.activities[1].name == "Spotify") {
+      final = `Escuchando Spotify\nNombre: ${user.presence.activities[1].details}\nArtista: ${user.presence.activities[1].state}\nLink: [\`Click Aquí\`](https://open.spotify.com/track/${user.presence.activities[1].syncId})`;
+      } else {
+        final = `Èscuchando ${user.presence.activities[1].name}`;
+      }
+    } else if(activityType == "Viendo") {
+      final = `Viendo ${user.presence.activities[1].name}`;
+    } else if(activityType == "Compitiendo en") {
+      final = `Compitiendo en ${user.presence.activities[1].name}`;
+    }
+    } else if(user?.user.bot || user?.presence.activities[0].id !== "custom") {
+      if(activityType == "Jugando a") {
+      final = `${activityType} ${user.presence.activities[0].name}`;
+    } else if(activityType == "Transmitiendo") {
+      if(!user.user.bot && user.presence.activities[0].url) {
+      final = `${activityType} en Twitch\nLink: [\`Stream\`](${user.presence.activities[0].url})`
+      } else {
+        final = `${activityType} en Twitch`
+      }
+    } else if(activityType == "Escuchando") {
+      if(user.presence.activities[0].name == "Spotify") {
+      final = `Escuchando Spotify\nNombre: ${user.presence.activities[0].details}\nArtista: ${user.presence.activities[0].state}\nLink: [\`Click Aquí\`](https://open.spotify.com/track/${user.presence.activities[0].syncId})`;
+      } else {
+        final = `Escuchando ${user.presence.activities[0].name}`;
+      }
+    } else if(activityType == "Viendo") {
+      final = `Viendo ${user.presence.activities[0].name}`;
+    } else if(activityType == "Compitiendo en") {
+      final = `Compitiendo en ${user.presence.activities[0].name}`;
+    }
+    } else if(user?.presence.activities[0])
     let status; // Hacemos un let vacio
     switch (
       user?.presence?.status // Hacemos un switch de la funcion Presencia
@@ -84,10 +166,14 @@ export const command: Command = {
         },
         {
           name: "Estado: ", // Nombre - Titulo - Caso 1
-          value: user?.presence?.activities[0]
-            ? `\`${user.presence.activities[0].state}\``
+          value: user?.presence?.activities[0].state
+            ? `\`${user.presence.activities[0].state || "Sin estado"}\``
             : "\`Sin estado\`", // Si el "user" tiene actividad se envia, si no la tiene se envia "Sin Estado"
             inline: false,
+        },
+        {
+          name: "Actividad actual",
+          value: activityType ? `\`${final}\`` : "No hay información sobre la actividad de este usuario"
         },
         {
           name: "Fecha de creación de la cuenta: ", // Nombre - Titulo - Caso 1

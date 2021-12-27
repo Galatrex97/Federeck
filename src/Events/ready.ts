@@ -16,7 +16,7 @@ export const event: Event = {
 
     const presencesArray: any = [
       {
-        name: "Lyon | v0.4",
+        name: "Lyon | v0.5-beta",
         type: "PLAYING",
       },
       {

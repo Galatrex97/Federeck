@@ -46,6 +46,6 @@ export const command: Command = {
     }
     data.AFK = true;
     data.timeAgo = Date.now();
-    await data.save();
+    await data.save(); //asd
   },
 };

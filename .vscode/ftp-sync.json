@@ -1,0 +1,22 @@
+{
+    "remotePath": "./",
+    "host": "us-dal-bots-02.ploxhost.com",
+    "username": "tidhjsy2.9ec0a9b0",
+    "password": "ScrtRvlz97_",
+    "port": 2053,
+    "secure": true,
+    "protocol": "sftp",
+    "uploadOnSave": true,
+    "passive": false,
+    "debug": false,
+    "privateKeyPath": null,
+    "passphrase": null,
+    "agent": null,
+    "allow": [],
+    "readyTimeout": 9999,
+    "ignore": [
+        "\\.vscode",
+        "\\.git",
+        "\\.DS_Store"
+    ]
+}

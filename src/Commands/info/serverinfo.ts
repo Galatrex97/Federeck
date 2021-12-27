@@ -61,7 +61,7 @@ export const command: Command = {
       .addField("**Fecha de creación**", `${server?.createdAt}`)
       .addField("**Región:**", regions[server.preferredLocale])
       .addField("**Dueño del server:**", `${owner}`)
-      .addField("** ID del dueño :**", `${owner.id}`)
+      .addField("** ID del dueño:**", `${owner.id}`)
       .addField(
         `**Canales**: ${server?.channels.cache.size}ㅤㅤ`,
         `Categorias:  ${

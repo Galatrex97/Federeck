@@ -35,7 +35,7 @@ export const Interaction: interactionCommand = {
       )
       .setColor("WHITE");
 
-      interaction.followUp({
+      interaction.reply({
         embeds: [embed],
       });
 

@@ -47,6 +47,7 @@ const request = https.request(options, (response) => {
       });
       response.on("end", () => {
         let resp: any = JSON.parse(str);
+        console.log(resp)
         if (!resp || !resp.hostname) {
          return interaction.reply({ content:"No encontré un server con la ip " + ip, ephemeral: true});
         }
@@ -60,6 +61,14 @@ let embed = new MessageEmbed()
 .setTimestamp()
 .setFooter("La información se actualiza cada 5 minutos")
 .addFields(
+  {
+    name: "Dirección IP",
+    value: `${resp[0].ip ? resp[0].ip : "No hay información"}`
+  },
+  {
+    name: "Puerto",
+    value: `${resp[0].port ? resp[0].port : "No hay información"}`
+  },
     {
         name: "Estado",
         value: "Offline",
