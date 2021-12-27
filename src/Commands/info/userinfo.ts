@@ -178,7 +178,7 @@ export const command: Command = {
         },
         {
           name: "Actividad actual",
-          value: activityType ? `${final || "No hay información sobre la actividad de este usuario"}` : "No hay información sobre la actividad de este usuario"
+          value: activityType ? `${final || "\`No hay información sobre la actividad de este usuario\`"}` : "\`No hay información sobre la actividad de este usuario\`"
         },
         {
           name: "Fecha de creación de la cuenta: ", // Nombre - Titulo - Caso 1
