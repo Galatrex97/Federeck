@@ -34,6 +34,9 @@ export const command: Command = {
         roles = roles + ` y un rol más`;
       }
       roles = roles + ` y otros ${(user?.roles.cache.size as any) - 10} roles más...`
+    } 
+    if(user?.roles.cache.size == 0 || -1) {
+      roles = "Este usuario no tiene roles"
     }
     let activityType;
     if(!user?.user.bot && user?.presence?.activities[0] && user?.presence?.activities[0].id == "custom" && user?.presence?.activities[1]) {
