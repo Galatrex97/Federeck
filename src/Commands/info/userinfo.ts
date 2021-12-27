@@ -79,7 +79,7 @@ export const command: Command = {
       final = `${activityType} ${user.presence.activities[1].name}`;
     } else if(activityType == "Transmitiendo") {
       if(!user.user.bot && user.presence.activities[1].url) {
-      final = `${activityType} en Twitch\nLink: [\`Stream\`](${user.presence.activities[1].url})`
+      final = `\`${activityType} en Twitch\nLink: \`[\`Stream\`](${user.presence.activities[1].url})`
       } else {
         final = `${activityType} en Twitch`
       }
@@ -90,18 +90,18 @@ export const command: Command = {
         final = `Èscuchando ${user.presence.activities[1].name}`;
       }
     } else if(activityType == "Viendo") {
-      final = `Viendo ${user.presence.activities[1].name}`;
+      final = `\`Viendo ${user.presence.activities[1].name}\``;
     } else if(activityType == "Compitiendo en") {
-      final = `Compitiendo en ${user.presence.activities[1].name}`;
+      final = `\`Compitiendo en ${user.presence.activities[1].name}\``;
     }
     } else if(user?.user.bot || user?.presence?.activities[0] && user?.presence?.activities[0].id !== "custom") {
       if(activityType == "Jugando a") {
       final = `${activityType} ${user.presence?.activities[0].name}`;
     } else if(activityType == "Transmitiendo") {
       if(!user.user.bot && user?.presence?.activities[0].url) {
-      final = `${activityType} en Twitch\nLink: [\`Stream\`](${user.presence.activities[0].url})`
+      final = `\`${activityType} en Twitch\nLink: \`[\`Stream\`](${user.presence.activities[0].url})`
       } else {
-        final = `${activityType} en Twitch`
+        final = `\`${activityType} en Twitch\``
       }
     } else if(activityType == "Escuchando") {
       if(user?.presence?.activities[0].name == "Spotify") {
@@ -110,9 +110,9 @@ export const command: Command = {
         final = `\`Escuchando ${user.presence?.activities[0].name}\``;
       }
     } else if(activityType == "Viendo") {
-      final = `Viendo ${user?.presence?.activities[0].name}`;
+      final = `\`Viendo ${user?.presence?.activities[0].name}\``;
     } else if(activityType == "Compitiendo en") {
-      final = `Compitiendo en ${user?.presence?.activities[0].name}`;
+      final = `\`Compitiendo en ${user?.presence?.activities[0].name}\``;
     }
     } 
     let status; // Hacemos un let vacio
