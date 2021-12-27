@@ -30,7 +30,7 @@ export const command: Command = {
 
     let activitiesArray: any = [];
     let activityType;
-    if(!user.user.bot && user?.presence?.activities[0] && user?.presence?.activities[0].id == "custom") {
+    if(!user?.user.bot && user?.presence?.activities[0] && user?.presence?.activities[0].id == "custom") {
     switch(user?.presence?.activities[1].type) {
       case "PLAYING":
         activityType = "Jugando a";
@@ -48,7 +48,7 @@ export const command: Command = {
         activityType = "Compitiendo en";
         break;
     }
-    } else if(user?.user.bot || user?.presence.activities[0] && user?.presence?.activities[0].id !== "custom") {
+    } else if(user?.user.bot || user?.presence?.activities[0] && user?.presence?.activities[0].id !== "custom") {
           switch(user?.presence?.activities[0].type) {
       case "PLAYING":
         activityType = "Jugando a";
@@ -68,10 +68,13 @@ export const command: Command = {
     }
     }
 
-let estado = `${user.presence.activities[0].state || "Sin estado"}`
+    let estado = "Sin estado"
+    if(user?.presence?.activities[0]) {
+ estado = `${user.presence.activities[0].state || "Sin estado"}`
+}
 
     let final;
-    if(!user.user.bot && user?.presence.activities[0] && user?.presence?.activities[0].id == "custom") {
+    if(!user?.user.bot && user?.presence?.activities[0] && user?.presence?.activities[0].id == "custom") {
     if(activityType == "Jugando a") {
       final = `${activityType} ${user.presence.activities[1].name}`;
     } else if(activityType == "Transmitiendo") {
@@ -91,25 +94,25 @@ let estado = `${user.presence.activities[0].state || "Sin estado"}`
     } else if(activityType == "Compitiendo en") {
       final = `Compitiendo en ${user.presence.activities[1].name}`;
     }
-    } else if(user?.user.bot || user?.presence.activities[0] && user?.presence?.activities[0].id !== "custom") {
+    } else if(user?.user.bot || user?.presence?.activities[0] && user?.presence?.activities[0].id !== "custom") {
       if(activityType == "Jugando a") {
-      final = `${activityType} ${user.presence.activities[0].name}`;
+      final = `${activityType} ${user.presence?.activities[0].name}`;
     } else if(activityType == "Transmitiendo") {
-      if(!user.user.bot && user.presence.activities[0].url) {
+      if(!user.user.bot && user?.presence?.activities[0].url) {
       final = `${activityType} en Twitch\nLink: [\`Stream\`](${user.presence.activities[0].url})`
       } else {
         final = `${activityType} en Twitch`
       }
     } else if(activityType == "Escuchando") {
-      if(user.presence.activities[0].name == "Spotify") {
+      if(user?.presence?.activities[0].name == "Spotify") {
       final = `Escuchando Spotify\nNombre: ${user.presence.activities[0].details}\nArtista: ${user.presence.activities[0].state}\n` + `Link: [Click Aquí](https://open.spotify.com/track/${user.presence.activities[0].syncId})`;
       } else {
-        final = `Escuchando ${user.presence.activities[0].name}`;
+        final = `Escuchando ${user.presence?.activities[0].name}`;
       }
     } else if(activityType == "Viendo") {
-      final = `Viendo ${user.presence.activities[0].name}`;
+      final = `Viendo ${user?.presence?.activities[0].name}`;
     } else if(activityType == "Compitiendo en") {
-      final = `Compitiendo en ${user.presence.activities[0].name}`;
+      final = `Compitiendo en ${user?.presence?.activities[0].name}`;
     }
     } 
     let status; // Hacemos un let vacio
