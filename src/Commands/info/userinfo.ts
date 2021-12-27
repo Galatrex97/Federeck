@@ -77,11 +77,13 @@ export const command: Command = {
     if(!user?.user.bot && user?.presence?.activities[0] && user?.presence?.activities[0].id == "custom") {
     if(activityType == "Jugando a") {
       if(user.presence.activities[1].details && user.presence.activities[1].state) {
-      final = `\`${activityType} ${user.presence.activities[1].name}\`\nDetalles: ${user.presence.activities[1].details}\n${user.presence.activities[1].state}`;
+      final = `\`${activityType} ${user.presence.activities[1].name}\nDetalles: ${user.presence.activities[1].details}\n${user.presence.activities[1].state}\``;
       } else if(user.presence.activities[1].details) {
-        final = `\`${activityType} ${user.presence.activities[1].name}\`\nDetalles: ${user.presence.activities[1].details}`;
+        final = `\`${activityType} ${user.presence.activities[1].name}\nDetalles: ${user.presence.activities[1].details}\``;
       } else if(user.presence.activities[1].state) {
-        final = `\`${activityType} ${user.presence.activities[1].name}\`\nDetalles: ${user.presence.activities[1].state}`;
+        final = `\`${activityType} ${user.presence.activities[1].name}\nDetalles: ${user.presence.activities[1].state}\``;
+      } else {
+        final = `\`${activityType} ${user.presence.activities[1].name}\``
       }
     } else if(activityType == "Transmitiendo") {
       if(!user.user.bot && user.presence.activities[1].url) {
@@ -103,11 +105,13 @@ export const command: Command = {
     } else if(user?.user.bot || user?.presence?.activities[0] && user?.presence?.activities[0].id !== "custom") {
       if(activityType == "Jugando a") {
         if(user?.presence?.activities[0].details && user.presence.activities[0].state) {
-          final = `\`${activityType} ${user.presence.activities[0].name}\`\nDetalles: ${user.presence.activities[0].details}\n${user.presence.activities[0].state}`;
+          final = `\`${activityType} ${user.presence.activities[0].name}\nDetalles: ${user.presence.activities[0].details}\n${user.presence.activities[0].state}\``;
           } else if(user.presence?.activities[0].details) {
-            final = `\`${activityType} ${user.presence.activities[0].name}\`\nDetalles: ${user.presence.activities[0].details}`;
+            final = `\`${activityType} ${user.presence.activities[0].name}\nDetalles: ${user.presence.activities[0].details}\``;
           } else if(user.presence?.activities[0].state) {
-            final = `\`${activityType} ${user.presence.activities[0].name}\`\nDetalles: ${user.presence.activities[0].state}`;
+            final = `\`${activityType} ${user.presence.activities[0].name}\nDetalles: ${user.presence.activities[0].state}\``;
+          } else {
+            final = `\`${activityType} ${user.presence?.activities[0].name}\``
           }
     } else if(activityType == "Transmitiendo") {
       if(!user.user.bot && user?.presence?.activities[0].url) {
