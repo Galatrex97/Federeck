@@ -30,7 +30,7 @@ export const command: Command = {
 
     let activitiesArray: any = [];
     let activityType;
-    if(!user?.user.bot && user?.presence?.activities[0] && user?.presence?.activities[0].id == "custom") {
+    if(!user?.user.bot && user?.presence?.activities[0] && user?.presence?.activities[0].id == "custom" && user?.presence?.activities[1]) {
     switch(user?.presence?.activities[1].type) {
       case "PLAYING":
         activityType = "Jugando a";
