@@ -30,7 +30,7 @@ export const command: Command = {
 
     let activitiesArray: any = [];
     let activityType;
-    if(!user.user.bot && user?.presence?.activities[0].id == "custom") {
+    if(!user.user.bot && user?.presence?.activities[0] && user?.presence?.activities[0].id == "custom") {
     switch(user?.presence?.activities[1].type) {
       case "PLAYING":
         activityType = "Jugando a";
@@ -48,7 +48,7 @@ export const command: Command = {
         activityType = "Compitiendo en";
         break;
     }
-    } else if(user?.user.bot || user?.presence.activities[0].id !== "custom") {
+    } else if(user?.user.bot || user?.presence.activities[0] && user?.presence?.activities[0].id !== "custom") {
           switch(user?.presence?.activities[0].type) {
       case "PLAYING":
         activityType = "Jugando a";
@@ -69,7 +69,7 @@ export const command: Command = {
     }
 
     let final;
-    if(!user.user.bot && user?.presence.activities[0].id == "custom") {
+    if(!user.user.bot && user?.presence.activities[0] && user?.presence?.activities[0].id == "custom") {
     if(activityType == "Jugando a") {
       final = `${activityType} ${user.presence.activities[1].name}`;
     } else if(activityType == "Transmitiendo") {
@@ -89,7 +89,7 @@ export const command: Command = {
     } else if(activityType == "Compitiendo en") {
       final = `Compitiendo en ${user.presence.activities[1].name}`;
     }
-    } else if(user?.user.bot || user?.presence.activities[0].id !== "custom") {
+    } else if(user?.user.bot || user?.presence.activities[0] && user?.presence?.activities[0].id !== "custom") {
       if(activityType == "Jugando a") {
       final = `${activityType} ${user.presence.activities[0].name}`;
     } else if(activityType == "Transmitiendo") {
