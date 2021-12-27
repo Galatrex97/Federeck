@@ -76,18 +76,24 @@ export const command: Command = {
     let final;
     if(!user?.user.bot && user?.presence?.activities[0] && user?.presence?.activities[0].id == "custom") {
     if(activityType == "Jugando a") {
-      final = `${activityType} ${user.presence.activities[1].name}`;
+      if(user.presence.activities[1].details && user.presence.activities[1].state) {
+      final = `\`${activityType} ${user.presence.activities[1].name}\`\nDetalles: ${user.presence.activities[1].details} - ${user.presence.activities[1].state}`;
+      } else if(user.presence.activities[1].details) {
+        final = `\`${activityType} ${user.presence.activities[1].name}\`\nDetalles: ${user.presence.activities[1].details}`;
+      } else if(user.presence.activities[1].state) {
+        final = `\`${activityType} ${user.presence.activities[1].name}\`\nDetalles: ${user.presence.activities[1].state}`;
+      }
     } else if(activityType == "Transmitiendo") {
       if(!user.user.bot && user.presence.activities[1].url) {
       final = `\`${activityType} en Twitch\nLink: \`[\`Stream\`](${user.presence.activities[1].url})`
       } else {
-        final = `${activityType} en Twitch`
+        final = `\`${activityType} en Twitch\``
       }
     } else if(activityType == "Escuchando") {
       if(user.presence.activities[1].name == "Spotify") {
       final = `\`Escuchando Spotify\nNombre: ${user.presence.activities[1].details}\nArtista: ${user.presence.activities[1].state}\n` + `Link:\`[\`Click Aquí\`](https://open.spotify.com/track/${user.presence.activities[0].syncId})`;
       } else {
-        final = `Èscuchando ${user.presence.activities[1].name}`;
+        final = `\`Escuchando ${user.presence.activities[1].name}\``;
       }
     } else if(activityType == "Viendo") {
       final = `\`Viendo ${user.presence.activities[1].name}\``;
@@ -96,7 +102,13 @@ export const command: Command = {
     }
     } else if(user?.user.bot || user?.presence?.activities[0] && user?.presence?.activities[0].id !== "custom") {
       if(activityType == "Jugando a") {
-      final = `${activityType} ${user.presence?.activities[0].name}`;
+        if(user?.presence?.activities[0].details && user.presence.activities[0].state) {
+          final = `\`${activityType} ${user.presence.activities[0].name}\`\nDetalles: ${user.presence.activities[0].details} - ${user.presence.activities[0].state}`;
+          } else if(user.presence?.activities[0].details) {
+            final = `\`${activityType} ${user.presence.activities[0].name}\`\nDetalles: ${user.presence.activities[0].details}`;
+          } else if(user.presence?.activities[0].state) {
+            final = `\`${activityType} ${user.presence.activities[0].name}\`\nDetalles: ${user.presence.activities[0].state}`;
+          }
     } else if(activityType == "Transmitiendo") {
       if(!user.user.bot && user?.presence?.activities[0].url) {
       final = `\`${activityType} en Twitch\nLink: \`[\`Stream\`](${user.presence.activities[0].url})`

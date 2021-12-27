@@ -2,7 +2,6 @@ import Discord, { Client, Message, MessageEmbed } from "discord.js";
 import Klar from "../../Client";
 const moment = require("moment");
 import { Command } from "../../Interfaces";
-
 export const command: Command = {
   name: "snipe",
   aliases: [],
