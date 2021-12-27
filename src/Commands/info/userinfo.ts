@@ -68,6 +68,8 @@ export const command: Command = {
     }
     }
 
+let estado = 
+
     let final;
     if(!user.user.bot && user?.presence.activities[0] && user?.presence?.activities[0].id == "custom") {
     if(activityType == "Jugando a") {
@@ -167,7 +169,7 @@ export const command: Command = {
         {
           name: "Estado: ", // Nombre - Titulo - Caso 1
           value: user?.presence?.activities[0].state
-            ? `\`${user.presence.activities[0].state || "Sin estado"}\``
+            ? `\`${user?.presence?.activities[0].state || "Sin estado"}\``
             : "\`Sin estado\`", // Si el "user" tiene actividad se envia, si no la tiene se envia "Sin Estado"
             inline: false,
         },
