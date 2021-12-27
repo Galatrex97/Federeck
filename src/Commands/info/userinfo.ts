@@ -100,7 +100,7 @@ export const command: Command = {
       }
     } else if(activityType == "Escuchando") {
       if(user.presence.activities[0].name == "Spotify") {
-      final = `Escuchando Spotify\nNombre: ${user.presence.activities[0].details}\nArtista: ${user.presence.activities[0].state}\nLink: [Click Aquí](https://open.spotify.com/track/${user.presence.activities[0].syncId})`;
+      final = `Escuchando Spotify\nNombre: ${user.presence.activities[0].details}\nArtista: ${user.presence.activities[0].state}\n` + `Link: [Click Aquí](https://open.spotify.com/track/${})`;
       } else {
         final = `Escuchando ${user.presence.activities[0].name}`;
       }
