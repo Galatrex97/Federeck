@@ -85,7 +85,7 @@ export const command: Command = {
       }
     } else if(activityType == "Escuchando") {
       if(user.presence.activities[1].name == "Spotify") {
-      final = `Escuchando Spotify\nNombre: ${user.presence.activities[1].details}\nArtista: ${user.presence.activities[1].state}\n` + `Link: [Click Aquí](https://open.spotify.com/track/${user.presence.activities[0].syncId})`;
+      final = `\`Escuchando Spotify\nNombre: ${user.presence.activities[1].details}\nArtista: ${user.presence.activities[1].state}\n` + `Link:\`[\`Click Aquí\`](https://open.spotify.com/track/${user.presence.activities[0].syncId})`;
       } else {
         final = `Èscuchando ${user.presence.activities[1].name}`;
       }
@@ -107,7 +107,7 @@ export const command: Command = {
       if(user?.presence?.activities[0].name == "Spotify") {
       final = `\`Escuchando Spotify\nNombre: ${user.presence.activities[0].details}\nArtista: ${user.presence.activities[0].state}\n` + `Link: \`[\`Click Aquí\`](https://open.spotify.com/track/${user.presence.activities[0].syncId})`;
       } else {
-        final = `Escuchando ${user.presence?.activities[0].name}`;
+        final = `\`Escuchando ${user.presence?.activities[0].name}\``;
       }
     } else if(activityType == "Viendo") {
       final = `Viendo ${user?.presence?.activities[0].name}`;
