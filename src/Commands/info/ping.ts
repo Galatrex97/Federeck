@@ -12,11 +12,19 @@ export const command: Command = {
 
   run: async (client: Klar, message: Message, args: String[]) => {
     let date = Date.now();
-    let pingDataBase = await new Promise((r, j) => {
+/*     let dbLatency = await new Promise((r, j) => {
       mongoose.connection.db
         .admin()
         .ping((err: any, result: any) => r(Date.now() - date));
-    });
+    }); */
+
+    let dbLatency = await new Promise((r, j) => {
+        mongoose.connection.db
+          .admin()
+          .ping((err, result) =>
+            err || !result ? j(err || result) : r(Date.now() - date)
+          );
+      });
 
     let embed = new Discord.MessageEmbed()
       .setTitle("Latencia")
@@ -25,17 +33,16 @@ export const command: Command = {
           client.ws.ping
         } ms\n**Latencia de mensajes:** ${
           Date.now() - message.createdTimestamp
-        } ms\n**Latencia de la base de datos:** ${pingDataBase} ms`
+        } ms\n**Latencia de la base de datos:** ${dbLatency} ms`
       )
       .setColor("WHITE");
 
     try {
       message.reply({
         embeds: [embed],
-        allowedMentions: { repliedUser: false },
+        allowedMentions: { repliedUser: true },
       });
     } catch (err) {
-
       console.log(err);
     }
   },
