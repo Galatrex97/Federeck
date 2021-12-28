@@ -38,7 +38,7 @@ export const event: Event = {
 
     (canvas.context.font = "42px My Olivin"),
       (canvas.context.textAlign = "center");
-    canvas.context.fillText(member.user.tag.toUpperCase(), 512, 410);
+    canvas.context.fillText(member.user.username.toUpperCase()+"#"+member.user.discriminator, 512, 410);
     canvas.context.font = "32px My Olivin";
     canvas.context.fillText(
       `Eres el miembro número ${member.guild.memberCount}° `,
