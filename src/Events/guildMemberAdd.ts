@@ -13,7 +13,7 @@ welcomeCanvas.context = welcomeCanvas.create.getContext("2d");
 welcomeCanvas.context.font = "45px My Olivin";
 welcomeCanvas.context.fillStyle = "#FFFFFF";
 
-Canvas.loadImage("./17010.jpg").then(async (img) => {
+Canvas.loadImage("./maxresdefault.jpg").then(async (img) => {
   welcomeCanvas.context.drawImage(img, 0, 0, 1024, 500);
   welcomeCanvas.context.fillText("Bienvenido/a ", 360, 360);
   welcomeCanvas.context.beginPath();
