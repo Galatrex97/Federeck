@@ -29,6 +29,9 @@ export const event: Event = {
       Guild: member.guild.id,
     });
 
+
+    let memberUser = member.guild.members.cache.get(member.user.id).user;
+
     let welcomeChannel;
 
     if (welcomeData && welcomeData?.Channel) {
@@ -38,7 +41,7 @@ export const event: Event = {
 
     (canvas.context.font = "42px My Olivin"),
       (canvas.context.textAlign = "center");
-    canvas.context.fillText(member.user.username.toUpperCase()+"#"+member.user.discriminator, 512, 410);
+    canvas.context.fillText(memberUser.username.toUpperCase()+"#"+memberUser.discriminator, 512, 410);
     canvas.context.font = "32px My Olivin";
     canvas.context.fillText(
       `Eres el miembro número ${member.guild.memberCount}° `,
