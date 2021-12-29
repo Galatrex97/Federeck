@@ -1,13 +1,13 @@
 import afkSchema from "../Models/afk";
 import la_grasa from "../Models/lagrasa";
 import antilink from "../Models/antilinkbv";
-import Discord, { Message, Collection } from "discord.js";
+import Discord, { Message, Collection, MessageEmbed } from "discord.js";
 import moment from "moment";
 let prefix = process.env.prefix as string;
 import { Event } from "../Interfaces";
 import { is_url } from "../functions";
 import { myMention, randomsPacmansReplies, randomizePacmanReplies, pacmansReplies } from "../resources";
-
+import { findBestMatch } from "string-similarity"
 export const event: Event = {
   name: "messageCreate",
   run: async (client, message) => {
@@ -253,9 +253,24 @@ export const event: Event = {
     }
 
     if (!cmd) {
-      return message.reply(
-        `No tengo un comando llamado \`${command}\` pero puedes usar \`${p}help\``
-      );
+
+let cmdEmbed = new MessageEmbed()
+.setTitle("Comando inexistente o mal escrito")
+.setColor("#2f3136")
+.setTimestamp()
+
+const commandsArr = client.commands.map(x => x.name);
+
+const res = findBestMatch(command, commandsArr);
+
+const pos = res.bestMatch.rating;
+
+if(pos < 0.325) {
+  cmdEmbed.setDescription(`No tengo un comando llamado \`${command}\`\nTampoco encontramos un comando parecido entre los ${client.commands.size} comandos en total.\nSi crees que pueda existir o estás buscando otro comando, usa ${p}help.`)
+  return message.reply({ embeds: [cmdEmbed] })
+}
+cmdEmbed.setDescription(`No tengo un comando llamado \`${command}\`\nComando más parecido: \`${res.bestMatch.target}\`\nSi crees que este no es el comando que buscas, puedes usar ${p}help para ver mis comandos.`)
+return message.reply({ embeds: [cmdEmbed] })
     }
   },
 };
