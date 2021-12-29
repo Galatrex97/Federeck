@@ -265,11 +265,13 @@ const res = findBestMatch(command, commandsArr);
 
 const pos = res.bestMatch.rating;
 
-if(pos < 0.325) {
+const filter = client.commands.filter(x => x.category == "NSFW").find(y => y.name == res.bestMatch.target)
+
+if(pos < 0.325 || filter) {
   cmdEmbed.setDescription(`No tengo un comando llamado \`${command}\`\nTampoco encontramos un comando parecido entre los ${client.commands.size} comandos en total.\nSi crees que pueda existir o estás buscando otro comando, usa ${p}help.`)
   return message.reply({ embeds: [cmdEmbed] })
 }
-cmdEmbed.setDescription(`No tengo un comando llamado \`${command}\`\nComando más parecido: \`${res.bestMatch.target}\`\nSi crees que este no es el comando que buscas, puedes usar ${p}help para ver mis comandos.`)
+cmdEmbed.setDescription(`No tengo un comando llamado \`${command}\`\nComando más parecido: \`${res.bestMatch.target}\`\nSi crees que este no es el comando que buscas, puedes usar \`${p}help\` para ver mis comandos.`)
 return message.reply({ embeds: [cmdEmbed] })
     }
   },
