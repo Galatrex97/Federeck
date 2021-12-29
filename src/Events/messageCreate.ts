@@ -267,7 +267,7 @@ const pos = res.bestMatch.rating;
 
 const filter = client.commands.filter(x => x.category == "NSFW").find(y => y.name == res.bestMatch.target)
 
-if(pos < 0.325 || filter) {
+if(pos < 0.325 || filter && !message.channel.nsfw) {
   cmdEmbed.setDescription(`No tengo un comando llamado \`${command}\`\nTampoco encontramos un comando parecido entre los ${client.commands.size} comandos en total.\nSi crees que pueda existir o estás buscando otro comando, usa ${p}help.`)
   return message.reply({ embeds: [cmdEmbed] })
 }
