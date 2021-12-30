@@ -237,16 +237,9 @@ collector.on("collect", async(interaction) => {
         main = main + integer;
     }
 
-    if(interaction.values.length >= 2) {
-    for(let i = 0; i < interaction.values.length - 1; i++) {
+    for(let i = 0; i < interaction.values.length; i++) {
         let intents = interaction.values[i];
         finalEvent += events[intents].join("\n");
-    }
-    } else {
-        for(let i = 0; i < interaction.values.length; i++) {
-            let intents = interaction.values[i];
-            finalEvent += events[intents].join("\n");
-        }
     }
 
     embed.setDescription(`**Eventos que recibirás**:\n**${events.default.join("\n") +"\n"+ finalEvent}**\n\n**Tú número de intents**: ${main}`);
