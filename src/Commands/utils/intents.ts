@@ -99,7 +99,7 @@ let embed = new MessageEmbed()
 .setColor("WHITE")
 .setTimestamp()
 
-        let valu = {
+        let values = {
             "guilds": 1,
             "guild_members": 2,
             "guild_bans": 4,
@@ -129,7 +129,28 @@ let embed = new MessageEmbed()
                 "interactionCreate"
             ],
             "guilds":[
-                ""
+                "guildCreate",
+                "guildUpdate",
+                "guildDelete",
+                "guildRoleCreate",
+                "guildRoleUpdate",
+                "guildRoleDelete",
+                "channelCreate",
+                "channelUpdate",
+                "channelDelete",
+                "channelPinsUpdate",
+                "threadCreate",
+                "threadUpdate",
+                "threadDelete",
+                "threadListSync",
+                "threadMemberUpdate",
+                "threadMembersUpdate (con GUILD_MEMBERS intent)",
+                "stageInstanceCreate",
+                "stageInstanceUpdate",
+                "stageInstanceDelete"
+            ],
+            "guild_members": [
+
             ]
         }
 
@@ -141,13 +162,17 @@ collector.on("collect", async(interaction) => {
     interaction.deferUpdate();
     let main = 0;
     for(let i = 0; i < interaction.values.length; i++) {
-
-        let when = interaction.values[i];
-        let final = parseInt(valu[when]);
-        main = main + final;
+        let intent = interaction.values[i];
+        let integer = parseInt(values[intent]);
+        main = main + integer;
     }
 
-    embed.setDescription(`Eventos que recibirás:\n**${events.default.join("\n")}**\nTú número de intents: ${main}`);
+    for(let i = 0; i < interaction.values.length; i++) {
+        let intents = interaction.values[1];
+        events = events[intents]
+    }
+
+    embed.setDescription(`__Eventos que recibirás__:\n**${events.join("\n")}**\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
 })
 
