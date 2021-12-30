@@ -118,7 +118,9 @@ let embed = new MessageEmbed()
             "guild_scheduled_events": 65536
         };
 
-const collector = message.channel.createMessageComponentCollector({ time: 75000, componentType: "SELECT_MENU" });
+const m: Message = message.reply({ embeds: [embed], components: [row] })
+
+const collector = m.channel.createMessageComponentCollector({ time: 75000, componentType: "SELECT_MENU" });
 
 collector.on("collect", async(interaction) => {
     let main = 0;
@@ -131,10 +133,9 @@ collector.on("collect", async(interaction) => {
         console.log(main)
     }
 
-    embed.setDescription(`Tú número de intents: ${main}`)
-    message.edit({ embeds: [embed] })
+    embed.setDescription(`Tú número de intents: ${main}`);
+    m.edit({ embeds: [embed] })
 })
-message.reply({ embeds: [embed], components: [row] })
 
   },
 };
