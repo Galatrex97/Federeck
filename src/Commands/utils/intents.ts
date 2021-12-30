@@ -100,30 +100,9 @@ let embed = new MessageEmbed()
         ])
     );
 
+const collector = message.channel.createMessageComponentCollector({ time: 60000, componentType: "SELECT_MENU" });
 
-
-        let valu = {
-            "guilds_intent": 1,
-            guild_members: 2,
-            guild_bans: 4,
-            guild_emojis_and_stickers: 8,
-            guild_integrations: 16,
-            guild_webhooks: 32,
-            guild_invites: 64,
-            guild_voice_states: 128,
-            guild_presences: 256,
-            guild_messages: 512,
-            guild_message_reactions: 1024,
-            guild_message_typings: 2048,
-            direct_messages: 4096,
-            direct_messages_reactions: 8192,
-            direct_messages_typings: 16384,
-            guild_scheduled_events: 65536
-        };
-
-const collector = message.createMessageComponentCollector({ time: 60000, componentType: "SELECT_MENU" });
-
-collector.on("collector", async(interaction) => {
+collector.on("collector", (interaction) => {
 interaction.reply(`${interaction.values}`)
 })
 message.reply({ embeds: [embed], components: [row] })
