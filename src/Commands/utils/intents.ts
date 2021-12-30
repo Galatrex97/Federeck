@@ -152,7 +152,7 @@ export const command: Command = {
         }
 let embed = new MessageEmbed()
 .setTitle("Calculadora de Intents")
-.setDescription(`__Eventos que recibirás__:\n**${events.default.join("\n")}**\n\n**Tú número de intents**: 0`)
+.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n")}**\n\n**Tú número de intents**: 0`)
 .setColor("WHITE")
 .setTimestamp()
 let m = await message.reply({ embeds: [embed], components: [row] });
@@ -174,7 +174,7 @@ collector.on("collect", async(interaction) => {
         finalEvent = events[intents].join("\n");
     }
 
-    embed.setDescription(`__Eventos que recibirás__:\n**${events.default.join("\n") + finalEvent}**\n\n**Tú número de intents**: ${main}`);
+    embed.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n") + finalEvent}**\n\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
 })
 
