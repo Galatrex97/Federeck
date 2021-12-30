@@ -125,7 +125,8 @@ collector.on("collector", async(interaction) => {
     for(let i = 0; i < interaction.values.length; i++) {
 
         let when = interaction.values[i];
-        let final = valu[when];
+        let final = parseInt(valu[when]);
+        
         main = main + final;
     }
     embed.setDescription(`${main}`)
