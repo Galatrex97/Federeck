@@ -239,7 +239,9 @@ collector.on("collect", async(interaction) => {
 
     for(let i = 0; i < interaction.values.length; i++) {
         let intents = interaction.values[i];
-        finalEvent = events[intents].join("\n");
+        let ftEvent = events[intents].join("\n");
+        finalEvent = ftEvent + events[intents].join("\n")
+
 
     }
 
