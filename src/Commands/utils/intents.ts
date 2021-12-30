@@ -1,4 +1,4 @@
-import { Message, MessageEmbed, MessageActionRow, MessageSelectMenu } from "discord.js";
+import { Message, MessageEmbed, MessageActionRow, MessageSelectMenu, MessageAttachment } from "discord.js";
 import { Command } from "../../Interfaces";
 
 export const command: Command = {
@@ -225,10 +225,15 @@ let embed = new MessageEmbed()
 .setTimestamp()
 let m = await message.reply({ embeds: [embed], components: [row] });
 
-const collector = m.createMessageComponentCollector({ time: 120000, componentType: "SELECT_MENU" });
+const filter = i => {
+	i.deferUpdate();
+	return i.user.id === message.author.id;
+};
+const collector = m.createMessageComponentCollector({ filter, time: 120000, componentType: "SELECT_MENU" });
 
 collector.on("collect", async(interaction) => {
     interaction.deferUpdate();
+    if(interaction.user.id == message.author.id) {
     let main = 0;
     let finalEvent;
     for(let i = 0; i < interaction.values.length; i++) {
@@ -244,6 +249,9 @@ collector.on("collect", async(interaction) => {
 
     embed.setDescription(`**Eventos que recibirás**:\n**${events.default.join("\n") + finalEvent}**\n\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
+} else {
+    return interaction.reply({ content: "Esta no es tu interacción.", ephemeral: true })
+}
 })
 
   },
