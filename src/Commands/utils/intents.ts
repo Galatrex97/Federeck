@@ -127,6 +127,7 @@ collector.on("collector", async(interaction) => {
         main = main + final;
     }
     embed.setDescription(`${main}`)
+    message.edit({ embeds: [embed]})
 })
 
 message.reply({ embeds: [embed], components: [row] })
