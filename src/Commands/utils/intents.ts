@@ -68,7 +68,7 @@ export const command: Command = {
             },
             {
                 label: "Guild Message Typings",
-                description: "Intent de el estado \"Escribiendo\", desbloquea 1 evento, puedes verlo arriba.",
+                description: "Intent \"Escribiendo\", desbloquea 1 evento, puedes verlo arriba.",
                 value: "guild_message_typings"
             },
             {
@@ -83,7 +83,7 @@ export const command: Command = {
             },
             {
                 label: "Direct Message Typings",
-                description: "Intent de el estado \"Escribiendo\", desbloquea 1 evento o ningún evento adicional, puedes revisar arriba.",
+                description: "Intent de \"Escribiendo\", puedes revisar arriba.",
                 value: "guild_message_typings"
             },
             {
