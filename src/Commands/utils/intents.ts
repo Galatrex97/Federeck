@@ -10,10 +10,16 @@ export const command: Command = {
 
   run: (client, message, args) => {
 
+let embed = new MessageEmbed()
+.setTitle("Calculadora de Intents")
+.setColor("WHITE")
+.setTimestamp()
+
     const row = new MessageActionRow().addComponents(
         new MessageSelectMenu()
         .setCustomId("intents_menu")
         .setPlaceholder("Selecciona tus intents aqui")
+        .setMinValues(1)
         .setMaxValues(15)
         .addOptions([
             {
@@ -94,10 +100,7 @@ export const command: Command = {
         ])
     );
 
-let embed = new MessageEmbed()
-.setTitle("Calculadora de Intents")
-.setColor("WHITE")
-.setTimestamp()
+
 
         let valu = {
             "guilds_intent": 1,
@@ -118,10 +121,10 @@ let embed = new MessageEmbed()
             guild_scheduled_events: 65536
         };
 
-const collector = message.channel.createMessageComponentCollector();
+const collector = message.createMessageComponentCollector({ time: 60000, componentType: "SELECT_MENU" });
 
 collector.on("collector", async(interaction) => {
-   message.edit({ content: `${interaction.values}` })
+interaction.reply(`${interaction.values}`)
 })
 message.reply({ embeds: [embed], components: [row] })
 
