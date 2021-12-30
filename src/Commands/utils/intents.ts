@@ -8,7 +8,7 @@ export const command: Command = {
   usage: "intents",
   description: "Calcula los intents que necesitarás",
 
-  run: (client, message, args) => {
+  run: async(client, message, args) => {
 
     const row = new MessageActionRow().addComponents(
         new MessageSelectMenu()
@@ -118,11 +118,12 @@ let embed = new MessageEmbed()
             "guild_scheduled_events": 65536
         };
 
-const m: Message = message.reply({ embeds: [embed], components: [row] })
+let m = await message.reply({ embeds: [embed], components: [row] });
 
-const collector = m.channel.createMessageComponentCollector({ time: 75000, componentType: "SELECT_MENU" });
+const collector = m.createMessageComponentCollector({ time: 75000, componentType: "SELECT_MENU" });
 
 collector.on("collect", async(interaction) => {
+    interaction.deferUpdate();
     let main = 0;
     for(let i = 0; i < interaction.values.length; i++) {
 
@@ -134,7 +135,7 @@ collector.on("collect", async(interaction) => {
     }
 
     embed.setDescription(`Tú número de intents: ${main}`);
-    m.edit({ embeds: [embed] })
+    m.edit({ embeds: [embed] });
 })
 
   },
