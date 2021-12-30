@@ -19,7 +19,7 @@ export const command: Command = {
             {
                 label: "Guilds",
                 description: "Intent de los servidores, desbloquea 15 eventos, puedes verlos arriba.",
-                value: "guild_intent"
+                value: "guilds_intent"
             },
             {
                 label: "Guild Members",
@@ -100,7 +100,7 @@ let embed = new MessageEmbed()
 .setTimestamp()
 
         let valu = {
-            "guilds": 1,
+            "guilds_intent": 1,
             guild_members: 2,
             guild_bans: 4,
             guild_emojis_and_stickers: 8,
@@ -121,7 +121,7 @@ let embed = new MessageEmbed()
 const collector = message.channel.createMessageComponentCollector();
 
 collector.on("collector", async(interaction) => {
-   interaction.reply(`${interaction.values}`)
+   message.edit({ content: `${values}` })
 })
 message.reply({ embeds: [embed], components: [row] })
 
