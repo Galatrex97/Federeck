@@ -121,23 +121,8 @@ let embed = new MessageEmbed()
 const collector = message.channel.createMessageComponentCollector();
 
 collector.on("collector", async(interaction) => {
-    let main = 0;
-    for(let i = 0; i < interaction.values.length; i++) {
-
-        let when = interaction.values[i];
-        let final = parseInt(valu[when]);
-        console.log(final)
-        main = main + final;
-        console.log(main)
-    }
-
-    console.log(main)
-    embed.setDescription(`${main}`)
-    message.channel.send(`${main}`)
-    message.edit({ embeds: [embed]})
-    
+   interaction.reply(`${interaction.values}`)
 })
-
 message.reply({ embeds: [embed], components: [row] })
 
   },
