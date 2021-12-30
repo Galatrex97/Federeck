@@ -126,7 +126,7 @@ collector.on("collector", async(interaction) => {
         let final = valu[when];
         main = main + final;
     }
-    embed.setDescription(`${final}`)
+    embed.setDescription(`${main}`)
 })
 
 message.reply({ embeds: [embed], components: [row] })
