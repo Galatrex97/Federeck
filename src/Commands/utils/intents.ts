@@ -170,10 +170,10 @@ collector.on("collect", async(interaction) => {
 
     for(let i = 0; i < interaction.values.length; i++) {
         let intents = interaction.values[i];
-        finalEvent = events[intents];
+        finalEvent = events.default.join("\n") + events[intents];
     }
 
-    embed.setDescription(`__Eventos que recibirás__:\n**${finalEvent}**\n**Tú número de intents**: ${main}`);
+    embed.setDescription(`__Eventos que recibirás__:\n**${finalEvent.join("\n")}**\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
 })
 
