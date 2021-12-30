@@ -102,10 +102,10 @@ let embed = new MessageEmbed()
 
 const collector = message.channel.createMessageComponentCollector({ time: 60000, componentType: "SELECT_MENU" });
 
-collector.on("collector", (interaction) => {
+collector.on("collect", (interaction) => {
 interaction.reply(`${interaction.values}`)
 })
-message.reply({ embeds: [embed], components: [row] })
+message.reply({ content: "a", components: [row] })
 
   },
 };
