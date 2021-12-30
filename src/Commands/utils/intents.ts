@@ -19,22 +19,22 @@ export const command: Command = {
             {
                 label: "Guilds",
                 description: "Intent de los servidores, desbloquea 15 eventos, puedes verlos arriba.",
-                value: "guild_intent"
+                value: "guilds"
             },
             {
                 label: "Guild Members",
                 description: "(Privilegiado) Intent de los miembros de los servidores, desbloquea 4 eventos, puedes verlos arriba.",
-                value: "guild_members_intent"
+                value: "guild_members"
             },
             {
                 label: "Guild Bans",
                 description: "Intent de los baneos de los servidores, desbloquea 2 eventos, puedes verlos arriba.",
-                value: "guild_bans_intent"
+                value: "guild_bans"
             },
             {
                 label: "Guild Emojis and Stickers",
                 description: "Intent de los emojis y stickers de los servidores, desbloquea 2 eventos, puedes verlos arriba.",
-                value: "guild_emojis_and_stikers_intent"
+                value: "guild_emojis_and_stikers"
             },
             {
                 label: "Guild Integrations",
