@@ -123,7 +123,7 @@ export const command: Command = {
                 "applicationCommandCreate",
                 "applicationCommandUpdate",
                 "applicationCommandDelete",
-                "interactionCreate"
+                "interactionCreate",
             ],
             "guilds":[
                 "guildCreate",
@@ -144,52 +144,52 @@ export const command: Command = {
                 "threadMembersUpdate (con GUILD_MEMBERS intent)",
                 "stageInstanceCreate",
                 "stageInstanceUpdate",
-                "stageInstanceDelete"
+                "stageInstanceDelete",
             ],
             "guild_members": [
                 "guildMemberAdd",
                 "guildMemberUpdate",
                 "guildMemberRemove",
-                "ThreadMembersUpdate (con GUILDS intent)"
+                "ThreadMembersUpdate (con GUILDS intent)",
             ],
             "guild_bans": [
                 "guildBanAdd",
-                "guildBanRemove"
+                "guildBanRemove",
             ],
             "guild_emojis_and_stickers": [
                 "guildEmojisUpdate",
-                "guildStickersUpdate"
+                "guildStickersUpdate",
             ],
             "guild_integrations": [
                 "guildIntegrationsUpdate",
                 "integrationCreate",
                 "integrationUpdate",
-                "integrationDelete"
+                "integrationDelete",
             ],
             "guild_webhooks": [
-                "webhooksUpdate"
+                "webhooksUpdate",
             ],
             "guild_invites": [
                 "inviteCreate",
-                "inviteDelete"
+                "inviteDelete",
             ],
             "guild_voice_states": [
-                "voiceStateUpdate"
+                "voiceStateUpdate",
             ],
             "guild_presences": [
-                "presenceUpdate"
+                "presenceUpdate",
             ],
             "guild_messages": [
                 "messageCreate (Desbloqueable también con DIRECT_MESSAGES intent)",
                 "messageUpdate (Desbloqueable también con DIRECT_MESSAGES intent)",
                 "messageDelete (Desbloqueable también con DIRECT_MESSAGES intent)",
-                "messageDeleteBulk (Desbloqueable también con DIRECT_MESSAGES intent)"
+                "messageDeleteBulk (Desbloqueable también con DIRECT_MESSAGES intent)",
             ],
             "guild_message_reactions": [
                 "messageReactionAdd (Desbloqueable también con DIRECT_MESSAGES intent)",
                 "messageReactionRemove (Desbloqueable también con DIRECT_MESSAGES intent)",
                 "messageReactionRemoveAll (Desbloqueable también con DIRECT_MESSAGES intent)",
-                "messageReactionRemoveEmoji (Desbloqueable también con DIRECT_MESSAGES intent)"
+                "messageReactionRemoveEmoji (Desbloqueable también con DIRECT_MESSAGES intent)",
             ],
             "guild_message_typings": [
                 "typingStart (Desbloqueable también con DIRECT_MESSAGES intent)"
@@ -198,23 +198,23 @@ export const command: Command = {
                 "messageCreate (Desbloqueable también con GUILD_MESSAGES intent)",
                 "messageUpdate (Desbloqueable también con GUILD_MESSAGES intent)",
                 "messageDelete (Desbloqueable también con GUILD_MESSAGES intent)",
-                "messageDeleteBulk (Desbloqueable también con GUILD_MESSAGES intent)"
+                "messageDeleteBulk (Desbloqueable también con GUILD_MESSAGES intent)",
             ],
             "direct_message_reactions": [
                 "messageReactionAdd (Desbloqueable también con GUILD_MESSAGES intent)",
                 "messageReactionRemove (Desbloqueable también con GUILD_MESSAGES intent)",
                 "messageReactionRemoveAll (Desbloqueable también con GUILD_MESSAGES intent)",
-                "messageReactionRemoveEmoji (Desbloqueable también con GUILD_MESSAGES intent)"
+                "messageReactionRemoveEmoji (Desbloqueable también con GUILD_MESSAGES intent)",
             ],
             "direct_message_typings": [
-                "typingStart (Desbloqueable también con GUILD_MESSAGES intent)"
+                "typingStart (Desbloqueable también con GUILD_MESSAGES intent)",
             ],
             "guild_scheduled_events": [
                 "guildScheduledEventCreate",
                 "guildScheduledEventUpdate",
                 "guildScheduledEventDelete",
                 "guildScheduledEventUserAdd",
-                "guildScheduledEventUserRemove"
+                "guildScheduledEventUserRemove",
             ]
         }
 let embed = new MessageEmbed()
@@ -230,11 +230,11 @@ const collector = m.createMessageComponentCollector({ time: 120000, componentTyp
 collector.on("collect", async(interaction) => {
     interaction.deferUpdate();
     let main = 0;
-    let finalEvent = "\n";
+    let finalEvent = "";
     for(let i = 0; i < interaction.values.length; i++) {
         let intent = interaction.values[i];
         let integer = parseInt(values[intent]);
-        main = main + integer;
+        main += integer;
     }
 
     for(let i = 0; i < interaction.values.length; i++) {
