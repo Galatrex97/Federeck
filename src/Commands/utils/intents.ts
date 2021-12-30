@@ -126,9 +126,12 @@ collector.on("collector", async(interaction) => {
 
         let when = interaction.values[i];
         let final = parseInt(valu[when]);
-        
+        console.log(final)
         main = main + final;
+        console.log(main)
     }
+
+    console.log(main)
     embed.setDescription(`${main}`)
     message.channel.send(`${main}`)
     message.edit({ embeds: [embed]})
