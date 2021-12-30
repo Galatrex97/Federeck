@@ -99,11 +99,6 @@ let embed = new MessageEmbed()
 .setColor("WHITE")
 .setTimestamp()
 
-const collector = message.channel.createMessageComponentCollector();
-
-collector.on("collector", async(interaction) => {
-    let main = 0;
-    for(let i = 0; i < interaction.values.length; i++) {
         let valu = {
             guilds: 1,
             guild_members: 2,
@@ -121,14 +116,22 @@ collector.on("collector", async(interaction) => {
             direct_messages_reactions: 8192,
             direct_messages_typings: 16384,
             guild_scheduled_events: 65536
-        }
+        };
+
+const collector = message.channel.createMessageComponentCollector();
+
+collector.on("collector", async(interaction) => {
+    let main = 0;
+    for(let i = 0; i < interaction.values.length; i++) {
+
         let when = interaction.values[i];
         let final = valu[when];
         main = main + final;
     }
     embed.setDescription(`${main}`)
-    message.edit({ embeds: [embed]})
     message.channel.send(`${main}`)
+    message.edit({ embeds: [embed]})
+    
 })
 
 message.reply({ embeds: [embed], components: [row] })
