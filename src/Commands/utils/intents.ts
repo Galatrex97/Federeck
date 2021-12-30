@@ -144,70 +144,70 @@ export const command: Command = {
                 "threadMembersUpdate (con GUILD_MEMBERS intent)",
                 "stageInstanceCreate",
                 "stageInstanceUpdate",
-                "stageInstanceDelete",
+                "stageInstanceDelete\n",
             ],
             "guild_members": [
                 "guildMemberAdd",
                 "guildMemberUpdate",
                 "guildMemberRemove",
-                "ThreadMembersUpdate (con GUILDS intent)",
+                "ThreadMembersUpdate (con GUILDS intent)\n",
             ],
             "guild_bans": [
                 "guildBanAdd",
-                "guildBanRemove",
+                "guildBanRemove\n",
             ],
             "guild_emojis_and_stickers": [
                 "guildEmojisUpdate",
-                "guildStickersUpdate",
+                "guildStickersUpdate\n",
             ],
             "guild_integrations": [
                 "guildIntegrationsUpdate",
                 "integrationCreate",
                 "integrationUpdate",
-                "integrationDelete",
+                "integrationDelete\n",
             ],
             "guild_webhooks": [
-                "webhooksUpdate",
+                "webhooksUpdate\n",
             ],
             "guild_invites": [
                 "inviteCreate",
-                "inviteDelete",
+                "inviteDelete\n",
             ],
             "guild_voice_states": [
-                "voiceStateUpdate",
+                "voiceStateUpdate\n",
             ],
             "guild_presences": [
-                "presenceUpdate",
+                "presenceUpdate\n",
             ],
             "guild_messages": [
                 "messageCreate (Desbloqueable también con DIRECT_MESSAGES intent)",
                 "messageUpdate (Desbloqueable también con DIRECT_MESSAGES intent)",
                 "messageDelete (Desbloqueable también con DIRECT_MESSAGES intent)",
-                "messageDeleteBulk (Desbloqueable también con DIRECT_MESSAGES intent)",
+                "messageDeleteBulk (Desbloqueable también con DIRECT_MESSAGES intent)\n",
             ],
             "guild_message_reactions": [
                 "messageReactionAdd (Desbloqueable también con DIRECT_MESSAGES intent)",
                 "messageReactionRemove (Desbloqueable también con DIRECT_MESSAGES intent)",
                 "messageReactionRemoveAll (Desbloqueable también con DIRECT_MESSAGES intent)",
-                "messageReactionRemoveEmoji (Desbloqueable también con DIRECT_MESSAGES intent)",
+                "messageReactionRemoveEmoji (Desbloqueable también con DIRECT_MESSAGES intent)\n",
             ],
             "guild_message_typings": [
-                "typingStart (Desbloqueable también con DIRECT_MESSAGES intent)"
+                "typingStart (Desbloqueable también con DIRECT_MESSAGES intent)\n"
             ],
             "direct_messages": [
                 "messageCreate (Desbloqueable también con GUILD_MESSAGES intent)",
                 "messageUpdate (Desbloqueable también con GUILD_MESSAGES intent)",
                 "messageDelete (Desbloqueable también con GUILD_MESSAGES intent)",
-                "messageDeleteBulk (Desbloqueable también con GUILD_MESSAGES intent)",
+                "messageDeleteBulk (Desbloqueable también con GUILD_MESSAGES intent)\n",
             ],
             "direct_message_reactions": [
                 "messageReactionAdd (Desbloqueable también con GUILD_MESSAGES intent)",
                 "messageReactionRemove (Desbloqueable también con GUILD_MESSAGES intent)",
                 "messageReactionRemoveAll (Desbloqueable también con GUILD_MESSAGES intent)",
-                "messageReactionRemoveEmoji (Desbloqueable también con GUILD_MESSAGES intent)",
+                "messageReactionRemoveEmoji (Desbloqueable también con GUILD_MESSAGES intent)\n",
             ],
             "direct_message_typings": [
-                "typingStart (Desbloqueable también con GUILD_MESSAGES intent)",
+                "typingStart (Desbloqueable también con GUILD_MESSAGES intent)\n",
             ],
             "guild_scheduled_events": [
                 "guildScheduledEventCreate",
@@ -242,7 +242,7 @@ collector.on("collect", async(interaction) => {
         finalEvent += events[intents].join("\n");
     }
 
-    embed.setDescription(`**Eventos que recibirás**:\n**${events.default.join("\n") +"\n"+ finalEvent}**\n\n**Tú número de intents**: ${main}`);
+    embed.setDescription(`**Eventos que recibirás**:\n**${events.default.join("\n") +"\n"+ finalEvent}**\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
 
 })
