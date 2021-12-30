@@ -121,7 +121,7 @@ let embed = new MessageEmbed()
 const collector = message.channel.createMessageComponentCollector();
 
 collector.on("collector", async(interaction) => {
-   message.edit({ content: `${values}` })
+   message.edit({ content: `${interaction.values}` })
 })
 message.reply({ embeds: [embed], components: [row] })
 
