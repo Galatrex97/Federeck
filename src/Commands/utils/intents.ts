@@ -152,7 +152,7 @@ export const command: Command = {
         }
 let embed = new MessageEmbed()
 .setTitle("Calculadora de Intents")
-.setDescription(`Eventos que recibirás: ${events.default.join("\n")}\n\nTú número de intents: 0`)
+.setDescription(`__Eventos que recibirás__:\n**${events.default.join("\n")}**\n\n**Tú número de intents**: 0`)
 .setColor("WHITE")
 .setTimestamp()
 let m = await message.reply({ embeds: [embed], components: [row] });
