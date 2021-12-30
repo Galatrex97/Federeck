@@ -230,7 +230,7 @@ const collector = m.createMessageComponentCollector({ time: 120000, componentTyp
 collector.on("collect", async(interaction) => {
     interaction.deferUpdate();
     let main = 0;
-    let finalEvent = "";
+    let finalEvent = "\n";
     for(let i = 0; i < interaction.values.length; i++) {
         let intent = interaction.values[i];
         let integer = parseInt(values[intent]);
