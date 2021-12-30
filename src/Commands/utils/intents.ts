@@ -242,7 +242,7 @@ collector.on("collect", async(interaction) => {
         finalEvent = events[intents].join("\n") + finalEvent;
     }
 
-    embed.setDescription(`**Eventos que recibirás**:\n**${events.default.join("\n") + finalEvent}**\n\n**Tú número de intents**: ${main}`);
+    embed.setDescription(`**Eventos que recibirás**:\n**${events.default.join("\n") +"\n"+ finalEvent}**\n\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
 
 })
