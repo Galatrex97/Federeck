@@ -14,7 +14,7 @@ export const command: Command = {
         new MessageSelectMenu()
         .setCustomId("intents_menu")
         .setPlaceholder("Selecciona tus intents aqui")
-        .setMaxValues(15)
+        .setMaxValues(16)
         .addOptions([
             {
                 label: "Guilds",
