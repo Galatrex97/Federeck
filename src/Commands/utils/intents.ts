@@ -219,13 +219,13 @@ export const command: Command = {
         }
 let embed = new MessageEmbed()
 .setTitle("Calculadora de Intents")
-.setDescription(`**Eventos que recibirás**:\n**${events.default.join("\n")}**\n\n**Tú número de intents**: 0`)
+.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n")}**\n\n**Tú número de intents**: 0`)
 .setColor("WHITE")
 .setFooter("Tienes 2 minutos para elegir tus intents")
 .setTimestamp()
 let m = await message.reply({ embeds: [embed], components: [row] });
-
-const collector = m.createMessageComponentCollector({ time: 120000, componentType: "SELECT_MENU" });
+let filter = (i) => i.user.id == message.author.id;
+const collector = m.createMessageComponentCollector({ filter, time: 120000, componentType: "SELECT_MENU" });
 
 collector.on("collect", async(interaction) => {
     interaction.deferUpdate();
@@ -242,7 +242,7 @@ collector.on("collect", async(interaction) => {
         finalEvent += events[intents].join("\n");
     }
 
-    embed.setDescription(`**Eventos que recibirás**:\n**${events.default.join("\n") +"\n"+ finalEvent}**\n**Tú número de intents**: ${main}`);
+    embed.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n") +"\n"+ finalEvent}**\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
 
 })
