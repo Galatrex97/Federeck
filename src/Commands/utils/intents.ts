@@ -10,37 +10,31 @@ export const command: Command = {
 
   run: (client, message, args) => {
 
-let embed = new MessageEmbed()
-.setTitle("Calculadora de Intents")
-.setColor("WHITE")
-.setTimestamp()
-
     const row = new MessageActionRow().addComponents(
         new MessageSelectMenu()
         .setCustomId("intents_menu")
         .setPlaceholder("Selecciona tus intents aqui")
-        .setMinValues(1)
         .setMaxValues(15)
         .addOptions([
             {
                 label: "Guilds",
                 description: "Intent de los servidores, desbloquea 15 eventos, puedes verlos arriba.",
-                value: "guilds_intent"
+                value: "guild_intent"
             },
             {
                 label: "Guild Members",
                 description: "(Privilegiado) Intent de los miembros de los servidores, desbloquea 4 eventos, puedes verlos arriba.",
-                value: "guild_members"
+                value: "guild_members_intent"
             },
             {
                 label: "Guild Bans",
                 description: "Intent de los baneos de los servidores, desbloquea 2 eventos, puedes verlos arriba.",
-                value: "guild_bans"
+                value: "guild_bans_intent"
             },
             {
                 label: "Guild Emojis and Stickers",
                 description: "Intent de los emojis y stickers de los servidores, desbloquea 2 eventos, puedes verlos arriba.",
-                value: "guild_emojis_and_stikers"
+                value: "guild_emojis_and_stikers_intent"
             },
             {
                 label: "Guild Integrations",
@@ -100,12 +94,50 @@ let embed = new MessageEmbed()
         ])
     );
 
-const collector = message.channel.createMessageComponentCollector({ time: 60000, componentType: "SELECT_MENU" });
+let embed = new MessageEmbed()
+.setTitle("Calculadora de Intents")
+.setColor("WHITE")
+.setTimestamp()
 
-collector.on("collect", (interaction) => {
-interaction.reply(`${interaction.values}`)
+        let valu = {
+            "guilds": 1,
+            guild_members: 2,
+            guild_bans: 4,
+            guild_emojis_and_stickers: 8,
+            guild_integrations: 16,
+            guild_webhooks: 32,
+            guild_invites: 64,
+            guild_voice_states: 128,
+            guild_presences: 256,
+            guild_messages: 512,
+            guild_message_reactions: 1024,
+            guild_message_typings: 2048,
+            direct_messages: 4096,
+            direct_messages_reactions: 8192,
+            direct_messages_typings: 16384,
+            guild_scheduled_events: 65536
+        };
+
+const collector = message.channel.createMessageComponentCollector({ time: 15000, componentType: "SELECT_MENU" });
+
+collector.on("collect", async(interaction) => {
+    let main = 0;
+    for(let i = 0; i < interaction.values.length; i++) {
+
+        let when = interaction.values[i];
+        let final = parseInt(valu[when]);
+        console.log(final)
+        main = main + final;
+        console.log(main)
+    }
+
+    console.log(main)
+    embed.setDescription(`${main}`)
+    message.channel.send(`${main}`)
+    message.edit({ embeds: [embed]})
+    
 })
-message.reply({ content: "a", components: [row] })
+message.reply({ embeds: [embed], components: [row] })
 
   },
 };
