@@ -74,17 +74,17 @@ export const command: Command = {
             {
                 label: "Direct Messages",
                 description: "Intent de los mensajes directos, puedes revisar arriba.",
-                value: "guild_messages"
+                value: "direct_messages"
             },
             {
                 label: "Direct Message Reactions",
                 description: "Intent de las reacciones de un mensaje directo, puedes revisar arriba.",
-                value: "guild_message_reactions"
+                value: "direct_message_reactions"
             },
             {
                 label: "Direct Message Typings",
                 description: "Intent de \"Escribiendo\", puedes revisar arriba.",
-                value: "guild_message_typings"
+                value: "direct_message_typings"
             },
             {
                 label: "Guild Scheduled Events",
