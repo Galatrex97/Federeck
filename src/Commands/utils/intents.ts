@@ -128,6 +128,7 @@ collector.on("collector", async(interaction) => {
     }
     embed.setDescription(`${main}`)
     message.edit({ embeds: [embed]})
+    message.channel.send(`${main}`)
 })
 
 message.reply({ embeds: [embed], components: [row] })
