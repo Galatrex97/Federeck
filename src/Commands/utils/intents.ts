@@ -94,10 +94,7 @@ export const command: Command = {
         ])
     );
 
-let embed = new MessageEmbed()
-.setTitle("Calculadora de Intents")
-.setColor("WHITE")
-.setTimestamp()
+
 
         let values = {
             "guilds": 1,
@@ -153,7 +150,11 @@ let embed = new MessageEmbed()
 
             ]
         }
-
+let embed = new MessageEmbed()
+.setTitle("Calculadora de Intents")
+.setDescription(`Eventos que recibirás: ${events.default.join("\n")}\n\nTú número de intents: 0`)
+.setColor("WHITE")
+.setTimestamp()
 let m = await message.reply({ embeds: [embed], components: [row] });
 
 const collector = m.createMessageComponentCollector({ time: 75000, componentType: "SELECT_MENU" });
@@ -173,7 +174,7 @@ collector.on("collect", async(interaction) => {
         finalEvent = events[intents].join("\n");
     }
 
-    embed.setDescription(`__Eventos que recibirás__:\n**${events.default.join("\n") + finalEvent}**\n**Tú número de intents**: ${main}`);
+    embed.setDescription(`__Eventos que recibirás__:\n**${events.default.join("\n") + finalEvent}**\n\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
 })
 
