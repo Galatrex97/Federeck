@@ -131,11 +131,8 @@ collector.on("collect", async(interaction) => {
         console.log(main)
     }
 
-    console.log(main)
-    embed.setDescription(`${main}`)
-    message.channel.send(`${main}`)
-    message.edit({ embeds: [embed]})
-    
+    embed.setDescription(`Tú número de intents: ${main}`)
+    interaction.editReply({ embeds: [embed], components: [row] })
 })
 message.reply({ embeds: [embed], components: [row] })
 
