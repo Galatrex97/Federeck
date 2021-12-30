@@ -240,12 +240,12 @@ collector.on("collect", async(interaction) => {
     if(interaction.values.length >= 2) {
     for(let i = 0; i < interaction.values.length - 1; i++) {
         let intents = interaction.values[i];
-        finalEvent = events[intents].join("\n") + finalEvent;
+        finalEvent = events[intents].join("\n");
     }
     } else {
         for(let i = 0; i < interaction.values.length; i++) {
             let intents = interaction.values[i];
-            finalEvent = events[intents].join("\n") + finalEvent;
+            finalEvent = events[intents].join("\n");
         }
     }
 
