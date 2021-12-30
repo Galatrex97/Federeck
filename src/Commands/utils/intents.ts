@@ -161,6 +161,7 @@ const collector = m.createMessageComponentCollector({ time: 75000, componentType
 collector.on("collect", async(interaction) => {
     interaction.deferUpdate();
     let main = 0;
+    let finalEvent
     for(let i = 0; i < interaction.values.length; i++) {
         let intent = interaction.values[i];
         let integer = parseInt(values[intent]);
@@ -169,10 +170,10 @@ collector.on("collect", async(interaction) => {
 
     for(let i = 0; i < interaction.values.length; i++) {
         let intents = interaction.values[1];
-        events = events[intents]
+        finalEvent = events[intents]
     }
 
-    embed.setDescription(`__Eventos que recibirás__:\n**${events.join("\n")}**\n**Tú número de intents**: ${main}`);
+    embed.setDescription(`__Eventos que recibirás__:\n**${finalEvent}**\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
 })
 
