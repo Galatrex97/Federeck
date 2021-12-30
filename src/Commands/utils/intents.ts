@@ -73,12 +73,12 @@ export const command: Command = {
             },
             {
                 label: "Direct Messages",
-                description: "Intent de los mensajes, desbloquea 4 eventos o ningún evento adicional, puedes revisar arriba.",
+                description: "Intent de los mensajes directos, puedes revisar arriba.",
                 value: "guild_messages"
             },
             {
                 label: "Direct Message Reactions",
-                description: "Intent de las reacciones de un mensaje directo, desbloquea 4 eventos o ningún evento adicional, puedes revisar arriba.",
+                description: "Intent de las reacciones de un mensaje directo, puedes revisar arriba.",
                 value: "guild_message_reactions"
             },
             {
