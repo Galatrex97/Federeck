@@ -117,6 +117,21 @@ let embed = new MessageEmbed()
             "direct_message_typings": 16384,
             "guild_scheduled_events": 65536
         };
+        let events = {
+            "default": [
+                "ready",
+                "resumed",
+                "voiceServerUpdate",
+                "userUpdate",
+                "applicationCommandCreate",
+                "applicationCommandUpdate",
+                "applicationCommandDelete",
+                "interactionCreate"
+            ],
+            "guilds":[
+                ""
+            ]
+        }
 
 let m = await message.reply({ embeds: [embed], components: [row] });
 
@@ -129,12 +144,10 @@ collector.on("collect", async(interaction) => {
 
         let when = interaction.values[i];
         let final = parseInt(valu[when]);
-        console.log(final)
         main = main + final;
-        console.log(main)
     }
 
-    embed.setDescription(`Tú número de intents: ${main}`);
+    embed.setDescription(`Eventos que recibirás:\n**${events.default.join("\n")}**\nTú número de intents: ${main}`);
     m.edit({ embeds: [embed] });
 })
 
