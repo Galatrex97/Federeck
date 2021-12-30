@@ -34,7 +34,7 @@ export const command: Command = {
             {
                 label: "Guild Emojis and Stickers",
                 description: "Intent de los emojis y stickers de los servidores, desbloquea 2 eventos, puedes verlos arriba.",
-                value: "guild_emojis_and_stikers"
+                value: "guild_emojis_and_stickers"
             },
             {
                 label: "Guild Integrations",
