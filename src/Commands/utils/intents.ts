@@ -147,17 +147,85 @@ export const command: Command = {
                 "stageInstanceDelete"
             ],
             "guild_members": [
-
+                "guildMemberAdd",
+                "guildMemberUpdate",
+                "guildMemberRemove",
+                "ThreadMembersUpdate (con GUILDS intent)"
+            ],
+            "guild_bans": [
+                "guildBanAdd",
+                "guildBanRemove"
+            ],
+            "guild_emojis_and_stickers": [
+                "guildEmojisUpdate",
+                "guildStickersUpdate"
+            ],
+            "guild_integrations": [
+                "guildIntegrationsUpdate",
+                "integrationCreate",
+                "integrationUpdate",
+                "integrationDelete"
+            ],
+            "guild_webhooks": [
+                "webhooksUpdate"
+            ],
+            "guild_invites": [
+                "inviteCreate",
+                "inviteDelete"
+            ],
+            "guild_voice_states": [
+                "voiceStateUpdate"
+            ],
+            "guild_presence": [
+                "presenceUpdate"
+            ],
+            "guild_messages": [
+                "messageCreate (Desbloqueable también con DIRECT_MESSAGES intent)",
+                "messageUpdate (Desbloqueable también con DIRECT_MESSAGES intent)",
+                "messageDelete (Desbloqueable también con DIRECT_MESSAGES intent)",
+                "messageDeleteBulk (Desbloqueable también con DIRECT_MESSAGES intent)"
+            ],
+            "guild_message_reactions": [
+                "messageReactionAdd (Desbloqueable también con DIRECT_MESSAGES intent)",
+                "messageReactionRemove (Desbloqueable también con DIRECT_MESSAGES intent)",
+                "messageReactionRemoveAll (Desbloqueable también con DIRECT_MESSAGES intent)",
+                "messageReactionRemoveEmoji (Desbloqueable también con DIRECT_MESSAGES intent)"
+            ],
+            "guild_message_typings": [
+                "typingStart (Desbloqueable también con DIRECT_MESSAGES intent)"
+            ],
+            "direct_messages": [
+                "messageCreate (Desbloqueable también con GUILD_MESSAGES intent)",
+                "messageUpdate (Desbloqueable también con GUILD_MESSAGES intent)",
+                "messageDelete (Desbloqueable también con GUILD_MESSAGES intent)",
+                "messageDeleteBulk (Desbloqueable también con GUILD_MESSAGES intent)"
+            ],
+            "direct_message_reactions": [
+                "messageReactionAdd (Desbloqueable también con GUILD_MESSAGES intent)",
+                "messageReactionRemove (Desbloqueable también con GUILD_MESSAGES intent)",
+                "messageReactionRemoveAll (Desbloqueable también con GUILD_MESSAGES intent)",
+                "messageReactionRemoveEmoji (Desbloqueable también con GUILD_MESSAGES intent)"
+            ],
+            "direct_message_typings": [
+                "typingStart (Desbloqueable también con GUILD_MESSAGES intent)"
+            ],
+            "guild_scheduled_events": [
+                "guildScheduledEventCreate",
+                "guildScheduledEventUpdate",
+                "guildScheduledEventDelete",
+                "guildScheduledEventUserAdd",
+                "guildScheduledEventUserRemove"
             ]
         }
 let embed = new MessageEmbed()
 .setTitle("Calculadora de Intents")
-.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n")}**\n\n**Tú número de intents**: 0`)
+.setDescription(`**Eventos que recibirás**:\n**${events.default.join("\n")}**\n\n**Tú número de intents**: 0`)
 .setColor("WHITE")
+.setFooter("Tienes 2 minutos para elegir tus intents")
 .setTimestamp()
 let m = await message.reply({ embeds: [embed], components: [row] });
 
-const collector = m.createMessageComponentCollector({ time: 75000, componentType: "SELECT_MENU" });
+const collector = m.createMessageComponentCollector({ time: 120000, componentType: "SELECT_MENU" });
 
 collector.on("collect", async(interaction) => {
     interaction.deferUpdate();
@@ -174,7 +242,7 @@ collector.on("collect", async(interaction) => {
         finalEvent = events[intents].join("\n");
     }
 
-    embed.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n") + finalEvent}**\n\n**Tú número de intents**: ${main}`);
+    embed.setDescription(`**Eventos que recibirás**:\n**${events.default.join("\n") + finalEvent}**\n\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
 })
 
