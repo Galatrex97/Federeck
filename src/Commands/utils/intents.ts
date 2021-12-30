@@ -170,7 +170,7 @@ collector.on("collect", async(interaction) => {
 
     for(let i = 0; i < interaction.values.length; i++) {
         let intents = interaction.values[i];
-        finalEvent = events.default.join("\n") + events[intents];
+        finalEvent = events.default + events[intents];
     }
 
     embed.setDescription(`__Eventos que recibirás__:\n**${finalEvent.join("\n")}**\n**Tú número de intents**: ${main}`);
