@@ -47,6 +47,11 @@ export const command: Command = {
                 value: "guild_webhooks"
             },
             {
+                label: "Guild Invites",
+                description: "Intent de las invites de un servidor, desbloquea 2 eventos, puedes verlos arriba.",
+                value: "guild_invites"
+            },
+            {
                 label: "Guild Voice States",
                 description: "Intent de los estados de actividad de voz, desbloquea 1 evento, puedes verlo arriba.",
                 value: "guild_voice_states"
@@ -217,6 +222,9 @@ export const command: Command = {
                 "guildScheduledEventUserRemove",
             ]
         }
+
+
+
 let embed = new MessageEmbed()
 .setTitle("Calculadora de Intents")
 .setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n")}**\n\n**Tú número de intents**: 0`)
