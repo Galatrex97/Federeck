@@ -176,7 +176,7 @@ export const command: Command = {
             "guild_voice_states": [
                 "voiceStateUpdate"
             ],
-            "guild_presence": [
+            "guild_presences": [
                 "presenceUpdate"
             ],
             "guild_messages": [
