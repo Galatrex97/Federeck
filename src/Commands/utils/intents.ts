@@ -132,7 +132,7 @@ collector.on("collect", async(interaction) => {
     }
 
     embed.setDescription(`Tú número de intents: ${main}`)
-    interaction.editReply({ embeds: [embed], components: [row] })
+    message.edit({ embeds: [embed], components: [row] })
 })
 message.reply({ embeds: [embed], components: [row] })
 
