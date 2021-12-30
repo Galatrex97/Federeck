@@ -100,7 +100,7 @@ let embed = new MessageEmbed()
 .setTimestamp()
 
         let valu = {
-            guilds: 1,
+            "guilds": 1,
             guild_members: 2,
             guild_bans: 4,
             guild_emojis_and_stickers: 8,
