@@ -259,7 +259,7 @@ array.forEach(x => {
 
 finalEvents = finalEvents.join("\n")
 
-    embed.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n") +"\n"+ finalEvent}**\n**Tú número de intents**: ${main}`);
+    embed.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n") +"\n"+ finalEvents}**\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
 
 })
