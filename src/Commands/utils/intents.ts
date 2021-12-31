@@ -212,7 +212,7 @@ export const command: Command = {
                 "messageReactionRemoveEmoji\n",
             ],
             "direct_message_typings": [
-                "typingStart (Desbloqueable también con GUILD_MESSAGES intent)\n",
+                "typingStart\n",
             ],
             "guild_scheduled_events": [
                 "guildScheduledEventCreate",
