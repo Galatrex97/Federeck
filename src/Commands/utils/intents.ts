@@ -251,7 +251,7 @@ collector.on("collect", async(interaction) => {
     }
 
 let finalEvents: any = [];
-let array = finalEvent.split(" ");
+let array = finalEvent.split("\n");
 array.forEach(x => {
     if (finalEvents.includes(x) && x !== "threadMembersUpdate") return;
     finalEvents.push(x);
