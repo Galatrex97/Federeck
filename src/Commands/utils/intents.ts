@@ -219,7 +219,7 @@ export const command: Command = {
                 "guildScheduledEventUpdate",
                 "guildScheduledEventDelete",
                 "guildScheduledEventUserAdd",
-                "guildScheduledEventUserRemove",
+                "guildScheduledEventUserRemove\n",
             ]
         }
 
