@@ -185,31 +185,31 @@ export const command: Command = {
                 "presenceUpdate\n",
             ],
             "guild_messages": [
-                "messageCreate (Desbloqueable también con DIRECT_MESSAGES intent)",
-                "messageUpdate (Desbloqueable también con DIRECT_MESSAGES intent)",
-                "messageDelete (Desbloqueable también con DIRECT_MESSAGES intent)",
-                "messageDeleteBulk (Desbloqueable también con DIRECT_MESSAGES intent)\n",
+                "messageCreate",
+                "messageUpdate",
+                "messageDelete",
+                "messageDeleteBulk\n",
             ],
             "guild_message_reactions": [
-                "messageReactionAdd (Desbloqueable también con DIRECT_MESSAGES intent)",
-                "messageReactionRemove (Desbloqueable también con DIRECT_MESSAGES intent)",
-                "messageReactionRemoveAll (Desbloqueable también con DIRECT_MESSAGES intent)",
-                "messageReactionRemoveEmoji (Desbloqueable también con DIRECT_MESSAGES intent)\n",
+                "messageReactionAdd",
+                "messageReactionRemove",
+                "messageReactionRemoveAll",
+                "messageReactionRemoveEmoji\n",
             ],
             "guild_message_typings": [
-                "typingStart (Desbloqueable también con DIRECT_MESSAGES intent)\n"
+                "typingStart\n"
             ],
             "direct_messages": [
-                "messageCreate (Desbloqueable también con GUILD_MESSAGES intent)",
-                "messageUpdate (Desbloqueable también con GUILD_MESSAGES intent)",
-                "messageDelete (Desbloqueable también con GUILD_MESSAGES intent)",
-                "messageDeleteBulk (Desbloqueable también con GUILD_MESSAGES intent)\n",
+                "messageCreate",
+                "messageUpdate",
+                "messageDelete",
+                "messageDeleteBulk\n",
             ],
             "direct_message_reactions": [
-                "messageReactionAdd (Desbloqueable también con GUILD_MESSAGES intent)",
-                "messageReactionRemove (Desbloqueable también con GUILD_MESSAGES intent)",
-                "messageReactionRemoveAll (Desbloqueable también con GUILD_MESSAGES intent)",
-                "messageReactionRemoveEmoji (Desbloqueable también con GUILD_MESSAGES intent)\n",
+                "messageReactionAdd",
+                "messageReactionRemove",
+                "messageReactionRemoveAll",
+                "messageReactionRemoveEmoji\n",
             ],
             "direct_message_typings": [
                 "typingStart (Desbloqueable también con GUILD_MESSAGES intent)\n",
