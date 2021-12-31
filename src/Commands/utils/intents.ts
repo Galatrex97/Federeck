@@ -250,6 +250,15 @@ collector.on("collect", async(interaction) => {
         finalEvent += events[intents].join("\n");
     }
 
+    let array: any = finalEvent.split(" ");
+let array2: any = [];
+array.forEach(x => {
+    if (array2.includes(x) && x !== "threadMembersUpdate (con GUILDS intent)" || "threadMembersUpdate (con GUILD_MEMBERS intents)") return;
+    array2.push(x);
+});
+
+finalEvent = array2.join(" ");
+
     embed.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n") +"\n"+ finalEvent}**\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
 
