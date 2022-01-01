@@ -236,7 +236,7 @@ const collector = m.createMessageComponentCollector({ time: 120000, componentTyp
 
 collector.on("collect", async(interaction) => {
     interaction.deferUpdate();
-    if(interaction.user.id == message.author.id) {
+    
     let main = 0;
     let finalEvent = "";
     for(let i = 0; i < interaction.values.length; i++) {
@@ -258,11 +258,11 @@ array.forEach(x => {
 });
 
 finalEvents = finalEvents.join("\n")
-
+if(interaction.user.id == message.author.id) {
     embed.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n") +"\n"+ finalEvents}**\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
 } else {
-    interaction.reply({ content: "No puedes interactuar con el menú de otro usuario.", ephemeral: true })
+   return interaction.reply({ content: "No puedes interactuar con el menú de otro usuario.", ephemeral: true })
 }
 
 })
