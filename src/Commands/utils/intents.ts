@@ -262,7 +262,7 @@ finalEvents = finalEvents.join("\n")
     embed.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n") +"\n"+ finalEvents}**\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
 } else {
-    return interaction.reply({ content: "No puedes interactuar con el menú de otro usuario.", ephemeral: true })
+    interaction.reply({ content: "No puedes interactuar con el menú de otro usuario.", ephemeral: true })
 }
 
 })
