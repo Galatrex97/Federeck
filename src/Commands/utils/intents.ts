@@ -232,11 +232,11 @@ let embed = new MessageEmbed()
 .setFooter("Tienes 2 minutos para elegir tus intents")
 .setTimestamp()
 let m = await message.reply({ embeds: [embed], components: [row] });
-let filter = (i) => i.user.id == message.author.id;
-const collector = m.createMessageComponentCollector({ filter, time: 120000, componentType: "SELECT_MENU" });
+const collector = m.createMessageComponentCollector({ time: 120000, componentType: "SELECT_MENU" });
 
 collector.on("collect", async(interaction) => {
     interaction.deferUpdate();
+    if(interaction.user.id == message.author.id) {
     let main = 0;
     let finalEvent = "";
     for(let i = 0; i < interaction.values.length; i++) {
@@ -261,6 +261,9 @@ finalEvents = finalEvents.join("\n")
 
     embed.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n") +"\n"+ finalEvents}**\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
+} else {
+    return interaction.reply({ content: "No puedes interactuar con el menú de otro usuario.", ephemeral: true })
+}
 
 })
 
