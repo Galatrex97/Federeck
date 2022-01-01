@@ -235,6 +235,11 @@ let m = await message.reply({ embeds: [embed], components: [row] });
 const collector = m.createMessageComponentCollector({ time: 120000, componentType: "SELECT_MENU" });
 
 collector.on("collect", async(interaction) => {
+
+    if(interaction.user.id !== message.author.id) {
+        return interaction.reply({ content: "No puedes interactuar con el menú de otro usuario.", ephemeral: true })
+    }
+
     interaction.deferUpdate();
     
     let main = 0;
@@ -258,12 +263,9 @@ array.forEach(x => {
 });
 
 finalEvents = finalEvents.join("\n")
-if(interaction.user.id == message.author.id) {
     embed.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n") +"\n"+ finalEvents}**\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
-} else {
-   return interaction.reply({ content: "No puedes interactuar con el menú de otro usuario.", ephemeral: true })
-}
+
 
 })
 
