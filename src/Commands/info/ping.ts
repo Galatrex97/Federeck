@@ -27,7 +27,7 @@ export const command: Command = {
       });
 
     let embed = new Discord.MessageEmbed()
-      .setTitle("Latencia")
+      .setTitle("Latencia <:signalbars:927623293492658306>")
       .setDescription(
         `<:discord:927617018142810132> **Latencia del websocket:** ${
           client.ws.ping
