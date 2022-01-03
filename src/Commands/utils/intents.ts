@@ -237,7 +237,7 @@ const collector = m.createMessageComponentCollector({ time: 120000, componentTyp
 collector.on("collect", async(interaction) => {
 
     if(interaction.user.id !== message.author.id) {
-        return interaction.reply({ content: "No puedes interactuar con el menú de otro usuario.", ephemeral: true })
+        return interaction.reply({ content: `${interaction.user} no puedes interactuar con el menú de otro usuario.`, ephemeral: true })
     }
 
     interaction.deferUpdate();

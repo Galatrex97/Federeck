@@ -29,11 +29,12 @@ export const command: Command = {
     let embed = new Discord.MessageEmbed()
       .setTitle("Latencia")
       .setDescription(
-        `**Latencia del websocket:** ${
+        `<:discord:927617018142810132>
+        **Latencia del websocket:** ${
           client.ws.ping
-        } ms\n**Latencia de mensajes:** ${
+        } ms\n<:message:927616437525286982> **Latencia de mensajes:** ${
           Date.now() - message.createdTimestamp
-        } ms\n**Latencia de la base de datos:** ${dbLatency} ms`
+        } ms\n<:mongodb:927612382736416831> **Latencia de la base de datos:** ${dbLatency} ms`
       )
       .setColor("WHITE");
 
