@@ -29,8 +29,7 @@ export const command: Command = {
     let embed = new Discord.MessageEmbed()
       .setTitle("Latencia")
       .setDescription(
-        `<:discord:927617018142810132>
-        **Latencia del websocket:** ${
+        `<:discord:927617018142810132> **Latencia del websocket:** ${
           client.ws.ping
         } ms\n<:message:927616437525286982> **Latencia de mensajes:** ${
           Date.now() - message.createdTimestamp
