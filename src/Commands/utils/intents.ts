@@ -254,6 +254,8 @@ menuCollector.on("collect", async(interaction) => {
         return interaction.reply({ content: `${interaction.user} no puedes interactuar con el menú de otro usuario.`, ephemeral: true })
     }
 
+interaction.deferUpdate();
+
     let main = 0;
     let finalEvent = "";
     for(let i = 0; i < interaction.values.length; i++) {
@@ -381,7 +383,7 @@ menuRow = new MessageActionRow().addComponents(
         .setDisabled(true)
 )
 
-m.edit({ components: [btnRow, menuRow] })
+m.edit({ components: [menuRow, btnRow] })
 
 })
 
@@ -401,7 +403,7 @@ btnRow = new MessageActionRow().addComponents(
 )
 
 if(interaction.customId == "clear_int") {
-    m.edit({ embeds: [iEmbed], components: [btnRow, menuRow] });
+    m.edit({ embeds: [iEmbed], components: [menuRow, btnRow] });
 }
 
 
@@ -417,7 +419,7 @@ btnCollector.on("end", (collected) => {
         .setStyle("SECONDARY")
     )
 
-    m.edit({ components: [btnRow, menuRow] })
+    m.edit({ components: [menuRow, btnRow] })
 
 })
 
