@@ -19,7 +19,6 @@ export const command: Command = {
       embed.setColor("WHITE");
       return message
         .reply({ embeds: [embed] })
-        .then((m) => m.delete())
         .catch((error) => {
           console.log(error);
 

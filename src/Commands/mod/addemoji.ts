@@ -7,7 +7,7 @@ export const command: Command = {
   name: "add-emoji",
   aliases: ["addemoji"],
   cooldown: 15,
-  usage: "add-emoji <:emoji:>",
+  usage: "add-emoji <(a):emoji:>",
   category: "Útil",
   description: `"Toma prestado" un emoji de otro servidor`,
 
@@ -17,6 +17,8 @@ export const command: Command = {
         "Necesitas el permiso **Gestionar emojis** para usar este comando."
       );
       return;
+    } if(!message.guild?.me?.permissions.has("MANAGE_EMOJIS_AND_STICKERS")) {
+      return message.reply("Para el uso adecuado de este comando necesito el permiso **Gestionar emojis**.")
     }
 
     let res = args.join(" ");
@@ -32,7 +34,7 @@ export const command: Command = {
 	} */
 
     if (!args.length) {
-      message.reply("Por favor especifica el emoji");
+      message.reply("Para el uso adecuado de este comando se necesita especificar un emoji **de otro servidor**. No puedes añadir emojis que el servidor ya tenga.");
       return;
     }
 

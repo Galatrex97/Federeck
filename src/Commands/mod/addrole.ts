@@ -18,7 +18,7 @@ export const command: Command = {
   description: "Añade un rol al miembro mencionado",
 
   run: (client: Klar, message: Message, args: any) => {
-    if (!message.member?.permissions.has("ADMINISTRATOR"))
+    if (!message.member?.permissions.has("MANAGE_ROLES"))
       return message.reply("No puedes hacer esto.");
 
     if (!message.guild?.me?.permissions.has("MANAGE_ROLES"))

@@ -1,4 +1,4 @@
-import { Message, MessageEmbed, MessageActionRow, MessageSelectMenu, MessageAttachment } from "discord.js";
+import { Message, MessageEmbed, MessageActionRow, MessageSelectMenu, MessageAttachment, MessageButton } from "discord.js";
 import { Command } from "../../Interfaces";
 
 export const command: Command = {
@@ -10,7 +10,7 @@ export const command: Command = {
 
   run: async(client, message, args) => {
 
-    const row = new MessageActionRow().addComponents(
+    let row = new MessageActionRow().addComponents(
         new MessageSelectMenu()
         .setCustomId("intents_menu")
         .setPlaceholder("Selecciona tus intents aqui")
@@ -96,7 +96,12 @@ export const command: Command = {
                 description: "Intent de los eventos programados de un servidor, desbloquea 5 eventos, puedes verlos arriba.",
                 value: "guild_scheduled_events"
             }
-        ])
+        ]),
+        new MessageButton()
+        .setCustomId("clear_int")
+        .setDisabled(true)
+        .setLabel("Clear Intents")
+        .setStyle("SECONDARY")
     );
 
 
@@ -231,10 +236,16 @@ let embed = new MessageEmbed()
 .setColor("WHITE")
 .setFooter("Tienes 2 minutos para elegir tus intents")
 .setTimestamp()
+let iEmbed = new MessageEmbed()
+.setTitle("Calculadora de Intents")
+.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n")}**\n\n**Tú número de intents**: 0`)
+.setColor("WHITE")
+.setFooter("Tienes 2 minutos para elegir tus intents")
+.setTimestamp()
 let m = await message.reply({ embeds: [embed], components: [row] });
-const collector = m.createMessageComponentCollector({ time: 120000, componentType: "SELECT_MENU" });
-
-collector.on("collect", async(interaction) => {
+const menuCollector = m.createMessageComponentCollector({ time: 120000, componentType: "SELECT_MENU" });
+const btnCollector = m.createMessageComponentCollector({ time: 120000, componentType: "BUTTON" })
+menuCollector.on("collect", async(interaction) => {
 
     if(interaction.user.id !== message.author.id) {
         return interaction.reply({ content: `${interaction.user} no puedes interactuar con el menú de otro usuario.`, ephemeral: true })
@@ -242,6 +253,15 @@ collector.on("collect", async(interaction) => {
 
     interaction.deferUpdate();
     
+row = new MessageActionRow().addComponents(
+        new MessageButton()
+        .setCustomId("clear_int")
+        .setDisabled(false)
+        .setLabel("Clear Intents")
+        .setStyle("SECONDARY")
+    
+)
+
     let main = 0;
     let finalEvent = "";
     for(let i = 0; i < interaction.values.length; i++) {
@@ -262,10 +282,142 @@ array.forEach(x => {
     finalEvents.push(x);
 });
 
+
 finalEvents = finalEvents.join("\n")
     embed.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n") +"\n"+ finalEvents}**\n**Tú número de intents**: ${main}`);
     m.edit({ embeds: [embed] });
 
+
+})
+
+menuCollector.on("end", async (collected) => {
+row = new MessageActionRow().addComponents(
+    new MessageSelectMenu()
+        .setCustomId("intents_menu")
+        .setPlaceholder("Selecciona tus intents aqui")
+        .setMaxValues(16)
+        .addOptions([
+            {
+                label: "Guilds",
+                description: "Intent de los servidores, desbloquea 15 eventos, puedes verlos arriba.",
+                value: "guilds"
+            },
+            {
+                label: "Guild Members",
+                description: "(Privilegiado) Intent de los miembros de los servidores, desbloquea 4 eventos, puedes verlos arriba.",
+                value: "guild_members"
+            },
+            {
+                label: "Guild Bans",
+                description: "Intent de los baneos de los servidores, desbloquea 2 eventos, puedes verlos arriba.",
+                value: "guild_bans"
+            },
+            {
+                label: "Guild Emojis and Stickers",
+                description: "Intent de los emojis y stickers de los servidores, desbloquea 2 eventos, puedes verlos arriba.",
+                value: "guild_emojis_and_stickers"
+            },
+            {
+                label: "Guild Integrations",
+                description: "Intent de las integraciones de los servidores, desbloquea 1 evento, puedes verlo arriba.",
+                value: "guild_integrations"
+            },
+            {
+                label: "Guild Webhooks",
+                description: "Intent de las webhooks de un servidor, desbloquea 1 evento, puedes verlo arriba.",
+                value: "guild_webhooks"
+            },
+            {
+                label: "Guild Invites",
+                description: "Intent de las invites de un servidor, desbloquea 2 eventos, puedes verlos arriba.",
+                value: "guild_invites"
+            },
+            {
+                label: "Guild Voice States",
+                description: "Intent de los estados de actividad de voz, desbloquea 1 evento, puedes verlo arriba.",
+                value: "guild_voice_states"
+            },
+            {
+                label: "Guild Presences",
+                description: "(Privilegiado) Intent de las presencias de un usuario, desbloquea 1 evento, puedes verlo arriba.",
+                value: "guild_presences"
+            },
+            {
+                label: "Guild Messages",
+                description: "(Privilegiado en 2022) Intent de los mensajes, desbloquea 4 eventos, puedes verlos arriba.",
+                value: "guild_messages"
+            },
+            {
+                label: "Guild Message Reactions",
+                description: "Intent de las reacciones de un mensaje, desbloquea 4 eventos, puedes verlos arriba.",
+                value: "guild_message_reactions"
+            },
+            {
+                label: "Guild Message Typings",
+                description: "Intent \"Escribiendo\", desbloquea 1 evento, puedes verlo arriba.",
+                value: "guild_message_typings"
+            },
+            {
+                label: "Direct Messages",
+                description: "Intent de los mensajes directos, puedes revisar arriba.",
+                value: "direct_messages"
+            },
+            {
+                label: "Direct Message Reactions",
+                description: "Intent de las reacciones de un mensaje directo, puedes revisar arriba.",
+                value: "direct_message_reactions"
+            },
+            {
+                label: "Direct Message Typings",
+                description: "Intent de \"Escribiendo\", puedes revisar arriba.",
+                value: "direct_message_typings"
+            },
+            {
+                label: "Guild Scheduled Events",
+                description: "Intent de los eventos programados de un servidor, desbloquea 5 eventos, puedes verlos arriba.",
+                value: "guild_scheduled_events"
+            }
+        ])
+        .setDisabled(true)
+)
+
+m.edit({ components: [row] })
+
+})
+
+btnCollector.on("collect", async(interaction) => {
+if(interaction.user.id !== message.author.id) {
+    message.reply("No puedes interactuar con un botón que no es tuyo");
+    return;
+}
+interaction.deferUpdate();
+
+row = new MessageActionRow().addComponents(
+    new MessageButton()
+    .setCustomId("clear_int")
+    .setDisabled(true)
+    .setLabel("Clear Intents")
+    .setStyle("SECONDARY")
+)
+
+if(interaction.customId == "clear_int") {
+    m.edit({ embeds: [iEmbed], components: [row] });
+}
+
+
+})
+
+btnCollector.on("end", (collected) => {
+ 
+    row = new MessageActionRow().addComponents(
+        new MessageButton()
+        .setCustomId("clear_int")
+        .setDisabled(true)
+        .setLabel("Clear Intents")
+        .setStyle("SECONDARY")
+    )
+
+    m.edit({ components: [row] })
 
 })
 
