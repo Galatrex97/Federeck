@@ -10,7 +10,7 @@ export const command: Command = {
 
   run: async(client, message, args) => {
 
-    let row = new MessageActionRow().addComponents(
+    let menuRow = new MessageActionRow().addComponents(
         new MessageSelectMenu()
         .setCustomId("intents_menu")
         .setPlaceholder("Selecciona tus intents aqui")
@@ -96,13 +96,16 @@ export const command: Command = {
                 description: "Intent de los eventos programados de un servidor, desbloquea 5 eventos, puedes verlos arriba.",
                 value: "guild_scheduled_events"
             }
-        ]),
+        ])
+    );
+
+    let btnRow = new MessageActionRow().addComponents(
         new MessageButton()
         .setCustomId("clear_int")
         .setDisabled(true)
         .setLabel("Clear Intents")
         .setStyle("SECONDARY")
-    );
+    )
 
 
 
@@ -242,7 +245,7 @@ let iEmbed = new MessageEmbed()
 .setColor("WHITE")
 .setFooter("Tienes 2 minutos para elegir tus intents")
 .setTimestamp()
-let m = await message.reply({ embeds: [embed], components: [row] });
+let m = await message.reply({ embeds: [embed], components: [menuRow, btnRow] });
 const menuCollector = m.createMessageComponentCollector({ time: 120000, componentType: "SELECT_MENU" });
 const btnCollector = m.createMessageComponentCollector({ time: 120000, componentType: "BUTTON" })
 menuCollector.on("collect", async(interaction) => {
@@ -250,17 +253,6 @@ menuCollector.on("collect", async(interaction) => {
     if(interaction.user.id !== message.author.id) {
         return interaction.reply({ content: `${interaction.user} no puedes interactuar con el menú de otro usuario.`, ephemeral: true })
     }
-
-    interaction.deferUpdate();
-    
-row = new MessageActionRow().addComponents(
-        new MessageButton()
-        .setCustomId("clear_int")
-        .setDisabled(false)
-        .setLabel("Clear Intents")
-        .setStyle("SECONDARY")
-    
-)
 
     let main = 0;
     let finalEvent = "";
@@ -291,7 +283,7 @@ finalEvents = finalEvents.join("\n")
 })
 
 menuCollector.on("end", async (collected) => {
-row = new MessageActionRow().addComponents(
+menuRow = new MessageActionRow().addComponents(
     new MessageSelectMenu()
         .setCustomId("intents_menu")
         .setPlaceholder("Selecciona tus intents aqui")
@@ -381,7 +373,7 @@ row = new MessageActionRow().addComponents(
         .setDisabled(true)
 )
 
-m.edit({ components: [row] })
+m.edit({ components: [menuRow] })
 
 })
 
@@ -392,7 +384,7 @@ if(interaction.user.id !== message.author.id) {
 }
 interaction.deferUpdate();
 
-row = new MessageActionRow().addComponents(
+btnRow = new MessageActionRow().addComponents(
     new MessageButton()
     .setCustomId("clear_int")
     .setDisabled(true)
@@ -409,7 +401,7 @@ if(interaction.customId == "clear_int") {
 
 btnCollector.on("end", (collected) => {
  
-    row = new MessageActionRow().addComponents(
+    btnRow = new MessageActionRow().addComponents(
         new MessageButton()
         .setCustomId("clear_int")
         .setDisabled(true)
@@ -417,7 +409,7 @@ btnCollector.on("end", (collected) => {
         .setStyle("SECONDARY")
     )
 
-    m.edit({ components: [row] })
+    m.edit({ components: [btnRow] })
 
 })
 
