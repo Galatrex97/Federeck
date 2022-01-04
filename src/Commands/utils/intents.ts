@@ -285,7 +285,7 @@ btnRow = new MessageActionRow().addComponents(
 
 finalEvents = finalEvents.join("\n")
     embed.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n") +"\n"+ finalEvents}**\n**Tú número de intents**: ${main}`);
-    m.edit({ embeds: [embed], components: [btnRow] });
+    m.edit({ embeds: [embed], components: [menuRow, btnRow] });
 
 
 })
@@ -381,7 +381,7 @@ menuRow = new MessageActionRow().addComponents(
         .setDisabled(true)
 )
 
-m.edit({ components: [menuRow] })
+m.edit({ components: [btnRow, menuRow] })
 
 })
 
@@ -401,7 +401,7 @@ btnRow = new MessageActionRow().addComponents(
 )
 
 if(interaction.customId == "clear_int") {
-    m.edit({ embeds: [iEmbed] });
+    m.edit({ embeds: [iEmbed], components: [btnRow, menuRow] });
 }
 
 
@@ -417,7 +417,7 @@ btnCollector.on("end", (collected) => {
         .setStyle("SECONDARY")
     )
 
-    m.edit({ components: [btnRow] })
+    m.edit({ components: [btnRow, menuRow] })
 
 })
 
