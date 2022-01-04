@@ -36,7 +36,7 @@ export const command: Command = {
       return;
     }
 
-    let reg = /^<a?:(\w{2,32}+):(\d{17,18})>$/;
+    let reg = /^<a?:(\w{2,32}):(\d{17,18})>/;
     let x = reg.test(args.join("  "));
 
     if(args.join(" ") && !x) {
