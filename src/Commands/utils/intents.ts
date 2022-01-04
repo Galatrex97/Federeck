@@ -401,7 +401,7 @@ row = new MessageActionRow().addComponents(
 )
 
 if(interaction.customId == "clear_int") {
-    m.edit({ embeds: [iEmbed], components: [row] });
+    m.edit({ embeds: [iEmbed] });
 }
 
 
