@@ -275,9 +275,17 @@ array.forEach(x => {
 });
 
 
+btnRow = new MessageActionRow().addComponents(
+    new MessageButton()
+    .setCustomId("clear_int")
+    .setDisabled(false)
+    .setLabel("Clear Intents")
+    .setStyle("SECONDARY")
+)
+
 finalEvents = finalEvents.join("\n")
     embed.setDescription(`**Eventos que recibirás**:\n\n**${events.default.join("\n") +"\n"+ finalEvents}**\n**Tú número de intents**: ${main}`);
-    m.edit({ embeds: [embed] });
+    m.edit({ embeds: [embed], components: [btnRow] });
 
 
 })
