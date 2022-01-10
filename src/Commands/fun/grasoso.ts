@@ -7,17 +7,34 @@ import Discord, {
 } from "discord.js";
 import Klar from "../../Client";
 import { createCanvas, loadImage } from "canvas";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class HailGrasaCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "hailgrasa",
+    aliases: [],
+    description: "#HailGrasa",   
+    usage: "",
+    category: "Fun",
+    cooldown: 0,
+    botPerms: ["ATTACH_FILES", "SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: true,
+  })
+};
 
-export const command: Command = {
-  name: "hailgrasa",
-  aliases: [],
-  usage: "",
-  category: "Fun",
-  description: "#HailGrasa",
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
 
-  run: async (client: Klar, message: Message, args, p) => {
+
+  run = async(client: Lyon, message: Message, args) => {
 
     let when = args[0];
 
@@ -60,5 +77,5 @@ export const command: Command = {
     );
 
     message.channel.send({ files: [attachment] });
-  },
+  };
 };

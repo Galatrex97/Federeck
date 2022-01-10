@@ -6,19 +6,34 @@ import Discord, {
   TextChannel,
 } from "discord.js";
 import Klar from "../../Client";
-const cooldown = new Set();
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class MinesweeperCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "buscaminas",
+    aliases: ["mminesweeper"],
+    description: "Juego clásico de Buscaminas.",   
+    usage: "buscaminas <Abrir los spoilers para encontrar los números, pero sin tocar las minas> ",
+    category: "Fun",
+    cooldown: 0,
+    botPerms: ["SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: false,
+  })
+};
 
-export const command: Command = {
-  name: "buscaminas",
-  aliases: [],
-  usage: "",
-  cooldown: 60,
-  category: "Fun",
-  description: "",
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
 
-  run: (client: Klar, message: Message, args: String[]) => {
+
+  run = async(client: Lyon, message: Message, args) => {
 
     const choices = [
       "||:zero:||",
@@ -94,5 +109,5 @@ export const command: Command = {
 
       console.log(err);
     }
-  },
+  };
 };

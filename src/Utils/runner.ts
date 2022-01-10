@@ -1,14 +1,14 @@
 import Client from "../Client"; //Importamos el ExtendedCLient.
-import { readdirSync } from "fs";
+import { readdirSync, readdir } from "fs";
 import {
-  Command,
+  CommandOptions,
   Event,
   interactionCommand,
   interactionMenu,
   PlayerEvent,
 } from "../Interfaces";
 import { connect } from "mongoose";
-
+import BaseCommand from "../Structures/Command";
 export function runAll(client: Client) {
   //Exportamos la función runAll.
 
@@ -30,21 +30,17 @@ process.on("uncaughtException", async(error, origin) => {
 })
 
   //Commands
-  readdirSync("./src/Commands/").forEach((dir) => {
-    //Entramos a la carpeta Commands, creamos la carpeta Cmd, y hacemos un readdirSync, para obtener todas sus categorias, retornando el parámetro dir
-    readdirSync("./src/Commands/" + dir) //Luego de eso entramos al mismo directorio, pero con el parámetro dir añadido.
-      .filter((f) => f.endsWith(".ts")) //Filtro de sólo archivos TypeScript.
-      .forEach((file) => {
-        //Y un forEach.
-        let { command } = require(`../Commands/${dir}/${file}`); //Requerimos el comando de los comandos.
-        client.commands.set((command as Command).name, command as Command);
-        if (command.aliases && Array.isArray(command.aliases)) {
-          command.aliases.forEach((alias: string) =>
-            client.aliases.set(alias, command.name)
-          );
-        } //Y lo establecemos en el Collection.
-      }); //Cerramos forEach de archivCs.
-  }); //Cerramos forEach de categorías
+  readdirSync('./Commands').forEach((dir) => {
+    readdir(`./Commands/${dir}`, (e) => {
+        if (e) console.log(`${e}`);
+        readdirSync(`./Commands/${dir}`).filter((f) => f.endsWith('.ts')).forEach((command) => {
+            const req = require(`../Commands/${dir}/${command}`);
+            const cmd = new req(client);
+            if (cmd.name && typeof cmd.name == 'string') client.commands.set(cmd.name.toLowerCase(), cmd as BaseCommand);
+            if (cmd.aliases && Array.isArray(cmd.aliases)) cmd.aliases.forEach((alias: string) => client.aliases.set(alias, cmd.name.toLowerCase()));
+        });
+    });
+});
 
   //Events
   readdirSync("./src/Events/") //Entramos a la carpeta Events, creamos la carpeta Djs, y hacemos un readdirSync para obtener todos sus archivos.

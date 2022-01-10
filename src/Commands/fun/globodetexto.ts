@@ -7,17 +7,34 @@ import Discord, {
 } from "discord.js";
 import Klar from "../../Client";
 import Canvas from "canvas";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class TextBallCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "globo",
+    aliases: ["globo-de-texto"],
+    description: "Hace un globo de texto a partir de la imagen que el usuario da.",   
+    usage: "",
+    category: "",
+    cooldown: 0,
+    botPerms: ["SEND_MESSAGES", "ATTACH_FILES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: false,
+  })
+};
 
-export const command: Command = {
-  name: "globo",
-  aliases: ["globo-de-texto"],
-  category: "Fun",
-  description: "Genera un globo de texto",
-  usage: "globo <imagen>",
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
 
-  async run(client: Klar, message: Message, args: String[]) {
+
+  run = async(client: Lyon, message: Message, args) => {
     if (!message.attachments.first())
       return message.reply({
         content: " Debes enviar un archivo de imagen adjunto al comando",
@@ -92,5 +109,5 @@ export const command: Command = {
 
       console.log(err);
     }
-  },
+  };
 };

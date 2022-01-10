@@ -7,17 +7,34 @@ import Discord, {
 } from "discord.js";
 import Klar from "../../Client";
 import { createCanvas, loadImage } from "canvas";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class WhatsappCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "whatsapp",
+    aliases: [],
+    description: "",   
+    usage: "",
+    category: "Fun",
+    cooldown: 0,
+    botPerms: ["SEND_MESSAGES", "ATTACH_FILES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: true,
+  })
+};
 
-export const command: Command = {
-  name: "whatsapp",
-  aliases: ["wa"],
-  usage: "",
-  category: "Fun",
-  description: "wasaaaa",
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
 
-  run: async (client: Klar, message: Message, args, p) => {
+
+  run = async(client: Lyon, message: Message, args) => {
     let when = args[0];
 
     let regg = /^\d{17,18}$/;
@@ -58,5 +75,5 @@ export const command: Command = {
     );
 
     message.channel.send({ files: [attachment] });
-  },
+  };
 };

@@ -2,37 +2,38 @@ import Discord, {
   Client,
   Message,
   MessageEmbed,
+  EmbedAuthorData,
   Guild,
   GuildMember,
 } from "discord.js";
 import * as backup from "discord-backup";
 import Klar from "../../Client";
 backup.setStorageFolder(__dirname + "/backups/");
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class BackupCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "backup",
+    aliases: ["cloud"],
+    description: "Crea una copia de seguridad de un server",   
+    usage: "backup/cloud",
+    category: "Mod",
+    cooldown: 0,
+    botPerms: ["ADMINISTRATOR"],
+    userPerms: ["ADMINISTRATOR"],
+    devOnly: false,
+    guildOnly: true,
+  })
+};
 
-export const command: Command = {
-  name: "backup",
-  aliases: ["cloud"],
-  usage: "backup/cloud",
-  category: "Mod",
-  description: "Crea una copia de seguridad del server",
 
-  run: (client: Klar, message: Message, args) => {
-    //Otra vez vuelvo a subir este comando, por favor, no me lo borren por los comentaios que hay en los codigos, son porque estoy desarrollando un bot en ingles
-
-    //Aparte de eso no olviden instalar el npm de "discord-backup" y crear una carpeta llamda backups
+  run = async(client: Lyon, message: Message, args, p) => {
 
     let guild = message.guild as Guild;
 
-    let i = message.guild?.me as GuildMember;
-
-    let perms = message.member?.permissions.has("ADMINISTRATOR");
-
-    if (!perms)
-      return message.reply(
-        "No tienes el permiso de Administrador como para usar este comando"
-      );
+    let me = message.guild?.me as GuildMember;
     backup
       .create(guild, {
         jsonBeautify: true,
@@ -42,9 +43,9 @@ export const command: Command = {
         message.author.send({
           embeds: [
             new Discord.MessageEmbed()
-              .setAuthor(`Backup creada correctamente`)
-              .setColor(i.displayHexColor)
-              .setDescription(`Para cargar esta backup usa ${backupData.id}`)
+              .setAuthor({ name: "Se ha creado una nueva copia de seguridad de un servidor" })
+              .setColor(me.displayHexColor)
+              .setDescription(`Para cargar esta backup usa **__${p + "backupload " + backupData.id}__**\n**Información general:** \n**ID del server:** **${message.guild?.id}**\n**Nombre del server:** **${message.guild?.name}**\n**Guardada por:** **${message.member?.nickname || message.author.username+message.author.discriminator}**\n**Fecha de esta copia:**\n\`<t:${message.createdTimestamp / 1000}:F>\``)
               .setThumbnail(message.author.displayAvatarURL()),
           ],
         });
@@ -52,10 +53,10 @@ export const command: Command = {
           embeds: [
             //backupData.id
             new Discord.MessageEmbed()
-              .setAuthor(`Backup creada correctamente`)
-              .setColor(i.displayHexColor)
+              .setAuthor({ name: `Backup creada correctamente` })
+              .setColor(me.displayHexColor)
               .setThumbnail(message.author.displayAvatarURL())
-              .setDescription("**El ID de la backup se ha enviado a tu MD**"),
+              .setDescription(`**El ID de la backup se ha enviado a tu MD**`),
           ],
         });
       })
@@ -64,5 +65,5 @@ export const command: Command = {
 
         message.channel.send("Ha ocurrido un error.");
       });
-  },
+  };
 };

@@ -7,16 +7,34 @@ import Discord, {
 } from "discord.js";
 import Klar from "../../Client";
 import canvacord from "canvacord";
-import { Command } from "../../Interfaces";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-export const command: Command = {
-  name: "ytcomment",
-  aliases: [],
-  usage: "ytcomment <args>",
-  category: "Fun",
-  description: '"comenta" algo en yt',
+export class YT_CommentCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "yt-comment",
+    aliases: [],
+    description: "",   
+    usage: "",
+    category: "Fun",
+    cooldown: 0,
+    botPerms: ["ATTACH_FILES", "SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: false,
+  })
+};
 
-  run: async (client, message, args) => {
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
+
+
+  run = async(client: Lyon, message: Message, args) => {
     const comment = args.join(""); // definimos el comentario a poner
     if (!comment) return message.reply(`Que quieres comentar?`); // si el usuario no indica ningun comentario dice que lo pongas ;)
     try {
@@ -38,5 +56,5 @@ export const command: Command = {
 Bien ahora se puede hacer otra cosa y es con await messages cojer la foto, el user y el contenido. Quedaria mejor.
 10 likes y lo subo ;)
 */
-  },
+  };
 };

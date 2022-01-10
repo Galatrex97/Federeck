@@ -1,14 +1,30 @@
 import { Message, MessageEmbed, MessageActionRow, MessageSelectMenu, MessageAttachment, MessageButton } from "discord.js";
-import { Command } from "../../Interfaces";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
+export class IntentsMenuCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "intents",
+    aliases: [],
+    description: "Calcula los intents que vas a necesitar para tu Client (bot) de Discord",   
+    usage: "intents",
+    category: "Útil",
+    cooldown: 27,
+    botPerms: ["SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: false,
+  })
+};     
 
-export const command: Command = {
-  name: "intents",
-  aliases: [],
-  category: "Útil",
-  usage: "intents",
-  description: "Calcula los intents que necesitarás",
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
 
-  run: async(client, message, args) => {
+run = async(client: Lyon, message: Message, args) => {
 
     let menuRow = new MessageActionRow().addComponents(
         new MessageSelectMenu()
@@ -423,5 +439,5 @@ btnCollector.on("end", (collected) => {
 
 })
 
-  },
+  };
 };

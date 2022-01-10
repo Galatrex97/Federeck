@@ -8,18 +8,34 @@ import Discord, {
 import Klar from "../../Client";
 import { is_url } from "../../functions";
 import translate from "@iamtraction/google-translate"; //requerimos la API que necesitaremos...
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
-
-export const command: Command = {
+export class TranslateCommand extends BaseCommand {
+constructor() {
+  super({  
   name: "translate",
   aliases: [],
   category: "Útil",
   cooldown: 7,
   description: "Traduce",
-  usage: "",
+  usage: "translate es Hallo \nEsto traducirá \"Hallo\" (Hola en alemán) a español.\nResultado: Hola.",
+    botPerms: ["SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: false,
+  })
+};
 
-  run: async (client, message, args) => {
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
+
+
+  run = async(client: Lyon, message: Message, args) => {
     const idioma = args[0] as string; //Establecemos el argumento 0 como el idioma al que se traducira
     const texto = args.slice(1).join(" "); //A partir del argumento 1 tomara el texto a traducir
 
@@ -31,7 +47,7 @@ if(def) {
 
     if (!idioma) {
       //Si no escribio el idioma de la manera correcta
-      return message.channel.send("Especifica el idioma a traducir del texto");
+      return message.channel.send("Especifica el idioma al que el texto será traducido");
     }
     if (!texto) {
       //Si solamente escribio el idioma pero no el texto...
@@ -53,5 +69,5 @@ if(def) {
         console.error(err); //En caso de haber un error en este caso seria introducir mal el lenguaje al que se traducirá
       });
     //Nota: el idioma a traducir tiene que ser escrito en ingles, como spanish, japanese, english, etc...
-  },
+  };
 };

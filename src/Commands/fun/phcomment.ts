@@ -6,17 +6,35 @@ import Discord, {
   TextChannel,
 } from "discord.js";
 import Klar from "../../Client";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class HubCommentCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "phcomment",
+    aliases: ["hubcomment"],
+    description: "Envía una imagen de un comentario tuyo en el hub.",   
+    usage: "",
+    category: "Fun",
+    cooldown: 0,
+    botPerms: ["ATTACH_FILES", "SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: false,
+  })
+};
 
-export const command: Command = {
-  name: "phcomment",
-  aliases: ["hubcomment"],
-  usage: "phcomment/hubcomment <args>",
-  category: "Fun",
-  description: "XDD",
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
 
-  run: (client: Klar, message: Message, args: String[]) => {
+
+  run = async(client: Lyon, message: Message, args) => {
+
     let txt = args.join("%20"); //Argumentos
     if (txt.includes("@"))
       return message.reply(
@@ -39,5 +57,5 @@ export const command: Command = {
 
       console.log(err);
     }
-  }, //Fin del codigo :D
+  }; //Fin del codigo :D
 };

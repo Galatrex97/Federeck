@@ -8,17 +8,34 @@ import Discord, {
 import Klar from "../../Client";
 import clientnt from "nekos.life";
 const neko = new clientnt();
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class WaifuCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "waifu",
+    aliases: [],
+    description: "",   
+    usage: "waifu",
+    category: "Anime",
+    cooldown: 0,
+    botPerms: ["SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: false,
+  })
+};
 
-export const command: Command = {
-  name: "waifu",
-  aliases: [],
-  usage: "",
-  description: "",
-  category: "Anime",
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
 
-  run: async (client, message, args) => {
+
+  run = async(client: Lyon, message: Message, args) => {
     neko.sfw
       .waifu()
       .then((aa) => {
@@ -30,5 +47,5 @@ export const command: Command = {
         console.log(error);
         message.channel.send("Ha ocurrido un error.");
       });
-  },
+  };
 };

@@ -1,5 +1,5 @@
 import Client from "../Client";
-import { CommandInteraction, ContextMenuInteraction } from "discord.js";
+import { CommandInteraction, ContextMenuInteraction, CommandOptionDataTypeResolvable } from "discord.js";
 
 interface Run {
   (client: Client, interaction: ContextMenuInteraction);
@@ -7,6 +7,6 @@ interface Run {
 
 export interface interactionMenu {
   name: string;
-  type: string;
+  type: "USER" | "MESSAGE";
   run: Run;
 }

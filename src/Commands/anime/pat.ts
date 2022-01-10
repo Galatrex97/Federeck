@@ -8,17 +8,35 @@ import Discord, {
 import Klar from "../../Client";
 import clientnt from "nekos.life";
 const neko = new clientnt();
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class PatCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "pat",
+    aliases: [],
+    description: "",   
+    usage: "",
+    category: "Anime",
+    cooldown: 0,
+    botPerms: ["SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: true,
+  })
+};
 
-export const command: Command = {
-  name: "pat",
-  aliases: [],
-  usage: "pat",
-  description: "Este comando da una palmada a un mencionado.",
-  category: "Anime",
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
 
-  run: async (client, message, args) => {
+
+  run = async(client: Lyon, message: Message, args) => {
+
     let user = message.member?.id;
 
     let mentionedUser = message.mentions.members?.first()?.id;
@@ -48,5 +66,5 @@ export const command: Command = {
         console.log(error);
         message.channel.send("Ha ocurrido un error.");
       });
-  },
+  };
 };

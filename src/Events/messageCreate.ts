@@ -13,15 +13,6 @@ export const event: Event = {
   run: async (client, message) => {
     //Returns & Conditionals
     if(message.author.bot) return;
-    if (message.channel.type === "DM" && message.content.startsWith(prefix)) {
-      try {
-        return message.reply("Los comandos en MD no están soportados aún.");
-      } catch (err) {
-        console.log(err);
-      }
-    } else if (message.channel.type === "DM") {
-      return;
-    }
 
     //Params Objects
     const someConfigParams = {
@@ -58,7 +49,7 @@ export const event: Event = {
       (await antilink.create(antilinkConfigParams));
 
     if (pacmansConfig.sdlg == true && message.content === ":v") {
-      message.channel.send(pacmansReplies[Math.floor(
+      message.channel.send(pacmansReplies[~~(
         Math.random() * pacmansReplies.length
       )]);
     }
@@ -179,7 +170,7 @@ export const event: Event = {
     }
 
     //Custom Prefix System
-    const p = await client.prefix(message);
+    const p = await client.prefix(message) || prefix;
 
     if (message.content.match(myMention))
       try {
@@ -197,6 +188,121 @@ export const event: Event = {
     const cmd =
       client.commands.get(command) ||
       client.commands.get(client.aliases.get(command) as string);
+
+const latPerms = {
+CREATE_INSTANT_INVITE: "Crear invitaciones",
+KICK_MEMBERS: "Expulsar miembros",
+BAN_MEMBERS: "Banear miembros",
+ADMINISTRATOR: "Administrador",
+MANAGE_CHANNELS: "Gestionar canales",
+MANAGE_GUILD: "Gestionar servidor",
+ADD_REACTIONS: "Añadir reacciones a mensajes",
+VIEW_AUDIT_LOG: "Ver el registro de auditoría",
+PRIORITY_SPEAKER: "Tener prioridad de palabra (Volumen más alto en comparación a los otros miembros en un canal de voz)",
+STREAM: "Transmitir",
+VIEW_CHANNEL: "Ver canal",
+SEND_MESSAGES: "Enviar mensajes",
+SEND_TTS_MESSAGES: "Enviar mensajes de texto a voz",
+MANAGE_MESSAGES: "Gestionar mensajes (Borrar mensajes y reacciones)",
+EMBED_LINKS: "Enviar links con una vista previa",
+ATTACH_FILES: "Adjuntar archivos",
+READ_MESSAGE_HISTORY: "Leer el historial de mensajes en un canal de texto",
+MENTION_EVERYONE: "Mencionar @everyone",
+USE_EXTERNAL_EMOJIS: "Utilizar emojis de otro servidor",
+VIEW_GUILD_INSIGHTS: "Ver las insignias del servidor",
+CONNECT: "Conectarse a un canal de voz",
+SPEAK: "Hablar en un canal de voz",
+MUTE_MEMBERS: "Silenciar miembros de los canales de voz",
+DEAFEN_MEMBERS: "Remover el audio de los miembros en los canales de voz (no escuchar audio en un canal de voz)",
+MOVE_MEMBERS: "Mover miembros de un canal de voz a otro",
+USE_VAD: "Utilizar Actividad de voz",
+CHANGE_NICKNAME: "Cambiar o reestablecer mi propio apodo (nickname)",
+MANAGE_NICKNAMES: "Cambiar o reestablecer los apodos (nicknames) de los miembros",
+MANAGE_ROLES: "Gestionar los roles del servidor (eliminarlos o cambiar su información)",
+MANAGE_WEBHOOKS: "Gestionar las webhooks del servidor, eliminarlas o crear nuevas",
+MANAGE_EMOJIS_AND_STICKERS: "Gestionar los emojis y/o stickers del servidor (eliminarlos, crear nuevos o cambiar información de los ya existentes)",
+USE_APPLICATION_COMMANDS: "Utilizar Interacciones de los bots (Slash Commands y Context Menus)",
+REQUEST_TO_SPEAK: "Permiso para solicitar hablar en un canal de escenario",
+MANAGE_EVENTS: "Gestionar los eventos programados de un servidor (eliminarlos, crear nuevos o cambiar información de los ya existentes)",
+MANAGE_THREADS: "Gestionar los hilos de los canales (eliminarlos, crear nuevos o cambiar información de los ya existentes)",
+CREATE_PUBLIC_THREADS: "Crear hilos públicos en un canal",
+CREATE_PRIVATE_THREADS: "Crear hilos cerrados | privados en un canal",
+USE_EXTERNAL_STICKERS: "Utilizar stickers de otro servidor",
+SEND_MESSAGES_IN_THREADS: "Enviar mensajes en los hilos de un canal",
+START_EMBEDDED_ACTIVITIES: "Iniciar una actividad en un canal de voz (exclusivo para bots)",
+MODERATE_MEMBERS: "Aislar miembros (mutearlos)"
+}
+
+let botPerms = cmd?.botPerms;
+let userPerms = cmd?.userPerms;
+
+if(userPerms) {
+  let permsHav: Array<string> = [];
+  let reqPerms: Array<string> = [];
+  let allPerms: Array<string> = [];
+
+  userPerms.forEach(permission => {
+allPerms.push(latPerms[permission])
+      let dex = message.guild.me.permissions.has(permission);
+
+      if (dex) {
+          permsHav.push(latPerms[permission]);
+      } else if (!dex) {
+          reqPerms.push(latPerms[permission]);
+      };
+
+
+
+  })
+
+  if (reqPerms.length > 0 && message.guild.me.permissions.has("SEND_MESSAGES")) {
+
+      let reqEmbed = new MessageEmbed()
+          .setTitle("Necesitas más permisos para ejecutar este comando")
+          .setDescription(`Para ejecutar este comando se necesitan los siguientes permisos:\n\n**Todos los permisos necesarios: **\n\`\`\`${allPerms.join("\n")}\`\`\`\n${permsHav.length > 0 ? `**Permisos que ya tienes: **\n\`\`\`${permsHav.join("\n")}\`\`\`\n` : "" } ${permsHav.length > 0 ? `**Permisos que aún te faltan: **\n\`\`\`${reqPerms.join("\n")}\`\`\`\n` :  "" } Para continuar, es necesario que tengas los permisos que aun te faltan.`)
+.setColor("WHITE")
+
+
+      message.reply({
+          embeds: [reqEmbed]
+      })
+  } 
+
+}
+
+if (botPerms) {
+  let permsHav: Array<string> = [];
+  let reqPerms: Array<string> = [];
+  let allPerms: Array<string> = [];
+
+  botPerms.forEach(permission => {
+allPerms.push(latPerms[permission])
+      let dex = message.guild.me.permissions.has(permission);
+
+      if (dex) {
+          permsHav.push(latPerms[permission]);
+      } else if (!dex) {
+          reqPerms.push(latPerms[permission]);
+      };
+
+
+
+  })
+
+  if (reqPerms.length > 0 && message.guild.me.permissions.has("SEND_MESSAGES")) {
+
+      let reqEmbed = new MessageEmbed()
+          .setTitle("Necesito más permisos para ejecutar este comando")
+          .setDescription(`Para ejecutar este comando se necesitan los siguientes permisos:\n\n**Todos los permisos necesarios: **\n\`\`\`${allPerms.join("\n")}\`\`\`\n${permsHav.length > 0 ? `**Permisos que ya tengo: **\n\`\`\`${permsHav.join("\n")}\`\`\`\n` : "" } ${permsHav.length > 0 ? `**Permisos que aún me faltan: **\n\`\`\`${reqPerms.join("\n")}\`\`\`\n\n` :  "" } Para continuar, es necesario que edites mis permisos o me des un rol con los permisos que aún necesito.`)
+.setColor("WHITE")
+
+
+      message.reply({
+          embeds: [reqEmbed]
+      })
+  } 
+
+}
 
     //Cooldowns System
     let cooldowns = client.cooldowns;
@@ -220,7 +326,7 @@ export const event: Event = {
         let timeLeft = (cooldownExpiration - actualTime) / 1000;
         return message.reply(
           `Por favor espera **${timeLeft.toFixed(
-            1
+            0
           )} segundos** antes de volver a usar el comando \`${cmd?.name}\`.`
         ).then(m => {
           setTimeout(() => {
@@ -237,12 +343,16 @@ export const event: Event = {
     );
 
     //Beta & Unstable Commands
-    if (cmd?.dev === true && message.author.id !== process.env.botOwner)
-      return message.reply(`Ese comando está en "Reconstrucción" `).then(m => {
+    if (cmd?.devOnly && message.author.id !== process.env.botOwner)
+      return message.reply(`Ese comando está modo inestable, solamente el grupo de desarrolladores puede hacer esto.`).then(m => {
         setTimeout(() => {
           m.delete();
         }, 10000)
       });
+
+      if(cmd?.guildOnly && !message.guild) {
+        return message.reply("Este comando solo está habilitado para los servidores.")
+      }
 
     try {
       if (cmd) {

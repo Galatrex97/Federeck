@@ -1,14 +1,33 @@
 import Discord, { Message, MessageEmbed } from "discord.js";
-import { Command } from "../../Interfaces";
 import Canvas from "canvas";
-export const command: Command = {
-  name: "sus",
-  aliases: [],
-  category: "Fun",
-  usage: "sus [user]",
-  description: "Kinda sus",
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-  run: async (client, message, args) => {
+export class AmogusCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "sus",
+    aliases: ["amogus"],
+    description: "",   
+    usage: "",
+    category: "Fun",
+    cooldown: 0,
+    botPerms: ["ATTACH_FILES", "SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: true,
+  })
+};
+
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
+
+
+  run = async(client: Lyon, message: Message, args) => {
     const member = message.mentions.members?.first() || message.member;
     const pfp: any = member?.user.displayAvatarURL({ format: "jpg" })
     const avatar = await Canvas.loadImage(pfp);
@@ -25,5 +44,5 @@ export const command: Command = {
         files: [attachment]
     });
 
-  },
+  };
 };

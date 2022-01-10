@@ -8,17 +8,27 @@ import Discord, {
 import Klar from "../../Client";
 import clientnt from "nekos.life";
 const neko = new clientnt();
+import BaseCommand from "../../Structures/Command";
 
-import { Command } from "../../Interfaces";
+export class BakaCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "baka",
+    aliases: [],
+    description: "",   
+    usage: "baka",
+    category: "Anime",
+    cooldown: 0,
+    botPerms: ["SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: true,
+  })
+};
 
-export const command: Command = {
-  name: "baka",
-  aliases: [],
-  usage: "baka",
-  description: "...",
-  category: "Anime",
 
-  run: async (client, message, args) => {
+  run = async(client: Klar, message: Message, args) => {
+
     let user = message.member?.id;
 
     let mentionedUser = message.mentions.members?.first()?.id;
@@ -33,15 +43,13 @@ export const command: Command = {
       .baka()
       .then((img) => {
         const embed = new MessageEmbed()
-          .setDescription(`Idiota`)
           .setImage(img.url)
           .setColor("WHITE");
-
         message.reply({ embeds: [embed] });
       })
       .catch((error) => {
         console.log(error);
         message.channel.send("Ha ocurrido un error.");
       });
-  },
+  };
 };

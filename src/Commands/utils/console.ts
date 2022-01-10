@@ -1,21 +1,38 @@
 import Discord, { Client, Message, MessageEmbed } from "discord.js";
-import Klar from "../../Client";
-import { Command } from "../../Interfaces";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-export const command: Command = {
-  name: "bugreport",
-  aliases: ["console", "bug", "reportbug", "report-bug", "bug-report"],
-  usage: "console/bugreport/bug/reportbug/report-bug/bug-report",
-  category: "Útil",
-  description: "...",
+export class ReportBugCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "bug-report",
+    aliases: ["bug", "reportbug", "report-bug", "bug-report"],
+    description: "Reporta un bug a los desarrolladores para que sea arreglado",   
+    usage: "bug-report <bug a reportar>",
+    category: "Útil",
+    cooldown: 0,
+    botPerms: ["SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: true,
+  })
+};
 
-  run: (client: Klar, message: Message, args: String[]) => {
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
+
+
+  run = async(client: Lyon, message: Message, args) => {
+  
     const reportedBug = args.join(" ");
     if (!reportedBug) return message.reply("Que bug quieres reportar?");
     const embed = new MessageEmbed()
       .setTitle("Nuevo reporte de bug")
       .setColor("WHITE")
-      .setFooter("Mmm")
       .setTimestamp()
       .setDescription(
         `El usuario **${message.author.tag}** ha reportado un bug desde el server **${message.guild?.name}**.\nEl bug reportado es el siguiente: **${reportedBug}**`
@@ -32,5 +49,5 @@ export const command: Command = {
     message.reply(
       `Tu bug se ha reportado correctamente y estará en revisión muy pronto.`
     );
-  },
+  };
 };

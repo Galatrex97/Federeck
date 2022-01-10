@@ -8,17 +8,26 @@ import Discord, {
 import Klar from "../../Client";
 import clientnt from "nekos.life";
 const neko = new clientnt();
+import BaseCommand from "../../Structures/Command";
 
-import { Command } from "../../Interfaces";
+export class HugCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "hug",
+    aliases: ["abrazar"],
+    description: "Abraza a quién lo necesite",   
+    usage: "hug",
+    category: "Anime",
+    cooldown: 0,
+    botPerms: ["SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: true,
+  })
+};
 
-export const command: Command = {
-  name: "hug",
-  aliases: ["abrazar"],
-  usage: "hug",
-  description: "Este comando abraza a un mencionado.",
-  category: "Anime",
 
-  run: async (client, message, args) => {
+  run = async(client, message, args) => {
     const person = message.mentions.members?.first();
     if (!person) return message.reply("Debes mencionar a alguien.");
 
@@ -49,5 +58,5 @@ export const command: Command = {
 
         message.channel.send("Ha ocurrido un error.");
       });
-  },
+  };
 };

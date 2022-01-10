@@ -8,17 +8,26 @@ import Discord, {
 import Klar from "../../Client";
 import clientnt from "nekos.life";
 const neko = new clientnt();
+import BaseCommand from "../../Structures/Command";
 
-import { Command } from "../../Interfaces";
+export class KissCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "kiss",
+    aliases: [],
+    description: "Besa a alguien con este comando",   
+    usage: "kiss",
+    category: "Anime",
+    cooldown: 0,
+    botPerms: ["SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: true,
+  })
+};
 
-export const command: Command = {
-  name: "kiss",
-  aliases: [],
-  usage: "kiss",
-  category: "Anime",
-  description: "Besa a alguien con este comando",
 
-  run: (client: Klar, message: Message, args: String[]) => {
+  run = async(client, message, args) => {
     let nya = message.mentions.members?.first();
     if (!nya) return message.reply("Debes mencionar a alguien");
 
@@ -39,7 +48,7 @@ export const command: Command = {
           )
           .setImage(neko.url)
           .setColor("WHITE")
-          .setFooter("Para cuando la boda?")
+          .setFooter({ text: "Para cuando la boda?" })
           .setTimestamp();
 
         message.reply({ embeds: [embed] });
@@ -48,5 +57,5 @@ export const command: Command = {
         console.log(error);
         message.channel.send("Ha ocurrido un error.");
       });
-  },
+  };
 };

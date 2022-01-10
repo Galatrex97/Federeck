@@ -5,17 +5,34 @@ import Discord, {
   Message,
   TextChannel,
 } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class PlayCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "play",
+    aliases: ["p"],
+    description: "Reproduce alguna canción solicitada o la añade a la lista de reproducción actual.",   
+    usage: "play",
+    category: "Música",
+    cooldown: 0,
+    botPerms: ["SEND_MESSAGES", "SPEAK", "CONNECT"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: true,
+  })
+};
 
-export const command: Command = {
-  name: "play",
-  aliases: ["p"],
-  category: "Música",
-  usage: "play/p",
-  description: "Reproduce una canción o la añade a la playlist",
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
 
-  run: async (client, message, args) => {
+
+  run = async(client: Lyon, message: Message, args) => {
     let guildList = client.player.getQueue(message.guild?.id as string);
 
     let si = args.join(" ");
@@ -44,5 +61,5 @@ export const command: Command = {
     song.setData({
       msg: message,
     });
-  },
+  };
 };

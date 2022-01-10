@@ -7,18 +7,35 @@ import {
   MessageEmbed,
 } from "discord.js";
 import { ticketSystem } from "../../Utils";
-import mentionSchema from "../../Models/ticketsMentionable";
-import { Command } from "../../Interfaces";
+import mentionSchema from "../../Models/ticketsMentionable"
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-export const command: Command = {
-  name: "set-tickets",
-  category: "Soporte",
-  cooldown: 900,
-  aliases: [],
-  description:
-    "Esto configurará los tickets.",
-  usage: "set-tickets",
-  run: async (client, message, args, p) => {
+export class TicketsCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "tickets",
+    aliases: ["set-tickets", "new-ticket"],
+    description: "Crea un ticket nuevo",   
+    usage: "tickets <Dar click en el botón>",
+    category: "Mod",
+    cooldown: 25,
+    botPerms: ["MANAGE_CHANNELS", "MANAGE_MESSAGES", "SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: true,
+  })
+};
+
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
+
+
+  run = async(client: Lyon, message: Message, args, p) => {
 
     const parentParams = {
       guildId: message.guild?.id
@@ -34,13 +51,13 @@ if(!parentData.parentId) {
 
     ticketSystem(message, message.channel, {
       embedTitle: "Soporte",
-      embedDesc: "Haz click en el botón de abajo para crear un ticket de soporte. \nNo mal usar.",
+      embedDesc: "Haz click en el botón de abajo para crear un ticket de soporte. \n**Opciones que puedes utilizar**: Cerrarlo en cualquier momento\nRe-abrirlo\nSolicitar un archivo de texto con los últimos 100 mensajes del ticket\nBorrarlo.",
       embedColor: "#ffffff", // default: #075FFFF
       embedFoot: "Lyon tickets",
       emoji: "🎫", // default:, 🎫
       credit: false,
     });
-  },
+  };
 };
 
 // to add a custom role copy this and paste it as explained in the video and replace role-id with the role ya want :D

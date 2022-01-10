@@ -6,20 +6,34 @@ import Discord, {
   TextChannel,
 } from "discord.js";
 import Klar from "../../Client";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class Trump_tweetCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "trump-tweet",
+    aliases: [],
+    description: "",   
+    usage: "",
+    category: "Fun",
+    cooldown: 0,
+    botPerms: ["ATTACH_FILES", "SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: false,
+  })
+};
 
-export const command: Command = {
-  name: "trumptweet",
-  aliases: ["trump"],
-  usage: "trumptweet <texto>",
-  category: "Fun",
-  description: "",
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
 
-  run: (client: Klar, message: Message, args, p) => {
-    if (!message.guild?.me?.permissions.has("ATTACH_FILES"))
-      return message.channel.send("Yo no tengo permisos de `Enviar Imagenes`");
 
+  run = async(client: Lyon, message: Message, args, p) => {
     const texto = args.join(" ");
     if (!texto) return message.channel.send("No has ingresado un texto");
     // Si no ingresan nada
@@ -52,5 +66,5 @@ export const command: Command = {
       }
       // En caso de que en el texto haya emojis y la API te de este error retorna este mensaje
     });
-  },
+  };
 };

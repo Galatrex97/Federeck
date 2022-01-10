@@ -9,16 +9,25 @@ import Klar from "../../Client";
 import clientnt from "nekos.life";
 const neko = new clientnt();
 
-import { Command } from "../../Interfaces";
+import Command from "../../Structures/Command";
 
-export const command: Command = {
-  name: "cuddle",
-  aliases: [],
-  usage: "cuddle",
-  description: "Este comando abraza a un mencionado.",
-  category: "Anime",
+class CuddleCommand extends Command {
 
-  run: async (client, message, args) => {
+constructor() {
+  super({
+    name: "cuddle",
+    aliases: [],
+    usage:  "",
+    description: "Dar cariño",
+    category: "Anime",
+    cooldown: 0,
+    botPerms: ["SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: true
+  }) 
+}
+  run = async (client, message, args) => {
     const mentionedMember = message.mentions.members?.first();
     if (!mentionedMember) return message.reply("Debes mencionar a alguien.");
 
@@ -48,5 +57,5 @@ export const command: Command = {
         console.log(error);
         message.channel.send("Ha ocurrido un error.");
       });
-  },
+  };
 };

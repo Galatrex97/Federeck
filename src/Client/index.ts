@@ -1,5 +1,6 @@
 import { Client, Collection, Message } from "discord.js";
-import { Command, interactionCommand, interactionMenu } from "../Interfaces";
+import { CommandOptions, interactionCommand, interactionMenu } from "../Interfaces";
+import BaseCommand from "../Structures/Command";
 import { runAll } from "../Utils/runner";
 import { Player } from "discord-music-player";
 import * as dotenv from "dotenv";
@@ -14,7 +15,7 @@ class Lyon extends Client {
       partials: ["MESSAGE", "CHANNEL", "REACTION", "GUILD_MEMBER", "USER"],
     });
   }
-  public commands: Collection<string, Command> = new Collection();
+  public commands: Collection<string, BaseCommand> = new Collection();
   public aliases: Collection<string, string> = new Collection();
   public cooldowns: Collection<any, any> = new Collection();
   public snipes = new Map();

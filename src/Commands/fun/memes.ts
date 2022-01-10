@@ -7,21 +7,38 @@ import Discord, {
 } from "discord.js";
 import Klar from "../../Client";
 import memes from "discord-memes";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class MemeCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "meme",
+    aliases: ["momo"],
+    description: "Enviar un meme al azar",   
+    usage: "",
+    category: "Fun",
+    cooldown: 0,
+    botPerms: ["ATTACH_FILES", "SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: false,
+  })
+};
 
-export const command: Command = {
-  name: "meme",
-  aliases: ["momo"],
-  category: "Fun",
-  usage: "meme/",
-  description: "Hace que envié un meme al azar",
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
 
-  run: (client: Klar, message: Message, args: String[]) => {
+
+  run = async(client: Lyon, message: Message, args) => {
     try {
       return message.channel.send(memes.deTodoEspañol());
     } catch (err) {
       console.log(err);
     }
-  },
+  };
 };

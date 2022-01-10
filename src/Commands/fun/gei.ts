@@ -7,21 +7,40 @@ import Discord, {
 } from "discord.js";
 import Klar from "../../Client";
 import { createCanvas, loadImage } from "canvas";
-import { Command } from "../../Interfaces";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-export const command: Command = {
-  name: "gay",
-  aliases: [],
-  usage: "gay <@usuario>",
-  category: "Fun",
-  description: "XDXDXDDDDDDDDDD",
+export class GayCommand extends BaseCommand {
+constructor() {
+  super({
+    name: "gay",
+    aliases: [],
+    description: "PPone la bandera gay encima de la foto de perfil de alguien.",   
+    usage: "gay <@user>",
+    category: "Fun",
+    cooldown: 0,
+    botPerms: ["ATTACH_FILES", "SEND_MESSAGES"],
+    userPerms: [],
+    devOnly: false,
+    guildOnly: true,
+  })
+};
 
-  run: async (client, message, args) => {
-    let when = args[0];
+/**
+ * 
+ * @param { Lyon } client 
+ * @param { Message } message 
+ * @param { String[] } args 
+ */
+
+
+  run = async(client: Lyon, message: Message, args) => {
+    
+    let possibleId = args[0];
 
     let regg = /^\d{17,18}$/;
 
-    let si = regg.test(when);
+    let si = regg.test(possibleId);
 
     if (args[0] && !message.mentions.members?.first() && !si) {
       return message.channel.send(
@@ -57,7 +76,7 @@ export const command: Command = {
 
     const embed = new MessageEmbed()
       .setColor("WHITE")
-      .setFooter("XD")
+      .setFooter({ text: "XD" })
       .setImage(`attachment://gay.png`)
       .setTimestamp();
 
@@ -67,5 +86,5 @@ export const command: Command = {
 
       console.log(err);
     }
-  },
+  };
 };

@@ -1,4 +1,4 @@
-export { Command } from "./command";
+export { CommandOptions } from "./commandOptions";
 export { Event } from "./event";
 export { interactionMenu } from "./interactionMenus";
 export { PlayerEvent } from "./player";
