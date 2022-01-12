@@ -12,35 +12,41 @@ import BaseCommand from "../Structures/Command";
 export function runAll(client: Client) {
   //Exportamos la función runAll.
 
-//Avoid crashes
-process.on("unhandledRejection", async(reason, promise) => {
-  console.log("------- There was an unhandled rejection at -------")
-  console.log(promise)
-  console.log("------- Reason -------")
-  console.log(reason)
-  console.log("------- End -------")
-})
+  //Avoid crashes
+  process.on("unhandledRejection", async (reason, promise) => {
+    console.log("------- There was an unhandled rejection at -------");
+    console.log(promise);
+    console.log("------- Reason -------");
+    console.log(reason);
+    console.log("------- End -------");
+  });
 
-process.on("uncaughtException", async(error, origin) => {
-  console.log("------- Error -------")
-  console.log(error.stack)
-  console.log("------- Exception origin -------")
-  console.log(origin)
-  console.log("------- End -------")
-})
+  process.on("uncaughtException", async (error, origin) => {
+    console.log("------- Error -------");
+    console.log(error.stack);
+    console.log("------- Exception origin -------");
+    console.log(origin);
+    console.log("------- End -------");
+  });
 
   //Commands
-  readdirSync('./Commands').forEach((dir) => {
-    readdir(`./Commands/${dir}`, (e) => {
-        if (e) console.log(`${e}`);
-        readdirSync(`./Commands/${dir}`).filter((f) => f.endsWith('.ts')).forEach((command) => {
-            const req = require(`../Commands/${dir}/${command}`);
-            const cmd = new req(client);
-            if (cmd.name && typeof cmd.name == 'string') client.commands.set(cmd.name.toLowerCase(), cmd as BaseCommand);
-            if (cmd.aliases && Array.isArray(cmd.aliases)) cmd.aliases.forEach((alias: string) => client.aliases.set(alias, cmd.name.toLowerCase()));
+  readdirSync("./src/Commands").forEach((dir) => {
+    readdir(`./src/Commands/${dir}`, (e) => {
+      if (e) console.log(`${e}`);
+      readdirSync(`./src/Commands/${dir}`)
+        .filter((f) => f.endsWith(".ts"))
+        .forEach((command) => {
+          const req = require(`../src/Commands/${dir}/${command}`);
+          const cmd = new req(client);
+          if (cmd.name && typeof cmd.name == "string")
+            client.commands.set(cmd.name.toLowerCase(), cmd as BaseCommand);
+          if (cmd.aliases && Array.isArray(cmd.aliases))
+            cmd.aliases.forEach((alias: string) =>
+              client.aliases.set(alias, cmd.name.toLowerCase())
+            );
         });
     });
-});
+  });
 
   //Events
   readdirSync("./src/Events/") //Entramos a la carpeta Events, creamos la carpeta Djs, y hacemos un readdirSync para obtener todos sus archivos.
@@ -64,43 +70,56 @@ process.on("uncaughtException", async(error, origin) => {
 
   //unhandledRejection = Básicamente esto sirve para que tu bot no se apague al instante si hay un error, sólo enviará un error a la consola, más no lo apagará.
 
-let interactionxD: any = [];
+  let interactionxD: any = [];
 
   //Interactions (commands)
 
-readdirSync(__dirname.replace("\Utils", "\Interaction-commands")).forEach(dir => {
-  const commands = readdirSync(`${__dirname.replace("\Utils", "\Interaction-commands")}/${dir}/`).filter(file => file.endsWith(".ts"));
+  readdirSync(__dirname.replace("Utils", "Interaction-commands")).forEach(
+    (dir) => {
+      const commands = readdirSync(
+        `${__dirname.replace("Utils", "Interaction-commands")}/${dir}/`
+      ).filter((file) => file.endsWith(".ts"));
 
-for(let file of commands) {
-  let { Interaction } = require(`${__dirname.replace("\Utils", "\Interaction-commands")}/${dir}/${file}`);
+      for (let file of commands) {
+        let { Interaction } = require(`${__dirname.replace(
+          "Utils",
+          "Interaction-commands"
+        )}/${dir}/${file}`);
 
-  client.slashCommands.set((Interaction as interactionCommand).name, Interaction as interactionCommand)
-interactionxD.push(Interaction as interactionCommand);
-
-
-}
-
-})
+        client.slashCommands.set(
+          (Interaction as interactionCommand).name,
+          Interaction as interactionCommand
+        );
+        interactionxD.push(Interaction as interactionCommand);
+      }
+    }
+  );
 
   //Interactions (Menus)
-  readdirSync(__dirname.replace("\Utils", "\Interaction-menus")).forEach(dir => {
-    const commands = readdirSync(`${__dirname.replace("\Utils", "\Interaction-menus")}/${dir}/`).filter(file => file.endsWith(".ts"));
-  
-  for(let file of commands) {
-    let { InteractionMenu } = require(`${__dirname.replace("\Utils", "\Interaction-menus")}/${dir}/${file}`);
-  
-    client.contextMenus.set((InteractionMenu as interactionMenu).name, InteractionMenu as interactionMenu)
-  interactionxD.push(InteractionMenu as interactionMenu);
+  readdirSync(__dirname.replace("Utils", "Interaction-menus")).forEach(
+    (dir) => {
+      const commands = readdirSync(
+        `${__dirname.replace("Utils", "Interaction-menus")}/${dir}/`
+      ).filter((file) => file.endsWith(".ts"));
 
+      for (let file of commands) {
+        let { InteractionMenu } = require(`${__dirname.replace(
+          "Utils",
+          "Interaction-menus"
+        )}/${dir}/${file}`);
 
-  }
-  
-  })
+        client.contextMenus.set(
+          (InteractionMenu as interactionMenu).name,
+          InteractionMenu as interactionMenu
+        );
+        interactionxD.push(InteractionMenu as interactionMenu);
+      }
+    }
+  );
 
-      client.on("ready", async() => {
-    await client.application?.commands.set(interactionxD)
-  })
-
+  client.on("ready", async () => {
+    await client.application?.commands.set(interactionxD);
+  });
 
   //Mongoose
   //Cerramos catch
