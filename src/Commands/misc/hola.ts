@@ -1,22 +1,36 @@
 import { Message, MessageEmbed } from "discord.js";
-import Klar from "../../Client";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class NameCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "hola",
+      aliases: ["hi"],
+      description: "Ni siquiera sé por qué tengo un comando tan inútil",
+      usage: "hola",
+      category: "Misceláneo",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: false,
+    });
+  }
 
-export const command: Command = {
-  name: "hola",
-  aliases: ["hi"],
-  category: "Misceláneo",
-  usage: "hola/hi",
-  description: "Es enserio? ._.XD",
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-  run: (client: Klar, message: Message, args: String[]) => {
+  run = async (client: Lyon, message: Message, args) => {
     try {
       message.channel.sendTyping();
-      message.reply(`Hola ${message.member}`);
+      message.reply(`Hola ${message.author}`);
     } catch (err) {
       console.log(err);
-
     }
-  },
-};
+  };
+}

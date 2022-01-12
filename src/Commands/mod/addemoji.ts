@@ -1,24 +1,43 @@
-import Discord, { Message } from "discord.js";
 import Klar from "../../Client";
 const emojiRegex = require("emoji-regex");
-import { Command } from "../../Interfaces";
+import Discord, { Message, MessageEmbed } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-export const command: Command = {
-  name: "add-emoji",
-  aliases: ["addemoji"],
-  cooldown: 15,
-  usage: "add-emoji <(a):emoji:>",
-  category: "Útil",
-  description: `"Toma prestado" un emoji de otro servidor`,
+export class AddEmojiCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "add-emoji",
+      aliases: [],
+      description: "Añade un emoji al servidor",
+      usage: "add-emoji <:emoji:>",
+      category: "Mod",
+      cooldown: 0,
+      botPerms: ["MANAGE_EMOJIS_AND_STICKERS", "SEND_MESSAGES"],
+      userPerms: ["MANAGE_EMOJIS_AND_STICKERS"],
+      devOnly: true,
+      guildOnly: false,
+    });
+  }
 
-  run: async (client, message, args) => {
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
+
+  run = async (client: Lyon, message: Message, args) => {
     if (!message.member?.permissions.has("MANAGE_EMOJIS_AND_STICKERS")) {
       message.reply(
         "Necesitas el permiso **Gestionar emojis** para usar este comando."
       );
       return;
-    } if(!message.guild?.me?.permissions.has("MANAGE_EMOJIS_AND_STICKERS")) {
-      return message.reply("Para el uso adecuado de este comando necesito el permiso **Gestionar emojis**.")
+    }
+    if (!message.guild?.me?.permissions.has("MANAGE_EMOJIS_AND_STICKERS")) {
+      return message.reply(
+        "Para el uso adecuado de este comando necesito el permiso **Gestionar emojis**."
+      );
     }
 
     let res = args.join(" ");
@@ -26,7 +45,7 @@ export const command: Command = {
     if (res.match(emojiRegex)) {
       return message.reply("No puedes poner emojis que ya trae Discord.");
     }
-    
+
     /* let parsedRes = parseInt(res);
 
 	if(isNaN(parsedRes) === false) {
@@ -34,17 +53,18 @@ export const command: Command = {
 	} */
 
     if (!args.length) {
-      message.reply("Para el uso adecuado de este comando se necesita especificar un emoji **de otro servidor**. No puedes añadir emojis que el servidor ya tenga.");
+      message.reply(
+        "Para el uso adecuado de este comando se necesita especificar un emoji **de otro servidor**. No puedes añadir emojis que el servidor ya tenga."
+      );
       return;
     }
 
     let reg = /^<a?:(\w{2,32}):(\d{17,18})>/;
     let x = reg.test(args.join("  "));
 
-    if(args.join(" ") && !x) {
-      return message.reply("Ese no es un emoji válido, reintenta.")
+    if (args.join(" ") && !x) {
+      return message.reply("Ese no es un emoji válido, reintenta.");
     }
-    
 
     for (let emojix of args) {
       let emojibv = Discord.Util.parseEmoji(emojix);
@@ -70,12 +90,11 @@ export const command: Command = {
         } catch (err) {
           console.log(err);
 
-
           message.reply(
             "Sucedió un error, reintenta. Tal vez pusiste un emoji inválido."
           );
         }
       }
     }
-  },
-};
+  };
+}

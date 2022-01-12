@@ -1,38 +1,37 @@
 import Discord, { Client, MessageEmbed, Message } from "discord.js";
 import antilink from "../../Models/antilinkbv";
 import Klar from "../../Client";
-import { Command } from "../../Interfaces";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-export const command: Command = {
-  name: "antilink",
-  aliases: ["antilinks"],
-  usage: "antilinks on/off",
-  category: "Configuración",
-  description: "",
+export class AntilinkSwitchCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "antilink",
+      aliases: [],
+      description: "Interruptor del sistema de antilinks en los mensajes",
+      usage: "antilink <on/off>",
+      category: "Configuración",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES", "MANAGE_MESSAGES"],
+      userPerms: ["MANAGE_MESSAGES"],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-  run: async (client, message, args, p) => {
-    if (!message.member?.permissions.has("MANAGE_MESSAGES"))
-      return message
-        .reply("Necesitas el permiso **Gestionar mensajes**.")
-        .then((nya) => {
-          setTimeout(() => {
-            nya.delete();
-          }, 7000);
-        });
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
+  run = async (client: Lyon, message: Message, args, p) => {
     if (!args[0])
       return message.channel.send("Tienes que especificar. (on/off)");
 
     if (args[0] === "on") {
-      if (!message.member?.permissions.has("MANAGE_MESSAGES"))
-        return message
-          .reply("Necesitas el permiso **Gestionar mensajes**.")
-          .then((x) => {
-            setTimeout(() => {
-              x.delete();
-            }, 7000);
-          });
-
       await antilink.findOne(
         { guild: message.guild?.id },
         async (err, data) => {
@@ -68,14 +67,6 @@ export const command: Command = {
         }
       );
     } else if (args[0] === "off") {
-      if (!message.member?.permissions.has("MANAGE_MESSAGES"))
-        return message
-          .reply("Necesitas el permiso **Gestionar mensajes**.")
-          .then((y) => {
-            setTimeout(() => {
-              y.delete();
-            }, 7000);
-          });
       await antilink.findOne(
         { guild: message.guild?.id },
         async (err, data) => {
@@ -109,5 +100,5 @@ export const command: Command = {
     } else {
       return message.channel.send("Ese argumento no es válido. Usa on/off");
     }
-  },
-};
+  };
+}

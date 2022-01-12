@@ -10,31 +10,29 @@ import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
 export class TrashCommand extends BaseCommand {
-constructor() {
-  super({
-    name: "trash",
-    aliases: [],
-    description: "",   
-    usage: "",
-    category: "Fun",
-    cooldown: 0,
-    botPerms: ["SEND_MESSAGES", "ATTACH_FILES"],
-    userPerms: [],
-    devOnly: false,
-    guildOnly: true,
-  })
-};
+  constructor() {
+    super({
+      name: "trash",
+      aliases: [],
+      description: "When olvidas tus lentes",
+      usage: "trash <@user>",
+      category: "Fun",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES", "ATTACH_FILES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-/**
- * 
- * @param { Lyon } client 
- * @param { Message } message 
- * @param { String[] } args 
- */
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-
-  run = async(client: Lyon, message: Message, args) => {
-
+  run = async (client: Lyon, message: Message, args) => {
     let when = args[0];
 
     let regg = /^\d{17,18}$/;
@@ -63,4 +61,4 @@ constructor() {
 
     message.reply({ files: [new MessageAttachment(img, "trash.png")] });
   };
-};
+}

@@ -1,15 +1,32 @@
 import Discord, { Message, TextChannel, MessageEmbed } from "discord.js";
 import afk from "../../Models/afk";
-import { Command } from "../../Interfaces";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-export const command: Command = {
-  name: "afk",
-  aliases: [],
-  usage: "afk",
-  description: "Comando AFK",
-  category: "Misceláneo",
+export class AFKCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "afk",
+      aliases: [],
+      description: "Diles a todos que estás ausente con este comando.",
+      usage: "afk [razón]",
+      category: "Misceláneo",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-  run: async (client, message, args) => {
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
+
+  run = async (client: Lyon, message: Message, args) => {
     let data: any;
     try {
       data = await afk.findOne({
@@ -28,13 +45,12 @@ export const command: Command = {
     data.AFK_Reason = args.join(" ");
     if (data.AFK_Reason) {
       message.channel.send({
-        content:
-        `**${
+        content: `**${
           message.member?.nickname || message.author.username
         }** tu AFK se ha establecido a: **${data.AFK_Reason}**`,
         allowedMentions: {
-          parse: ["users"]
-        }
+          parse: ["users"],
+        },
       });
     }
     if (!data.AFK_Reason) {
@@ -47,5 +63,5 @@ export const command: Command = {
     data.AFK = true;
     data.timeAgo = Date.now();
     await data.save(); //asd
-  },
-};
+  };
+}

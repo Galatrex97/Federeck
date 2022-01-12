@@ -1,15 +1,31 @@
 import Discord, { Client, MessageEmbed, Guild, Message } from "discord.js";
-import Klar from "../../Client";
-import { Command } from "../../Interfaces";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-export const command: Command = {
-  name: "serverinfo",
-  aliases: ["sv-info"],
-  usage: "serverinfo/sv-info",
-  category: "Info",
-  description: "Muestra la información del server",
+export class SVInfoCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "serverinfo",
+      aliases: [],
+      description: "Muestra información detallada sobre",
+      usage: "serverinfo",
+      category: "Info",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-  run: async (client, message, args) => {
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
+
+  run = async (client: Lyon, message: Message, args) => {
     const owner = (await (message.guild as Guild).fetchOwner()).user;
     let server = message.guild as Guild; //definimos server
     let serverSi: any = server?.premiumSubscriptionCount?.toString();
@@ -21,8 +37,8 @@ export const command: Command = {
       VERY_HIGH: "Tryhard",
     };
     const regions = {
-      "en-US": "Inglésa (Estados Unidos)",
-      "en-GB": "Inglésa (Inglaterra)",
+      "en-US": "Inglesa (Estados Unidos)",
+      "en-GB": "Inglesa (Inglaterra)",
       "zh-CN": "China (China)",
       "zh-TW": "China (Taiwan)",
       "pt-BR": "Portugues (Brazil)",
@@ -56,14 +72,14 @@ export const command: Command = {
       .setTitle("**Información del server**")
       .setDescription("**Información actual del server**")
       .setThumbnail(serverIcon)
-      .setAuthor(serverName, serverIcon)
+      .setAuthor({ name: serverName, iconURL: serverIcon })
       .addField("**ID del server**", server?.id, true)
       .addField("**Fecha de creación**", `${server?.createdAt}`)
       .addField("**Región:**", regions[server.preferredLocale])
       .addField("**Dueño del server:**", `${owner}`)
       .addField("** ID del dueño:**", `${owner.id}`)
       .addField(
-        `**Canales**: ${server?.channels.cache.size}ㅤㅤ`,
+        `**Canales**: ${server?.channels.cache.size}`,
         `Categorias:  ${
           server.channels.cache.filter((x) => x.type === "GUILD_CATEGORY").size
         }\nTexto: ${
@@ -89,8 +105,7 @@ export const command: Command = {
     try {
       message.reply({ embeds: [embed] });
     } catch (err) {
-
       console.log(err);
     }
-  },
-};
+  };
+}

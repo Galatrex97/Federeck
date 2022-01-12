@@ -344,7 +344,7 @@ allPerms.push(latPerms[permission])
 
     //Beta & Unstable Commands
     if (cmd?.devOnly && message.author.id !== process.env.botOwner)
-      return message.reply(`Ese comando está modo inestable, solamente el grupo de desarrolladores puede hacer esto.`).then(m => {
+      return message.reply(`Ese comando está en modo inestable, solamente el grupo de desarrolladores puede hacer esto.`).then(m => {
         setTimeout(() => {
           m.delete();
         }, 10000)
@@ -352,6 +352,11 @@ allPerms.push(latPerms[permission])
 
       if(cmd?.guildOnly && !message.guild) {
         return message.reply("Este comando solo está habilitado para los servidores.")
+      }
+
+      if(!message.inGuild) {
+        delete cmd?.botPerms;
+        delete cmd?.userPerms; 
       }
 
     try {

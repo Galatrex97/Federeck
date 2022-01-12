@@ -1,17 +1,36 @@
 import Discord from "discord.js";
 const gg = process.env.botOwner;
 const nya = process.env.nya;
-import { Command } from "../../Interfaces";
 
-export const command: Command = {
-  name: "servers",
-  aliases: ["sv"],
-  usage: "servers/sv",
-  category: "Info",
-  cooldown: 7,
-  description: "...",
-  run: async (client, message, args) => {
- /*    if (![gg, nya].includes(message.author.id)) {
+import { Message, MessageEmbed } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
+
+export class NameCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "servers",
+      aliases: [],
+      description: "Muestra los servers en los que está el bot",
+      usage: "servers",
+      category: "Info",
+      cooldown: 7,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: false,
+    });
+  }
+
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
+
+  run = async (client: Lyon, message: Message, args) => {
+    /*    if (![gg, nya].includes(message.author.id)) {
       return message.reply(
         "No puedes usar este comando, no te diré porque pero no tiene nada que ver con permisos o roles."
       );
@@ -47,5 +66,5 @@ export const command: Command = {
     } catch (err) {
       console.log(err);
     }
-  },
-};
+  };
+}

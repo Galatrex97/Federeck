@@ -1,15 +1,34 @@
 import Discord, { Client, Message, MessageEmbed } from "discord.js";
 import Klar from "../../Client";
 const moment = require("moment");
-import { Command } from "../../Interfaces";
-export const command: Command = {
-  name: "snipe",
-  aliases: [],
-  usage: "snipe",
-  category: "Misceláneo",
-  description: "Muestra un mensaje recientemente eliminado.",
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-  run: async (client, message, args) => {
+export class SnipeCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "snipe",
+      aliases: [],
+      description:
+        "Lamentablemente este comando será eliminado en unas semanas, se está volviendo ilegal",
+      usage: "snipe [posición]",
+      category: "Misceláneo",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
+
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
+
+  run = async (client: Lyon, message: Message, args) => {
     let snipes = client.snipes.get(message.channel.id);
     if (message.mentions.channels.first()) {
       snipes = client.snipes.get(message.mentions.channels.first()?.id);
@@ -58,5 +77,5 @@ export const command: Command = {
     } catch (err) {
       console.log(err);
     }
-  },
-};
+  };
+}

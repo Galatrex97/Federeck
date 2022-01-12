@@ -1,17 +1,35 @@
+import Discord from "discord.js";
+import { Message, MessageEmbed } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import Discord, { Message } from "discord.js";
-import Klar from "../../Client";
-import { Command } from "../../Interfaces";
+export class InviteCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "invite",
+      aliases: [],
+      description:
+        "¿Estás intentando invitarme a tu servidor? ¡Muchas gracias!",
+      usage: "invite",
+      category: "Info",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: false,
+    });
+  }
 
-export const command: Command = {
-  name: "invite",
-  aliases: [],
-  category: "Info",
-  usage: "invite",
-  description: "Envia mi link de invitación",
-  run: (client, message, args, p) => {
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-    let link = "https://discord.com/oauth2/authorize?client_id=849395994973700117&scope=bot%20applications.commands&permissions=2146938238"
+  run = async (client: Lyon, message: Message, args, p) => {
+    let link =
+      "https://discord.com/oauth2/authorize?client_id=849395994973700117&scope=bot%20applications.commands&permissions=2146938238";
 
     const inviteEmbed = new Discord.MessageEmbed()
       .setTitle("Link de invitación")
@@ -34,5 +52,5 @@ export const command: Command = {
     } catch (err) {
       console.log(err);
     }
-  },
-};
+  };
+}

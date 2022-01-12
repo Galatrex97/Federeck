@@ -1,21 +1,36 @@
-import Discord from "discord.js";
-const {
-  Client,
+import Discord, {
+  Message,
   MessageEmbed,
   MessageActionRow,
   MessageButton,
-} = require("discord.js");
+} from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class UiCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "userinfo",
+      aliases: ["ui"],
+      description: "Muestra información detallada sobre un usuario",
+      usage: "userinfo [@user]",
+      category: "Info",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-export const command: Command = {
-  name: "userinfo",
-  aliases: [],
-  usage: "userinfo",
-  category: "Info",
-  description: "",
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-  run: async (client, message, args) => {
+  run = async (client: Lyon, message: Message, args) => {
     let user =
       message.mentions.members?.first() ||
       message.guild?.members.cache.get(args[0]) ||
@@ -28,115 +43,146 @@ export const command: Command = {
         .setLabel("Link del avatar")
     );
 
-    let roles: any = `${user?.roles.cache.map((role) => role.toString()).slice(0, 10).join(" ")}`;
-    if((user?.roles.cache.size as any) > 10) {
-      if(user?.roles.cache.size == 11) {
+    let roles: any = `${user?.roles.cache
+      .map((role) => role.toString())
+      .slice(0, 10)
+      .join(" ")}`;
+    if ((user?.roles.cache.size as any) > 10) {
+      if (user?.roles.cache.size == 11) {
         roles = roles + ` y un rol más`;
       }
-      roles = roles + ` y otros ${(user?.roles.cache.size as any) - 10} roles más...`
+      roles =
+        roles + ` y otros ${(user?.roles.cache.size as any) - 10} roles más...`;
     }
     let activityType;
-    if(!user?.user.bot && user?.presence?.activities[0] && user?.presence?.activities[0].id == "custom" && user?.presence?.activities[1]) {
-    switch(user?.presence?.activities[1].type) {
-      case "PLAYING":
-        activityType = "Jugando a";
-        break;
-      case "STREAMING":
-        activityType = "Transmitiendo";
-        break;
-      case "LISTENING":
-        activityType = "Escuchando";
-        break;
-      case "WATCHING":
-        activityType = "Viendo";
-        break;
-      case "COMPETING":
-        activityType = "Compitiendo en";
-        break;
-    }
-    } else if(user?.user.bot || user?.presence?.activities[0] && user?.presence?.activities[0].id !== "custom") {
-          switch(user?.presence?.activities[0].type) {
-      case "PLAYING":
-        activityType = "Jugando a";
-        break;
-      case "STREAMING":
-        activityType = "Transmitiendo";
-        break;
-      case "LISTENING":
-        activityType = "Escuchando";
-        break;
-      case "WATCHING":
-        activityType = "Viendo";
-        break;
-      case "COMPETING":
-        activityType = "Compitiendo en";
-        break;
-    }
+    if (
+      !user?.user.bot &&
+      user?.presence?.activities[0] &&
+      user?.presence?.activities[0].id == "custom" &&
+      user?.presence?.activities[1]
+    ) {
+      switch (user?.presence?.activities[1].type) {
+        case "PLAYING":
+          activityType = "Jugando a";
+          break;
+        case "STREAMING":
+          activityType = "Transmitiendo";
+          break;
+        case "LISTENING":
+          activityType = "Escuchando";
+          break;
+        case "WATCHING":
+          activityType = "Viendo";
+          break;
+        case "COMPETING":
+          activityType = "Compitiendo en";
+          break;
+      }
+    } else if (
+      user?.user.bot ||
+      (user?.presence?.activities[0] &&
+        user?.presence?.activities[0].id !== "custom")
+    ) {
+      switch (user?.presence?.activities[0].type) {
+        case "PLAYING":
+          activityType = "Jugando a";
+          break;
+        case "STREAMING":
+          activityType = "Transmitiendo";
+          break;
+        case "LISTENING":
+          activityType = "Escuchando";
+          break;
+        case "WATCHING":
+          activityType = "Viendo";
+          break;
+        case "COMPETING":
+          activityType = "Compitiendo en";
+          break;
+      }
     }
 
-    let estado = "Sin estado"
-    if(user?.presence?.activities[0]) {
- estado = `${user.presence.activities[0].state || "Sin estado"}`
-}
+    let estado = "Sin estado";
+    if (user?.presence?.activities[0]) {
+      estado = `${user.presence.activities[0].state || "Sin estado"}`;
+    }
 
     let final;
-    if(!user?.user.bot && user?.presence?.activities[0] && user?.presence?.activities[0].id == "custom") {
-    if(activityType == "Jugando a") {
-      if(user.presence.activities[1].details && user.presence.activities[1].state) {
-      final = `\`${activityType} ${user.presence.activities[1].name}\nDetalles: ${user.presence.activities[1].details}\n${user.presence.activities[1].state}\``;
-      } else if(user.presence.activities[1].details) {
-        final = `\`${activityType} ${user.presence.activities[1].name}\nDetalles: ${user.presence.activities[1].details}\``;
-      } else if(user.presence.activities[1].state) {
-        final = `\`${activityType} ${user.presence.activities[1].name}\nDetalles: ${user.presence.activities[1].state}\``;
-      } else {
-        final = `\`${activityType} ${user.presence.activities[1].name}\``
+    if (
+      !user?.user.bot &&
+      user?.presence?.activities[0] &&
+      user?.presence?.activities[0].id == "custom"
+    ) {
+      if (activityType == "Jugando a") {
+        if (
+          user.presence.activities[1].details &&
+          user.presence.activities[1].state
+        ) {
+          final = `\`${activityType} ${user.presence.activities[1].name}\nDetalles: ${user.presence.activities[1].details}\n${user.presence.activities[1].state}\``;
+        } else if (user.presence.activities[1].details) {
+          final = `\`${activityType} ${user.presence.activities[1].name}\nDetalles: ${user.presence.activities[1].details}\``;
+        } else if (user.presence.activities[1].state) {
+          final = `\`${activityType} ${user.presence.activities[1].name}\nDetalles: ${user.presence.activities[1].state}\``;
+        } else {
+          final = `\`${activityType} ${user.presence.activities[1].name}\``;
+        }
+      } else if (activityType == "Transmitiendo") {
+        if (!user.user.bot && user.presence.activities[1].url) {
+          final = `\`${activityType} en Twitch\nLink: \`[\`Stream\`](${user.presence.activities[1].url})`;
+        } else {
+          final = `\`${activityType} en Twitch\``;
+        }
+      } else if (activityType == "Escuchando") {
+        if (user.presence.activities[1].name == "Spotify") {
+          final =
+            `\`Escuchando Spotify\nNombre: ${user.presence.activities[1].details}\nArtista: ${user.presence.activities[1].state}\n` +
+            `Link:\`[\`Click Aquí\`](https://open.spotify.com/track/${user.presence.activities[0].syncId})`;
+        } else {
+          final = `\`Escuchando ${user.presence.activities[1].name}\``;
+        }
+      } else if (activityType == "Viendo") {
+        final = `\`Viendo ${user.presence.activities[1].name}\``;
+      } else if (activityType == "Compitiendo en") {
+        final = `\`Compitiendo en ${user.presence.activities[1].name}\``;
       }
-    } else if(activityType == "Transmitiendo") {
-      if(!user.user.bot && user.presence.activities[1].url) {
-      final = `\`${activityType} en Twitch\nLink: \`[\`Stream\`](${user.presence.activities[1].url})`
-      } else {
-        final = `\`${activityType} en Twitch\``
-      }
-    } else if(activityType == "Escuchando") {
-      if(user.presence.activities[1].name == "Spotify") {
-      final = `\`Escuchando Spotify\nNombre: ${user.presence.activities[1].details}\nArtista: ${user.presence.activities[1].state}\n` + `Link:\`[\`Click Aquí\`](https://open.spotify.com/track/${user.presence.activities[0].syncId})`;
-      } else {
-        final = `\`Escuchando ${user.presence.activities[1].name}\``;
-      }
-    } else if(activityType == "Viendo") {
-      final = `\`Viendo ${user.presence.activities[1].name}\``;
-    } else if(activityType == "Compitiendo en") {
-      final = `\`Compitiendo en ${user.presence.activities[1].name}\``;
-    }
-    } else if(user?.user.bot || user?.presence?.activities[0] && user?.presence?.activities[0].id !== "custom") {
-      if(activityType == "Jugando a") {
-        if(user?.presence?.activities[0].details && user.presence.activities[0].state) {
+    } else if (
+      user?.user.bot ||
+      (user?.presence?.activities[0] &&
+        user?.presence?.activities[0].id !== "custom")
+    ) {
+      if (activityType == "Jugando a") {
+        if (
+          user?.presence?.activities[0].details &&
+          user.presence.activities[0].state
+        ) {
           final = `\`${activityType} ${user.presence.activities[0].name}\nDetalles: ${user.presence.activities[0].details}\n${user.presence.activities[0].state}\``;
-          } else if(user.presence?.activities[0].details) {
-            final = `\`${activityType} ${user.presence.activities[0].name}\nDetalles: ${user.presence.activities[0].details}\``;
-          } else if(user.presence?.activities[0].state) {
-            final = `\`${activityType} ${user.presence.activities[0].name}\nDetalles: ${user.presence.activities[0].state}\``;
-          } else {
-            final = `\`${activityType} ${user.presence?.activities[0].name}\``
-          }
-    } else if(activityType == "Transmitiendo") {
-      if(!user.user.bot && user?.presence?.activities[0].url) {
-      final = `\`${activityType} en Twitch\nLink: \`[\`Stream\`](${user.presence.activities[0].url})`
-      } else {
-        final = `\`${activityType} en Twitch\``
+        } else if (user.presence?.activities[0].details) {
+          final = `\`${activityType} ${user.presence.activities[0].name}\nDetalles: ${user.presence.activities[0].details}\``;
+        } else if (user.presence?.activities[0].state) {
+          final = `\`${activityType} ${user.presence.activities[0].name}\nDetalles: ${user.presence.activities[0].state}\``;
+        } else {
+          final = `\`${activityType} ${user.presence?.activities[0].name}\``;
+        }
+      } else if (activityType == "Transmitiendo") {
+        if (!user.user.bot && user?.presence?.activities[0].url) {
+          final = `\`${activityType} en Twitch\nLink: \`[\`Stream\`](${user.presence.activities[0].url})`;
+        } else {
+          final = `\`${activityType} en Twitch\``;
+        }
+      } else if (activityType == "Escuchando") {
+        if (user?.presence?.activities[0].name == "Spotify") {
+          final =
+            `\`Escuchando Spotify\nNombre: ${user.presence.activities[0].details}\nArtista: ${user.presence.activities[0].state}\n` +
+            `Link: \`[\`Click Aquí\`](https://open.spotify.com/track/${user.presence.activities[0].syncId})`;
+        } else {
+          final = `\`Escuchando ${user.presence?.activities[0].name}\``;
+        }
+      } else if (activityType == "Viendo") {
+        final = `\`Viendo ${user?.presence?.activities[0].name}\``;
+      } else if (activityType == "Compitiendo en") {
+        final = `\`Compitiendo en ${user?.presence?.activities[0].name}\``;
       }
-    } else if(activityType == "Escuchando") {
-      if(user?.presence?.activities[0].name == "Spotify") {
-      final = `\`Escuchando Spotify\nNombre: ${user.presence.activities[0].details}\nArtista: ${user.presence.activities[0].state}\n` + `Link: \`[\`Click Aquí\`](https://open.spotify.com/track/${user.presence.activities[0].syncId})`;
-      } else {
-        final = `\`Escuchando ${user.presence?.activities[0].name}\``;
-      }
-    } else if(activityType == "Viendo") {
-      final = `\`Viendo ${user?.presence?.activities[0].name}\``;
-    } else if(activityType == "Compitiendo en") {
-      final = `\`Compitiendo en ${user?.presence?.activities[0].name}\``;
     }
-    } 
     let status; // Hacemos un let vacio
     switch (
       user?.presence?.status // Hacemos un switch de la funcion Presencia
@@ -158,49 +204,55 @@ export const command: Command = {
     const embed = new MessageEmbed() // Hacemos un nuevo embed
       .setTitle(`Informacion del usuario ${user?.user.username}`) // Titulo - Recibimos el "user" y decimos su "username"
       .setColor(`WHITE`) // Color para hacerlo mas bonito <3
-      .setThumbnail(user?.user.displayAvatarURL({ dynamic: true })) // Un Thumbnail de la foto de perfil del "user".
+      .setThumbnail(`${user?.user.displayAvatarURL({ dynamic: true })}`) // Un Thumbnail de la foto de perfil del "user".
       .addFields(
         // Hacemos nuevas Fields
         {
           name: "Username: ",
           value: `\`${user?.user.username}\``,
-          inline: false
+          inline: false,
         },
         {
           name: "Nickname: ", // Nombre - Titulo - Caso 1
-          value: user?.nickname ? `\`${user.nickname}\`` : "\`No tiene apodo\`", // En linea: SI
-          inline: false
+          value: user?.nickname ? `\`${user.nickname}\`` : "`No tiene apodo`", // En linea: SI
+          inline: false,
         },
         {
           name: "#️⃣ Tag: ", // Nombre - Titulo - Caso 1
           value: `\`#${user?.user.discriminator}\``, // En linea: SI
-          inline: false
+          inline: false,
         },
         {
           name: "🆔 ID: ", // Nombre - Titulo - Caso 1
           value: `\`${user?.user.id}\``, // Del "user" sacamos su ID
-          inline: false
+          inline: false,
         },
         {
           name: "Avatar: ", // Nombre - Titulo - Caso 1
-          value: `[\`Click Aquí\`](${user?.user.displayAvatarURL({ dynamic: true, size: 4096 })})`, // Del "user" obtenemos su Avatar Link, Hacemos que dentro del Array se encuentre el Link y cuando se de Click te reenviara una pagina viendo el avatar del "user"
-          inline: false
+          value: `[\`Click Aquí\`](${user?.user.displayAvatarURL({
+            dynamic: true,
+            size: 4096,
+          })})`, // Del "user" obtenemos su Avatar Link, Hacemos que dentro del Array se encuentre el Link y cuando se de Click te reenviara una pagina viendo el avatar del "user"
+          inline: false,
         },
         {
           name: "Status actual: ", // Nombre - Titulo - Caso 1
-          value: user?.presence?.status ? `\`${status}\`` : "\`⚪ Desconectado\`", // Acá se obtiene el estado del "user" con los casos ya dichos y explicado anteriormente.
+          value: user?.presence?.status ? `\`${status}\`` : "`⚪ Desconectado`", // Acá se obtiene el estado del "user" con los casos ya dichos y explicado anteriormente.
           inline: false, // En linea: SI
         },
         {
           name: "Estado: ", // Nombre - Titulo - Caso 1
-          value: estado
-            ? `\`${estado}\``
-            : "\`Sin estado\`", // Si el "user" tiene actividad se envia, si no la tiene se envia "Sin Estado"
-            inline: false,
+          value: estado ? `\`${estado}\`` : "`Sin estado`", // Si el "user" tiene actividad se envia, si no la tiene se envia "Sin Estado"
+          inline: false,
         },
         {
           name: "Actividad actual",
-          value: activityType ? `${final || "\`No hay información sobre la actividad de este usuario\`"}` : "\`No hay información sobre la actividad de este usuario\`"
+          value: activityType
+            ? `${
+                final ||
+                "`No hay información sobre la actividad de este usuario`"
+              }`
+            : "`No hay información sobre la actividad de este usuario`",
         },
         {
           name: "Fecha de creación de la cuenta: ", // Nombre - Titulo - Caso 1
@@ -210,12 +262,12 @@ export const command: Command = {
         {
           name: "Fecha de entrada al server: ", // Nombre - Titulo - Caso 1
           value: `\`${user?.joinedAt?.toLocaleDateString("es-co")}\``, // En linea: SI
-          inline: false
+          inline: false,
         },
         {
           name: "Roles del usuario: ", // Nombre - Titulo - Caso 1
-          value: `${roles}` // En linea: SI
-        },
+          value: `${roles}`, // En linea: SI
+        }
         // {
         //   name: "Permisos del usuario: ",
         //   value: user?.permissions.toArray().map(perm => perm.toString()).join(", ")
@@ -227,5 +279,5 @@ export const command: Command = {
     } catch (err) {
       console.log(err);
     }
-  },
-};
+  };
+}

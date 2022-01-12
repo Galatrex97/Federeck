@@ -11,34 +11,29 @@ import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
 export class MemeCommand extends BaseCommand {
-constructor() {
-  super({
-    name: "meme",
-    aliases: ["momo"],
-    description: "Enviar un meme al azar",   
-    usage: "",
-    category: "Fun",
-    cooldown: 0,
-    botPerms: ["ATTACH_FILES", "SEND_MESSAGES"],
-    userPerms: [],
-    devOnly: false,
-    guildOnly: false,
-  })
-};
+  constructor() {
+    super({
+      name: "meme",
+      aliases: ["momo"],
+      description: "Enviar un meme al azar",
+      usage: "meme",
+      category: "Fun",
+      cooldown: 0,
+      botPerms: ["ATTACH_FILES", "SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: false,
+    });
+  }
 
-/**
- * 
- * @param { Lyon } client 
- * @param { Message } message 
- * @param { String[] } args 
- */
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-
-  run = async(client: Lyon, message: Message, args) => {
-    try {
-      return message.channel.send(memes.deTodoEspañol());
-    } catch (err) {
-      console.log(err);
-    }
+  run = async (client: Lyon, message: Message, args) => {
+    message.channel.send(memes.deTodoEspañol());
   };
-};
+}

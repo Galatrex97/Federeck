@@ -1,16 +1,33 @@
 import Discord from "discord.js";
-const { Client, MessageEmbed } = require("discord.js");
+import { Client, Message, MessageEmbed } from "discord.js";
 const YouTube = require("youtube-node");
-import { Command } from "../../Interfaces";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-export const command: Command = {
-  name: "ytsearch",
-  aliases: ["yt"],
-  usage: "ytsearch <args>",
-  category: "Útil",
-  description: "Busca un video en youtube",
+export class YTSearchCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "yt-search",
+      aliases: [],
+      description: "Busca un vídeo en youtube.",
+      usage: "yt-search <video>",
+      category: "Info",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: false,
+    });
+  }
 
-  run: (client, message, args) => {
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
+
+  run = async (client: Lyon, message: Message, args) => {
     let youTube = new YouTube();
 
     //Necesita tener una clave para usar la API de YouTube Data API v3
@@ -43,5 +60,5 @@ export const command: Command = {
 
         message.channel.send("Ha ocurrido un error.");
       });
-  }, //Cerramos código
-};
+  }; //Cerramos código
+}

@@ -1,30 +1,46 @@
 import Discord, { Client, Message, MessageEmbed } from "discord.js";
 import mongoose from "mongoose";
-import Klar from "../../Client";
-import { Command } from "../../Interfaces";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-export const command: Command = {
-  name: "ping",
-  aliases: ["ms"],
-  category: "Útil",
-  usage: "ping/ms",
-  description: "Muestra la latencia o ping del bot en milisegundos.",
+export class PingCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "ping",
+      aliases: ["ms"],
+      description: "Muestra la latencia actual.",
+      usage: "ping",
+      category: "Info",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: false,
+    });
+  }
 
-  run: async (client: Klar, message: Message, args: String[]) => {
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
+
+  run = async (client: Lyon, message: Message, args) => {
     let date = Date.now();
-/*     let dbLatency = await new Promise((r, j) => {
+    /*     let dbLatency = await new Promise((r, j) => {
       mongoose.connection.db
         .admin()
         .ping((err: any, result: any) => r(Date.now() - date));
     }); */
 
     let dbLatency = await new Promise((r, j) => {
-        mongoose.connection.db
-          .admin()
-          .ping((err, result) =>
-            err || !result ? j(err || result) : r(Date.now() - date)
-          );
-      });
+      mongoose.connection.db
+        .admin()
+        .ping((err, result) =>
+          err || !result ? j(err || result) : r(Date.now() - date)
+        );
+    });
 
     let embed = new Discord.MessageEmbed()
       .setTitle("Latencia <:signalbars128:927624679659823204>")
@@ -45,5 +61,5 @@ export const command: Command = {
     } catch (err) {
       console.log(err);
     }
-  },
-};
+  };
+}

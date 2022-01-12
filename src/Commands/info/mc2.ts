@@ -1,17 +1,33 @@
 import https from "https";
-import Discord, { Client, MessageEmbed, Message } from "discord.js";
-import Klar from "../../Client";
+import { Message, MessageEmbed } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class MinecraftSvCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "mc-server",
+      aliases: ["mc"],
+      description:
+        "Busca un servidor de Minecraft en los servidores de Mojang. (inestable)",
+      usage: "mc-server <link/ip del server>",
+      category: "Info",
+      cooldown: 10,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: true,
+      guildOnly: false,
+    });
+  }
 
-export const command: Command = {
-  name: "mc",
-  aliases: [],
-  usage: "mc <ip>",
-  category: "Info",
-  description: "nya~ XD obtiene la información de un server de minecraft",
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-  run: (client: Klar, message: Message, args: any) => {
+  run = async (client: Lyon, message: Message, args) => {
     //check if there're arguments
     if (!args.length) {
       message.reply("Por favor especifica la ip de un server.");
@@ -80,8 +96,6 @@ export const command: Command = {
         try {
           message.channel.send({ embeds: [embed] });
         } catch (err) {
-
-
           console.log(err);
         }
       });
@@ -96,5 +110,5 @@ export const command: Command = {
     });
     //close request
     request.end();
-  },
-};
+  };
+}

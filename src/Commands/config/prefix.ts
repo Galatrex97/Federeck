@@ -1,46 +1,43 @@
+// @ts-check
 import Discord, { Client, MessageEmbed, Message } from "discord.js";
 import prefixSchema from "../../Models/prefix";
 import Klar from "../../Client";
-import { Command } from "../../Interfaces";
 import emojiRegex from "emoji-regex";
-export const command: Command = {
-  name: "setprefix",
-  cooldown: 60,
-  aliases: ["sp", "set-prefix"],
-  category: "Configuración",
-  usage: "setprefix/sp/set-prefix",
-  description: "Establece o cambia el prefix actual.",
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
+
+export class SetprefixCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "set-prefix",
+      aliases: ["setprefix"],
+      description: "Establece un prefix personalizado para el servidor.",
+      usage: "set-prefix <nuevo prefix>",
+      category: "Configuración",
+      cooldown: 15,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: ["MANAGE_MESSAGES"],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
   /**
+   *
+   * @param { Lyon } client
    * @param { Message } message
+   * @param { String[] } args
    */
 
-  run: async (client, message, args) => {
-
-    if (!message.member?.permissions.has("MANAGE_MESSAGES")) {
-      return message
-        .reply(
-          "Necesitas el permiso **Gestionar mensajes** para realizar este cambio.**"
-        )
-        .then((nya) => {
-          setTimeout(() => {
-            nya.delete();
-          }, 7000);
-        })
-        .catch((error) => {
-          console.log(error);
-          message.channel.send("Ha ocurrido un error.");
-        });
-      }
-    const res = args.join(" ");    
+  run = async (client: Lyon, message: Message, args) => {
+    const res = args.join(" ");
     let emoji = Discord.Util.parseEmoji(res);
 
-let regx = emojiRegex();
+    let regx = emojiRegex();
 
-if(regx.test(res)) {
-  return message.reply("No puedes poner emojis como prefix.")
-}
-
+    if (regx.test(res)) {
+      return message.reply("No puedes poner emojis como prefix.");
+    }
 
     if (
       res.includes(
@@ -59,9 +56,10 @@ if(regx.test(res)) {
         console.log(err);
       }
       if (data) {
-
-        if(res == "k!"  && data.Prefix == "k!") {
-          return message.reply("No puedes re-establecer k! como prefix, es el prefix por defecto, además de que el servidor ya estableció este prefix.")
+        if (res == "k!" && data.Prefix == "k!") {
+          return message.reply(
+            "No puedes re-establecer k! como prefix, es el prefix por defecto, además de que el servidor ya estableció este prefix."
+          );
         }
 
         await prefixSchema.findOneAndDelete({ Guild: message.guild?.id });
@@ -72,9 +70,10 @@ if(regx.test(res)) {
         await data.save();
         message.reply(`Mi prefix ha sido cambiado a **${res}**`);
       } else {
-
-        if(res == "k!") {
-          return message.reply("No puedes establecer k! como prefix ya que es el prefix por defecto que estás utilizando.")
+        if (res == "k!") {
+          return message.reply(
+            "No puedes establecer k! como prefix ya que es el prefix por defecto que estás utilizando."
+          );
         }
 
         data = await new prefixSchema({
@@ -85,7 +84,5 @@ if(regx.test(res)) {
         message.reply(`Mi prefix ha sido establecido a **${res}**`);
       }
     });
-  },
-};
-
-
+  };
+}

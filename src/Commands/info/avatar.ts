@@ -1,17 +1,33 @@
 import Discord, { GuildMember, Message, MessageEmbed } from "discord.js";
 import Klar from "../../Client";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class AvatarCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "avatar",
+      aliases: ["pfp"],
+      description:
+        "¿Alguna vez quisiste descargar tu foto de perfil o ver la foto de algún usuario más cerca? Con este comando podrás ver tu propio avatar, el de otros miembros e incluso el de los usuarios que no están en el servidor.",
+      usage: "Avatar [@user]",
+      category: "Info",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-export const command: Command = {
-  name: "avatar",
-  aliases: ["pfp"],
-  category: "Útil",
-  description:
-    "Muestra el avatar de un usuario (mencionado) o de ti, si no mencionas a nadie.",
-  usage: "avatar/pfp",
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-  run: async (client, message, args) => {
+  run = async (client: Lyon, message: Message, args) => {
     let when = args[0];
 
     let regg = /^\d{17,18}$/;
@@ -34,14 +50,18 @@ export const command: Command = {
     }
 
     try {
-      let a = await client.users.fetch(member)
-      let pfp = await a.displayAvatarURL({ format: "png", dynamic: true, size: 4096 })
+      let a = await client.users.fetch(member);
+      let pfp = await a.displayAvatarURL({
+        format: "png",
+        dynamic: true,
+        size: 4096,
+      });
       const embed = new Discord.MessageEmbed()
         .setTitle(`Avatar de: **${a.username}**`)
         .addField("Pedido por:", `${message.member}`)
         .setImage(`${pfp}`)
         .setColor("WHITE")
-        .setFooter(":)", client.user?.avatarURL() as string)
+        .setFooter({ text: ":)", iconURL: `${client.user?.avatarURL()}` })
         .setTimestamp();
 
       message.reply({ embeds: [embed] });
@@ -49,5 +69,5 @@ export const command: Command = {
       console.log(err);
       message.channel.send("Ha ocurrido un error.");
     }
-  },
-};
+  };
+}

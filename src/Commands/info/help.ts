@@ -8,18 +8,34 @@ import {
 import { capitalizeFirstLetter } from "../../functions";
 import Klar from "../../Client";
 const BOT_OWNER = "";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class HelpCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "help",
+      aliases: ["commands"],
+      description:
+        "Muestra una lista detallada de comandos (en fase beta, implementando un menú)",
+      usage: "help",
+      category: "Info",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: true,
+      guildOnly: false,
+    });
+  }
 
-export const command: Command = {
-  name: "help",
-  aliases: ["commands"],
-  cooldown: 5,
-  category: "Info",
-  description: `Muestra la página <Ayuda> o Información sobre un comando especifíco`,
-  usage: "help [comando/categoria]",
-  run: async (client, message, args, p) => {
-  
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
+
+  run = async (client: Lyon, message: Message, args, p) => {
     if (args.join(" ")) {
       const command =
         client.commands.get(args.join(" ").toLowerCase()) ||
@@ -44,7 +60,7 @@ export const command: Command = {
           "Para ver información sobre este comando debes usar el comando en un canal NSFW"
         );
       } else if (
-        command?.dev === true &&
+        command?.devOnly === true &&
         message.author.id !== process.env.botOwner
       ) {
         return message.reply(
@@ -146,5 +162,5 @@ export const command: Command = {
         console.log(err);
       }
     }
-  },
-};
+  };
+}

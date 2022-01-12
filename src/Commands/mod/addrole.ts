@@ -5,29 +5,37 @@ import Discord, {
   MessageButton,
   Message,
 } from "discord.js";
-import Klar from "../../Client";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class AddRoleCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "add-role",
+      aliases: [],
+      description: "Añade un rol a un miembro del servidor.",
+      usage: "add-role <@rol> <@user>",
+      category: "Mod",
+      cooldown: 0,
+      botPerms: ["MANAGE_ROLES", "SEND_MESSAGES"],
+      userPerms: ["MANAGE_ROLES"],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-export const command: Command = {
-  name: "addrole",
-  aliases: [],
-  cooldown: 5,
-  usage: "addrole <@role> <@user>",
-  category: "Mod",
-  description: "Añade un rol al miembro mencionado",
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-  run: (client: Klar, message: Message, args: any) => {
-    if (!message.member?.permissions.has("MANAGE_ROLES"))
-      return message.reply("No puedes hacer esto.");
-
-    if (!message.guild?.me?.permissions.has("MANAGE_ROLES"))
-      return message.reply("No tengo el permiso para **Gestionar Roles**");
-
+  run = async (client: Lyon, message: Message, args) => {
     let role: any = message.mentions.roles.first();
     let member =
       message.mentions.members?.first() ||
-      message.guild.members.cache.get(args[1]);
+      message.guild?.members.cache.get(args[1]);
 
     if (!role) return message.reply("Debes mencionar un rol.");
     if (!member)
@@ -52,5 +60,5 @@ export const command: Command = {
       message.channel.send(`Ha ocurrido un error.`);
       console.log(err);
     }
-  },
-};
+  };
+}

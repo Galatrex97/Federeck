@@ -10,30 +10,29 @@ import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
 export class Trump_tweetCommand extends BaseCommand {
-constructor() {
-  super({
-    name: "trump-tweet",
-    aliases: [],
-    description: "",   
-    usage: "",
-    category: "Fun",
-    cooldown: 0,
-    botPerms: ["ATTACH_FILES", "SEND_MESSAGES"],
-    userPerms: [],
-    devOnly: false,
-    guildOnly: false,
-  })
-};
+  constructor() {
+    super({
+      name: "trump-tweet",
+      aliases: [],
+      description: "Mira este tweet de Trump!",
+      usage: "trump-tweet <texto>",
+      category: "Fun",
+      cooldown: 0,
+      botPerms: ["ATTACH_FILES", "SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: false,
+    });
+  }
 
-/**
- * 
- * @param { Lyon } client 
- * @param { Message } message 
- * @param { String[] } args 
- */
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-
-  run = async(client: Lyon, message: Message, args, p) => {
+  run = async (client: Lyon, message: Message, args, p) => {
     const texto = args.join(" ");
     if (!texto) return message.channel.send("No has ingresado un texto");
     // Si no ingresan nada
@@ -50,7 +49,6 @@ constructor() {
     ); //Creamos la imagen con la API de NekoBot
 
     message.channel.send({ files: [attachment] }).catch((err) => {
-
       // En caso de algun error
       if (
         err ==
@@ -67,4 +65,4 @@ constructor() {
       // En caso de que en el texto haya emojis y la API te de este error retorna este mensaje
     });
   };
-};
+}
