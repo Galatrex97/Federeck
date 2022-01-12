@@ -46,13 +46,13 @@ export default class BackupCommand extends BaseCommand {
               })
               .setColor(me.displayHexColor)
               .setDescription(
-                `Para cargar esta backup usa \`\`\`__${
+                `**Para cargar esta backup usa** \`\`\`${
                   p + "backupload " + backupData.id
-                }\`\`\`**\n**Información general:** \n\n**ID del server:** ${
+                }\`\`\`\n**Información general:** \n\n**ID del server:** ${
                   message.guild?.id
                 }\n**Nombre del server:** ${
                   message.guild?.name
-                }\n**Guardada por: ${
+                }\n**Guardada por:** ${
                   message.member?.nickname ||
                   message.author.username + "#" + message.author.discriminator
                 }\n**Fecha de esta copia:**\n <t:${(
