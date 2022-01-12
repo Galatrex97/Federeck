@@ -33,7 +33,7 @@ export function runAll(client: Client) {
   readdirSync("./src/Commands/").forEach((dir) => {
     readdir(`../Commands/${dir}`, (e) => {
       if (e) console.log(`${e}`);
-      readdirSync(`../Commands/${dir}`)
+      readdirSync(`../Commands/${dir}/`)
         .filter((f) => f.endsWith(".ts"))
         .forEach((command) => {
           const req = require(`../Commands/${dir}/${command}`);
