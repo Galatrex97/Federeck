@@ -31,21 +31,18 @@ export function runAll(client: Client) {
 
   //Commands
   readdirSync("./src/Commands/").forEach((dir) => {
-    readdir(`../Commands/${dir}`, (e) => {
-      if (e) console.log(`${e}`);
-      readdirSync(`../Commands/${dir}/`)
-        .filter((f) => f.endsWith(".ts"))
-        .forEach((command) => {
-          const req = require(`../Commands/${dir}/${command}`);
-          const cmd = new req(client);
-          if (cmd.name && typeof cmd.name == "string")
-            client.commands.set(cmd.name.toLowerCase(), cmd as BaseCommand);
-          if (cmd.aliases && Array.isArray(cmd.aliases))
-            cmd.aliases.forEach((alias: string) =>
-              client.aliases.set(alias, cmd.name.toLowerCase())
-            );
-        });
-    });
+    readdirSync(`../Commands/${dir}/`)
+      .filter((f) => f.endsWith(".ts"))
+      .forEach((command) => {
+        const req = require(`../Commands/${dir}/${command}`);
+        const cmd = new req(client);
+        if (cmd.name && typeof cmd.name == "string")
+          client.commands.set(cmd.name.toLowerCase(), cmd as BaseCommand);
+        if (cmd.aliases && Array.isArray(cmd.aliases))
+          cmd.aliases.forEach((alias: string) =>
+            client.aliases.set(alias, cmd.name.toLowerCase())
+          );
+      });
   });
 
   //Events
