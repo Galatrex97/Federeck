@@ -275,100 +275,101 @@ export const event: Event = {
       delete cmd?.userPerms;
     }
 
-    if (userPerms) {
-      let permsHav: Array<string> = [];
-      let reqPerms: Array<string> = [];
-      let allPerms: Array<string> = [];
+    if (message.inGuild()) {
+      if (userPerms) {
+        let permsHav: Array<string> = [];
+        let reqPerms: Array<string> = [];
+        let allPerms: Array<string> = [];
 
-      userPerms.forEach((permission) => {
-        allPerms.push(latPerms[permission]);
-        let dex = message.guild.me.permissions.has(permission);
+        userPerms.forEach((permission) => {
+          allPerms.push(latPerms[permission]);
+          let dex = message.member.permissions.has(permission);
 
-        if (dex) {
-          permsHav.push(latPerms[permission]);
-        } else if (!dex) {
-          reqPerms.push(latPerms[permission]);
-        }
-      });
-
-      if (
-        reqPerms.length > 0 &&
-        message.guild.me.permissions.has("SEND_MESSAGES")
-      ) {
-        let reqEmbed = new MessageEmbed()
-          .setTitle("Necesitas más permisos para ejecutar este comando")
-          .setDescription(
-            `Para ejecutar este comando se necesitan los siguientes permisos:\n\n**Todos los permisos necesarios: **\n\`\`\`${allPerms.join(
-              "\n"
-            )}\`\`\`\n${
-              permsHav.length > 0
-                ? `**Permisos que ya tienes: **\n\`\`\`${permsHav.join(
-                    "\n"
-                  )}\`\`\`\n`
-                : ""
-            } ${
-              permsHav.length > 0
-                ? `**Permisos que aún te faltan: **\n\`\`\`${reqPerms.join(
-                    "\n"
-                  )}\`\`\`\n`
-                : ""
-            } Para continuar, es necesario que tengas los permisos que aun te faltan.`
-          )
-          .setColor("WHITE");
-
-        message.reply({
-          embeds: [reqEmbed],
+          if (dex) {
+            permsHav.push(latPerms[permission]);
+          } else if (!dex) {
+            reqPerms.push(latPerms[permission]);
+          }
         });
+
+        if (
+          reqPerms.length > 0 &&
+          message.guild.me.permissions.has("SEND_MESSAGES")
+        ) {
+          let reqEmbed = new MessageEmbed()
+            .setTitle("Necesitas más permisos para ejecutar este comando")
+            .setDescription(
+              `Para ejecutar este comando se necesitan los siguientes permisos:\n\n**Todos los permisos necesarios: **\n\`\`\`${allPerms.join(
+                "\n"
+              )}\`\`\`\n${
+                permsHav.length > 0
+                  ? `**Permisos que ya tienes: **\n\`\`\`${permsHav.join(
+                      "\n"
+                    )}\`\`\`\n`
+                  : ""
+              } ${
+                permsHav.length > 0
+                  ? `**Permisos que aún te faltan: **\n\`\`\`${reqPerms.join(
+                      "\n"
+                    )}\`\`\`\n`
+                  : ""
+              } Para continuar, es necesario que tengas los permisos que aun te faltan.`
+            )
+            .setColor("WHITE");
+
+          return message.reply({
+            embeds: [reqEmbed],
+          });
+        }
+      }
+
+      if (botPerms) {
+        let permsHav: Array<string> = [];
+        let reqPerms: Array<string> = [];
+        let allPerms: Array<string> = [];
+
+        botPerms.forEach((permission) => {
+          allPerms.push(latPerms[permission]);
+          let dex = message.guild.me.permissions.has(permission);
+
+          if (dex) {
+            permsHav.push(latPerms[permission]);
+          } else if (!dex) {
+            reqPerms.push(latPerms[permission]);
+          }
+        });
+
+        if (
+          reqPerms.length > 0 &&
+          message.guild.me.permissions.has("SEND_MESSAGES")
+        ) {
+          let reqEmbed = new MessageEmbed()
+            .setTitle("Necesito más permisos para ejecutar este comando")
+            .setDescription(
+              `Para ejecutar este comando se necesitan los siguientes permisos:\n\n**Todos los permisos necesarios: **\n\`\`\`${allPerms.join(
+                "\n"
+              )}\`\`\`\n${
+                permsHav.length > 0
+                  ? `**Permisos que ya tengo: **\n\`\`\`${permsHav.join(
+                      "\n"
+                    )}\`\`\`\n`
+                  : ""
+              } ${
+                permsHav.length > 0
+                  ? `**Permisos que aún me faltan: **\n\`\`\`${reqPerms.join(
+                      "\n"
+                    )}\`\`\`\n\n`
+                  : ""
+              } Para continuar, es necesario que edites mis permisos o me des un rol con los permisos que aún necesito.`
+            )
+            .setColor("WHITE");
+
+          return message.reply({
+            embeds: [reqEmbed],
+          });
+        }
       }
     }
-
-    if (botPerms) {
-      let permsHav: Array<string> = [];
-      let reqPerms: Array<string> = [];
-      let allPerms: Array<string> = [];
-
-      botPerms.forEach((permission) => {
-        allPerms.push(latPerms[permission]);
-        let dex = message.guild.me.permissions.has(permission);
-
-        if (dex) {
-          permsHav.push(latPerms[permission]);
-        } else if (!dex) {
-          reqPerms.push(latPerms[permission]);
-        }
-      });
-
-      if (
-        reqPerms.length > 0 &&
-        message.guild.me.permissions.has("SEND_MESSAGES")
-      ) {
-        let reqEmbed = new MessageEmbed()
-          .setTitle("Necesito más permisos para ejecutar este comando")
-          .setDescription(
-            `Para ejecutar este comando se necesitan los siguientes permisos:\n\n**Todos los permisos necesarios: **\n\`\`\`${allPerms.join(
-              "\n"
-            )}\`\`\`\n${
-              permsHav.length > 0
-                ? `**Permisos que ya tengo: **\n\`\`\`${permsHav.join(
-                    "\n"
-                  )}\`\`\`\n`
-                : ""
-            } ${
-              permsHav.length > 0
-                ? `**Permisos que aún me faltan: **\n\`\`\`${reqPerms.join(
-                    "\n"
-                  )}\`\`\`\n\n`
-                : ""
-            } Para continuar, es necesario que edites mis permisos o me des un rol con los permisos que aún necesito.`
-          )
-          .setColor("WHITE");
-
-        message.reply({
-          embeds: [reqEmbed],
-        });
-      }
-    }
-
     //Cooldowns System
     let cooldowns = client.cooldowns;
 
