@@ -15,7 +15,7 @@ export class TicketsCommand extends BaseCommand {
   constructor() {
     super({
       name: "tickets",
-      aliases: ["set-tickets", "new-ticket"],
+      aliases: ["set-tickets", "tickets-btn"],
       description: "Crea un ticket nuevo",
       usage: "tickets <Dar click en el botón>",
       category: "Mod",

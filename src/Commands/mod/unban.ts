@@ -1,26 +1,32 @@
 import Discord, { Client, Message, MessageEmbed } from "discord.js";
 import Klar from "../../Client";
-import { Command } from "../../Interfaces";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-export const command: Command = {
-  name: "unban",
-  aliases: ["desbanear"],
-  category: "Mod",
-  usage: "unban/desbanear <id de la persona baneada>",
-  description: "Desbanea a alguien.",
+export class UnbanCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "unban",
+      aliases: [],
+      description: "Desbanea a un miembro del servidor",
+      usage: "unban <id del miembro>",
+      category: "Mod",
+      cooldown: 0,
+      botPerms: ["BAN_MEMBERS", "SEND_MESSAGES"],
+      userPerms: ["BAN_MEMBERS"],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-  run: async (client, message, args) => {
-    if (!message.member?.permissions.has("BAN_MEMBERS")) {
-      return message.channel.send(
-        "No tienes los permisos requeridos para **Desbanear Miembros**"
-      );
-    }
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-    if (!message.guild?.me?.permissions.has("BAN_MEMBERS"))
-      return message.channel.send(
-        "No tengo los permisos requeridos para poder ejecutar este comando."
-      );
-
+  run = async (client: Lyon, message: Message, args) => {
     let userId: any = args[0] as string;
 
     if (!userId) return message.channel.send("Debes escribir un ID");
@@ -40,8 +46,6 @@ export const command: Command = {
         await message.guild?.members
           .unban(bannedUser.user)
           .catch((err) => {
-
-
             return message.channel.send("Algo salió mal.");
           })
           .then(() => {
@@ -56,5 +60,5 @@ export const command: Command = {
         console.log(error);
         message.channel.send("Ha ocurrido un error.");
       });
-  },
-};
+  };
+}

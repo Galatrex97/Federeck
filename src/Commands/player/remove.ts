@@ -1,21 +1,31 @@
-import Discord, {
-  Channel,
-  Client,
-  MessageEmbed,
-  Message,
-  TextChannel,
-} from "discord.js";
+import { Message, MessageEmbed } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class RemoveCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "remove",
+      aliases: [],
+      description: "Quita una canción de la lista de reproducción actual. ",
+      usage: "remove <pos>",
+      category: "Música",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-export const command: Command = {
-  name: "remove",
-  aliases: [],
-  category: "Música",
-  usage: "remove <num. de canción>",
-  description: "Quita una canción de la lista de reproducción.",
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-  run: async (client, message, args) => {
+  run = async (client: Lyon, message: Message, args) => {
     let guildList = client.player.getQueue(message.guild?.id as string);
 
     if (!message.member?.voice.channel)
@@ -41,5 +51,5 @@ export const command: Command = {
         parsedSi +
         " de la lista de reproducción."
     );
-  },
-};
+  };
+}

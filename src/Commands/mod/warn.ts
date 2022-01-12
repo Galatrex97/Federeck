@@ -1,21 +1,34 @@
 import Discord, { Client, MessageEmbed, Guild, Message } from "discord.js";
 import db from "../../Models/warn";
-import mongoose from "mongoose";
-import Klar from "../../Client";
-import { Command } from "../../Interfaces";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-export const command: Command = {
-  name: "warn",
-  aliases: [],
-  usage: "warn <@usuario>",
-  category: "Mod",
-  description: "...",
+export class WarnCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "warn",
+      aliases: [],
+      description: "Advierte a un usuario.",
+      usage: "warn <@user> [advertencia]",
+      category: "Mod",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: ["ADMINISTRATOR"],
+      devOnly: true,
+      guildOnly: true,
+    });
+  }
 
-  run: (client: Klar, message: Message, args: String[]) => {
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
+
+  run = async (client: Lyon, message: Message, args) => {
     let possibleId: any = args[0] as string;
 
-    if (!message.member?.permissions.has("ADMINISTRATOR"))
-      return message.reply(`No tienes el permiso **Administrador**`);
     const user =
       message.mentions.members?.first() ||
       message.guild?.members.cache.get(possibleId);
@@ -40,7 +53,6 @@ export const command: Command = {
       { guildid: message.guild?.id, user: user.id },
       async (err, data) => {
         if (err) {
-
           console.log(err);
         }
         if (!data) {
@@ -93,5 +105,5 @@ export const command: Command = {
     } catch (err) {
       console.log(err);
     }
-  },
-};
+  };
+}

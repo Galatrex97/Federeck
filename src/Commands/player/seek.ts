@@ -1,21 +1,31 @@
-import Discord, {
-  Channel,
-  Client,
-  MessageEmbed,
-  Message,
-  TextChannel,
-} from "discord.js";
+import { Message, MessageEmbed } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class SeekCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "seek",
+      aliases: [],
+      description: "Salta una canción al segundo especificado.",
+      usage: "seek <segundo>",
+      category: "Música",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-export const command: Command = {
-  name: "seek",
-  aliases: [],
-  category: "Música",
-  usage: "seek <segundo>",
-  description: "Salta la canción a el segundo especificado",
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-  run: async (client, message, args) => {
+  run = async (client: Lyon, message: Message, args) => {
     let guildList = client.player.getQueue(message.guild?.id as string);
 
     if (!message.member?.voice.channel)
@@ -36,5 +46,5 @@ export const command: Command = {
       return message.reply("Debes escribir un número válido.");
     guildList?.seek(parsedSi * 1000);
     message.reply("Se ha saltado al segundo " + parsedSi);
-  },
-};
+  };
+}

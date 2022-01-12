@@ -1,21 +1,31 @@
-import Discord, {
-  Channel,
-  Client,
-  MessageEmbed,
-  Message,
-  TextChannel,
-} from "discord.js";
+import { Message, MessageEmbed } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class GetVolumeCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "getvolume",
+      aliases: [],
+      description: "Obtiene el volumen de la lista de reproduccion actual",
+      usage: "getvolume",
+      category: "Música",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-export const command: Command = {
-  name: "get-volume",
-  aliases: [],
-  category: "Música",
-  usage: "get-volume",
-  description: "Muestra el volumen actual de la canción reproduciéndose.",
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-  run: async (client, message, args) => {
+  run = async (client: Lyon, message: Message, args) => {
     let guildList = client.player.getQueue(message.guild?.id as string);
 
     if (!message.member?.voice.channel)
@@ -29,6 +39,9 @@ export const command: Command = {
         "Debes estar en el mismo canal de voz que yo, de lo contrario no funcionará correctamente..."
       );
 
+    if (!guildList?.isPlaying) {
+      return message.reply("No hay nada reproduciendose.");
+    }
     message.reply("El volumen actual es: " + guildList?.volume);
-  },
-};
+  };
+}

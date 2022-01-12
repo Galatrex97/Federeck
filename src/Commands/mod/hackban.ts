@@ -1,14 +1,32 @@
 import Discord, { Message, MessageEmbed, User } from "discord.js";
-import Klar from "../../Client";
-import { Command } from "../../Interfaces";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-export const command: Command = {
-  name: "hackban",
-  aliases: [],
-  category: "Mod",
-  usage: "hackban <id>",
-  description: "Terminado, necesitas el id de la persona a banear",
-  run: async (client: Klar, message: Message, args, p) => {
+export class HackbanCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "hackban",
+      aliases: [],
+      description:
+        "Banea a un usuario de manera forzada, incluso si no está en el servidor",
+      usage: "hackban <id del usuario> [razón]",
+      category: "",
+      cooldown: 0,
+      botPerms: ["BAN_MEMBERS", "SEND_MESSAGES"],
+      userPerms: ["BAN_MEMBERS"],
+      devOnly: true,
+      guildOnly: true,
+    });
+  }
+
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
+
+  run = async (client: Lyon, message: Message, args) => {
     let guildname: any = message.guild?.name as string;
     let guildIcon: any = message.guild?.iconURL() as string;
     const embed = new Discord.MessageEmbed()
@@ -17,13 +35,11 @@ export const command: Command = {
     if (!args[0]) {
       embed.setDescription("Debes escribir el ID de un usuario.");
       embed.setColor("WHITE");
-      return message
-        .reply({ embeds: [embed] })
-        .catch((error) => {
-          console.log(error);
+      return message.reply({ embeds: [embed] }).catch((error) => {
+        console.log(error);
 
-          message.channel.send("Ha ocurrido un error.");
-        });
+        message.channel.send("Ha ocurrido un error.");
+      });
     }
 
     let idz = args[0] as string;
@@ -31,9 +47,7 @@ export const command: Command = {
     let member =
       message.mentions.members?.first() ||
       message.guild?.members.resolve(idz) ||
-      message.guild?.members.cache.find(
-        (m) => m.user.id == args[0]
-      );
+      message.guild?.members.cache.find((m) => m.user.id == args[0]);
 
     if (!member) {
       embed.setDescription("Necesitas escribir el ID de un usuario.");
@@ -92,5 +106,5 @@ export const command: Command = {
 
     if (!!member.user) member.user.send({ embeds: [embed] }).catch((e) => e);
     message.reply({ embeds: [embed] });
-  },
-};
+  };
+}

@@ -1,21 +1,31 @@
-import Discord, {
-  Channel,
-  Client,
-  MessageEmbed,
-  Message,
-  TextChannel,
-} from "discord.js";
+import { Message, MessageEmbed } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class PlayingCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "playing",
+      aliases: [],
+      description: "Muestra la canción reproduciendose y la",
+      usage: "playing",
+      category: "Música",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-export const command: Command = {
-  name: "playing",
-  aliases: [],
-  category: "Música",
-  usage: "playing",
-  description: "Muestra la canción reproduciéndose y el minuto actual",
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-  run: async (client, message, args) => {
+  run = async (client: Lyon, message: Message, args) => {
     let guildList = client.player.getQueue(message.guild?.id as string);
 
     if (!message.member?.voice.channel)
@@ -29,6 +39,10 @@ export const command: Command = {
         "Debes estar en el mismo canal de voz que yo, de lo contrario no funcionará correctamente..."
       );
 
+    if (!guildList?.isPlaying) {
+      return message.reply("No hay nada reproduciéndose.");
+    }
+
     const ProgressBar = guildList?.createProgressBar();
     let embed = new MessageEmbed()
       .setTitle(`Reproduciendo ahora`)
@@ -38,5 +52,5 @@ export const command: Command = {
       .setColor("WHITE")
       .setThumbnail(`${guildList?.nowPlaying?.thumbnail}`);
     await message.reply({ embeds: [embed] });
-  },
-};
+  };
+}

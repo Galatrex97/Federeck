@@ -1,23 +1,31 @@
-import Discord, {
-  Channel,
-  Client,
-  MessageEmbed,
-  Message,
-  TextChannel,
-} from "discord.js";
-import Klar from "../../Client";
+import { Message, MessageEmbed } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class SkipCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "skip",
+      aliases: [],
+      description: "Salta una canción de la lista de reproducción",
+      usage: "skip",
+      category: "Música",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-export const command: Command = {
-  name: "skip",
-  aliases: [],
-  category: "Música",
-  usage: "skip",
-  description:
-    "Salta una canción, pero puedes saltar más de una utilizando el comando jump.",
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-  run: async (client, message, args) => {
+  run = async (client: Lyon, message: Message, args) => {
     let guildQueue = await client.player.getQueue(message.guild?.id as string);
 
     if (!guildQueue?.songs[1]) {
@@ -42,9 +50,8 @@ export const command: Command = {
 
       message.channel.send("La cancion fue omitida correctamente.");
     } catch (err) {
-
       message.channel.send("Ha ocurrido un error.");
       console.log(err);
     }
-  },
-};
+  };
+}

@@ -1,22 +1,31 @@
-import Discord, {
-  Channel,
-  Client,
-  MessageEmbed,
-  Message,
-  TextChannel,
-} from "discord.js";
-import Klar from "../../Client";
+import { Message, MessageEmbed } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class QueueCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "queue",
+      aliases: [],
+      description: "Muestra la lista de reproducción actual",
+      usage: "queue",
+      category: "Música",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-export const command: Command = {
-  name: "queue",
-  aliases: [],
-  category: "Música",
-  usage: "queue",
-  description: "Muestra la lista de reproducción",
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-  run: async (client, message, args) => {
+  run = async (client: Lyon, message: Message, args) => {
     let queue = await client.player.getQueue(message.guild?.id as string);
 
     if (!queue) {
@@ -37,5 +46,5 @@ export const command: Command = {
       .setColor("WHITE");
 
     message.reply({ embeds: [embed] });
-  },
-};
+  };
+}

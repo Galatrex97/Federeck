@@ -1,22 +1,31 @@
-import Discord, {
-  Channel,
-  Client,
-  MessageEmbed,
-  Message,
-  TextChannel,
-} from "discord.js";
-import Klar from "../../Client";
+import { Message, MessageEmbed } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class ResumeCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "resume",
+      aliases: ["continue"],
+      description: "Despausa la canción actual",
+      usage: "resume",
+      category: "Música",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-export const command: Command = {
-  name: "continue",
-  aliases: ["resume"],
-  category: "Música",
-  usage: "continue/resume",
-  description: "Continua la canción si ha sido pausada.",
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-  run: (client, message, args) => {
+  run = async (client: Lyon, message: Message, args) => {
     let guildList = client.player.getQueue(message.guild?.id as string);
 
     if (!message.member?.voice.channel)
@@ -46,5 +55,5 @@ export const command: Command = {
 
       console.log(err);
     }
-  },
-};
+  };
+}

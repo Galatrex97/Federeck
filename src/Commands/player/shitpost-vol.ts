@@ -1,21 +1,31 @@
-import Discord, {
-  Channel,
-  Client,
-  MessageEmbed,
-  Message,
-  TextChannel,
-} from "discord.js";
-import Klar from "../../Client";
-import { Command } from "../../Interfaces";
+import { Message, MessageEmbed } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-export const command: Command = {
-  name: "shitpost-v",
-  aliases: ["s-vol"],
-  category: "Música",
-  usage: "shitpost-vol/s-vol",
-  description: "🥶",
+export class ShitpostCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "shitpost",
+      aliases: [],
+      description: "Satura el volumen de la lista de reproducción.",
+      usage: "shitpost",
+      category: "Música",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-  run: async (client, message, args) => {
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
+
+  run = async (client: Lyon, message: Message, args) => {
     let guildQueue = await client.player.getQueue(message.guild?.id as string);
 
     if (!guildQueue) {
@@ -41,9 +51,8 @@ export const command: Command = {
     try {
       guildQueue.setVolume(parsedShitpost);
     } catch (err) {
-
       console.log(err);
     }
     message.channel.send("Sale chipos");
-  },
-};
+  };
+}

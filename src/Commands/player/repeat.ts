@@ -1,23 +1,31 @@
-import Discord, {
-  Channel,
-  Client,
-  MessageEmbed,
-  Message,
-  TextChannel,
-} from "discord.js";
-import Klar from "../../Client";
+import { Message, MessageEmbed } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class RepeatCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "repeat",
+      aliases: [],
+      description: "Repite una canción, la lista entera o desactiva este modo.",
+      usage: "repeat <0 (apagar)/1 (canción actual)/2 (Playlist entera)>",
+      category: "Música",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-export const command: Command = {
-  name: "repeat",
-  aliases: [],
-  category: "Música",
-  usage: "repeat 0/1/2",
-  description:
-    "Cambia al modo repetición. El modo 1 repite la canción actual, el 2 la lista de reproducción entera y el 0 apaga este modo.",
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-  run: async (client, message, args) => {
+  run = async (client: Lyon, message: Message, args) => {
     let guildQueue = await client.player.getQueue(message.guild?.id as string);
 
     if (!guildQueue) {
@@ -38,5 +46,5 @@ export const command: Command = {
         : "Repetir canción"
       : "Apagado";
     message.channel.send("El modo de repetición actual es: `" + mode + "`");
-  },
-};
+  };
+}

@@ -1,21 +1,31 @@
-import Discord, {
-  Channel,
-  Client,
-  MessageEmbed,
-  Message,
-  TextChannel,
-} from "discord.js";
-import Klar from "../../Client";
-import { Command } from "../../Interfaces";
+import { Message, MessageEmbed } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-export const command: Command = {
-  name: "shuffle",
-  aliases: ["aleatorio"],
-  category: "Música",
-  usage: "shuffle/aleatorio",
-  description: "Activa el modo aleatorio de la playlist.",
+export class ShuffleCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "shuffle",
+      aliases: ["aleatorio"],
+      description: "Pone la lista de reproducción en modo aleatorio.",
+      usage: "shuffle",
+      category: "Música",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-  run: async (client, message, args) => {
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
+
+  run = async (client: Lyon, message: Message, args) => {
     let guildQueue = await client.player.getQueue(message.guild?.id as string);
 
     if (!guildQueue) {
@@ -37,9 +47,8 @@ export const command: Command = {
       guildQueue.shuffle();
       message.reply("Se ha activado el modo aleatorio.");
     } catch (err) {
-
       message.channel.send("Ha ocurrido un error.");
       console.log(err);
     }
-  },
-};
+  };
+}

@@ -2,17 +2,34 @@ import Discord, { Client, Message, Guild, MessageEmbed } from "discord.js";
 import * as backup from "discord-backup";
 import Klar from "../../Client";
 backup.setStorageFolder(__dirname + "/backups/");
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class BackuploadCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "backupload",
+      aliases: [],
+      description:
+        "Carga una backup en este servidor.\nPELIGROSO: Reemplaza todos los roles, canales, nombres e iconos, etc. Tener cuidado",
+      usage: "backupload <id de la backup>",
+      category: "Mod",
+      cooldown: 0,
+      botPerms: ["ADMINISTRATOR", "SEND_MESSAGES"],
+      userPerms: ["ADMINISTRATOR"],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-export const command: Command = {
-  name: "backupload",
-  aliases: ["loadbackup", "loadcloud"],
-  usage: "backupload/loadbackup/loadcloud",
-  category: "Mod",
-  description: "Carga una backup",
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-  run: (client: Klar, message: Message, args) => {
+  run = async (client: Lyon, message: Message, args) => {
     let server = message.guild as Guild;
 
     if (!message.member?.permissions.has("ADMINISTRATOR")) {
@@ -79,14 +96,12 @@ export const command: Command = {
           .catch((error) => {
             console.log(error);
 
-
             message.channel.send("Ha ocurrido un error.");
           });
       })
       .catch((error) => {
-
         console.log(error);
         message.channel.send("Ha ocurrido un error.");
       });
-  },
-};
+  };
+}

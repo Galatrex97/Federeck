@@ -5,20 +5,33 @@ import Discord, {
   MessageEmbed,
   TextChannel,
 } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
+export class ClearCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "clear",
+      aliases: ["purge"],
+      description: "Borra mensajes en masa (hasta 100)",
+      usage: "clear <1-100>",
+      category: "Mod",
+      cooldown: 0,
+      botPerms: ["MANAGE_MESSAGES", "SEND_MESSAGES"],
+      userPerms: ["MANAGE_MESSAGES"],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-import { Command } from "../../Interfaces";
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-export const command: Command = {
-  name: "clear",
-  cooldown: 7,
-  aliases: ["del", "purge"],
-  category: "Mod",
-  usage: "clear/del <numero de mensajes a borrar>",
-  description: "Elimina los mensajes que quieras",
-
-  run: (client: Klar, message: Message, args: String[]) => {
-
+  run = async (client: Lyon, message: Message, args) => {
     let su = message.channel as TextChannel;
     let cantidad: any = args.join(" ");
     if (!cantidad) return message.reply("Debes escribir una cantidad");
@@ -26,23 +39,12 @@ export const command: Command = {
       return message.reply("Las cantidades tienen que ser números.");
     let a = parseInt(cantidad);
 
-    let perms = message.member?.permissions.has("MANAGE_MESSAGES");
-    if (!perms)
-      return message.reply(
-        "No tienes los permisos requeridos para **Borrar Mensajes**"
-      );
-
     if (a === 0) return message.reply("No puedes borrar 0 mensajes");
 
     if (a < 0) return message.reply("No puedes borrar 0 o menos mensajes.");
 
     if (a > 100)
       return message.reply("No puedes borrar 100 o más mensajes a la vez.");
-
-    if (!message.guild?.me?.permissions.has("MANAGE_MESSAGES"))
-      return message.reply(
-        "Necesito el permiso **Gestionar Mensajes** para poder ejecutar este comando."
-      );
 
     su.bulkDelete(a)
       .then(() => {
@@ -58,5 +60,5 @@ export const command: Command = {
 
         message.channel.send("Ha ocurrido un error.");
       });
-  },
-};
+  };
+}

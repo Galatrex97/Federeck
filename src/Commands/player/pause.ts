@@ -1,22 +1,31 @@
-import Discord, {
-  Channel,
-  Client,
-  MessageEmbed,
-  Message,
-  TextChannel,
-} from "discord.js";
-import Klar from "../../Client";
+import { Message, MessageEmbed } from "discord.js";
+import BaseCommand from "../../Structures/Command";
+import Lyon from "../../Client";
 
-import { Command } from "../../Interfaces";
+export class PauseCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "pause",
+      aliases: [],
+      description: "Ppausa la lista de reproducción actual",
+      usage: "pause",
+      category: "Música",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-export const command: Command = {
-  name: "pause",
-  aliases: ["ps"],
-  category: "Música",
-  usage: "pause/ps",
-  description: "Pausa la canción que se está reproduciendo.",
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-  run: async (client, message, args) => {
+  run = async (client: Lyon, message: Message, args) => {
     let guildList = client.player.getQueue(message.guild?.id as string);
     if (!message.member?.voice.channel)
       return message.channel.send(
@@ -42,9 +51,8 @@ export const command: Command = {
 
       message.channel.send("La canción ha sido pausada.");
     } catch (err) {
-
       message.channel.send("Ha ocurrido un error.");
       console.log(err);
     }
-  },
-};
+  };
+}

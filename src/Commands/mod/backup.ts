@@ -13,24 +13,22 @@ import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
 export class BackupCommand extends BaseCommand {
-constructor() {
-  super({
-    name: "backup",
-    aliases: ["cloud"],
-    description: "Crea una copia de seguridad de un server",   
-    usage: "backup/cloud",
-    category: "Mod",
-    cooldown: 0,
-    botPerms: ["ADMINISTRATOR"],
-    userPerms: ["ADMINISTRATOR"],
-    devOnly: false,
-    guildOnly: true,
-  })
-};
+  constructor() {
+    super({
+      name: "backup",
+      aliases: ["cloud"],
+      description: "Crea una copia de seguridad de un server",
+      usage: "backup/cloud",
+      category: "Mod",
+      cooldown: 0,
+      botPerms: ["ADMINISTRATOR", "SEND_MESSAGES"],
+      userPerms: ["ADMINISTRATOR"],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-
-  run = async(client: Lyon, message: Message, args, p) => {
-
+  run = async (client: Lyon, message: Message, args, p) => {
     let guild = message.guild as Guild;
 
     let me = message.guild?.me as GuildMember;
@@ -43,9 +41,24 @@ constructor() {
         message.author.send({
           embeds: [
             new Discord.MessageEmbed()
-              .setAuthor({ name: "Se ha creado una nueva copia de seguridad de un servidor" })
+              .setAuthor({
+                name: "Se ha creado una nueva copia de seguridad de un servidor",
+              })
               .setColor(me.displayHexColor)
-              .setDescription(`Para cargar esta backup usa **__${p + "backupload " + backupData.id}__**\n**Información general:** \n**ID del server:** **${message.guild?.id}**\n**Nombre del server:** **${message.guild?.name}**\n**Guardada por:** **${message.member?.nickname || message.author.username+message.author.discriminator}**\n**Fecha de esta copia:**\n\`<t:${message.createdTimestamp / 1000}:F>\``)
+              .setDescription(
+                `Para cargar esta backup usa **__${
+                  p + "backupload " + backupData.id
+                }__**\n**Información general:** \n**ID del server:** **${
+                  message.guild?.id
+                }**\n**Nombre del server:** **${
+                  message.guild?.name
+                }**\n**Guardada por:** **${
+                  message.member?.nickname ||
+                  message.author.username + message.author.discriminator
+                }**\n**Fecha de esta copia:**\n\`<t:${
+                  message.createdTimestamp / 1000
+                }:F>\``
+              )
               .setThumbnail(message.author.displayAvatarURL()),
           ],
         });
@@ -66,4 +79,4 @@ constructor() {
         message.channel.send("Ha ocurrido un error.");
       });
   };
-};
+}
