@@ -53,7 +53,9 @@ export default class BackupCommand extends BaseCommand {
                 }\n**Nombre del server:** ${
                   message.guild?.name
                 }\n**Guardada por:** ${
-                  message.member?.nickname + message.author.discriminator ||
+                  message.member?.nickname +
+                    "#" +
+                    message.author.discriminator ||
                   message.author.username + "#" + message.author.discriminator
                 }\n**Fecha de esta copia:**\n <t:${(
                   message.createdTimestamp / 1000

@@ -334,7 +334,8 @@ export const event: Event = {
 
           if (dex) {
             permsHav.push(latPerms[permission]);
-          } else if (!dex) {
+          }
+          if (!dex) {
             reqPerms.push(latPerms[permission]);
           }
         });
