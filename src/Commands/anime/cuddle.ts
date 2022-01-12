@@ -11,22 +11,21 @@ const neko = new clientnt();
 
 import Command from "../../Structures/Command";
 
-class CuddleCommand extends Command {
-
-constructor() {
-  super({
-    name: "cuddle",
-    aliases: [],
-    usage:  "",
-    description: "Dar cariño",
-    category: "Anime",
-    cooldown: 0,
-    botPerms: ["SEND_MESSAGES"],
-    userPerms: [],
-    devOnly: false,
-    guildOnly: true
-  }) 
-}
+export class CuddleCommand extends Command {
+  constructor() {
+    super({
+      name: "cuddle",
+      aliases: [],
+      usage: "",
+      description: "Dar cariño",
+      category: "Anime",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
   run = async (client, message, args) => {
     const mentionedMember = message.mentions.members?.first();
     if (!mentionedMember) return message.reply("Debes mencionar a alguien.");
@@ -58,4 +57,4 @@ constructor() {
         message.channel.send("Ha ocurrido un error.");
       });
   };
-};
+}
