@@ -35,6 +35,7 @@ export function runAll(client: Client) {
       .filter((f) => f.endsWith(".ts"))
       .forEach((command) => {
         const req = require(`../Commands/${dir}/${command}`);
+        console.log(req);
         const cmd = new req.default(client);
         if (cmd.name && typeof cmd.name == "string")
           client.commands.set(cmd.name.toLowerCase(), cmd as BaseCommand);
