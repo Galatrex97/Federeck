@@ -17,8 +17,8 @@ export default class TextBallCommand extends BaseCommand {
       aliases: ["globo-de-texto"],
       description:
         "Hace un globo de texto a partir de la imagen que el usuario da.",
-      usage: "",
-      category: "",
+      usage: "globo <insertar imagen<",
+      category: "Fun",
       cooldown: 0,
       botPerms: ["SEND_MESSAGES", "ATTACH_FILES"],
       userPerms: [],

@@ -10,7 +10,7 @@ export default class HackbanCommand extends BaseCommand {
       description:
         "Banea a un usuario de manera forzada, incluso si no está en el servidor",
       usage: "hackban <id del usuario> [razón]",
-      category: "",
+      category: "Mod",
       cooldown: 0,
       botPerms: ["BAN_MEMBERS", "SEND_MESSAGES"],
       userPerms: ["BAN_MEMBERS"],

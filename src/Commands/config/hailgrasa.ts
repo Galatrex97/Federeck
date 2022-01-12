@@ -11,7 +11,7 @@ export default class PacmansSwitchCommand extends BaseCommand {
       aliases: [],
       description: 'Configura las respuestas a los pacmans ":v"',
       usage: "pacmans <on/off>",
-      category: "",
+      category: "Mod",
       cooldown: 0,
       botPerms: [],
       userPerms: ["MANAGE_MESSAGES"],
