@@ -4,7 +4,7 @@ let prefix = process.env.prefix as string;
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class ResetprefixCommand extends BaseCommand {
+export default class ResetprefixCommand extends BaseCommand {
   constructor() {
     super({
       name: "reset-prefix",

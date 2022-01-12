@@ -11,7 +11,7 @@ const BOT_OWNER = "";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class HelpCommand extends BaseCommand {
+export default class HelpCommand extends BaseCommand {
   constructor() {
     super({
       name: "help",

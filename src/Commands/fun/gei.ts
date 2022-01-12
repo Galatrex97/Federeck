@@ -10,32 +10,31 @@ import { createCanvas, loadImage } from "canvas";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class GayCommand extends BaseCommand {
-constructor() {
-  super({
-    name: "gay",
-    aliases: [],
-    description: "PPone la bandera gay encima de la foto de perfil de alguien.",   
-    usage: "gay <@user>",
-    category: "Fun",
-    cooldown: 0,
-    botPerms: ["ATTACH_FILES", "SEND_MESSAGES"],
-    userPerms: [],
-    devOnly: false,
-    guildOnly: true,
-  })
-};
+export default class GayCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "gay",
+      aliases: [],
+      description:
+        "PPone la bandera gay encima de la foto de perfil de alguien.",
+      usage: "gay <@user>",
+      category: "Fun",
+      cooldown: 0,
+      botPerms: ["ATTACH_FILES", "SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-/**
- * 
- * @param { Lyon } client 
- * @param { Message } message 
- * @param { String[] } args 
- */
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-
-  run = async(client: Lyon, message: Message, args) => {
-    
+  run = async (client: Lyon, message: Message, args) => {
     let possibleId = args[0];
 
     let regg = /^\d{17,18}$/;
@@ -83,8 +82,7 @@ constructor() {
     try {
       message.channel.send({ embeds: [embed], files: [attachment] });
     } catch (err) {
-
       console.log(err);
     }
   };
-};
+}

@@ -3,7 +3,7 @@ import Klar from "../../Client";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class UnbanCommand extends BaseCommand {
+export default class UnbanCommand extends BaseCommand {
   constructor() {
     super({
       name: "unban",

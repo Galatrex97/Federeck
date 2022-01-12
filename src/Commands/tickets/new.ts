@@ -11,7 +11,7 @@ import mentionSchema from "../../Models/ticketsMentionable";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class TicketsCommand extends BaseCommand {
+export default class TicketsCommand extends BaseCommand {
   constructor() {
     super({
       name: "tickets",

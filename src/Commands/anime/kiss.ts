@@ -10,24 +10,23 @@ import clientnt from "nekos.life";
 const neko = new clientnt();
 import BaseCommand from "../../Structures/Command";
 
-export class KissCommand extends BaseCommand {
-constructor() {
-  super({
-    name: "kiss",
-    aliases: [],
-    description: "Besa a alguien con este comando",   
-    usage: "kiss",
-    category: "Anime",
-    cooldown: 0,
-    botPerms: ["SEND_MESSAGES"],
-    userPerms: [],
-    devOnly: false,
-    guildOnly: true,
-  })
-};
+export default class KissCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "kiss",
+      aliases: [],
+      description: "Besa a alguien con este comando",
+      usage: "kiss",
+      category: "Anime",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-
-  run = async(client, message, args) => {
+  run = async (client, message, args) => {
     let nya = message.mentions.members?.first();
     if (!nya) return message.reply("Debes mencionar a alguien");
 
@@ -58,4 +57,4 @@ constructor() {
         message.channel.send("Ha ocurrido un error.");
       });
   };
-};
+}

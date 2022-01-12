@@ -8,31 +8,31 @@ import Discord, {
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class PlayCommand extends BaseCommand {
-constructor() {
-  super({
-    name: "play",
-    aliases: ["p"],
-    description: "Reproduce alguna canción solicitada o la añade a la lista de reproducción actual.",   
-    usage: "play",
-    category: "Música",
-    cooldown: 0,
-    botPerms: ["SEND_MESSAGES", "SPEAK", "CONNECT"],
-    userPerms: [],
-    devOnly: false,
-    guildOnly: true,
-  })
-};
+export default class PlayCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "play",
+      aliases: ["p"],
+      description:
+        "Reproduce alguna canción solicitada o la añade a la lista de reproducción actual.",
+      usage: "play",
+      category: "Música",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES", "SPEAK", "CONNECT"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-/**
- * 
- * @param { Lyon } client 
- * @param { Message } message 
- * @param { String[] } args 
- */
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-
-  run = async(client: Lyon, message: Message, args) => {
+  run = async (client: Lyon, message: Message, args) => {
     let guildList = client.player.getQueue(message.guild?.id as string);
 
     let si = args.join(" ");
@@ -55,11 +55,11 @@ constructor() {
     });
     await queue.join(message.member?.voice.channel as any);
     let song: any = await queue.play(si).catch((err) => {
-      console.log(err)
+      console.log(err);
     });
 
     song.setData({
       msg: message,
     });
   };
-};
+}

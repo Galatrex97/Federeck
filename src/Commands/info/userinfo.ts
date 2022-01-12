@@ -7,7 +7,7 @@ import Discord, {
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class UiCommand extends BaseCommand {
+export default class UiCommand extends BaseCommand {
   constructor() {
     super({
       name: "userinfo",

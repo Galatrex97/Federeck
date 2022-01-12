@@ -4,7 +4,7 @@ import Klar from "../../Client";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class AntilinkSwitchCommand extends BaseCommand {
+export default class AntilinkSwitchCommand extends BaseCommand {
   constructor() {
     super({
       name: "antilink",

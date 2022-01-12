@@ -2,7 +2,7 @@ import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class ResumeCommand extends BaseCommand {
+export default class ResumeCommand extends BaseCommand {
   constructor() {
     super({
       name: "resume",

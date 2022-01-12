@@ -3,7 +3,7 @@ import Canvas from "canvas";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class AmogusCommand extends BaseCommand {
+export default class AmogusCommand extends BaseCommand {
   constructor() {
     super({
       name: "sus",

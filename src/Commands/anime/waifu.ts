@@ -11,31 +11,30 @@ const neko = new clientnt();
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class WaifuCommand extends BaseCommand {
-constructor() {
-  super({
-    name: "waifu",
-    aliases: [],
-    description: "",   
-    usage: "waifu",
-    category: "Anime",
-    cooldown: 0,
-    botPerms: ["SEND_MESSAGES"],
-    userPerms: [],
-    devOnly: false,
-    guildOnly: false,
-  })
-};
+export default class WaifuCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "waifu",
+      aliases: [],
+      description: "",
+      usage: "waifu",
+      category: "Anime",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: false,
+    });
+  }
 
-/**
- * 
- * @param { Lyon } client 
- * @param { Message } message 
- * @param { String[] } args 
- */
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-
-  run = async(client: Lyon, message: Message, args) => {
+  run = async (client: Lyon, message: Message, args) => {
     neko.sfw
       .waifu()
       .then((aa) => {
@@ -48,4 +47,4 @@ constructor() {
         message.channel.send("Ha ocurrido un error.");
       });
   };
-};
+}

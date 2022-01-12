@@ -10,31 +10,30 @@ import { createCanvas, loadImage } from "canvas";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class WhatsappCommand extends BaseCommand {
-constructor() {
-  super({
-    name: "whatsapp",
-    aliases: [],
-    description: "",   
-    usage: "",
-    category: "Fun",
-    cooldown: 0,
-    botPerms: ["SEND_MESSAGES", "ATTACH_FILES"],
-    userPerms: [],
-    devOnly: false,
-    guildOnly: true,
-  })
-};
+export default class WhatsappCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "whatsapp",
+      aliases: [],
+      description: "",
+      usage: "",
+      category: "Fun",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES", "ATTACH_FILES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-/**
- * 
- * @param { Lyon } client 
- * @param { Message } message 
- * @param { String[] } args 
- */
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-
-  run = async(client: Lyon, message: Message, args) => {
+  run = async (client: Lyon, message: Message, args) => {
     let when = args[0];
 
     let regg = /^\d{17,18}$/;
@@ -76,4 +75,4 @@ constructor() {
 
     message.channel.send({ files: [attachment] });
   };
-};
+}

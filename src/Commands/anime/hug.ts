@@ -10,24 +10,23 @@ import clientnt from "nekos.life";
 const neko = new clientnt();
 import BaseCommand from "../../Structures/Command";
 
-export class HugCommand extends BaseCommand {
-constructor() {
-  super({
-    name: "hug",
-    aliases: ["abrazar"],
-    description: "Abraza a quién lo necesite",   
-    usage: "hug",
-    category: "Anime",
-    cooldown: 0,
-    botPerms: ["SEND_MESSAGES"],
-    userPerms: [],
-    devOnly: false,
-    guildOnly: true,
-  })
-};
+export default class HugCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "hug",
+      aliases: ["abrazar"],
+      description: "Abraza a quién lo necesite",
+      usage: "hug",
+      category: "Anime",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: true,
+    });
+  }
 
-
-  run = async(client, message, args) => {
+  run = async (client, message, args) => {
     const person = message.mentions.members?.first();
     if (!person) return message.reply("Debes mencionar a alguien.");
 
@@ -59,4 +58,4 @@ constructor() {
         message.channel.send("Ha ocurrido un error.");
       });
   };
-};
+}

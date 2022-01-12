@@ -3,7 +3,7 @@ import Klar from "../../Client";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class AvatarCommand extends BaseCommand {
+export default class AvatarCommand extends BaseCommand {
   constructor() {
     super({
       name: "avatar",

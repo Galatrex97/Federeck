@@ -9,32 +9,31 @@ import Klar from "../../Client";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class MinesweeperCommand extends BaseCommand {
-constructor() {
-  super({
-    name: "buscaminas",
-    aliases: ["mminesweeper"],
-    description: "Juego clásico de Buscaminas.",   
-    usage: "buscaminas <Abrir los spoilers para encontrar los números, pero sin tocar las minas> ",
-    category: "Fun",
-    cooldown: 0,
-    botPerms: ["SEND_MESSAGES"],
-    userPerms: [],
-    devOnly: false,
-    guildOnly: false,
-  })
-};
+export default class MinesweeperCommand extends BaseCommand {
+  constructor() {
+    super({
+      name: "buscaminas",
+      aliases: ["mminesweeper"],
+      description: "Juego clásico de Buscaminas.",
+      usage:
+        "buscaminas <Abrir los spoilers para encontrar los números, pero sin tocar las minas> ",
+      category: "Fun",
+      cooldown: 0,
+      botPerms: ["SEND_MESSAGES"],
+      userPerms: [],
+      devOnly: false,
+      guildOnly: false,
+    });
+  }
 
-/**
- * 
- * @param { Lyon } client 
- * @param { Message } message 
- * @param { String[] } args 
- */
+  /**
+   *
+   * @param { Lyon } client
+   * @param { Message } message
+   * @param { String[] } args
+   */
 
-
-  run = async(client: Lyon, message: Message, args) => {
-
+  run = async (client: Lyon, message: Message, args) => {
     const choices = [
       "||:zero:||",
       "||:one:||",
@@ -106,8 +105,7 @@ constructor() {
     try {
       return message.channel.send(buscaminas.join("\n"));
     } catch (err) {
-
       console.log(err);
     }
   };
-};
+}
