@@ -34,7 +34,7 @@ export function runAll(client: Client) {
     readdirSync(`./src/Commands/` + dir)
       .filter((f) => f.endsWith(".ts"))
       .forEach((command) => {
-        const req = require(`../Commands/${dir}/${command}`);
+        const req = require(`../Commands/${dir}/${command}`).default;
         const cmd = new req(client);
         if (cmd.name && typeof cmd.name == "string")
           client.commands.set(cmd.name.toLowerCase(), cmd as BaseCommand);
