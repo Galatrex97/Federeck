@@ -412,7 +412,7 @@ export const event: Event = {
     );
 
     //Beta & Unstable Commands
-    if (cmd?.devOnly && message.author.id !== process.env.botOwner)
+    if (cmd?.devOnly && !client.developers.includes(message.author.id))
       return message
         .reply(
           `Ese comando está en modo inestable, solamente el grupo de desarrolladores puede hacer esto.`
