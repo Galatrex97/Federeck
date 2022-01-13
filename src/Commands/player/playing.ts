@@ -2,7 +2,7 @@ import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class PlayingCommand extends BaseCommand {
+export default class PlayingCommand extends BaseCommand {
   constructor() {
     super({
       name: "playing",

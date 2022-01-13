@@ -10,7 +10,7 @@ import canvacord from "canvacord";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class YT_CommentCommand extends BaseCommand {
+export default class YT_CommentCommand extends BaseCommand {
   constructor() {
     super({
       name: "yt-comment",

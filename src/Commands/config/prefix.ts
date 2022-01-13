@@ -6,7 +6,7 @@ import emojiRegex from "emoji-regex";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class SetprefixCommand extends BaseCommand {
+export default class SetprefixCommand extends BaseCommand {
   constructor() {
     super({
       name: "set-prefix",

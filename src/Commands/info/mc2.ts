@@ -3,7 +3,7 @@ import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class MinecraftSvCommand extends BaseCommand {
+export default class MinecraftSvCommand extends BaseCommand {
   constructor() {
     super({
       name: "mc-server",

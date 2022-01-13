@@ -8,7 +8,7 @@ import Discord, {
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class AddRoleCommand extends BaseCommand {
+export default class AddRoleCommand extends BaseCommand {
   constructor() {
     super({
       name: "add-role",

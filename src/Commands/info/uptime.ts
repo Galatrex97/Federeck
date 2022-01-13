@@ -3,7 +3,7 @@ import { Message, MessageEmbed } from "discord.js";
 import Lyon from "../../Client";
 import BaseCommand from "../../Structures/Command";
 
-export class UptimeCommand extends BaseCommand {
+export default class UptimeCommand extends BaseCommand {
   constructor() {
     super({
       name: "uptime",

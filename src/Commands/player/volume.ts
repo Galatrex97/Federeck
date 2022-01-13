@@ -2,7 +2,7 @@ import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class VolumeCommand extends BaseCommand {
+export default class VolumeCommand extends BaseCommand {
   constructor() {
     super({
       name: "volume",

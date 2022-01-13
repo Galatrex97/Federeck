@@ -2,7 +2,7 @@ import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class StopCommand extends BaseCommand {
+export default class StopCommand extends BaseCommand {
   constructor() {
     super({
       name: "stop",

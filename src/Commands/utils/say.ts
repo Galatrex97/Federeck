@@ -11,7 +11,7 @@ import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 import { is_url } from "../../functions";
 
-export class SayCommand extends BaseCommand {
+export default class SayCommand extends BaseCommand {
   constructor() {
     super({
       name: "say",

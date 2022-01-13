@@ -4,7 +4,7 @@ import ugu from "../../Models/add";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class WelcomeCommand extends BaseCommand {
+export default class WelcomeCommand extends BaseCommand {
   constructor() {
     super({
       name: "welcome-settings",

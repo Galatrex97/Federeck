@@ -8,7 +8,7 @@ import Discord, {
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class KickCommand extends BaseCommand {
+export default class KickCommand extends BaseCommand {
   constructor() {
     super({
       name: "kick",

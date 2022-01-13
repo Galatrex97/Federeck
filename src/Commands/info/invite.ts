@@ -3,7 +3,7 @@ import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class InviteCommand extends BaseCommand {
+export default class InviteCommand extends BaseCommand {
   constructor() {
     super({
       name: "invite",

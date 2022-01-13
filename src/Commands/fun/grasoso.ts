@@ -10,7 +10,7 @@ import { createCanvas, loadImage } from "canvas";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class HailGrasaCommand extends BaseCommand {
+export default class HailGrasaCommand extends BaseCommand {
   constructor() {
     super({
       name: "hailgrasa",

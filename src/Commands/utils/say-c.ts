@@ -10,7 +10,7 @@ import Discord, {
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class SayToChannelCommand extends BaseCommand {
+export default class SayToChannelCommand extends BaseCommand {
   constructor() {
     super({
       name: "say-c",

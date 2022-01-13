@@ -8,7 +8,7 @@ import Discord, {
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class ClearCommand extends BaseCommand {
+export default class ClearCommand extends BaseCommand {
   constructor() {
     super({
       name: "clear",

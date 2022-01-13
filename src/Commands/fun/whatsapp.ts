@@ -10,7 +10,7 @@ import { createCanvas, loadImage } from "canvas";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class WhatsappCommand extends BaseCommand {
+export default class WhatsappCommand extends BaseCommand {
   constructor() {
     super({
       name: "whatsapp",

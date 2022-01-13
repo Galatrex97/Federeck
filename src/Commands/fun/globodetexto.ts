@@ -10,7 +10,7 @@ import Canvas from "canvas";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class TextBallCommand extends BaseCommand {
+export default class TextBallCommand extends BaseCommand {
   constructor() {
     super({
       name: "globo",

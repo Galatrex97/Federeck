@@ -10,7 +10,7 @@ import { createCanvas, loadImage } from "canvas";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class GayCommand extends BaseCommand {
+export default class GayCommand extends BaseCommand {
   constructor() {
     super({
       name: "gay",

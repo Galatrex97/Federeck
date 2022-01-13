@@ -4,7 +4,7 @@ const moment = require("moment");
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class SnipeCommand extends BaseCommand {
+export default class SnipeCommand extends BaseCommand {
   constructor() {
     super({
       name: "snipe",

@@ -11,7 +11,7 @@ import translate from "@iamtraction/google-translate"; //requerimos la API que n
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class TranslateCommand extends BaseCommand {
+export default class TranslateCommand extends BaseCommand {
   constructor() {
     super({
       name: "translate",

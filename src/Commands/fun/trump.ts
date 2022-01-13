@@ -9,7 +9,7 @@ import Klar from "../../Client";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class Trump_tweetCommand extends BaseCommand {
+export default class Trump_tweetCommand extends BaseCommand {
   constructor() {
     super({
       name: "trump-tweet",

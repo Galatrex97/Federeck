@@ -2,7 +2,7 @@ import Discord, { Guild, GuildMember, Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export class BanCommand extends BaseCommand {
+export default class BanCommand extends BaseCommand {
   constructor() {
     super({
       name: "ban",
