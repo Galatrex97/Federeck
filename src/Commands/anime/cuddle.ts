@@ -11,7 +11,7 @@ const neko = new clientnt();
 
 import Command from "../../Structures/Command";
 
-export default class CuddleCommand extends Command {
+export class CuddleCommand extends Command {
   constructor() {
     super({
       name: "cuddle",

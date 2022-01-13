@@ -11,7 +11,7 @@ const neko = new clientnt();
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class SlapCommand extends BaseCommand {
+export class SlapCommand extends BaseCommand {
   constructor() {
     super({
       name: "slap",

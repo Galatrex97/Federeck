@@ -12,7 +12,7 @@ backup.setStorageFolder(__dirname + "/backups/");
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class BackupCommand extends BaseCommand {
+export class BackupCommand extends BaseCommand {
   constructor() {
     super({
       name: "backup",

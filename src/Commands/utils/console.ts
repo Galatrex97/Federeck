@@ -2,7 +2,7 @@ import Discord, { Client, Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class ReportBugCommand extends BaseCommand {
+export class ReportBugCommand extends BaseCommand {
   constructor() {
     super({
       name: "bug-report",

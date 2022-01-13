@@ -4,7 +4,7 @@ import la_grasa from "../../Models/lagrasa";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class PacmansSwitchCommand extends BaseCommand {
+export class PacmansSwitchCommand extends BaseCommand {
   constructor() {
     super({
       name: "pacmans",

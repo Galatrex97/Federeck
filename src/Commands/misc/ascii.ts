@@ -3,7 +3,7 @@ import figlet from "figlet";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class AsciiCommand extends BaseCommand {
+export class AsciiCommand extends BaseCommand {
   constructor() {
     super({
       name: "ascii",

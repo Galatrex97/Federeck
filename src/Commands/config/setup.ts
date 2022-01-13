@@ -3,7 +3,7 @@ import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 import roleSchema from "../../Models/ticketsMentionable";
-export default class TicketsSettingsCommand extends BaseCommand {
+export class TicketsSettingsCommand extends BaseCommand {
   constructor() {
     super({
       name: "tickets-settings",

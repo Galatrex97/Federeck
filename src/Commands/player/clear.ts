@@ -2,7 +2,7 @@ import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class clearListCommand extends BaseCommand {
+export class clearListCommand extends BaseCommand {
   constructor() {
     super({
       name: "clearList",

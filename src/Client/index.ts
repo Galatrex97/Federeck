@@ -22,6 +22,7 @@ class Lyon extends Client {
   public developers: Array<string> = [
     "754717879265525792",
     "833420566820028426",
+    "729099091409240097"
   ];
   public commands: Collection<string, BaseCommand> = new Collection();
   public aliases: Collection<string, string> = new Collection();

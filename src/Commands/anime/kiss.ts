@@ -10,7 +10,7 @@ import clientnt from "nekos.life";
 const neko = new clientnt();
 import BaseCommand from "../../Structures/Command";
 
-export default class KissCommand extends BaseCommand {
+export class KissCommand extends BaseCommand {
   constructor() {
     super({
       name: "kiss",

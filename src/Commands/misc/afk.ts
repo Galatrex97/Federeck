@@ -3,7 +3,7 @@ import afk from "../../Models/afk";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class AFKCommand extends BaseCommand {
+export class AFKCommand extends BaseCommand {
   constructor() {
     super({
       name: "afk",

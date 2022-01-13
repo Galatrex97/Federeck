@@ -3,7 +3,7 @@ import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class MathCommand extends BaseCommand {
+export class MathCommand extends BaseCommand {
   constructor() {
     super({
       name: "math",

@@ -10,7 +10,7 @@ import play from "google-play-scraper";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class AppSearchCommand extends BaseCommand {
+export class AppSearchCommand extends BaseCommand {
   constructor() {
     super({
       name: "playstore",

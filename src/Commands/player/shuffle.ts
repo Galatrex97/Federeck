@@ -2,7 +2,7 @@ import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class ShuffleCommand extends BaseCommand {
+export class ShuffleCommand extends BaseCommand {
   constructor() {
     super({
       name: "shuffle",

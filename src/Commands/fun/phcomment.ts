@@ -9,7 +9,7 @@ import Klar from "../../Client";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class HubCommentCommand extends BaseCommand {
+export class HubCommentCommand extends BaseCommand {
   constructor() {
     super({
       name: "phcomment",

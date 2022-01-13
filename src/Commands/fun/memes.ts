@@ -10,7 +10,7 @@ import memes from "discord-memes";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class MemeCommand extends BaseCommand {
+export class MemeCommand extends BaseCommand {
   constructor() {
     super({
       name: "meme",

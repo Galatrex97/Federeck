@@ -2,7 +2,7 @@ import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class QueueCommand extends BaseCommand {
+export class QueueCommand extends BaseCommand {
   constructor() {
     super({
       name: "queue",

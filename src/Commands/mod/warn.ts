@@ -3,7 +3,7 @@ import db from "../../Models/warn";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class WarnCommand extends BaseCommand {
+export class WarnCommand extends BaseCommand {
   constructor() {
     super({
       name: "warn",

@@ -8,7 +8,7 @@ const neko = new clientnt();
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class NekoCommand extends BaseCommand {
+export class NekoCommand extends BaseCommand {
   constructor() {
     super({
       name: "neko",

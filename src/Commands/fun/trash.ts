@@ -9,7 +9,7 @@ import DIG from "discord-image-generation";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class TrashCommand extends BaseCommand {
+export class TrashCommand extends BaseCommand {
   constructor() {
     super({
       name: "trash",

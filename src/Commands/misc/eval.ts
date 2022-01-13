@@ -4,7 +4,7 @@ import { inspect } from "util";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class EvalCommand extends BaseCommand {
+export class EvalCommand extends BaseCommand {
   constructor() {
     super({
       name: "eval",

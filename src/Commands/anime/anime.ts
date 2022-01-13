@@ -7,7 +7,7 @@ import { CommandOptions } from "../../Interfaces";
 import { Message, MessageEmbed } from "discord.js";
 import BaseCommand from "../../Structures/Command";
 
-export default class AnimeCommand extends BaseCommand {
+export class AnimeCommand extends BaseCommand {
   constructor() {
     super({
       name: "anime",

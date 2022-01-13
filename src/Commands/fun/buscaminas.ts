@@ -9,7 +9,7 @@ import Klar from "../../Client";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class MinesweeperCommand extends BaseCommand {
+export class MinesweeperCommand extends BaseCommand {
   constructor() {
     super({
       name: "buscaminas",

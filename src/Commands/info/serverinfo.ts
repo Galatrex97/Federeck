@@ -2,7 +2,7 @@ import Discord, { Client, MessageEmbed, Guild, Message } from "discord.js";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class SVInfoCommand extends BaseCommand {
+export class SVInfoCommand extends BaseCommand {
   constructor() {
     super({
       name: "serverinfo",

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class PingCommand extends BaseCommand {
+export class PingCommand extends BaseCommand {
   constructor() {
     super({
       name: "ping",

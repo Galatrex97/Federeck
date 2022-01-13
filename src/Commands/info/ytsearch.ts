@@ -4,7 +4,7 @@ const YouTube = require("youtube-node");
 import BaseCommand from "../../Structures/Command";
 import Lyon from "../../Client";
 
-export default class YTSearchCommand extends BaseCommand {
+export class YTSearchCommand extends BaseCommand {
   constructor() {
     super({
       name: "yt-search",
