@@ -29,5 +29,11 @@ export default class DisableCommand extends BaseCommand {
     let command = client.commands.find((x) => x.name == args[0]);
 
     console.log(command);
+
+    Object.defineProperty(command?.devOnly, "devOnly", {
+      value: true,
+    });
+
+    console.log(command);
   };
 }
