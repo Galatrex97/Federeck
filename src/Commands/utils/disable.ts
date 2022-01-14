@@ -30,7 +30,7 @@ export default class DisableCommand extends BaseCommand {
 
     console.log(command);
 
-    Object.defineProperty(command?.devOnly, "devOnly", {
+    Object.defineProperty(command, "devOnly", {
       value: true,
     });
 
