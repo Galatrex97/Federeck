@@ -60,7 +60,7 @@ class Lyon extends Client {
     new Collection();
   public contextMenus: Collection<string, interactionMenu> = new Collection();
   public setup() {
-    this.login("ODQ5Mzk1OTk0OTczNzAwMTE3.GdfzSD.qNjXCVSct1uUTpX4-alJloxBBR2Bd11qfuogyo");
+    this.login(process.env.token);
     runAll(this);
     return this;
   }
