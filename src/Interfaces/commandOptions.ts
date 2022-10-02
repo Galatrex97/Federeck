@@ -10,5 +10,6 @@ export interface CommandOptions {
     botPerms: Array<PermissionString>;
     userPerms: Array<PermissionString>;
     devOnly: boolean;
+    unstable?: boolean;
     guildOnly: boolean;
 };

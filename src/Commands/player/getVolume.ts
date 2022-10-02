@@ -40,7 +40,7 @@ export default class GetVolumeCommand extends BaseCommand {
       );
 
     if (!guildList?.isPlaying) {
-      return message.reply("No hay nada reproduciendose.");
+      return message.reply("No hay nada reproduciéndose.");
     }
     message.reply("El volumen actual es: " + guildList?.volume);
   };

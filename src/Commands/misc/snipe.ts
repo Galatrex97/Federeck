@@ -10,8 +10,8 @@ export default class SnipeCommand extends BaseCommand {
       name: "snipe",
       aliases: [],
       description:
-        "Lamentablemente este comando será eliminado en unas semanas, se está volviendo ilegal",
-      usage: "snipe [posición]",
+        "Lamentablemente este comando será eliminado en unas semanas, se está volviendo ilegal.",
+      usage: "snipe <posición>",
       category: "Misceláneo",
       cooldown: 0,
       botPerms: ["SEND_MESSAGES"],
@@ -35,7 +35,7 @@ export default class SnipeCommand extends BaseCommand {
     }
 
     if (!snipes)
-      return message.reply("No se ha borrado recientemente ningun mensaje");
+      return message.reply("No hay registros de mensajes borrados en este servidor.");
 
     let snipe = +args[0] - 1 || 0;
     if (isNaN(parseInt(args[0]))) {
@@ -44,13 +44,13 @@ export default class SnipeCommand extends BaseCommand {
     const target = snipes[snipe];
     if (snipes.length === 1 && !target) {
       return message.reply(
-        `Solo hay ${snipes.length} mensaje borrado recientemente en este canal`
+        `Solo hay ${snipes.length} mensaje borrado recientemente en este canal.`
       );
     }
 
     if (snipes.length >= 2 && !target) {
       return message.reply(
-        `Solo hay ${snipes.length} mensajes borrados recientemente en este canal`
+        `Solo hay ${snipes.length} mensajes borrados recientemente en este canal.`
       );
     }
     let { msg, timeAgo, image } = target;

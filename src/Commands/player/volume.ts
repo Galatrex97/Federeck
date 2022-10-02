@@ -36,7 +36,7 @@ export default class VolumeCommand extends BaseCommand {
     let parsedNya = parseInt(nya);
 
     if (isNaN(parsedNya)) {
-      return message.reply("Me pasó mañana.");
+      return message.reply("Debes escribir un número, simbólico (2, 3), no textual (dos, tres).");
     }
 
     if (!message.member?.voice.channel)
@@ -54,7 +54,7 @@ export default class VolumeCommand extends BaseCommand {
       guildQueue.setVolume(parsedNya);
       message.reply("El volumen se ha establecido a " + parsedNya);
     } catch (err) {
-      message.reply("No hay nada reproduciendose.");
+      message.reply("No hay nada reproduciéndose.");
     }
   };
 }

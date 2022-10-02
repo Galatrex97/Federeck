@@ -34,7 +34,7 @@ export default class BanCommand extends BaseCommand {
     } else if (user.id === message.author.id) {
       return message.reply("No puedes auto-banearte.");
     } else if (user.id === owner) {
-      return message.reply("No se puede banear al dueño del servidor. XD");
+      return message.reply("No se puede banear al dueño del servidor.");
     } else if (user.id === client.user?.id) {
       return message.reply(":pensive: ¿Qué hice mal?");
     } else if (
@@ -43,7 +43,7 @@ export default class BanCommand extends BaseCommand {
       ) < 0
     ) {
       return message.channel.send(
-        "No puedo banear a esa persona por qué tiene un rol más alto que el mío."
+        "No puedo banear a esa persona porque tiene un rol más alto que el mío."
       );
     } else if (
       (message.guild?.me as GuildMember).roles.highest.comparePositionTo(
@@ -51,23 +51,23 @@ export default class BanCommand extends BaseCommand {
       ) == 0
     ) {
       return message.channel.send(
-        "No puedo banear a esa persona por qué tiene un rol igual que el mío. Compartimos nuestro rol más alto."
+        "No puedo banear a esa persona porque tiene un rol igual que el mío. Compartimos nuestro rol más alto."
       );
     } else if (
-      message.member.roles.highest.comparePositionTo(user.roles.highest) < 0
+      message.member.roles?.highest.comparePositionTo(user?.roles?.highest) < 0
     ) {
       return message.reply(
-        "No puedes banear a esa persona por que tiene un rol más alto que el tuyo."
+        "No puedes banear a esa persona porque tiene un rol más alto que el tuyo."
       );
     } else if (
-      message.member.roles.highest.comparePositionTo(user.roles.highest) == 0
+      message.member?.roles.highest.comparePositionTo(user.roles.highest) == 0
     ) {
       return message.reply(
-        "No puedes banear a esa persona por qué ambos comparten un rol de igual jerarquía. Ambos comparten su rol más alto."
+        "No puedes banear a esa persona porque ambos comparten un rol de igual jerarquía. Ambos comparten su rol más alto."
       );
     } else if (!user.bannable) {
       return message.reply(
-        "No puedo banear a ese usuario, seguramente sea un administrador/moderador u otro motivo."
+        "No puedo banear a ese usuario, seguramente sea un administrador/moderador u otro motivo me lo impide."
       );
     } else if (!banReason) {
       return message.reply("Escribe una razón.");
@@ -80,9 +80,9 @@ export default class BanCommand extends BaseCommand {
     const bannedEmbed = new Discord.MessageEmbed()
       .setTitle("Adiós.")
       .setDescription(
-        `Lamentablemente has sido baneado de **${message.guild.name}** por el Moderador: **${message.author.username}**.\nLa razón de tu baneo fue: ${banReason}. ¡Hasta pronto!`
+        `Lamentablemente has sido baneado de **${message.guild?.name}** por el Moderador: **${message.author.username}**.\nLa razón de tu baneo fue: ${banReason}. ¡Hasta pronto!`
       )
-      .setThumbnail(`${message.guild.iconURL({ size: 4096, dynamic: true })}`)
+      .setThumbnail(`${message.guild?.iconURL({ size: 4096, dynamic: true })}`)
       .setTimestamp();
     user.send({ embeds: [bannedEmbed] }).catch(() => {});
   };

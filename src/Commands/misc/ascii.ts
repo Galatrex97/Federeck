@@ -8,7 +8,7 @@ export default class AsciiCommand extends BaseCommand {
     super({
       name: "ascii",
       aliases: [],
-      description: "Convierte texto de esta manera para que sea mas llamativo",
+      description: "Convierte texto de esta manera para que sea mas llamativo.",
       usage: "ascii <texto>",
       category: "Misceláneo",
       cooldown: 0,
@@ -31,7 +31,7 @@ export default class AsciiCommand extends BaseCommand {
 
     if (!si) return message.reply("¿Y el texto?");
     if (si.length > 15)
-      return message.reply("El texto no puede contener más de 15 Caracteres");
+      return message.reply("El texto no puede contener más de 15 caracteres.");
     figlet(si, (err, data) => {
       if (err) {
         console.log(err);

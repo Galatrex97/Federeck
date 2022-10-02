@@ -14,7 +14,7 @@ export default class PlayCommand extends BaseCommand {
       name: "play",
       aliases: ["p"],
       description:
-        "Reproduce alguna canción solicitada o la añade a la lista de reproducción actual.",
+        "Reproduce una canción, si ya hay canciones reproduciéndose entonces la añade a la lista de reproducción actual.",
       usage: "play",
       category: "Música",
       cooldown: 0,

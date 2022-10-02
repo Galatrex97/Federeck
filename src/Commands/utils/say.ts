@@ -19,7 +19,7 @@ export default class SayCommand extends BaseCommand {
       category: "Útil",
       usage: "say/d",
       description:
-        "Este comando hace que yo diga algo en el canal en el que se ejecuto el comando",
+        "Este comando hace que yo diga algo en el canal en el que se ejecutó el comando",
       cooldown: 0,
       botPerms: [],
       userPerms: [],

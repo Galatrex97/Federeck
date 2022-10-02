@@ -10,6 +10,7 @@ class BaseCommand {
   cooldown: number;
   category: string;
   devOnly: boolean;
+  unstable: boolean;
   botPerms?: Array<PermissionString>;
   userPerms?: Array<PermissionString>;
   guildOnly: boolean;
@@ -26,6 +27,7 @@ class BaseCommand {
     this.cooldown = options.cooldown || 0;
     this.category = options.category || "";
     this.devOnly = options.devOnly || false;
+    this.unstable = options.unstable || false;
     this.botPerms = options.botPerms || [];
     this.userPerms = options.userPerms || [];
     this.guildOnly = options.guildOnly || false;

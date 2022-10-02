@@ -36,7 +36,7 @@ export default class IntentsMenuCommand extends BaseCommand {
     let menuRow = new MessageActionRow().addComponents(
       new MessageSelectMenu()
         .setCustomId("intents_menu")
-        .setPlaceholder("Selecciona tus intents aqui")
+        .setPlaceholder("Selecciona tus intents aquí")
         .setMaxValues(16)
         .addOptions([
           {
@@ -108,7 +108,7 @@ export default class IntentsMenuCommand extends BaseCommand {
           {
             label: "Guild Message Typings",
             description:
-              'Intent "Escribiendo", desbloquea 1 evento, puedes verlo arriba.',
+              'Intent del estado "Escribiendo", desbloquea 1 evento, puedes verlo arriba.',
             value: "guild_message_typings",
           },
           {
@@ -253,7 +253,7 @@ export default class IntentsMenuCommand extends BaseCommand {
       .setDescription(
         `**Eventos que recibirás**:\n\n**${events.default.join(
           "\n"
-        )}**\n\n**Tú número de intents**: 0`
+        )}**\n\n**Tu número de intents**: 0`
       )
       .setColor("WHITE")
       .setFooter("Tienes 2 minutos para elegir tus intents")
@@ -263,7 +263,7 @@ export default class IntentsMenuCommand extends BaseCommand {
       .setDescription(
         `**Eventos que recibirás**:\n\n**${events.default.join(
           "\n"
-        )}**\n\n**Tú número de intents**: 0`
+        )}**\n\n**Tu número de intents**: 0`
       )
       .setColor("WHITE")
       .setFooter("Tienes 2 minutos para elegir tus intents")

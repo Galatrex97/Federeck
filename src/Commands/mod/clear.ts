@@ -36,10 +36,10 @@ export default class ClearCommand extends BaseCommand {
     let cantidad: any = args.join(" ");
     if (!cantidad) return message.reply("Debes escribir una cantidad");
     if (isNaN(cantidad))
-      return message.reply("Las cantidades tienen que ser números.");
+      return message.reply("Las cantidades tienen que ser números (Simbólicos; 1, 3. No textuales; uno, tres).");
     let a = parseInt(cantidad);
 
-    if (a === 0) return message.reply("No puedes borrar 0 mensajes");
+    if (a === 0) return message.reply("No puedes borrar 0 mensajes. ¿Puedes dividir 0 etre 0?");
 
     if (a < 0) return message.reply("No puedes borrar 0 o menos mensajes.");
 

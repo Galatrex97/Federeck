@@ -16,7 +16,7 @@ export default class AppSearchCommand extends BaseCommand {
       name: "playstore",
       aliases: ["app", "play-store"],
       description:
-        "Busca una aplicación en la tienda oficial de aplicones de Google, la Play Store.",
+        "Busca una aplicación en la tienda oficial de aplicaciones de Google, la Play Store.",
       usage: "playstore <app>",
       category: "Info",
       cooldown: 0,
@@ -38,7 +38,7 @@ export default class AppSearchCommand extends BaseCommand {
     let busqueda = args.join(" ");
     if (!busqueda) {
       message.channel.sendTyping();
-      return message.reply({ content: "Que quieres buscar?" });
+      return message.reply({ content: "¿Qué quieres buscar?" });
     }
     play
       .search({

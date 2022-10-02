@@ -30,7 +30,7 @@ export default class ResumeCommand extends BaseCommand {
 
     if (!message.member?.voice.channel)
       return message.channel.send(
-        "Debes estar en un canal de voz para usar este cmd"
+        "Debes estar en un canal de voz para usar este comando."
       );
 
     if (
@@ -38,11 +38,11 @@ export default class ResumeCommand extends BaseCommand {
       message.member.voice.channel.id !== message.guild.me.voice.channel.id
     )
       return message.channel.send(
-        "debes estar en el mismo canal de voz que yo"
+        "Debes estar en el mismo canal de voz que yo"
       );
 
     if (!guildList)
-      return message.channel.send("No hay canciones reproduciendose...");
+      return message.channel.send("No hay canciones reproduciésndose...");
 
     if (!guildList.paused)
       return message.channel.send("La canción no está pausada.");

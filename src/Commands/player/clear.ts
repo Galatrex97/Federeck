@@ -29,14 +29,14 @@ export default class clearListCommand extends BaseCommand {
     let guildList = client.player.getQueue(message.guild?.id as string);
 
     if (!message.member?.voice.channel)
-      return message.channel.send("Debes estar en un canal de voz...");
+      return message.channel.send("Debes estar en un canal de voz.");
 
     if (
       message.guild?.me?.voice.channel &&
       message.member?.voice.channel?.id !== message.guild.me.voice.channel.id
     )
       return message.channel.send(
-        "Debes estar en el mismo canal de voz que yo, de lo contrario no funcionará correctamente..."
+        "Debes estar en el mismo canal de voz que yo, de lo contrario no se te permitirá usar el comando."
       );
 
     guildList?.clearQueue();

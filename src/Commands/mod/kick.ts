@@ -54,25 +54,25 @@ export default class KickCommand extends BaseCommand {
       message.guild.me.roles.highest.comparePositionTo(user.roles.highest) < 0
     ) {
       return message.channel.send(
-        "No puedo expulsar a esa persona por qué tiene un rol más alto que el mío."
+        "No puedo expulsar a esa persona porque tiene un rol más alto que el mío."
       );
     } else if (
       message.guild.me.roles.highest.comparePositionTo(user.roles.highest) == 0
     ) {
       return message.channel.send(
-        "No puedo expulsar a esa persona por qué tiene un rol igual que el mío. Compartimos nuestro rol más alto."
+        "No puedo expulsar a esa persona porque tiene un rol igual que el mío. Compartimos nuestro rol más alto."
       );
     } else if (
       message.member?.roles.highest.comparePositionTo(user.roles.highest) < 0
     ) {
       return message.reply(
-        "No puedes expulsar a esa persona por que tiene un rol más alto que el tuyo."
+        "No puedes expulsar a esa persona porque tiene un rol más alto que el tuyo."
       );
     } else if (
       message.member.roles.highest.comparePositionTo(user.roles.highest) == 0
     ) {
       return message.reply(
-        "No puedes expulsar a esa persona por qué ambos comparten un rol de igual jerarquía. Ambos comparten su rol más alto."
+        "No puedes expulsar a esa persona porque ambos comparten un rol de igual jerarquía. Ambos comparten su rol más alto."
       );
     } else if (!user.kickable) {
       return message.reply(

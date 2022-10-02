@@ -32,9 +32,9 @@ export default class WarnCommand extends BaseCommand {
     const user =
       message.mentions.members?.first() ||
       message.guild?.members.cache.get(possibleId);
-    if (!user) return message.reply(`Debes mencionar a alguien`);
+    if (!user) return message.reply(`Debes mencionar a alguien.`);
     if (user.id === client.user?.id)
-      return message.reply("No puedes warnearme a mi.");
+      return message.reply("No puedes warnearme a mí.");
 
     let userX = message.member?.id;
 
@@ -48,7 +48,7 @@ export default class WarnCommand extends BaseCommand {
 
     const reason = args.slice(1).join(" ")
       ? args.slice(1).join(" ")
-      : "No se dió un motivo";
+      : "No se dio un motivo.";
     db.findOne(
       { guildid: message.guild?.id, user: user.id },
       async (err, data) => {

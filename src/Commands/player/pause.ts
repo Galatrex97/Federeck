@@ -7,7 +7,7 @@ export default class PauseCommand extends BaseCommand {
     super({
       name: "pause",
       aliases: [],
-      description: "Ppausa la lista de reproducción actual",
+      description: "Pausa la lista de reproducción actual",
       usage: "pause",
       category: "Música",
       cooldown: 0,

@@ -412,17 +412,25 @@ export const event: Event = {
     );
 
     //Beta & Unstable Commands
-    if (cmd?.devOnly && !client.developers.includes(message.author.id))
-      return message
-        .reply(
-          `Ese comando está en modo inestable, solamente el grupo de desarrolladores puede hacer esto.`
-        )
+    if (cmd?.devOnly && !client.developers.includes(message.author.id)) {
+      if(cmd?.unstable) {
+        return message
+        .reply("Ese comando está catalogado como inestable, por lo cual solo puede ser usado por los desarrolladores hasta que sea corregido.")
         .then((m) => {
           setTimeout(() => {
             m.delete();
           }, 10000);
         });
-
+      } else {
+      return message
+        .reply(`Ese comando solo puede ser usado por los desarrolladores.`)
+        .then((m) => {
+          setTimeout(() => {
+            m.delete();
+          }, 10000);
+        });
+      }
+    }
     try {
       if (cmd) {
         cmd.run(client, message, args, p);

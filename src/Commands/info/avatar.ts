@@ -9,7 +9,7 @@ export default class AvatarCommand extends BaseCommand {
       name: "avatar",
       aliases: ["pfp"],
       description:
-        "¿Alguna vez quisiste descargar tu foto de perfil o ver la foto de algún usuario más cerca? Con este comando podrás ver tu propio avatar, el de otros miembros e incluso el de los usuarios que no están en el servidor.",
+        "¿Alguna vez quisiste descargar tu foto de perfil o ver la foto de algún usuario más cerca? Con este comando podrás ver tu propio avatar, el de otros miembros e incluso el de usuarios que no están en el servidor.",
       usage: "Avatar [@user]",
       category: "Info",
       cooldown: 0,

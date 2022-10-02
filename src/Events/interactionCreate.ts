@@ -16,7 +16,7 @@ let mentionData = await mentionSchema.findOne(parentParams) || await mentionSche
     clickBtn(interaction, {
       categoryID: parentData.parentId,
       credit: false,
-      cooldownMsg: "Ya tienes un ticket abierto, cierralo primero para abrir otro.",
+      cooldownMsg: "Ya tienes un ticket abierto, ciérralo primero para abrir otro.",
       timeout: false,
       embedColor: "#ffffff",
       pingRole: mentionData.mentions

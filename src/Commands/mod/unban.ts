@@ -33,7 +33,7 @@ export default class UnbanCommand extends BaseCommand {
     if (isNaN(userId)) return message.channel.send("El id debe ser un numero");
     const member = await client.users.fetch(userId);
 
-    message.guild.bans
+    message.guild?.bans
       .fetch()
       .then(async (bans) => {
         if (bans.size === 0)
@@ -49,7 +49,7 @@ export default class UnbanCommand extends BaseCommand {
             return message.channel.send("Algo salió mal.");
           })
           .then(() => {
-            message.channel.send(`El usuario ${member} fue Desbaneado`);
+            message.channel.send(`El usuario ${member} fue desbaneado.`);
           })
           .catch((error) => {
             console.log(error);
